@@ -49,7 +49,7 @@ public class Menu extends javax.swing.JPanel {
         setOpaque(false);
         sp.getViewport().setOpaque(false);
         sp.setVerticalScrollBar(new ScrollBarCustom());
-        layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
+        layout = new MigLayout("wrap, fillx, insets 5", "[fill]", "[]30[]");
         panel.setLayout(layout);
     }
 

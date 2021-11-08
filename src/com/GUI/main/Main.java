@@ -63,7 +63,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menu.initMenuItem();
-        bg.add(menu, "w 230!, spany 2");    // Span Y 2cell
+        bg.add(menu, "w 255!, spany 2");    // Span Y 2cell
         bg.add(header, "h 50!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
@@ -71,9 +71,9 @@ public class Main extends javax.swing.JFrame {
             public void timingEvent(float fraction) {
                 double width;
                 if (menu.isShowMenu()) {
-                    width = 60 + (170 * (1f - fraction));
+                    width = 85 + (170 * (1f - fraction));
                 } else {
-                    width = 60 + (170 * fraction);
+                    width = 85 + (170 * fraction);
                 }
                 layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
