@@ -2,6 +2,7 @@ package com.GUI.swing;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -37,6 +38,7 @@ public class MenuButton extends JButton {
         super(text);
         setIcon(icon);
         init();
+        setFont(new Font("tahoma",Font.PLAIN,18));
         setBorder(new EmptyBorder(1, 20, 1, 1));
     }
 
