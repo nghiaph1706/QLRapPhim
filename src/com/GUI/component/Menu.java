@@ -54,13 +54,13 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/1.png")), "Bán vé", "Home", "Buttons", "Cards", "Tabs", "Accordions", "Modals"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/2.png")), "Quản lý phim", "Morris", "Flot", "Line"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/3.png")), "Quản lý lịch chiếu", "Income", "Expense", "Profit"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/4.png")), "Quản lý sự kiện", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/5.png")), "Quản lý nhân viên", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/6.png")), "Thống kê doanh thu", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/7.png")), "Thông tin", "Menu 001", "Menu 002", "Menu 003"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/ticket.png")), "Bán vé"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/movie.png")), "Phim", "Quản lý phim", "Đang chiếu", "Đã ngừng chiếu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "Lịch chiếu", "Quản lý lịch chiếu", "Lịch chiếu hôm nay", "Lịch chiếu tuần này"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/party.png")), "Sự kiện", "Quản lý sự kiện", "Đang diễn ra", "Đã kết thúc"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "Nhân viên", "Thông tin nhân viên", "Thông tin tài khoản"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "Thống kê", "Doanh thu theo tháng", "Doanh thu theo năm", "Doanh thu theo phim", "Doanh thu theo ...", "Lượt xem phim", "Khách hàng thân thiết"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/backup.png")), "Dữ liệu", "Sao lưu", "Khôi phục"));
     }
 
     private void addMenu(ModelMenu menu) {
