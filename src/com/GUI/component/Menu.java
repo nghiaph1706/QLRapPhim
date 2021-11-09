@@ -56,10 +56,10 @@ public class Menu extends javax.swing.JPanel {
     public void initMenuItem() {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/ticket.png")), "Bán vé"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/movie.png")), "Phim", "Quản lý phim", "Đang chiếu", "Đã ngừng chiếu"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "Lịch chiếu", "Quản lý lịch chiếu", "Lịch chiếu hôm nay", "Lịch chiếu tuần này"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "Lịch chiếu", "Quản lý lịch chiếu"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/party.png")), "Sự kiện", "Quản lý sự kiện", "Đang diễn ra", "Đã kết thúc"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "Nhân viên", "Thông tin nhân viên", "Thông tin tài khoản"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "Thống kê", "Doanh thu theo tháng", "Doanh thu theo năm", "Doanh thu theo phim", "Doanh thu theo ...", "Lượt xem phim", "Khách hàng thân thiết"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "Nhân viên"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "Thống kê", "Doanh thu", "Lượt xem", "Khách hàng thân thiết"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/backup.png")), "Dữ liệu", "Sao lưu", "Khôi phục"));
     }
 
