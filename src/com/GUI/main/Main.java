@@ -43,7 +43,6 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         init();
-        setExtendedState(MAXIMIZED_BOTH);
     }
 
     private void init() {
