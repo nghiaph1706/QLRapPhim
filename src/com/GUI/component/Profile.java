@@ -13,19 +13,18 @@ public class Profile extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 32)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(224, 224, 224));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/Untitled-1.png"))); // NOI18N
-        jLabel1.setText(" CINEMA");
-        jLabel1.setAlignmentX(0.5F);
+        jLabel1.setText("  CINEMA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
