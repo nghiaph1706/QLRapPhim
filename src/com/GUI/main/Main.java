@@ -4,22 +4,8 @@ import com.GUI.component.Header;
 import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
 import com.GUI.event.EventShowPopupMenu;
-import com.GUI.form.BanVe_Form;
+import com.GUI.form.Form1;
 import com.GUI.form.MainForm;
-import com.GUI.form.NhanVien.Profile_Form;
-import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
-import com.GUI.form.Phim.PhimDangChieu_Form;
-import com.GUI.form.Phim.PhimNgungChieu_Form;
-import com.GUI.form.Phim.QuanLyPhim_Form;
-import com.GUI.form.QuanLyLichChieu_Form;
-import com.GUI.form.SaoLuu.KhoiPhuc_Form;
-import com.GUI.form.SaoLuu.SaoLuu_Form;
-import com.GUI.form.SuKien.QuanLySuKien_Form;
-import com.GUI.form.SuKien.SKDangDienRa_Form;
-import com.GUI.form.SuKien.SKKetThuc_Form;
-import com.GUI.form.ThongKe.TKDoanhThu_Form;
-import com.GUI.form.ThongKe.TKKHTT_Form;
-import com.GUI.form.ThongKe.TKLuotXem_Form;
 import com.GUI.swing.MenuItem;
 import com.GUI.swing.PopupMenu;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
@@ -57,44 +43,10 @@ public class Main extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
-                    main.showForm(new BanVe_Form());
-                } else if (menuIndex == 1) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new QuanLyPhim_Form());
+                        main.showForm(new Form1());
                     } else if (subMenuIndex == 1) {
-                        main.showForm(new PhimDangChieu_Form());
-                    } else if (subMenuIndex == 2) {
-                        main.showForm(new PhimNgungChieu_Form());
-                    }
-                } else if (menuIndex == 2) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new QuanLyLichChieu_Form());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new QuanLyLichChieu_Form());
-                    }
-                } else if (menuIndex == 3) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new QuanLySuKien_Form());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new SKDangDienRa_Form());
-                    } else if (subMenuIndex == 2) {
-                        main.showForm(new SKKetThuc_Form());
-                    }
-                } else if (menuIndex == 4) {
-                    main.showForm(new QuanLyNhanVien_Form());
-                } else if (menuIndex == 5) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new TKDoanhThu_Form());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new TKLuotXem_Form());
-                    } else if (subMenuIndex == 2) {
-                        main.showForm(new TKKHTT_Form());
-                    }
-                } else if (menuIndex == 6) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new SaoLuu_Form());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new KhoiPhuc_Form());
+                        main.showForm(new Form1());
                     }
                 }
             }
@@ -111,7 +63,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menu.initMenuItem();
-        bg.add(menu, "w 255!, spany 2");    // Span Y 2cell
+        bg.add(menu, "w 230!, spany 2");    // Span Y 2cell
         bg.add(header, "h 50!, wrap");
         bg.add(main, "w 100%, h 100%");
         TimingTarget target = new TimingTargetAdapter() {
@@ -119,9 +71,9 @@ public class Main extends javax.swing.JFrame {
             public void timingEvent(float fraction) {
                 double width;
                 if (menu.isShowMenu()) {
-                    width = 85 + (170 * (1f - fraction));
+                    width = 60 + (170 * (1f - fraction));
                 } else {
-                    width = 85 + (170 * fraction);
+                    width = 60 + (170 * fraction);
                 }
                 layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
@@ -153,7 +105,7 @@ public class Main extends javax.swing.JFrame {
         //  Init google icon font
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         //  Start with this form
-        main.showForm(new MainForm());
+        main.showForm(new Form1());
     }
 
     @SuppressWarnings("unchecked")
