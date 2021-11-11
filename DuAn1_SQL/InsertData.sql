@@ -17,12 +17,12 @@ INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUE
 (N'Đào Đức Nguyên','0990090905',1,0,'123',0);
 GO
 
-INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
-(N'MẮT BIẾC','10-10-2010',N'VIỆT NAM','TL1','2D','NV1',0),
-(N'AVENGER SECOND GAME','10-10-2011',N'VIỆT NAM','TL2','2D','NV2',0),
-(N'IRON MAN','10-10-2012',N'VIỆT NAM','TL3','2D','NV3',0),
-(N'NGƯỜI NHỆN MAN','10-10-2013',N'VIỆT NAM','TL4','3D','NV4',0),
-(N'IRON WOMEN','10-10-2014',N'VIỆT NAM','TL5','3D','NV1',0);
+INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
+(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','NV1',0),
+(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','NV2',0),
+(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','NV3',0),
+(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NV4',0),
+(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','NV1',0);
 GO
 
 INSERT INTO [Phong]([SoHang],[HIDE]) VALUES 
@@ -52,12 +52,12 @@ GO
 EXEC sp_TaoGhe 'P5'
 GO
 
-INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[MaNhanVien],[HIDE]) VALUES 
-('HALLOWEEN', N'Mua 2 bắp được tặng 1 cái ống hút', 10 , 'NV1', 0),
-('QUOCKHANH', N'Mua 2 bắp được tặng 1 cái bao bóng', 15 , 'NV1', 0),
-('QUOCTETHIEUNHI', N'Mua 2 bắp được tặng 1 cái bao bóng', 10 , 'NV1', 0),
-('MUNGDANGMUNGXUAN', N'Mua 2 bắp được tặng 1 cái bao bóng', 20 , 'NV1', 0),
-('TET', N'Mua 2 bắp được tặng 1 cái bao bóng', 10 , 'NV1', 0);
+INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES
+('HALLOWEEN', N'Mua 2 bắp được tặng 1 cái ống hút', 10 ,'10-10-2010','10-12-2010', 'NV1', 0),
+('QUOCKHANH', N'Mua 2 bắp được tặng 1 cái bao bóng',15 , '10-10-2010','10-12-2010', 'NV1', 0),
+('QUOCTETHIEUNHI', N'Mua 2 bắp được tặng 1 cái bao bóng', 10,'10-10-2010','10-12-2010' , 'NV1', 0),
+('MUNGDANGMUNGXUAN', N'Mua 2 bắp được tặng 1 cái bao bóng', 20 ,'10-10-2010','10-12-2010', 'NV1', 0),
+('TET', N'Mua 2 bắp được tặng 1 cái bao bóng', 10 ,'10-10-2010','10-12-2010', 'NV1', 0);
 GO
 
 INSERT INTO [KhachHangThanThiet]([Ten],[SDT],[Email],[NgayDK],[MucGiamGia],[SoLanSuDung],[MaNhanVien],[HIDE]) VALUES

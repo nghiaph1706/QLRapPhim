@@ -4,7 +4,7 @@ INSERT INTO [TheLoai]([TenTheLoai],[HIDE]) VALUES (?,?)
 
 INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES (?,?,?,?,?,?)
 
-INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?)
+INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?)
 
 INSERT INTO [Phong]([SoHang],[HIDE]) VALUES (?,?)
 
@@ -12,7 +12,7 @@ INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
 
 EXEC sp_TaoGhe ?
 
-INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?)
+INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?)
 
 INSERT INTO [KhachHangThanThiet]([Ten],[SDT],[Email],[NgayDK],[MucGiamGia],[SoLanSuDung],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?)
 
