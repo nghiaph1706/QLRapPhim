@@ -6,7 +6,6 @@ import com.GUI.event.EventMenuSelected;
 import com.GUI.event.EventShowPopupMenu;
 import com.GUI.form.BanVe_Form;
 import com.GUI.form.MainForm;
-import com.GUI.form.NhanVien.Profile_Form;
 import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
 import com.GUI.form.Phim.PhimDangChieu_Form;
 import com.GUI.form.Phim.PhimNgungChieu_Form;
@@ -43,7 +42,6 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         init();
-        setExtendedState(MAXIMIZED_BOTH);
     }
 
     private void init() {
@@ -138,18 +136,6 @@ public class Main extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
-        header.addMenuEvent(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (!animator.isRunning()) {
-                    animator.start();
-                }
-                menu.setEnableMenu(false);
-                if (menu.isShowMenu()) {
-                    menu.hideallMenu();
-                }
-            }
-        });
         //  Init google icon font
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         //  Start with this form
@@ -165,18 +151,18 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        bg.setBackground(new java.awt.Color(20, 30, 48));
+        bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setOpaque(true);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+            .addGap(0, 1700, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
