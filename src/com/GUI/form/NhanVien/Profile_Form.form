@@ -40,7 +40,7 @@
           <Color blue="9f" green="9f" red="9f" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="tk luot xem "/>
+        <Property name="text" type="java.lang.String" value="profile"/>
       </Properties>
     </Component>
   </SubComponents>
