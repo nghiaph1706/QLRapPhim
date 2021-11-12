@@ -132,21 +132,29 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setText("Nhân Viên");
 
-        button3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        button3.setForeground(new java.awt.Color(0, 0, 0));
+        button3.setBackground(new java.awt.Color(255, 0, 0));
+        button3.setBorder(null);
+        button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Thêm Mới");
+        button3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
 
-        button4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        button4.setForeground(new java.awt.Color(0, 0, 0));
+        button4.setBackground(new java.awt.Color(255, 0, 0));
+        button4.setBorder(null);
+        button4.setForeground(new java.awt.Color(255, 255, 255));
         button4.setText("Cập Nhật");
+        button4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
 
-        button5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        button5.setForeground(new java.awt.Color(0, 0, 0));
+        button5.setBackground(new java.awt.Color(255, 0, 0));
+        button5.setBorder(null);
+        button5.setForeground(new java.awt.Color(255, 255, 255));
         button5.setText("Làm Mới");
+        button5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
 
-        button6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        button6.setForeground(new java.awt.Color(0, 0, 0));
+        button6.setBackground(new java.awt.Color(255, 0, 0));
+        button6.setBorder(null);
+        button6.setForeground(new java.awt.Color(255, 255, 255));
         button6.setText("Xóa ");
+        button6.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
 
         panelBorder1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -218,13 +226,10 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(254, 254, 254)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(254, 254, 254)
-                                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(254, 254, 254)
-                                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
