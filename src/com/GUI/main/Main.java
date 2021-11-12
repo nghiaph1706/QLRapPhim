@@ -5,6 +5,7 @@ import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
 import com.GUI.event.EventShowPopupMenu;
 import com.GUI.form.BanVe_Form;
+import com.GUI.form.ChonGhe_Form;
 import com.GUI.form.MainForm;
 import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
 import com.GUI.form.Phim.PhimDangChieu_Form;
@@ -56,6 +57,9 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     main.showForm(new BanVe_Form());
+                    if (subMenuIndex == 0) {
+                        main.showForm(new ChonGhe_Form());
+                    }
                 } else if (menuIndex == 1) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QuanLyPhim_Form());
