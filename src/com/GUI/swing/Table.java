@@ -11,8 +11,7 @@ public class Table extends JTable {
 
     public Table() {
         setShowHorizontalLines(true);
-        setShowVerticalLines(false);
-        setGridColor(new Color(255,51,51));
+        setGridColor(new Color(230, 230, 230));
         setRowHeight(40);
         getTableHeader().setResizingAllowed(false);
         getTableHeader().setDefaultRenderer(new DefaultTableCellHeaderRenderer() {
@@ -29,10 +28,10 @@ public class Table extends JTable {
                 Component com = super.getTableCellRendererComponent(jTable, o, selected, bln1, i, i1);
                 com.setBackground(Color.WHITE);
                 setBorder(noFocusBorder);
-                setFont(new Font("Segoe UI Variable", Font.BOLD, 14));
+                setFont(new Font("Tahoma", Font.BOLD, 14));
                 if (selected) {
-                    com.setForeground(new Color(51,51,51));
-                    com.setBackground(new Color(255,51,51));
+                    com.setForeground(new Color(15,89,140));
+                    com.setBackground(new Color(186,168,251));
                 } else {
                     com.setForeground(new Color(102,102,102));
                 }

@@ -14,7 +14,7 @@ public class TableHeader extends JLabel{
         super(text);
         setOpaque(true);
         setBackground(Color.WHITE);
-        setFont(new Font("Segoe UI Variable", Font.BOLD, 18));
+        setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
         setForeground(new Color(102, 102, 102));
         setBorder(new EmptyBorder(10,5,10,5));
     }
