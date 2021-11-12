@@ -113,7 +113,7 @@
         <Container class="com.GUI.swing.ImageAvatar" name="imageAvatar1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/GUI/icon/profile1.jpg"/>
+              <Image iconType="3" name="/com/GUI/icon/0cf1c017d3491b174258.jpg"/>
             </Property>
           </Properties>
 

@@ -39,7 +39,7 @@ public class ChangePassForm extends javax.swing.JFrame {
         panelBorder1.setBackground(new java.awt.Color(56, 56, 56));
         panelBorder1.setForeground(new java.awt.Color(0, 0, 0));
 
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/profile1.jpg"))); // NOI18N
+        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
