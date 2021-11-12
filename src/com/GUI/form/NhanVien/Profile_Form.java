@@ -1,8 +1,8 @@
-package com.GUI.form.SuKien;
+package com.GUI.form.NhanVien;
 
-public class SKKetThuc_Form extends javax.swing.JPanel {
+public class Profile_Form extends javax.swing.JPanel {
 
-    public SKKetThuc_Form() {
+    public Profile_Form() {
         initComponents();
         setOpaque(false);
     }
@@ -17,7 +17,7 @@ public class SKKetThuc_Form extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(159, 159, 159));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("sk ket thuc");
+        jLabel1.setText("profile");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

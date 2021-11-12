@@ -30,13 +30,8 @@ public class Table extends JTable {
                 setBorder(noFocusBorder);
                 setFont(new Font("Tahoma", Font.BOLD, 14));
                 if (selected) {
-<<<<<<< HEAD
                     com.setForeground(new Color(15,89,140));
                     com.setBackground(new Color(186,168,251));
-=======
-                    com.setForeground(new Color(51,51,51));
-                    com.setBackground(new Color(255,51,51));
->>>>>>> origin/duytrinoigiong
                 } else {
                     com.setForeground(new Color(102,102,102));
                 }

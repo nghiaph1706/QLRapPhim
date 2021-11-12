@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
 package com.GUI.Chart.BarChart;
-=======
-package GUI.Chart.BarChart;
->>>>>>> origin/duytrinoigiong
 
 public class ModelChart {
     String label;

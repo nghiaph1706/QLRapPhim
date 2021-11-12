@@ -41,11 +41,7 @@ public class TextField extends JTextField {
     private boolean show;
     private boolean mouseOver = false;
     private String labelText = "Label";
-<<<<<<< HEAD
     private Color lineColor = new Color(255,51,51);
-=======
-    private Color lineColor = new Color(3, 155, 216);
->>>>>>> origin/duytrinoigiong
 
     public TextField() {
         setBorder(new EmptyBorder(20, 3, 10, 3));
