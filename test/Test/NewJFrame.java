@@ -80,6 +80,7 @@ public class NewJFrame extends javax.swing.JFrame {
         chartPie2 = new com.GUI.Chart.ChartPie.ChartPie();
         chartLine1 = new com.GUI.Chart.ChartLine.ChartLine();
         card1 = new com.GUI.component.Card();
+<<<<<<< HEAD
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         barChart1 = new GUI.Chart.BarChart.BarChart();
@@ -106,6 +107,11 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGap(0, 419, Short.MAX_VALUE)
         );
 
+=======
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+>>>>>>> parent of b8744f6 (Merge branch 'nghia')
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,6 +122,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(card1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chartPie2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chartLine1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
@@ -127,6 +134,11 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(barChart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(barChart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+>>>>>>> parent of b8744f6 (Merge branch 'nghia')
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,6 +153,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addGap(496, 496, 496)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
@@ -148,15 +161,27 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
+=======
+                        .addComponent(chartPie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chartLine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(barChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(card1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addContainerGap())
+>>>>>>> parent of b8744f6 (Merge branch 'nghia')
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         testSeat();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+=======
+>>>>>>> parent of b8744f6 (Merge branch 'nghia')
     /**
      * @param args the command line arguments
      */
@@ -197,7 +222,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private com.GUI.component.Card card1;
     private com.GUI.Chart.ChartLine.ChartLine chartLine1;
     private com.GUI.Chart.ChartPie.ChartPie chartPie2;
+<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+=======
+>>>>>>> parent of b8744f6 (Merge branch 'nghia')
     // End of variables declaration//GEN-END:variables
 }
