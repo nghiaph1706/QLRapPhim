@@ -1,5 +1,5 @@
 
-package GUI.Chart.BarChart;
+package com.GUI.Chart.BarChart;
 
 public class ModelChart {
     String label;

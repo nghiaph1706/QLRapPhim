@@ -1,7 +1,6 @@
 package com.GUI.swing;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -45,7 +44,6 @@ public class PasswordField extends JPasswordField {
     private Color lineColor = new Color(255,51,51);
 
     public PasswordField() {
-        setFont(new Font("Segoe UI Variable", Font.PLAIN, 18));
         setBorder(new EmptyBorder(20, 3, 10, 3));
         setSelectionColor(new Color(76, 204, 255));
         addMouseListener(new MouseAdapter() {
