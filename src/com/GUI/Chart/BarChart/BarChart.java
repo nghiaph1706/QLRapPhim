@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 package com.GUI.Chart.BarChart;
+=======
+package GUI.Chart.BarChart;
+>>>>>>> origin/duytrinoigiong
 
 import GUI.Chart.BlankChart.BlankPlotChart;
 import GUI.Chart.BlankChart.BlankPlotChatRender;
