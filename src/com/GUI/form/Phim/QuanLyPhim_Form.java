@@ -108,6 +108,11 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         jComboBox1.setBackground(new java.awt.Color(224, 224, 224));
         jComboBox1.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -323,6 +328,10 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     private void textField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textField8ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.ButtonBadges buttonBadges2;
