@@ -49,18 +49,18 @@ public class Menu extends javax.swing.JPanel {
         setOpaque(false);
         sp.getViewport().setOpaque(false);
         sp.setVerticalScrollBar(new ScrollBarCustom());
-        layout = new MigLayout("wrap, fillx, insets 5", "[fill]", "[]40[]");
+        layout = new MigLayout("wrap, fillx, insets 5", "[fill]", "[]30[]");
         panel.setLayout(layout);
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/ticket.png")), "BÁN VÉ"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/movie.png")), "PHIM", "Quản lý phim", "Đang chiếu", "Đã ngừng chiếu"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "LỊCH CHIẾU", "Quản lý lịch chiếu"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/party.png")), "SỰ KIỆN", "Quản lý sự kiện", "Đang diễn ra", "Đã kết thúc"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "NHÂN VIÊN"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "THỐNG KÊ", "Doanh thu", "Lượt xem", "Khách hàng thân thiết"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/backup.png")), "DỮ LIỆU", "Sao lưu", "Khôi phục"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/ticket.png")), "Bán vé"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/movie.png")), "Phim", "Quản lý phim", "Đang chiếu", "Đã ngừng chiếu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "Lịch chiếu", "Quản lý lịch chiếu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/party.png")), "Sự kiện", "Quản lý sự kiện", "Đang diễn ra", "Đã kết thúc"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "Nhân viên"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "Thống kê", "Doanh thu", "Lượt xem", "Khách hàng thân thiết"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/backup.png")), "Dữ liệu", "Sao lưu", "Khôi phục"));
     }
 
     private void addMenu(ModelMenu menu) {
@@ -108,6 +108,7 @@ public class Menu extends javax.swing.JPanel {
 
         sp.setBorder(null);
         sp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sp.setViewportBorder(null);
 
         panel.setOpaque(false);
 
@@ -136,7 +137,7 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sp))
+                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
