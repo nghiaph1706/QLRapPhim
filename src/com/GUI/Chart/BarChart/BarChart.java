@@ -1,5 +1,5 @@
 
-package com.GUI.Chart.BarChart;
+package GUI.Chart.BarChart;
 
 import GUI.Chart.BlankChart.BlankPlotChart;
 import GUI.Chart.BlankChart.BlankPlotChatRender;
