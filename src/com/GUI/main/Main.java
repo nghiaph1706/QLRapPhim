@@ -19,6 +19,7 @@ import com.GUI.form.SuKien.SKKetThuc_Form;
 import com.GUI.form.ThongKe.TKDoanhThu_Form;
 import com.GUI.form.ThongKe.TKKHTT_Form;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
+import com.GUI.form.ThongKe.TKLuotXem_Form;
 import com.GUI.swing.MenuItem;
 import com.GUI.swing.PopupMenu;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
