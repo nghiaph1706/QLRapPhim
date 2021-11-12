@@ -1,8 +1,11 @@
 package com.GUI.component;
 
+import com.GUI.form.NhanVien.ChangePassForm;
 import java.awt.event.ActionListener;
 
 public class Header extends javax.swing.JPanel {
+
+    public ChangePassForm cpf;
 
     public Header() {
         initComponents();
@@ -21,7 +24,12 @@ public class Header extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(240, 240, 240));
 
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/profile1.jpg"))); // NOI18N
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
+        pic.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                picMouseClicked(evt);
+            }
+        });
 
         lbUserName.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lbUserName.setForeground(new java.awt.Color(127, 127, 127));
@@ -88,6 +96,13 @@ public class Header extends javax.swing.JPanel {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void picMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_picMouseClicked
+        // TODO add your handling code here:
+        cpf = new ChangePassForm();
+        cpf.setLocationRelativeTo(null);
+        cpf.setVisible(true);
+    }//GEN-LAST:event_picMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
