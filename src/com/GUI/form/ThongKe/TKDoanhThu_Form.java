@@ -54,6 +54,7 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         txtTimKiemThang = new javax.swing.JTextField();
         barChart3 = new com.GUI.Chart.BarChart.BarChart();
         barChart4 = new com.GUI.Chart.BarChart.BarChart();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(20, 30, 48));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -126,10 +127,10 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTBDoanhThuNam)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 69, -1, 338));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 69, 200, 338));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jLabel11.setText("9.000.000");
@@ -176,7 +177,7 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
                     .addComponent(jLabel16)
                     .addComponent(lblThangDTThapNhat)
                     .addComponent(lblTrungBinhDTThang))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,10 +198,10 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTrungBinhDTThang)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1205, 69, -1, 338));
+        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1205, 69, 210, 338));
 
         cboThongKeNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(cboThongKeNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 69, 168, -1));
@@ -233,10 +234,10 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         ));
         jScrollPane4.setViewportView(tblThongKeThang);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 105, 493, 302));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, 493, 310));
 
         cboThongKeThangNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cboThongKeThangNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(1068, 73, 130, -1));
+        add(cboThongKeThangNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 70, 110, -1));
 
         lblThongKeThang.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblThongKeThang.setText("Thống kê doanh thu theo tháng");
@@ -246,9 +247,12 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         lblThongKeNam.setText("Thống kê doanh thu theo năm");
         add(lblThongKeNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 23, 675, -1));
         add(txtTimKiemNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 69, 224, -1));
-        add(txtTimKiemThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 73, 228, -1));
-        add(barChart3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 690, 370));
-        add(barChart4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 740, 370));
+        add(txtTimKiemThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 200, -1));
+        add(barChart3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 680, 370));
+        add(barChart4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 710, 370));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 70, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,6 +260,7 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
     private com.GUI.Chart.BarChart.BarChart barChart4;
     private javax.swing.JComboBox<String> cboThongKeNam;
     private javax.swing.JComboBox<String> cboThongKeThangNam;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
