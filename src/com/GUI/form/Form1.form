@@ -21,12 +21,29 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream:src/com/GUI/form/Form1.form
           <Component id="jLabel1" alignment="0" pref="400" max="32767" attributes="0"/>
+=======
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <Component id="labelColor1" min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblName" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
+          </Group>
+>>>>>>> Stashed changes:build/classes/com/GUI/Chart/BarChart/LegendItem.form
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream:src/com/GUI/form/Form1.form
           <Component id="jLabel1" alignment="0" pref="300" max="32767" attributes="0"/>
+=======
+          <Group type="103" groupAlignment="3" attributes="0">
+              <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="labelColor1" alignment="3" min="-2" max="-2" attributes="0"/>
+          </Group>
+>>>>>>> Stashed changes:build/classes/com/GUI/Chart/BarChart/LegendItem.form
       </Group>
     </DimensionLayout>
   </Layout>
@@ -36,11 +53,20 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="48" style="1"/>
         </Property>
+<<<<<<< Updated upstream:src/com/GUI/form/Form1.form
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="9f" green="9f" red="9f" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Form 1"/>
+=======
+        <Property name="text" type="java.lang.String" value="Name"/>
+      </Properties>
+    </Component>
+    <Component class="com.GUI.Chart.BarChart.LabelColor" name="labelColor1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="labelColor1"/>
+>>>>>>> Stashed changes:build/classes/com/GUI/Chart/BarChart/LegendItem.form
       </Properties>
     </Component>
   </SubComponents>
