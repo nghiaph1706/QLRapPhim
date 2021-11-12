@@ -1,5 +1,5 @@
 
-package GUI.Chart.BarChart;
+package com.GUI.Chart.BarChart;
 
 import java.awt.Color;
 

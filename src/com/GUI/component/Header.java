@@ -8,35 +8,53 @@ public class Header extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void addMenuEvent(ActionListener event) {
+        cmdMenu.addActionListener(event);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmdMenu = new com.GUI.swing.Button();
         pic = new com.GUI.swing.ImageAvatar();
         lbUserName = new javax.swing.JLabel();
         lbRole = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        buttonBadges1 = new com.GUI.swing.ButtonBadges();
+        buttonBadges2 = new com.GUI.swing.ButtonBadges();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(224, 224, 224));
-        setForeground(new java.awt.Color(51, 51, 51));
+<<<<<<< Updated upstream
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        cmdMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/menu.png"))); // NOI18N
+=======
+        setBackground(new java.awt.Color(240, 240, 240));
+>>>>>>> Stashed changes
 
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/profile1.jpg"))); // NOI18N
 
-        lbUserName.setBackground(new java.awt.Color(51, 51, 51));
         lbUserName.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        lbUserName.setForeground(new java.awt.Color(0, 0, 0));
+        lbUserName.setForeground(new java.awt.Color(127, 127, 127));
         lbUserName.setText("User Name");
 
-        lbRole.setForeground(new java.awt.Color(51, 51, 51));
+        lbRole.setForeground(new java.awt.Color(127, 127, 127));
         lbRole.setText("Admin");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        buttonBadges1.setForeground(new java.awt.Color(250, 49, 49));
+        buttonBadges1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/notification.png"))); // NOI18N
+        buttonBadges1.setBadges(12);
+
+        buttonBadges2.setForeground(new java.awt.Color(63, 178, 232));
+        buttonBadges2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/message.png"))); // NOI18N
+        buttonBadges2.setBadges(5);
+
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/icons8_multiply_60px.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -49,7 +67,17 @@ public class Header extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(396, Short.MAX_VALUE)
+<<<<<<< Updated upstream
+                .addContainerGap()
+                .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonBadges1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+=======
+                .addContainerGap(429, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,14 +87,29 @@ public class Header extends javax.swing.JPanel {
                 .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< Updated upstream
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
+                    .addComponent(cmdMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonBadges1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonBadges2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                    .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbUserName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -75,10 +118,9 @@ public class Header extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jSeparator1))
                         .addContainerGap())))
-            .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -87,6 +129,9 @@ public class Header extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.GUI.swing.ButtonBadges buttonBadges1;
+    private com.GUI.swing.ButtonBadges buttonBadges2;
+    private com.GUI.swing.Button cmdMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
