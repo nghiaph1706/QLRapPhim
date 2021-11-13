@@ -6,6 +6,7 @@ import com.GUI.event.EventMenuSelected;
 import com.GUI.event.EventShowPopupMenu;
 import com.GUI.form.BanVe_Form;
 import com.GUI.form.ChonGhe_Form;
+import com.GUI.form.DashBoard;
 import com.GUI.form.MainForm;
 import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
 import com.GUI.form.Phim.PhimDangChieu_Form;
@@ -143,7 +144,7 @@ public class Main extends javax.swing.JFrame {
         //  Init google icon font
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         //  Start with this form
-        main.showForm(new MainForm());
+        main.showForm(new DashBoard());
     }
 
     @SuppressWarnings("unchecked")

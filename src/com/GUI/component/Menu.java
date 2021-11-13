@@ -3,6 +3,8 @@ package com.GUI.component;
 import com.GUI.event.EventMenu;
 import com.GUI.event.EventMenuSelected;
 import com.GUI.event.EventShowPopupMenu;
+import com.GUI.form.MainForm;
+import com.GUI.main.Main;
 import com.GUI.model.ModelMenu;
 import com.GUI.swing.MenuAnimation;
 import com.GUI.swing.MenuItem;
@@ -108,19 +110,21 @@ public class Menu extends javax.swing.JPanel {
 
         sp.setBorder(null);
         sp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        sp.setViewportBorder(null);
 
+        panel.setMaximumSize(new java.awt.Dimension(230, 529));
+        panel.setMinimumSize(new java.awt.Dimension(230, 529));
         panel.setOpaque(false);
+        panel.setPreferredSize(new java.awt.Dimension(230, 529));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
+            .addGap(0, 529, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panel);
@@ -129,15 +133,15 @@ public class Menu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addComponent(sp)
             .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(sp))
         );
     }// </editor-fold>//GEN-END:initComponents
 
