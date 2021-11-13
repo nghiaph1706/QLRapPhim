@@ -1,14 +1,16 @@
-package com.GUI.form;
+package newpackage;
 
 import com.GUI.Chart.ChartPie.ModelChartPie;
-import com.GUI.form.ThongKe.*;
 import com.GUI.model.ModelCard;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Component;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.border.EmptyBorder;
 
 public class DashBoard extends javax.swing.JPanel {
 
@@ -31,7 +33,6 @@ public class DashBoard extends javax.swing.JPanel {
         jLabel2.setIcon(imageIcon);
         imageIcon = new ImageIcon(new ImageIcon("/com/GUI/imagePhim/Avengers.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         jLabel3.setIcon(imageIcon);
-       
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,7 +51,6 @@ public class DashBoard extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel1.setFocusTraversalPolicyProvider(true);
         jLabel1.setMaximumSize(new java.awt.Dimension(394, 480));
         jLabel1.setMinimumSize(new java.awt.Dimension(394, 480));
         jLabel1.setPreferredSize(new java.awt.Dimension(394, 480));
@@ -95,12 +95,12 @@ public class DashBoard extends javax.swing.JPanel {
                     .addComponent(chartPie1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(card2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(card1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -114,8 +114,7 @@ public class DashBoard extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.component.Card card1;
     private com.GUI.component.Card card2;
