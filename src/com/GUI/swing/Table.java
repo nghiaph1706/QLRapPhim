@@ -11,6 +11,7 @@ public class Table extends JTable {
 
     public Table() {
         setShowHorizontalLines(true);
+        setShowVerticalLines(false);
         setGridColor(new Color(230, 230, 230));
         setRowHeight(40);
         getTableHeader().setResizingAllowed(false);
@@ -30,8 +31,8 @@ public class Table extends JTable {
                 setBorder(noFocusBorder);
                 setFont(new Font("Tahoma", Font.BOLD, 14));
                 if (selected) {
-                    com.setForeground(new Color(15,89,140));
-                    com.setBackground(new Color(186,168,251));
+                    com.setForeground(new Color(51,51,51));
+                    com.setBackground(new Color(255,51,51));
                 } else {
                     com.setForeground(new Color(102,102,102));
                 }

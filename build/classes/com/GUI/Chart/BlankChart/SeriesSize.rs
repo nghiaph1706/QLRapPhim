@@ -1,0 +1,1 @@
+GUI.Chart.BlankChart.SeriesSize

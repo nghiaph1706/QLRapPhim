@@ -3,6 +3,7 @@ package com.GUI.swing;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -34,9 +35,10 @@ public class Button extends JButton {
     private Color effectColor = new Color(173, 173, 173);
 
     public Button() {
+        setFont(new Font("Segoe UI Variable", 1, 18));
         setContentAreaFilled(false);
         setBorder(new EmptyBorder(5, 5, 5, 5));
-        setBackground(Color.WHITE);
+        setBackground(new Color(51,51,51));
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         addMouseListener(new MouseAdapter() {
             @Override
