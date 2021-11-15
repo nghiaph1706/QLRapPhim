@@ -6,7 +6,6 @@ package Entity;
 import java.util.Date;
 
 public class HoaDon {
-    private int ID;
     private String MaHoaDon;
     private double TongTien;
     private String MaKM;
@@ -22,14 +21,21 @@ public class HoaDon {
         return this.MaHoaDon;
     }
 
-    public int getID() {
-        return ID;
+    public HoaDon() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public HoaDon(String MaHoaDon, double TongTien, String MaKM, String MaKHTT, int MucGiamGia, double ThanhTien, Date NgayLap, String MaNhanVien, boolean HIDE) {
+        this.MaHoaDon = MaHoaDon;
+        this.TongTien = TongTien;
+        this.MaKM = MaKM;
+        this.MaKHTT = MaKHTT;
+        this.MucGiamGia = MucGiamGia;
+        this.ThanhTien = ThanhTien;
+        this.NgayLap = NgayLap;
+        this.MaNhanVien = MaNhanVien;
+        this.HIDE = HIDE;
     }
-
+    
     public String getMaHoaDon() {
         return MaHoaDon;
     }
