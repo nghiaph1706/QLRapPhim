@@ -1,7 +1,7 @@
 
 package Utilities;
 
-import Model.NhanVien;
+import Entity.NhanVien;
 
 public class Auth {
     

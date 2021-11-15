@@ -1,5 +1,5 @@
 /* @author nghiacubu */
-package Model;
+package Entity;
 
 public class Ve {
 

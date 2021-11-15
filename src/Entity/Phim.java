@@ -1,7 +1,7 @@
 /* @author nghiacubu */
 
 
-package Model;
+package Entity;
 
 import java.util.Date;
 

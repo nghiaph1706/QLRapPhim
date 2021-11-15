@@ -3,7 +3,7 @@
 
 package DAO;
 
-import Model.NhanVien;
+import Entity.NhanVien;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;

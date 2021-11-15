@@ -4,7 +4,7 @@
 
 package DAO;
 
-import Model.Phim;
+import Entity.Phim;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -3,7 +3,7 @@
 
 package DAO;
 
-import Model.LichChieu;
+import Entity.LichChieu;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
