@@ -13,6 +13,17 @@ public class HDCT {
     private double ThanhTien;
     private String MaHoaDon;
     private boolean HIDE;
+
+    public HDCT(String MaHoaDonChiTiet, String MaDichVu, String MaVe, double GiaTien, int SoLuong, double ThanhTien, String MaHoaDon, boolean HIDE) {
+        this.MaHoaDonChiTiet = MaHoaDonChiTiet;
+        this.MaDichVu = MaDichVu;
+        this.MaVe = MaVe;
+        this.GiaTien = GiaTien;
+        this.SoLuong = SoLuong;
+        this.ThanhTien = ThanhTien;
+        this.MaHoaDon = MaHoaDon;
+        this.HIDE = HIDE;
+    }
     
     @Override
     public String toString(){
