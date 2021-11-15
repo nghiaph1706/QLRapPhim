@@ -25,6 +25,7 @@ CREATE TABLE [NhanVien] (
 	[GioiTinh] BIT DEFAULT 0,
 	[ChucVu] BIT DEFAULT 0,
 	[MatKhau] VARCHAR(30),
+	[Hinh] VARCHAR(200),
 	[HIDE] BIT DEFAULT 0
 );
 GO
@@ -38,6 +39,7 @@ CREATE TABLE [Phim] (
 	[QuocGia] NVARCHAR(50),
 	[MaTheLoai] VARCHAR(10),
 	[DinhDang] VARCHAR(10),
+	[Hinh] VARCHAR(200),
 	[MaNhanVien] VARCHAR(10),
 	[HIDE] BIT DEFAULT 0,
 	CONSTRAINT [FK_Phim.MaTheLoai] FOREIGN KEY ([MaTheLoai]) 

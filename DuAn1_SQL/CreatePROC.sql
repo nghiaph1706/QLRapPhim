@@ -24,7 +24,7 @@ as begin
 end
 GO
 
---Doanh thu theo năm truyền tham số
+--Doanh thu theo năm truyền tham số XXX
 CREATE PROCEDURE SP_DOANHTHUTHEONAM @year varchar(4)
 	AS BEGIN
 		SELECT 
@@ -47,7 +47,7 @@ CREATE PROCEDURE SP_DOANHTHUNAM
 	END
 GO
 
---Doanh thu theo tháng truyền tham số
+--Doanh thu theo tháng truyền tham số XXX
 CREATE PROCEDURE SP_DOANHTHUTHEOTHANG @MONTH varchar(2)
 	AS BEGIN
 		SELECT 
@@ -59,14 +59,15 @@ CREATE PROCEDURE SP_DOANHTHUTHEOTHANG @MONTH varchar(2)
 	END
 GO
 
---Doanh thu theo tháng không truyền tham số
-CREATE PROCEDURE SP_DOANHTHUTHANG
+--Doanh thu theo tháng cuar nam
+CREATE PROCEDURE SP_DOANHTHUTHANG  @year varchar(4)
 	AS BEGIN
 		SELECT 
 		COUNT(MAHOADON) AS 'SOHOADON',
 		SUM(THANHTIEN) AS 'TONG',MONTH(NGAYLAP) as 'Nam'
 		FROM HOADON
-		group by MONTH(NGAYLAP)
+		where year(ngaylap) = @year
+		group by MONTH(NGAYLAP) 
 	END
 GO
 

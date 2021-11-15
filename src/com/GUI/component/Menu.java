@@ -8,6 +8,7 @@ import com.GUI.main.Main;
 import com.GUI.model.ModelMenu;
 import com.GUI.swing.MenuAnimation;
 import com.GUI.swing.MenuItem;
+import com.GUI.swing.ScrollBar;
 import com.GUI.swing.scrollbar.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Component;
@@ -50,8 +51,8 @@ public class Menu extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         sp.getViewport().setOpaque(false);
-        sp.setVerticalScrollBar(new ScrollBarCustom());
-        layout = new MigLayout("wrap, fillx, insets 5", "[fill]", "[]40[]");
+        sp.setVerticalScrollBar(new ScrollBar());
+        layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]40[]");
         panel.setLayout(layout);
     }
 
@@ -111,20 +112,20 @@ public class Menu extends javax.swing.JPanel {
         sp.setBorder(null);
         sp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        panel.setMaximumSize(new java.awt.Dimension(230, 529));
-        panel.setMinimumSize(new java.awt.Dimension(230, 529));
+        panel.setMaximumSize(new java.awt.Dimension(312, 523));
+        panel.setMinimumSize(new java.awt.Dimension(312, 523));
         panel.setOpaque(false);
-        panel.setPreferredSize(new java.awt.Dimension(230, 529));
+        panel.setPreferredSize(new java.awt.Dimension(230, 770));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGap(0, 312, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panel);

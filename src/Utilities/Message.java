@@ -1,4 +1,4 @@
-package com.GUI.dialog;
+package Utilities;
 
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
 import com.GUI.swing.icon.IconFontSwing;
@@ -9,17 +9,9 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class Message extends javax.swing.JDialog {
 
-    public boolean isOk() {
-        return ok;
-    }
-
-    public void setOk(boolean ok) {
-        this.ok = ok;
-    }
-
-    private boolean ok;
     private final Animator animator;
     private boolean show = true;
+    private boolean flag = false;
 
     public Message(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -50,10 +42,11 @@ public class Message extends javax.swing.JDialog {
         animator.setAcceleration(0.5f);
     }
 
-    public void showMessage(String message) {
+    public boolean showMessage(String message) {
         lbMessage.setText(message);
         animator.start();
         setVisible(true);
+        return flag;
     }
 
     @SuppressWarnings("unchecked")
@@ -141,11 +134,12 @@ public class Message extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        ok = true;
+        flag = true;
         closeMenu();
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        flag = false;
         closeMenu();
     }//GEN-LAST:event_button1ActionPerformed
 

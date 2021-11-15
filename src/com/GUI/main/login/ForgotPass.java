@@ -1,6 +1,6 @@
 package com.GUI.main.login;
 
-import com.GUI.dialog.Message;
+import Utilities.Message;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;

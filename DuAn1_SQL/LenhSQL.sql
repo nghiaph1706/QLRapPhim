@@ -2,9 +2,9 @@
 
 INSERT INTO [TheLoai]([TenTheLoai],[HIDE]) VALUES (?,?)
 
-INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES (?,?,?,?,?,?)
+INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[HIDE]) VALUES (?,?,?,?,?,?,?)
 
-INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?)
+INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?,?)
 
 INSERT INTO [Phong]([SoHang],[HIDE]) VALUES (?,?)
 
@@ -50,7 +50,7 @@ UPDATE [DichVu] SET [TenDichVu] = ?, [GiaDichVu] = ?, [HIDE] = ? WHERE [MaDichVu
 UPDATE [HoaDonChiTiet] SET [MaDichVu] = ?, [GiaTien] = ?, [SoLuong] = ?, [ThanhTien] = ?, [MaHoaDon] = ?, [HIDE] = ? WHERE [MaHoaDonChiTiet] = ?
 
 --SPOC
-EXEC SP_DOANHTHUTHEONAM ?
+--EXEC SP_DOANHTHUTHEONAM ?
 EXEC SP_DOANHTHUNAM
 EXEC SP_DOANHTHUTHEOTHANG ?
 EXEC SP_DOANHTHUTHANG
