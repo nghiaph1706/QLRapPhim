@@ -19,6 +19,7 @@ import com.GUI.form.SuKien.QuanLySuKien_Form;
 import com.GUI.form.SuKien.SKDangDienRa_Form;
 import com.GUI.form.SuKien.SKKetThuc_Form;
 import com.GUI.form.ThongKe.TKDoanhThu_Form;
+import com.GUI.form.ThongKe.TKDoanhThu_Form1;
 import com.GUI.form.ThongKe.TKKHTT_Form;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
 import com.GUI.swing.MenuItem;
@@ -87,7 +88,7 @@ public class Main extends javax.swing.JFrame {
                     main.showForm(new QuanLyNhanVien_Form());
                 } else if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new TKDoanhThu_Form());
+                        main.showForm(new TKDoanhThu_Form1());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new TKLuotXem_Form());
                     } else if (subMenuIndex == 2) {
