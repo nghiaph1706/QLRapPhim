@@ -7,7 +7,6 @@ import java.util.Date;
 
 
 public class LichChieu {
-    private int ID;
     private String MaLichChieu;
     private Date NgayChieu;
     private String GioChieu;
@@ -20,12 +19,16 @@ public class LichChieu {
         return this.MaLichChieu;
     }
 
-    public int getID() {
-        return ID;
+    public LichChieu() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public LichChieu(String MaLichChieu, Date NgayChieu, String GioChieu, String MaPhim, String MaPhong, boolean HIDE) {
+        this.MaLichChieu = MaLichChieu;
+        this.NgayChieu = NgayChieu;
+        this.GioChieu = GioChieu;
+        this.MaPhim = MaPhim;
+        this.MaPhong = MaPhong;
+        this.HIDE = HIDE;
     }
 
     public String getMaLichChieu() {

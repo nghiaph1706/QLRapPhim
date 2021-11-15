@@ -5,7 +5,6 @@ package Entity;
 
 
 public class NhanVien {
-    private int ID;
     private String MaNhanVien;
     private String HoTen;
     private String SDT;
@@ -18,8 +17,7 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(int ID, String MaNhanVien, String HoTen, String SDT, boolean GioiTinh, boolean ChucVu, String MatKhau, String Hinh, boolean HIDE) {
-        this.ID = ID;
+    public NhanVien(String MaNhanVien, String HoTen, String SDT, boolean GioiTinh, boolean ChucVu, String MatKhau, String Hinh, boolean HIDE) {
         this.MaNhanVien = MaNhanVien;
         this.HoTen = HoTen;
         this.SDT = SDT;
@@ -28,14 +26,6 @@ public class NhanVien {
         this.MatKhau = MatKhau;
         this.Hinh = Hinh;
         this.HIDE = HIDE;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getMaNhanVien() {

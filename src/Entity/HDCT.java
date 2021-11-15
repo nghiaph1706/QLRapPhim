@@ -5,7 +5,6 @@ package Entity;
 
 
 public class HDCT {
-    private int ID;
     private String MaHoaDonChiTiet;
     private String MaDichVu;
     private String MaVe;
@@ -18,14 +17,6 @@ public class HDCT {
     @Override
     public String toString(){
         return this.MaHoaDonChiTiet;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getMaHoaDonChiTiet() {

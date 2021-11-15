@@ -7,7 +7,6 @@ import java.util.Date;
 
 
 public class KHTT {
-    private int ID;
     private String MAKHTT;
     private String Ten;
     private String SDT;
@@ -23,12 +22,19 @@ public class KHTT {
         return this.Ten;
     }
 
-    public int getID() {
-        return ID;
+    public KHTT() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public KHTT(String MAKHTT, String Ten, String SDT, String Email, Date NgayDK, double MucGiacGia, int SoLanSuDung, String MaNhanVien, boolean HIDE) {
+        this.MAKHTT = MAKHTT;
+        this.Ten = Ten;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.NgayDK = NgayDK;
+        this.MucGiacGia = MucGiacGia;
+        this.SoLanSuDung = SoLanSuDung;
+        this.MaNhanVien = MaNhanVien;
+        this.HIDE = HIDE;
     }
 
     public String getMAKHTT() {

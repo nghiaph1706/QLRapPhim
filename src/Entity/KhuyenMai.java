@@ -20,6 +20,19 @@ public class KhuyenMai {
         return this.ThongTinKM;
     }
 
+    public KhuyenMai() {
+    }
+
+    public KhuyenMai(String MaKM, String ThongTinKM, double MucGiamGia, Date NgayBatDau, Date NgayKetThuc, String MaNhanVien, boolean HIDE) {
+        this.MaKM = MaKM;
+        this.ThongTinKM = ThongTinKM;
+        this.MucGiamGia = MucGiamGia;
+        this.NgayBatDau = NgayBatDau;
+        this.NgayKetThuc = NgayKetThuc;
+        this.MaNhanVien = MaNhanVien;
+        this.HIDE = HIDE;
+    }
+    
     public String getMaKM() {
         return MaKM;
     }

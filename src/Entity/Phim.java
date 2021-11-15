@@ -6,7 +6,6 @@ package Entity;
 import java.util.Date;
 
 public class Phim {
-    private int ID;
     private String MaPhim;
     private String TenPhim;
     private Date NgayKhoiChieu;
@@ -23,14 +22,22 @@ public class Phim {
         return this.TenPhim;
     }
 
-    public int getID() {
-        return ID;
+    public Phim() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public Phim(String MaPhim, String TenPhim, Date NgayKhoiChieu, Date NgayKetThuc, String QuocGia, String MaTheLoai, String DinhDang, String Hinh, String MaNhanVien, boolean HIDE) {
+        this.MaPhim = MaPhim;
+        this.TenPhim = TenPhim;
+        this.NgayKhoiChieu = NgayKhoiChieu;
+        this.NgayKetThuc = NgayKetThuc;
+        this.QuocGia = QuocGia;
+        this.MaTheLoai = MaTheLoai;
+        this.DinhDang = DinhDang;
+        this.Hinh = Hinh;
+        this.MaNhanVien = MaNhanVien;
+        this.HIDE = HIDE;
     }
-
+    
     public String getMaPhim() {
         return MaPhim;
     }

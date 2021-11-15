@@ -5,7 +5,6 @@ package Entity;
 
 
 public class TheLoai {
-    private int ID;
     private String MaTheLoai;
     private String TenTheLoai;
     private boolean HIDE;
@@ -15,12 +14,13 @@ public class TheLoai {
         return this.TenTheLoai;
     }
 
-    public int getID() {
-        return ID;
+    public TheLoai() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public TheLoai(String MaTheLoai, String TenTheLoai, boolean HIDE) {
+        this.MaTheLoai = MaTheLoai;
+        this.TenTheLoai = TenTheLoai;
+        this.HIDE = HIDE;
     }
 
     public String getMaTheLoai() {
