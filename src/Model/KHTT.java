@@ -18,6 +18,18 @@ public class KHTT {
     private String MaNhanVien;
     private boolean HIDE;
 
+    public KHTT(String MAKHTT, String Ten, String SDT, String Email, Date NgayDK, double MucGiacGia, int SoLanSuDung, String MaNhanVien, boolean HIDE) {
+        this.MAKHTT = MAKHTT;
+        this.Ten = Ten;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.NgayDK = NgayDK;
+        this.MucGiacGia = MucGiacGia;
+        this.SoLanSuDung = SoLanSuDung;
+        this.MaNhanVien = MaNhanVien;
+        this.HIDE = HIDE;
+    }
+
     @Override
     public String toString() {
         return this.Ten;

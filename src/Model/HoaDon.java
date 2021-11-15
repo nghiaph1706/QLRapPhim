@@ -17,6 +17,18 @@ public class HoaDon {
     private String MaNhanVien;
     private boolean HIDE;
 
+    public HoaDon(String MaHoaDon, double TongTien, String MaKM, String MaKHTT, int MucGiamGia, double ThanhTien, Date NgayLap, String MaNhanVien, boolean HIDE) {
+        this.MaHoaDon = MaHoaDon;
+        this.TongTien = TongTien;
+        this.MaKM = MaKM;
+        this.MaKHTT = MaKHTT;
+        this.MucGiamGia = MucGiamGia;
+        this.ThanhTien = ThanhTien;
+        this.NgayLap = NgayLap;
+        this.MaNhanVien = MaNhanVien;
+        this.HIDE = HIDE;
+    }
+    
     @Override
     public String toString() {
         return this.MaHoaDon;
