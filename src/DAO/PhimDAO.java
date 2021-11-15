@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     
     private String INSERT_SQL = "INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?,?)";
-    private String UPDATE_SQL = "UPDATE [Phim] SET [TenPhim] = ?, [NgayKhoiChieu] = ?, [QuocGia] = ?, [MaTheLoai] = ?,[DinhDang] = ?,[MaNhanVien] = ?,[HIDE] = ? WHERE [MaPhim] = ?";
+    private String UPDATE_SQL = "UPDATE [Phim] SET [TenPhim] = ?, [NgayKhoiChieu] = ?, [NgayKetThuc] = ?, [QuocGia] = ?, [MaTheLoai] = ?,[DinhDang] = ?, [Hinh] = ?, [MaNhanVien] = ?, [HIDE] = ? WHERE [MaPhim] = ?";
     private String DELETE_SQL = "UPDATE [Phim] SET [HIDE] = 1 WHERE [MaPhim] = ?";
     private String SELECT_BY_ID = "SELECT * FROM Phim WHERE [HIDE] = 0 AND [MaPhim] = ?";
     private String SELECT_ALL = "SELECT * FROM Phim WHERE [HIDE] = 0";
@@ -25,8 +25,8 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     @Override
     public void insert(Phim entity) {
         try {
-            XJdbc.update(INSERT_SQL, entity);
-        } catch (SQLException e) {
+            XJdbc.update(INSERT_SQL, entity.getTenPhim(), entity.getNgayKhoiChieu(), entity.getNgayKetThuc(), entity.getQuocGia(), entity.getMaTheLoai(), entity.getDinhDang(), entity.getHinh(), entity.getMaNhanVien(), entity.isHIDE());
+        } catch (Exception e) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -34,8 +34,8 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     @Override
     public void update(Phim entity) {
         try {
-            XJdbc.update(UPDATE_SQL, entity);
-        } catch (SQLException e) {
+            XJdbc.update(UPDATE_SQL, entity.getTenPhim(), entity.getNgayKhoiChieu(), entity.getNgayKetThuc(), entity.getQuocGia(), entity.getMaTheLoai(), entity.getDinhDang(), entity.getHinh(), entity.getMaNhanVien(), entity.isHIDE(), entity.getMaPhim());
+        } catch (Exception e) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -44,7 +44,7 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     public void delete(String key) {
         try {
             XJdbc.update(DELETE_SQL, key);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -66,9 +66,18 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     protected List<Phim> selectBySql(String sql, Object... args) {
         List<Phim> list = new ArrayList<>();
         try {
-            ResultSet rs = XJdbc;
+            ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()) {
                 Phim ph = new Phim();
+                ph.setMaPhim(rs.getString("MaPhim"));
+                ph.setTenPhim(rs.getNString("TenPhim"));
+                ph.setNgayKhoiChieu(rs.getDate("NgayKhoiChieu"));
+                ph.setNgayKetThuc(rs.getDate("NgayKetThuc"));
+                ph.setQuocGia(rs.getNString("QuocGia"));
+                ph.setMaTheLoai(rs.getString("MaTheLoai"));
+                ph.setDinhDang(rs.getString("DinhDang"));
+                ph.setHinh(rs.getString("Hinh"));
+                ph.setHIDE(rs.getBoolean("HIDE"));
                 list.add(ph);
             }
             rs.getStatement().getConnection().close();

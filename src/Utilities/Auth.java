@@ -12,7 +12,7 @@ public class Auth {
     }
     
     public static boolean isManager(){
-        return Auth.isLogin() && user.getVaiTro();
+        return Auth.isLogin() && user.isChucVu();
     }
     
     public static void clear(){

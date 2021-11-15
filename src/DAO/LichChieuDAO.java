@@ -24,8 +24,8 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     @Override
     public void insert(LichChieu entity) {
         try {
-            XJdbc.update(INSERT_SQL, entity);
-        } catch (SQLException e) {
+            XJdbc.update(INSERT_SQL, entity.getNgayChieu(), entity.getGioChieu(), entity.getMaPhim(), entity.getMaPhong(), entity.isHIDE());
+        } catch (Exception e) {
             Logger.getLogger(LichChieuDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -33,8 +33,8 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     @Override
     public void update(LichChieu entity) {
         try {
-            XJdbc.update(UPDATE_SQL, entity);
-        } catch (SQLException e) {
+            XJdbc.update(UPDATE_SQL, entity.getNgayChieu(), entity.getGioChieu(), entity.getMaPhim(), entity.getMaPhong(), entity.isHIDE(), entity.getMaLichChieu());
+        } catch (Exception e) {
             Logger.getLogger(LichChieuDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -42,8 +42,8 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     @Override
     public void delete(String key) {
         try {
-            XJdbc.update(DELETE_SQL, key)
-        } catch (SQLException e) {
+            XJdbc.update(DELETE_SQL, key);
+        } catch (Exception e) {
             Logger.getLogger(LichChieuDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -68,6 +68,12 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()) {
                 LichChieu lc = new LichChieu();
+                lc.setMaLichChieu(rs.getString("MaLichChieu"));
+                lc.setMaPhim(rs.getString("MaPhim"));
+                lc.setMaPhong(rs.getString("MaPhong"));
+                lc.setNgayChieu(rs.getDate("NgayChieu"));
+                lc.setGioChieu(rs.getString("GioChieu"));
+                lc.setHIDE(rs.getBoolean("HIDE"));
                 list.add(lc);
             }
             rs.getStatement().getConnection().close();
