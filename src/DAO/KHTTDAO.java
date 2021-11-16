@@ -3,7 +3,7 @@
 
 package DAO;
 
-import Model.KHTT;
+import Entity.KHTT;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;

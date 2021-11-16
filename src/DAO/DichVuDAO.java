@@ -1,7 +1,7 @@
 /* @author nghiacubu */
 package DAO;
 
-import Model.DichVu;
+import Entity.DichVu;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;

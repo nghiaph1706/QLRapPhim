@@ -3,7 +3,7 @@
 
 package DAO;
 
-import Model.HDCT;
+import Entity.HDCT;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;

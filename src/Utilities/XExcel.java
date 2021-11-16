@@ -1,7 +1,8 @@
 
 package Utilities;
 
-import GUI.Swing.Table;
+
+import com.GUI.swing.Table;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;

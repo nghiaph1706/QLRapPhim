@@ -3,7 +3,7 @@
 
 package DAO;
 
-import Model.HoaDon;
+import Entity.HoaDon;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;

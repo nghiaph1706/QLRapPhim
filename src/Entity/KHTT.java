@@ -37,18 +37,6 @@ public class KHTT {
     public KHTT() {
     }
 
-    public KHTT(String MAKHTT, String Ten, String SDT, String Email, Date NgayDK, double MucGiacGia, int SoLanSuDung, String MaNhanVien, boolean HIDE) {
-        this.MAKHTT = MAKHTT;
-        this.Ten = Ten;
-        this.SDT = SDT;
-        this.Email = Email;
-        this.NgayDK = NgayDK;
-        this.MucGiacGia = MucGiacGia;
-        this.SoLanSuDung = SoLanSuDung;
-        this.MaNhanVien = MaNhanVien;
-        this.HIDE = HIDE;
-    }
-
     public String getMAKHTT() {
         return MAKHTT;
     }
