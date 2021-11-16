@@ -1,5 +1,5 @@
 
-package GUI.Chart.BlankChart;
+package com.GUI.Chart.BlankChart;
 import java.awt.Graphics2D;
 
 public abstract class BlankPlotChatRender {

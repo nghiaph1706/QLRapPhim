@@ -1,10 +1,13 @@
 package com.GUI.form.Phim;
 
+import com.GUI.swing.ScrollBar;
+
 public class PhimDangChieu_Form extends javax.swing.JPanel {
 
     public PhimDangChieu_Form() {
         initComponents();
         setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,7 +68,7 @@ public class PhimDangChieu_Form extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("PHIM ĐANG CHIẾU");
 

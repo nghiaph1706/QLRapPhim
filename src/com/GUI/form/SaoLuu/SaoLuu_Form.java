@@ -1,10 +1,13 @@
 package com.GUI.form.SaoLuu;
 
+import com.GUI.swing.ScrollBar;
+
 public class SaoLuu_Form extends javax.swing.JPanel {
 
     public SaoLuu_Form() {
         initComponents();
         setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -23,7 +26,7 @@ public class SaoLuu_Form extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("DỮ LIỆU");
 
@@ -40,27 +43,27 @@ public class SaoLuu_Form extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblNhatKyHD);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("NHẬT KÝ HOẠT ĐỘNG");
 
-        button1.setBackground(new java.awt.Color(51, 51, 51));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("XUẤT DỮ LIỆU TRỰC TIẾP");
+        button1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
-        button2.setBackground(new java.awt.Color(51, 51, 51));
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("XUẤT DỮ LIỆU ĐẾN");
+        button2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
-        button3.setBackground(new java.awt.Color(51, 51, 51));
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("XUẤT NHẬT KÝ HOẠT ĐỘNG");
+        button3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         progressBarCustom1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         progressBarCustom1.setForeground(new java.awt.Color(51, 255, 153));
         progressBarCustom1.setValue(50);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("DUNG LƯỢNG");
 

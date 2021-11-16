@@ -38,7 +38,7 @@ public class MenuButton extends JButton {
         super(text);
         setIcon(icon);
         init();
-        setFont(new Font("tahoma",Font.PLAIN,18));
+        setFont(new Font("Segoe UI Black",Font.PLAIN,18));
         setBorder(new EmptyBorder(1, 20, 1, 1));
     }
 

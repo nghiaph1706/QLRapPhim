@@ -1,10 +1,13 @@
 package com.GUI.form.Phim;
 
+import com.GUI.swing.ScrollBar;
+
 public class QuanLyPhim_Form extends javax.swing.JPanel {
 
     public QuanLyPhim_Form() {
         initComponents();
         setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
         
     }
     @SuppressWarnings("unchecked")
@@ -64,15 +67,15 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         jScrollPane1.setViewportView(table1);
 
         textField1.setBackground(new java.awt.Color(224, 224, 224));
-        textField1.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField1.setLabelText("Mã phim");
 
         textField2.setBackground(new java.awt.Color(224, 224, 224));
-        textField2.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField2.setLabelText("Mã thể loại");
 
         textField3.setBackground(new java.awt.Color(224, 224, 224));
-        textField3.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField3.setLabelText("Tên phim");
         textField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,23 +84,23 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         });
 
         textField4.setBackground(new java.awt.Color(224, 224, 224));
-        textField4.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField4.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField4.setLabelText("Ngày kết thúc");
 
         textField5.setBackground(new java.awt.Color(224, 224, 224));
-        textField5.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField5.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField5.setLabelText("Quốc gia");
 
         textField6.setBackground(new java.awt.Color(224, 224, 224));
-        textField6.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField6.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField6.setLabelText("Mã định dạng");
 
         textField7.setBackground(new java.awt.Color(224, 224, 224));
-        textField7.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField7.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField7.setLabelText("Định dạng");
 
         textField8.setBackground(new java.awt.Color(224, 224, 224));
-        textField8.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        textField8.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         textField8.setLabelText("Ngày khởi chiếu");
         textField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +109,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         });
 
         jComboBox1.setBackground(new java.awt.Color(224, 224, 224));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,23 +130,23 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
             .addGap(0, 310, Short.MAX_VALUE)
         );
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("P");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("S");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
         jLabel5.setText("O");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("T");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
         jLabel7.setText("E");
 
@@ -151,7 +154,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("R");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
         jLabel9.setText("R");
 
@@ -193,18 +196,21 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("QUẢN LÝ PHIM");
 
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("THÊM");
+        button1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("SỬA");
+        button2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("XÓA");
+        button3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -284,7 +290,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
                             .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
