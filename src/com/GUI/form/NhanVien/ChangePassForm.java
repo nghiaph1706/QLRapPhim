@@ -37,7 +37,6 @@ public class ChangePassForm extends javax.swing.JFrame {
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(56, 56, 56));
-        panelBorder1.setForeground(new java.awt.Color(0, 0, 0));
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
 
@@ -46,15 +45,12 @@ public class ChangePassForm extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tên Nhân Viên");
 
-        passwordField1.setForeground(new java.awt.Color(0, 0, 0));
         passwordField1.setText("passwordField1");
         passwordField1.setLabelText("Old PassWord");
 
-        passwordField2.setForeground(new java.awt.Color(0, 0, 0));
         passwordField2.setText("passwordField1");
         passwordField2.setLabelText("Old PassWord");
 
-        passwordField3.setForeground(new java.awt.Color(0, 0, 0));
         passwordField3.setText("passwordField1");
         passwordField3.setLabelText("Old PassWord");
 

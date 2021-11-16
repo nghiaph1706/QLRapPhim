@@ -191,9 +191,9 @@ public class ChonGhe_Form extends javax.swing.JPanel {
         );
 
         buttonBadges1.setBackground(new java.awt.Color(51, 51, 51));
-        buttonBadges1.setForeground(new java.awt.Color(255, 51, 51));
+        buttonBadges1.setForeground(new java.awt.Color(255, 255, 255));
         buttonBadges1.setText("RESET");
-        buttonBadges1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        buttonBadges1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         buttonBadges1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBadges1ActionPerformed(evt);
@@ -201,9 +201,9 @@ public class ChonGhe_Form extends javax.swing.JPanel {
         });
 
         buttonBadges2.setBackground(new java.awt.Color(51, 51, 51));
-        buttonBadges2.setForeground(new java.awt.Color(255, 51, 51));
+        buttonBadges2.setForeground(new java.awt.Color(255, 255, 255));
         buttonBadges2.setText("SELECT");
-        buttonBadges2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        buttonBadges2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         buttonBadges2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBadges2ActionPerformed(evt);

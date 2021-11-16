@@ -3,12 +3,9 @@ package com.GUI.component;
 import com.GUI.event.EventMenu;
 import com.GUI.event.EventMenuSelected;
 import com.GUI.event.EventShowPopupMenu;
-import com.GUI.form.MainForm;
-import com.GUI.main.Main;
 import com.GUI.model.ModelMenu;
 import com.GUI.swing.MenuAnimation;
 import com.GUI.swing.MenuItem;
-import com.GUI.swing.ScrollBar;
 import com.GUI.swing.scrollbar.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Component;
@@ -51,19 +48,19 @@ public class Menu extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         sp.getViewport().setOpaque(false);
-        sp.setVerticalScrollBar(new ScrollBar());
-        layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]40[]");
+        sp.setVerticalScrollBar(new ScrollBarCustom());
+        layout = new MigLayout("wrap, fillx, insets 5", "[fill]", "[]30[]");
         panel.setLayout(layout);
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/ticket.png")), "BÁN VÉ","Chọn ghế"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/movie.png")), "PHIM", "Quản lý phim", "Đang chiếu", "Đã ngừng chiếu"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "LỊCH CHIẾU", "Quản lý lịch chiếu"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/party.png")), "SỰ KIỆN", "Quản lý sự kiện", "Đang diễn ra", "Đã kết thúc"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "NHÂN VIÊN"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "THỐNG KÊ", "Doanh thu", "Lượt xem", "Khách hàng thân thiết"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/backup.png")), "DỮ LIỆU", "Sao lưu", "Khôi phục"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/ticket.png")), "Bán vé", "Chọn ghế"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/movie.png")), "Phim", "Quản lý phim", "Đang chiếu", "Đã ngừng chiếu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/planner.png")), "Lịch chiếu", "Quản lý lịch chiếu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/party.png")), "Sự kiện", "Quản lý sự kiện", "Đang diễn ra", "Đã kết thúc"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/staff.png")), "Nhân viên"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/increase.png")), "Thống kê", "Doanh thu", "Lượt xem", "Khách hàng thân thiết"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/GUI/icon/backup.png")), "Dữ liệu", "Sao lưu", "Khôi phục"));
     }
 
     private void addMenu(ModelMenu menu) {
@@ -111,11 +108,9 @@ public class Menu extends javax.swing.JPanel {
 
         sp.setBorder(null);
         sp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sp.setViewportBorder(null);
 
-        panel.setMaximumSize(new java.awt.Dimension(312, 523));
-        panel.setMinimumSize(new java.awt.Dimension(312, 523));
         panel.setOpaque(false);
-        panel.setPreferredSize(new java.awt.Dimension(230, 770));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -125,7 +120,7 @@ public class Menu extends javax.swing.JPanel {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panel);
@@ -134,15 +129,15 @@ public class Menu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sp)
+            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
             .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(sp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

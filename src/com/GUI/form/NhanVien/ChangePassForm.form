@@ -39,9 +39,6 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="38" green="38" red="38" type="rgb"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
       </Properties>
 
       <Layout>
@@ -135,27 +132,18 @@
         </Component>
         <Component class="com.GUI.swing.PasswordField" name="passwordField1">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="passwordField1"/>
             <Property name="labelText" type="java.lang.String" value="Old PassWord"/>
           </Properties>
         </Component>
         <Component class="com.GUI.swing.PasswordField" name="passwordField2">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="passwordField1"/>
             <Property name="labelText" type="java.lang.String" value="Old PassWord"/>
           </Properties>
         </Component>
         <Component class="com.GUI.swing.PasswordField" name="passwordField3">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="passwordField1"/>
             <Property name="labelText" type="java.lang.String" value="Old PassWord"/>
           </Properties>
