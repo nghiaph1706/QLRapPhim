@@ -1,13 +1,10 @@
 package com.GUI.form.NhanVien;
 
-import com.GUI.swing.ScrollBar;
-
 public class QuanLyNhanVien_Form extends javax.swing.JPanel {
 
     public QuanLyNhanVien_Form() {
         initComponents();
         setOpaque(false);
-        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,11 +47,12 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         imageAvatar1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
 
         table1.setAutoCreateRowSorter(true);
+        table1.setForeground(new java.awt.Color(0, 0, 0));
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -77,41 +75,44 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         button1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("CHỌN HÌNH");
-        button1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         button2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("XÓA HÌNH");
-        button2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("GIỚI TÍNH");
 
         buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("Nam");
 
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("Nữ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("CHỨC VỤ");
 
         buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jRadioButton3.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton3.setText("Quản Lý");
 
         buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jRadioButton4.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setText("Nhân Viên");
 
         button3.setBackground(new java.awt.Color(255, 0, 0));
         button3.setBorder(null);
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("THÊM MỚI");
+        button3.setActionCommand("THÊM MỚI");
         button3.setFont(new java.awt.Font("Segoe UI Variable", 1, 15)); // NOI18N
 
         button4.setBackground(new java.awt.Color(255, 0, 0));
@@ -137,16 +138,20 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
 
         imageAvatar2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Thẻ Nhân Viên");
 
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Mã NV:");
 
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Chức Vụ:");
 
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Họ Tên:");
 
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CFL - Cinema For Life Company, Card");
 
@@ -178,7 +183,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -203,7 +208,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(77, Short.MAX_VALUE)
+                        .addContainerGap(46, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(250, 250, 250)
@@ -257,9 +262,11 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(207, 207, 207)
-                        .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(42, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -316,7 +323,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -81,11 +81,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("LOGIN");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Username");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Password");
 
@@ -111,11 +111,11 @@ public class Login extends javax.swing.JFrame {
 
         txtUser.setBackground(new java.awt.Color(204, 204, 204));
         txtUser.setForeground(new java.awt.Color(51, 51, 51));
-        txtUser.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
         pwdPass.setBackground(new java.awt.Color(204, 204, 204));
         pwdPass.setForeground(new java.awt.Color(51, 51, 51));
-        pwdPass.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        pwdPass.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
         lblExit.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lblExit.setForeground(new java.awt.Color(255, 51, 51));

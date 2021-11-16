@@ -1,13 +1,10 @@
 package com.GUI.form;
 
-import com.GUI.swing.ScrollBar;
-
 public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     public QuanLyLichChieu_Form() {
         initComponents();
         setOpaque(false);
-        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -63,15 +60,15 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         jScrollPane1.setViewportView(table1);
 
         textField1.setBackground(new java.awt.Color(224, 224, 224));
-        textField1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        textField1.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         textField1.setLabelText("Tìm kiếm");
 
         textField2.setBackground(new java.awt.Color(224, 224, 224));
-        textField2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        textField2.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         textField2.setLabelText("Mã lịch chiếu");
 
         textField3.setBackground(new java.awt.Color(224, 224, 224));
-        textField3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        textField3.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         textField3.setLabelText("Tên phim");
         textField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,15 +77,15 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         });
 
         textField4.setBackground(new java.awt.Color(224, 224, 224));
-        textField4.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        textField4.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         textField4.setLabelText("Giờ chiếu");
 
         textField6.setBackground(new java.awt.Color(224, 224, 224));
-        textField6.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        textField6.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         textField6.setLabelText("Mã phim");
 
         textField7.setBackground(new java.awt.Color(224, 224, 224));
-        textField7.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        textField7.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         textField7.setLabelText("Mã phòng");
 
         txtNgayKTchieu.setBackground(new java.awt.Color(224, 224, 224));
@@ -101,50 +98,50 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         txtsearchDate1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jComboBox1.setBackground(new java.awt.Color(224, 224, 224));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 51, 51));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên phim 1", "Tên phim 2", "Tên phim 3", "Tên phim 4" }));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("QUẢN LÝ LỊCH CHIẾU");
 
         buttonBadges1.setBackground(new java.awt.Color(51, 51, 51));
         buttonBadges1.setForeground(new java.awt.Color(255, 255, 255));
         buttonBadges1.setText("SỬA");
-        buttonBadges1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        buttonBadges1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
 
         buttonBadges2.setBackground(new java.awt.Color(51, 51, 51));
         buttonBadges2.setForeground(new java.awt.Color(255, 255, 255));
         buttonBadges2.setText("LƯU");
-        buttonBadges2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        buttonBadges2.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
 
         buttonBadges3.setBackground(new java.awt.Color(51, 51, 51));
         buttonBadges3.setForeground(new java.awt.Color(255, 255, 255));
         buttonBadges3.setText("THÊM");
-        buttonBadges3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        buttonBadges3.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
 
         buttonBadges4.setBackground(new java.awt.Color(51, 51, 51));
         buttonBadges4.setForeground(new java.awt.Color(255, 255, 255));
         buttonBadges4.setText("XÓA");
-        buttonBadges4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        buttonBadges4.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Từ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Đến");
 
         txtNgaychieu.setBackground(new java.awt.Color(224, 224, 224));
         txtNgaychieu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
         jLabel5.setText("Ngày chiếu");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("Ngày KT chiếu");
 

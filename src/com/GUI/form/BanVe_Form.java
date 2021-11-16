@@ -1,13 +1,11 @@
 package com.GUI.form;
 
-import com.GUI.swing.ScrollBar;
 import java.awt.Color;
 
 public class BanVe_Form extends javax.swing.JPanel {
 
     public BanVe_Form() {
         initComponents();
-        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,15 +39,6 @@ public class BanVe_Form extends javax.swing.JPanel {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -61,32 +50,33 @@ public class BanVe_Form extends javax.swing.JPanel {
         tblHoaDon.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(tblHoaDon);
 
+        button1.setBackground(new java.awt.Color(51, 51, 51));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("THANH TOÁN");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("HÓA ĐƠN");
 
         cboPhim.setBackground(new java.awt.Color(224, 224, 224));
-        cboPhim.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        cboPhim.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         cboPhim.setForeground(new java.awt.Color(204, 204, 204));
         cboPhim.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("PHIM");
 
-        chkPhieuGG.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        chkPhieuGG.setFont(new java.awt.Font("Segoe UI Variable", 0, 24)); // NOI18N
         chkPhieuGG.setForeground(new java.awt.Color(255, 51, 51));
         chkPhieuGG.setText("Thêm phiếu giảm giá");
 
         cboPhieuGG.setBackground(new java.awt.Color(224, 224, 224));
-        cboPhieuGG.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        cboPhieuGG.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         cboPhieuGG.setForeground(new java.awt.Color(51, 51, 51));
         cboPhieuGG.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("PHIẾU GIẢM GIÁ");
 
@@ -112,16 +102,16 @@ public class BanVe_Form extends javax.swing.JPanel {
         jLabel7.setText("COMBO 2");
         jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jSpinner1.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
         jSpinner1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
-        jSpinner2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jSpinner2.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
         jSpinner2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
-        jSpinner3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jSpinner3.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
         jSpinner3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
-        jSpinner4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jSpinner4.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
         jSpinner4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -165,9 +155,11 @@ public class BanVe_Form extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        button2.setBackground(new java.awt.Color(51, 51, 51));
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("XỬ LÝ");
 
+        button3.setBackground(new java.awt.Color(51, 51, 51));
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("NHU CẦU DỊCH VỤ");
 
@@ -203,7 +195,7 @@ public class BanVe_Form extends javax.swing.JPanel {
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(244, 244, 244))))
+                        .addGap(248, 248, 248))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,13 +218,12 @@ public class BanVe_Form extends javax.swing.JPanel {
                         .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
-                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

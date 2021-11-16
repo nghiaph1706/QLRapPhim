@@ -35,7 +35,7 @@ public class Button extends JButton {
     private Color effectColor = new Color(173, 173, 173);
 
     public Button() {
-        setFont(new Font("Segoe UI Black", 1, 18));
+        setFont(new Font("Segoe UI Variable", 1, 18));
         setContentAreaFilled(false);
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setBackground(new Color(51,51,51));

@@ -1,9 +1,9 @@
 
 package com.GUI.Chart.BarChart;
 
-import com.GUI.Chart.BlankChart.BlankPlotChart;
-import com.GUI.Chart.BlankChart.BlankPlotChatRender;
-import com.GUI.Chart.BlankChart.SeriesSize;
+import GUI.Chart.BlankChart.BlankPlotChart;
+import GUI.Chart.BlankChart.BlankPlotChatRender;
+import GUI.Chart.BlankChart.SeriesSize;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -61,8 +61,8 @@ public class BarChart extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        blankPlotChart = new GUI.Chart.BlankChart.BlankPlotChart();
         panelLegend = new javax.swing.JPanel();
-        blankPlotChart = new com.GUI.Chart.BlankChart.BlankPlotChart();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -74,8 +74,8 @@ public class BarChart extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelLegend, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
             .addComponent(blankPlotChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelLegend, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +88,7 @@ public class BarChart extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.GUI.Chart.BlankChart.BlankPlotChart blankPlotChart;
+    private GUI.Chart.BlankChart.BlankPlotChart blankPlotChart;
     private javax.swing.JPanel panelLegend;
     // End of variables declaration//GEN-END:variables
 }

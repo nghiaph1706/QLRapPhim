@@ -1,5 +1,5 @@
 
-package com.GUI.Chart.BlankChart;
+package GUI.Chart.BlankChart;
 
 public class SeriesSize {
 

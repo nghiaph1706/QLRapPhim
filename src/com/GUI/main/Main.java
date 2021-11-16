@@ -23,6 +23,7 @@ import com.GUI.form.ThongKe.TKDoanhThu_Form1;
 import com.GUI.form.ThongKe.TKKHTT_Form;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
 import com.GUI.swing.MenuItem;
+import com.GUI.swing.PopupMenu;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
 import com.GUI.swing.icon.IconFontSwing;
 import java.awt.Component;
@@ -100,6 +101,17 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(new KhoiPhuc_Form());
                     }
                 }
+            }
+        });
+        menu.addEventShowPopup(new EventShowPopupMenu() {
+            @Override
+            public void showPopup(Component com) {
+                MenuItem item = (MenuItem) com;
+                PopupMenu popup = new PopupMenu(Main.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = Main.this.getX() + 52;
+                int y = Main.this.getY() + com.getY() + 86;
+                popup.setLocation(x, y);
+                popup.setVisible(true);
             }
         });
         menu.initMenuItem();

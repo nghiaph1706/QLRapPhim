@@ -1,5 +1,5 @@
 
-package com.GUI.Chart.BlankChart;
+package GUI.Chart.BlankChart;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;

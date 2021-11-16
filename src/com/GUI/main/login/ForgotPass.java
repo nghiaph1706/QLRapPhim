@@ -97,19 +97,20 @@ public class ForgotPass extends javax.swing.JFrame {
 
         panelEnterMail.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("FORGOT PASSWORD");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Username");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Email");
 
+        btnNext.setBackground(new java.awt.Color(51, 51, 51));
         btnNext.setBorder(null);
         btnNext.setForeground(new java.awt.Color(255, 255, 255));
         btnNext.setText("NEXT");
@@ -121,8 +122,9 @@ public class ForgotPass extends javax.swing.JFrame {
         });
 
         txtUser.setBackground(new java.awt.Color(204, 204, 204));
-        txtUser.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
+        btnCancel.setBackground(new java.awt.Color(51, 51, 51));
         btnCancel.setBorder(null);
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("CANCEL");
@@ -134,7 +136,7 @@ public class ForgotPass extends javax.swing.JFrame {
         });
 
         txtEmail.setBackground(new java.awt.Color(204, 204, 204));
-        txtEmail.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout panelEnterMailLayout = new javax.swing.GroupLayout(panelEnterMail);
         panelEnterMail.setLayout(panelEnterMailLayout);
@@ -153,7 +155,7 @@ public class ForgotPass extends javax.swing.JFrame {
                         .addGroup(panelEnterMailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(326, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEnterMailLayout.createSequentialGroup()
                         .addGroup(panelEnterMailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,7 +180,7 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelEnterMail, "card2");
@@ -190,10 +192,11 @@ public class ForgotPass extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("FORGOT PASSWORD");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("Code");
 
+        btnNext1.setBackground(new java.awt.Color(51, 51, 51));
         btnNext1.setBorder(null);
         btnNext1.setForeground(new java.awt.Color(255, 255, 255));
         btnNext1.setText("NEXT");
@@ -205,8 +208,9 @@ public class ForgotPass extends javax.swing.JFrame {
         });
 
         txtCode.setBackground(new java.awt.Color(204, 204, 204));
-        txtCode.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtCode.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
+        btnCancel1.setBackground(new java.awt.Color(51, 51, 51));
         btnCancel1.setBorder(null);
         btnCancel1.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel1.setText("CANCEL");
@@ -243,7 +247,7 @@ public class ForgotPass extends javax.swing.JFrame {
                         .addGroup(panelEnterCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                             .addComponent(txtCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 81, Short.MAX_VALUE))))
+                        .addGap(0, 52, Short.MAX_VALUE))))
             .addGroup(panelEnterCodeLayout.createSequentialGroup()
                 .addGap(127, 127, 127)
                 .addGroup(panelEnterCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -278,11 +282,11 @@ public class ForgotPass extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("FORGOT PASSWORD");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("New Password");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI Variable", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
         jLabel9.setText("Confirm Password");
 
@@ -331,7 +335,7 @@ public class ForgotPass extends javax.swing.JFrame {
                         .addGroup(panelEnterNewPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8))
-                        .addContainerGap(250, Short.MAX_VALUE))
+                        .addContainerGap(248, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEnterNewPassLayout.createSequentialGroup()
                         .addGroup(panelEnterNewPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -356,7 +360,7 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelEnterNewPass, "card2");

@@ -1,7 +1,5 @@
 package com.GUI.form.SuKien;
 
-import com.GUI.swing.ScrollBar;
-
 public class QuanLySuKien_Form extends javax.swing.JPanel {
 
     public QuanLySuKien_Form() {
@@ -10,7 +8,6 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         txtMaSuKien.setLabelText("Mã Sự Kiện");
         txtTenSuKien.setLabelText("Tên Sự Kiện");
         txtMucKhuyenMai.setLabelText("Mức Khuyến Mãi (%)");
-        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,15 +46,15 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table1);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Ngày Bắt Đầu");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("Ngày Kết Thúc");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Mô tả:");
 
@@ -68,36 +65,32 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         button3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("THÊM");
-        button3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         button4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         button4.setForeground(new java.awt.Color(255, 255, 255));
         button4.setText("CẬP NHẬT");
-        button4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         button6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         button6.setForeground(new java.awt.Color(255, 255, 255));
         button6.setText("XÓA");
-        button6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         button5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         button5.setForeground(new java.awt.Color(255, 255, 255));
         button5.setText("LÀM MỚI");
-        button5.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("QUẢN LÝ SỰ KIỆN");
 
         txtMaSuKien.setForeground(new java.awt.Color(51, 51, 51));
-        txtMaSuKien.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtMaSuKien.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
         txtTenSuKien.setForeground(new java.awt.Color(51, 51, 51));
-        txtTenSuKien.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtTenSuKien.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
         txtMucKhuyenMai.setForeground(new java.awt.Color(51, 51, 51));
-        txtMucKhuyenMai.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtMucKhuyenMai.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -177,7 +170,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(41, Short.MAX_VALUE))))
+                        .addContainerGap(49, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 

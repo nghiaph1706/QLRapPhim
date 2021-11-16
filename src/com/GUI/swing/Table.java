@@ -29,7 +29,7 @@ public class Table extends JTable {
                 Component com = super.getTableCellRendererComponent(jTable, o, selected, bln1, i, i1);
                 com.setBackground(Color.WHITE);
                 setBorder(noFocusBorder);
-                setFont(new Font("Segoe UI Black", Font.BOLD, 14));
+                setFont(new Font("Tahoma", Font.BOLD, 14));
                 if (selected) {
                     com.setForeground(new Color(51,51,51));
                     com.setBackground(new Color(255,51,51));
