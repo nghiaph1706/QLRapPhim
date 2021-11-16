@@ -1,5 +1,5 @@
 
-package GUI.Chart.BlankChart;
+package com.GUI.Chart.BlankChart;
 
 public class NiceScale {
 

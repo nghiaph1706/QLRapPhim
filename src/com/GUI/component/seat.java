@@ -30,7 +30,7 @@ public class seat extends JPanel{
             } else {
                 button.setLabel(""+ 10);
             }
-            button.setFont(new Font("tahoma",Font.BOLD,18));
+            button.setFont(new Font("Segoe UI Black",Font.BOLD,18));
             button.setSize(new Dimension(19, 35));
             button.addActionListener(new ActionListener(){
                 @Override

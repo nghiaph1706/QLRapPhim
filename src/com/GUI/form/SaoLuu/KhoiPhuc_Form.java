@@ -20,21 +20,21 @@ public class KhoiPhuc_Form extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("KHÔI PHỤC DỮ LIỆU");
 
-        button3.setBackground(new java.awt.Color(51, 51, 51));
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("LẤY DỮ LIỆU");
+        button3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         progressBarCustom1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         progressBarCustom1.setForeground(new java.awt.Color(51, 255, 153));
         progressBarCustom1.setValue(50);
 
-        button4.setBackground(new java.awt.Color(51, 51, 51));
         button4.setForeground(new java.awt.Color(255, 255, 255));
         button4.setText("NHẬP DỮ LIỆU");
+        button4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,7 +70,7 @@ public class KhoiPhuc_Form extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -40,38 +40,41 @@ public class ChangePassForm extends javax.swing.JFrame {
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tên Nhân Viên");
 
         passwordField1.setText("passwordField1");
+        passwordField1.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
         passwordField1.setLabelText("Old PassWord");
 
         passwordField2.setText("passwordField1");
+        passwordField2.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
         passwordField2.setLabelText("Old PassWord");
 
         passwordField3.setText("passwordField1");
+        passwordField3.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
         passwordField3.setLabelText("Old PassWord");
 
         button1.setBackground(new java.awt.Color(255, 0, 0));
         button1.setBorder(null);
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Đổi Mật Khẩu");
-        button1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        button1.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
 
         button2.setBackground(new java.awt.Color(255, 0, 0));
         button2.setBorder(null);
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("Hủy");
-        button2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        button2.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button2ActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Mã Nhân Viên");
