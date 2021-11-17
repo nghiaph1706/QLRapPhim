@@ -24,7 +24,7 @@ public class ItemChartPie extends javax.swing.JPanel {
         g.setColor(new Color(240, 240, 240));
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
         int margin = 8;
-        int size = getHeight() - margin * 3;
+        int size = getHeight() - margin * 4;
         g.setColor(data.getColor());
         g.fillRect(margin, margin, size, size);
         super.paintComponent(g);
@@ -50,8 +50,8 @@ public class ItemChartPie extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblValues)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

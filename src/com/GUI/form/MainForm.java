@@ -7,7 +7,6 @@ public class MainForm extends javax.swing.JPanel {
 
     public MainForm() {
         initComponents();
-        setOpaque(false);
         setLayout(new BorderLayout());
     }
 
@@ -22,6 +21,7 @@ public class MainForm extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(new java.awt.Color(20, 30, 48));
+        setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -1,35 +1,37 @@
 package com.GUI.form;
 
 import com.GUI.Chart.ChartPie.ModelChartPie;
-import com.GUI.form.ThongKe.*;
 import com.GUI.model.ModelCard;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class DashBoard extends javax.swing.JPanel {
 
     public DashBoard() {
         initComponents();
-        setOpaque(false);
-        card1.setData(new ModelCard("Value1", 255, 80, new ImageIcon("/com/GUI/icon/1.png")));
-        card1.setColorGradient(Color.orange);
-        card2.setData(new ModelCard("Value2", 800, 25, new ImageIcon("/com/GUI/icon/2.png")));
-        card2.setColorGradient(new Color(255,51,51));
+        Icon icon1 = new ImageIcon(getClass().getResource("/com/GUI/icon/profile.jpg"));
+        card1.setData(new ModelCard("Value1", 255, 80,icon1));
+        Icon icon2 = new ImageIcon(getClass().getResource("/com/GUI/icon/2.png"));
+        card2.setData(new ModelCard("Value2", 800, 25,icon2));
+        
+        
         List <ModelChartPie> list = new ArrayList<>();
         list.add(new ModelChartPie("Quí 1", 200, Color.yellow));
         list.add(new ModelChartPie("Quí 1", 400, Color.blue));
         list.add(new ModelChartPie("Quí 1", 300, Color.orange)); 
         list.add(new ModelChartPie("Quí 1", 600, Color.pink));        
         chartPie1.setModel(list);
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("/src/com/GUI/imagePhim/AntMain.jpg").getImage().getScaledInstance(jLabel1.getPreferredSize().width, jLabel1.getPreferredSize().height, Image.SCALE_SMOOTH));
+        
+        
+        Icon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel1.getPreferredSize().width, jLabel1.getPreferredSize().height, Image.SCALE_SMOOTH));
         jLabel1.setIcon(imageIcon);
-        imageIcon = new ImageIcon(new ImageIcon("/com/GUI/imagePhim/Iception.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel2.getPreferredSize().width, jLabel2.getPreferredSize().height, Image.SCALE_SMOOTH));
         jLabel2.setIcon(imageIcon);
-        imageIcon = new ImageIcon(new ImageIcon("/com/GUI/imagePhim/Avengers.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel3.getPreferredSize().width, jLabel3.getPreferredSize().height, Image.SCALE_SMOOTH));
         jLabel3.setIcon(imageIcon);
        
     }
@@ -44,10 +46,13 @@ public class DashBoard extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(20, 30, 48));
+        setOpaque(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
 
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel1.setFocusTraversalPolicyProvider(true);
@@ -70,37 +75,43 @@ public class DashBoard extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(card1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(card2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(chartPie1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(51, 51, 51)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(66, 66, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(card2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chartPie1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(83, 83, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(585, 585, 585))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel4)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(chartPie1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(card2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(card1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -123,6 +134,7 @@ public class DashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

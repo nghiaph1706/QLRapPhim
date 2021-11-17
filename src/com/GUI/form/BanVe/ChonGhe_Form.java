@@ -1,4 +1,6 @@
-package com.GUI.form;
+package com.GUI.form.BanVe;
+
+import java.awt.Color;
 
 /**
  *

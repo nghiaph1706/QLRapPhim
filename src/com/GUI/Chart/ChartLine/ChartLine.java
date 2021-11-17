@@ -58,7 +58,7 @@ public class ChartLine extends javax.swing.JPanel {
         );
         panelChartLine1Layout.setVerticalGroup(
             panelChartLine1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 191, Short.MAX_VALUE)
+            .addGap(0, 231, Short.MAX_VALUE)
         );
 
         panelData.setOpaque(false);
