@@ -117,24 +117,6 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private com.GUI.swing.Table tblsukien;
     // End of variables declaration//GEN-END:variables
 
-    private void UpdateValuesFromTable() {
-        for (int i = 0; i < list.size(); i++) {
-            if (tblsukien.getValueAt(i, 1).equals(list.get(i).getTenKM()) == false
-                    || tblsukien.getValueAt(i, 2).equals(list.get(i).getTenKM()) == false
-                    || tblsukien.getValueAt(i, 3).equals(list.get(i).getTenKM()) == false
-                    || tblsukien.getValueAt(i, 4).equals(list.get(i).getTenKM()) == false) {
-                KhuyenMai x = new KhuyenMai();
-                x = list.get(i);
-                x.setTenKM(tblsukien.getValueAt(i, 1).toString());
-                x.setMucGiamGia(Float.valueOf(tblsukien.getValueAt(i, 2).toString()));
-                x.setNgayBatDau(new XDate().toDate(tblsukien.getValueAt(i, 3).toString()));
-                x.setNgayKetThuc(new XDate().toDate(tblsukien.getValueAt(i, 4).toString()));
-                KmAction = new KhuyenMaiDAO();
-                KmAction.update(x);
-            }
-        }
-        JOptionPane.showMessageDialog(this, "Cập Nhật Dữ Liệu Thành Công!", "Hoàn Thành", 0);
-    }
 
     private void FillTable() {
         list = null;
@@ -153,6 +135,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             KmAction.delete(tblsukien.getValueAt(index, 0).toString());
             JOptionPane.showMessageDialog(this, "Xóa Dữ Liệu Thành Công!", "Hoàn Thành", 0);
+            FillTable();
             return;
         }
         JOptionPane.showMessageDialog(this, "Xóa Dữ Liệu Không Thành Công!", "Lỗi!", 0);

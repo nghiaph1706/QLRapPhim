@@ -13,6 +13,7 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
 
     static String insert = "INSERT INTO [KhuyenMai]([MaKM],[TenKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,0)";
     static String update = "Update KhuyenMai Set  [TenKM]=?, ThongTinKM=?,MucGiamGia=?,NgayBatDau=?,NgayKetThuc=? Where MaKM like ?";
+    static String updatehide ="Update KhuyenMai Set Hide = 0 Where MaKM like ?";
     static String delete = "Update KhuyenMai Set Hide = 1 Where MaKM like ?";
     static String selectall = "Select * from KhuyenMai Where HIDE = 0;";
     static String selectallbydate = "{CALL SP_SUKIENDANGDIENRA (?)}";
@@ -31,6 +32,9 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
     @Override
     public void delete(String key) {
         XJdbc.update(delete, key);
+    }
+    public void updatehide(String key) {
+        XJdbc.update(updatehide, key);
     }
 
     @Override

@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class QuanLySuKien_Form extends javax.swing.JPanel {
-    
+
     private DefaultTableModel modeltable;
     private List<KhuyenMai> list;
     private ValidateCheck vld = new ValidateCheck();
     private KhuyenMaiDAO KmAction;
-    
+
     public QuanLySuKien_Form() {
         initComponents();
         setOpaque(false);
@@ -24,7 +24,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
         FillTable();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -278,7 +278,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         }
         modeltable.fireTableDataChanged();
     }
-    
+
     private void FillToNull() {
         txtMaSuKien.setEditable(true);
         tblsukien.clearSelection();
@@ -289,7 +289,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         DateClose.setDate(null);
         txtthongtin.setText("");
     }
-    
+
     private KhuyenMai GetValuesKhuyenMai() {
         KhuyenMai km = new KhuyenMai();
         km.setMaKM(txtMaSuKien.getText());
@@ -301,14 +301,14 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 //        km.setMaNhanVien(""); cái này hoàn thiện khi login
         return km;
     }
-    
+
     private boolean Check(String values1) {
         for (int i = 0; i < list.size(); i++) {
             return vld.CheckDulicase("Mã Sự Kiện", values1, "Mã Sự Kiện Có Sẵn", list.get(i).getMaKM());
         }
         return true;
     }
-    
+
     private boolean Validateform(boolean x) {
         if (x
                 && vld.CheckString("Mã Sự Kiện", txtMaSuKien.getText(), 50, false)
@@ -335,7 +335,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         }
         return false;
     }
-    
+
     private void AddEvent() {
         if (Validateform(true)) {
             KhuyenMai values = GetValuesKhuyenMai();
@@ -344,12 +344,18 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 KmAction.insert(values);
                 JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!", "Hoàn Thành", 0);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!\n" + e, "Lỗi", 0);
+                try {
+                    KmAction.updatehide(values.getMaKM());
+                    KmAction.update(values);
+                    JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!", "Hoàn Thành", 0);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!\n" + e, "Lỗi", 0);
+                }
             }
             FillTable();
         }
     }
-    
+
     private void FillToComp() {
         txtMaSuKien.setEditable(false);
         int index = tblsukien.getSelectedRow();
@@ -364,7 +370,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void UpdateEvent() {
         if (Validateform(false)) {
             KhuyenMai values = GetValuesKhuyenMai();
@@ -378,22 +384,21 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             FillTable();
         }
     }
-    
+
     private void DeleteEvent() {
         int index = tblsukien.getSelectedRow();
         if (index != -1) {
-            KmAction= new KhuyenMaiDAO();
+            KmAction = new KhuyenMaiDAO();
             try {
                 KmAction.delete((String) tblsukien.getValueAt(index, 0));
                 JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Thành Công!", "Hoàn Thành", 0);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Không Thành Công!\n"+e, "Lỗi", 0);
+                JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Không Thành Công!\n" + e, "Lỗi", 0);
             }
             FillTable();
             FillToNull();
-        }
-        else{
-             JOptionPane.showMessageDialog(null, "Chưa Chọn Dòng Để Xóa!", "Lỗi", 0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa Chọn Dòng Để Xóa!", "Lỗi", 0);
         }
     }
 }
