@@ -382,6 +382,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     private void DeleteEvent() {
         int index = tblsukien.getSelectedRow();
         if (index != -1) {
+            KmAction= new KhuyenMaiDAO();
             try {
                 KmAction.delete((String) tblsukien.getValueAt(index, 0));
                 JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Thành Công!", "Hoàn Thành", 0);

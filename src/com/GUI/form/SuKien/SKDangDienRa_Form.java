@@ -31,7 +31,6 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        btnupdate = new com.GUI.swing.Button();
         btndelete = new com.GUI.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblsukien = new com.GUI.swing.Table();
@@ -42,15 +41,6 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("SỰ KIỆN ĐANG DIỄN RA");
-
-        btnupdate.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnupdate.setForeground(new java.awt.Color(255, 255, 255));
-        btnupdate.setText("CẬP NHẬT");
-        btnupdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnupdateActionPerformed(evt);
-            }
-        });
 
         btndelete.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btndelete.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,8 +83,6 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addGap(499, 499, 499))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
                         .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -109,20 +97,10 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
-        if (tblsukien.getRowCount() > 0) {
-            UpdateValuesFromTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "Chưa Có Dữ Liệu!", "Lỗi!", 0);
-        }
-    }//GEN-LAST:event_btnupdateActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         if (tblsukien.getRowCount() > 0) {
@@ -134,7 +112,6 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btndelete;
-    private com.GUI.swing.Button btnupdate;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private com.GUI.swing.Table tblsukien;
@@ -176,6 +153,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             KmAction.delete(tblsukien.getValueAt(index, 0).toString());
             JOptionPane.showMessageDialog(this, "Xóa Dữ Liệu Thành Công!", "Hoàn Thành", 0);
+            return;
         }
         JOptionPane.showMessageDialog(this, "Xóa Dữ Liệu Không Thành Công!", "Lỗi!", 0);
     }
