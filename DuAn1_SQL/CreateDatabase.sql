@@ -86,6 +86,7 @@ GO
 
 CREATE TABLE [KhuyenMai] (
 	[MaKM] VARCHAR(50),
+	[TenKM] NVARCHAR(255),--duongsua
 	[ThongTinKM] NVARCHAR(255),
 	[MucGiamGia] FLOAT,
 	[NgayBatDau] DATE,

@@ -14,5 +14,4 @@ public abstract class QLRapPhimDAO<E,K> {
     abstract public List<E> selectAll();
     abstract public E selectById(K key);
     abstract protected List<E> selectBySql(String sql, Object...args);
-    
 }

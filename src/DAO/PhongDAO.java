@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PhongDAO extends QLRapPhimDAO<Phong, String> {
 
-    static String insert = "INSERT INTO [Phong]([SoHang],[HIDE]) VALUES (?,?)";
+    static String insert = "INSERT INTO [Phong]([SoHang],[HIDE]) VALUES (?,?,0)";
     static String update = "Update Phong Set Sohang =? Where maphong like ?";
     static String delete = "Update Phong Set Hide = 1 Where maphong like ?";
     static String selectall = "Select * from Phong";
@@ -57,6 +57,7 @@ public class PhongDAO extends QLRapPhimDAO<Phong, String> {
             throw new RuntimeException(e);
         }
     }
+    
     public Phong readFromResultSet(ResultSet rs) throws SQLException {
        Phong obj = new Phong();
         return obj;

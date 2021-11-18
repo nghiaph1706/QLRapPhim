@@ -12,7 +12,7 @@ INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
 
 EXEC sp_TaoGhe ?
 
-INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?)
+INSERT INTO [KhuyenMai]([MaKM],[TenKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?)--duongsua
 
 INSERT INTO [KhachHangThanThiet]([Ten],[SDT],[Email],[NgayDK],[MucGiamGia],[SoLanSuDung],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?)
 
@@ -37,7 +37,7 @@ UPDATE [Phong] SET [SoHang] = ?, [HIDE] = ? WHERE [MaPhong] = ?
 
 UPDATE [LichChieu] SET [NgayChieu] = ?, [GioChieu] = ?,[MaPhim] = ?,[MaPhong] = ?,[HIDE] = ? WHERE [MaLichChieu] = ?
 
-UPDATE [KhuyenMai] SET [MaKM] = ?, [ThongTinKM] = ?,[MucGiamGia] = ?,[MaNhanVien] = ?,[HIDE] = ? WHERE [MaKM] = ?
+Update KhuyenMai Set  [TenKM]=?, ThongTinKM=?,MucGiamGia=?,NgayBatDau=?,NgayKetThuc=?,MaNhanVien=? Where MaKM like ?--duongsua
 
 UPDATE [KhachHangThanThiet] SET [Ten] = ?, [SDT] = ?, [Email] = ?, [NgayDK] = ?, [MucGiamGia] = ?, [SoLanSuDung] = ?, [MaNhanVien] = ?, [HIDE] = ? WHERE [MaKHTT] = ?
 
