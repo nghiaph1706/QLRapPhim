@@ -7,21 +7,21 @@ import com.GUI.swing.Button;
 
 
 public class ModelButton {
-    int ma;
+    String ma;
     Button btn;
 
-    public ModelButton(int ma, Button btn) {
+    public ModelButton(String ma, Button btn) {
         this.ma = ma;
         this.btn = btn;
     }
     
     
     
-    public int getMa() {
+    public String getMa() {
         return ma;
     }
 
-    public void setMa(int ma) {
+    public void setMa(String ma) {
         this.ma = ma;
     }
 

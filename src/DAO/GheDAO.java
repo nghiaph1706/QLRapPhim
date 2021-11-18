@@ -70,4 +70,8 @@ public class GheDAO extends QLRapPhimDAO<Ghe, String>{
             throw new RuntimeException(e);
         }
     }
+    
+    public List<Ghe> selectByMaPhong(String maPhong){
+        return this.selectBySql(SELECT_BY_MaPhong, maPhong);
+    }
 }

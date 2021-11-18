@@ -3,6 +3,7 @@
 
 package com.GUI.component;
 
+import DAO.GheDAO;
 import Entity.Ghe;
 import com.GUI.swing.Button;
 import java.awt.Color;
@@ -17,39 +18,49 @@ import javax.swing.JPanel;
 
 
 public class seat extends JPanel{
-    public static boolean status = false;
-    public static int index = 0;
-    public static List<ModelButton> list_btn_selected = new ArrayList<>();
-    private int i;
-    public static List<Ghe> listGhe = new ArrayList<>();
+    
+//    public static boolean status = false;
+    public List<ModelButton> list_btn_selected = new ArrayList<>();
+            
+    public List<Ghe> listGhe = new ArrayList<>();
+    public GheDAO gheDAO = new GheDAO();
+    
     public seat(String maPhong){
-        this.setBackground(Color.white);
-        setLayout(new GridLayout(14,10,18,18));
-        for (i = 1; i <= 140; i++) {
+        init();
+        
+        listGhe = gheDAO.selectByMaPhong(maPhong);
+        for (Ghe ghe : listGhe) {
             Button button = new Button();
-            button.setBackground(new Color(204,204,204));
-            button.setForeground(Color.red);
-            if (i%10!=0) {
-                button.setLabel(""+ i%10);
-            } else {
-                button.setLabel(""+ 10);
-            }
+            button.setText(ghe.getMaGhe());
             button.setFont(new Font("Segoe UI Black",Font.BOLD,18));
             button.setSize(new Dimension(19, 35));
-            button.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    status = true;
-                    button.setBackground(Color.red);
-                    button.setForeground(Color.white);
-                    list_btn_selected.add(new ModelButton(i,button));
-                }
-            });
-            this.add(button);
+            if (ghe.isTrangThai()) {
+                button.setBackground(Color.BLACK);
+                button.setForeground(Color.red);
+                button.disable();
+            } else {
+                button.setBackground(new Color(204,204,204));
+                button.setForeground(Color.red);
+                button.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+//                        status = true;
+                        button.setBackground(Color.red);
+                        button.setForeground(Color.white);
+                        list_btn_selected.add(new ModelButton(ghe.getMaGhe(),button));
+                    }
+                });
+                this.add(button);
+            }
         }
     }
     
-    public void reset(){
+    void init(){
+        this.setBackground(Color.white);
+        setLayout(new GridLayout(14,10,18,18));
+    }
+    
+    void reset(){
         for (ModelButton button : list_btn_selected) {
             button.getBtn().setBackground(Color.white);
             button.getBtn().setForeground(Color.red);
@@ -57,5 +68,15 @@ public class seat extends JPanel{
         list_btn_selected.clear();
     }
     
-    
+    List<Ghe> selectedSeat(){
+        List<Ghe> listSelect = new ArrayList<>();
+        for (ModelButton modelButton : list_btn_selected) {
+            for (Ghe ghe : listGhe) {
+                if (modelButton.getMa().equals(ghe.getMaGhe())) {
+                    listSelect.add(ghe);
+                }
+            }
+        }
+        return listSelect;
+    }
 }
