@@ -52,12 +52,12 @@ GO
 EXEC sp_TaoGhe 'P5'
 GO
 
-INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES
-('HALLOWEEN', N'Mua 2 bắp được tặng 1 cái ống hút', 10 ,'10-10-2010','10-12-2010', 'NV1', 0),
-('QUOCKHANH', N'Mua 2 bắp được tặng 1 cái bao bóng',15 , '10-10-2010','10-12-2010', 'NV1', 0),
-('QUOCTETHIEUNHI', N'Mua 2 bắp được tặng 1 cái bao bóng', 10,'10-10-2010','10-12-2010' , 'NV1', 0),
-('MUNGDANGMUNGXUAN', N'Mua 2 bắp được tặng 1 cái bao bóng', 20 ,'10-10-2010','10-12-2010', 'NV1', 0),
-('TET', N'Mua 2 bắp được tặng 1 cái bao bóng', 10 ,'10-10-2010','10-12-2010', 'NV1', 0);
+INSERT INTO [KhuyenMai]([MaKM],[TenKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES --dương sửa
+('HALLOWEEN',N'Tưng Bừng Sự Kiện Halloween', N'Mua 2 bắp được tặng 1 cái ống hút', 10 ,'10-10-2010','10-12-2010', 'NV1', 0),
+('QUOCKHANH',N'Tưng Bừng Ngày Quốc Khánh 2-9', N'Mua 2 bắp được tặng 1 cái bao bóng',15 , '10-10-2010','10-12-2010', 'NV1', 0),
+('QUOCTETHIEUNHI',N'Tưng Bừng Cùng Các Bé Thiếu Nhi 1-6', N'Mua 2 bắp được tặng 1 cái bao bóng', 10,'10-10-2010','10-12-2010' , 'NV1', 0),
+('MUNGDANGMUNGXUAN',N'Chào Mừng Đảng Và Nhà Nước Đầu Xuân Năm Mới', N'Mua 2 bắp được tặng 1 cái bao bóng', 20 ,'10-10-2010','10-12-2010', 'NV1', 0),
+('TET',N'Chúc Mừng Ngày Tết Đoàn Viên Sum Vầy', N'Mua 2 bắp được tặng 1 cái bao bóng', 10 ,'10-10-2010','10-12-2010', 'NV1', 0);
 GO
 
 INSERT INTO [KhachHangThanThiet]([Ten],[SDT],[Email],[NgayDK],[MucGiamGia],[SoLanSuDung],[MaNhanVien],[HIDE]) VALUES

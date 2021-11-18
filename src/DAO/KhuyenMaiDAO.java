@@ -1,33 +1,31 @@
 /* @author nghiacubu */
-
-
 package DAO;
 
 import Entity.KhuyenMai;
+import Utilities.XDate;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
 
-public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String>{
-
-    static String insert = "INSERT INTO [KhuyenMai]([MaKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES"
-            + "(?,?,?,?,?,?,0)";
-    static String update = "Update KhuyenMai Set  ThongTinKM=?,MucGiamGia=?,NgayBatDau=?,NgayKetThuc=?,MaNhanVien=? Where maphong like ?";
+    static String insert = "INSERT INTO [KhuyenMai]([MaKM],[TenKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,0)";
+    static String update = "Update KhuyenMai Set  [TenKM]=?, ThongTinKM=?,MucGiamGia=?,NgayBatDau=?,NgayKetThuc=? Where MaKM like ?";
     static String delete = "Update KhuyenMai Set Hide = 1 Where MaKM like ?";
-    static String selectall = "Select * from KhuyenMai";
+    static String selectall = "Select * from KhuyenMai Where HIDE = 0;";
+    static String selectallbydate = "{CALL SP_SUKIENDANGDIENRA (?)}";
     static String selectbyid = "Select * from KhuyenMai Where MaKM like ?";
 
     @Override
     public void insert(KhuyenMai entity) {
-        XJdbc.update(insert, entity.getMaKM(), entity.getThongTinKM(),entity.getMucGiamGia(),entity.getNgayBatDau(),entity.getNgayKetThuc(),entity.getMaNhanVien());
+        XJdbc.update(insert, entity.getMaKM(), entity.getTenKM(), entity.getThongTinKM(), entity.getMucGiamGia(), entity.getNgayBatDau(), entity.getNgayKetThuc(), entity.getMaNhanVien());
     }
 
     @Override
     public void update(KhuyenMai entity) {
-        XJdbc.update(update,entity.getThongTinKM(),entity.getMucGiamGia(),entity.getNgayBatDau(),entity.getNgayKetThuc(),entity.getMaNhanVien(),entity.getMaKM());
+        XJdbc.update(update, entity.getTenKM(), entity.getThongTinKM(), entity.getMucGiamGia(), entity.getNgayBatDau(), entity.getNgayKetThuc(), entity.getMaKM());
     }
 
     @Override
@@ -38,6 +36,10 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String>{
     @Override
     public List<KhuyenMai> selectAll() {
         return selectBySql(selectall);
+    }
+
+    public List<KhuyenMai> selectallbydate() {
+        return selectBySql(selectallbydate, new XDate().now());
     }
 
     @Override
@@ -52,7 +54,7 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String>{
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                KhuyenMai km = new KhuyenMai();
+                KhuyenMai km = readFromResultSet(rs);
                 list.add(km);
             }
             rs.getStatement().getConnection().close();
@@ -61,8 +63,17 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String>{
             throw new RuntimeException(e);
         }
     }
+
     public KhuyenMai readFromResultSet(ResultSet rs) throws SQLException {
-       KhuyenMai obj = new KhuyenMai();
+        KhuyenMai obj = new KhuyenMai();
+        obj.setMaKM(rs.getString("MaKM"));
+        obj.setTenKM(rs.getString("TenKM"));
+        obj.setThongTinKM(rs.getString("ThongTinKM"));
+        obj.setMucGiamGia(rs.getFloat("MucGiamGia"));
+        obj.setNgayBatDau(rs.getDate("NgayBatDau"));
+        obj.setNgayKetThuc(rs.getDate("NgayKetThuc"));
+        obj.setMaNhanVien(rs.getString("MaNhanVien"));
+        obj.setHIDE(rs.getBoolean("HIDE"));
         return obj;
     }
 }
