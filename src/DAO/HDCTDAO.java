@@ -62,7 +62,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                list.add(new HDCT(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getDouble(6), rs.getString(7), rs.getBoolean(8)));
+                list.add(new HDCT(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getInt(6), rs.getDouble(7), rs.getString(8), rs.getBoolean(9)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DichVuDAO.class.getName()).log(Level.SEVERE, null, ex);

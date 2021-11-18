@@ -7,7 +7,6 @@ package DAO;
 import Entity.Phim;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,8 +18,8 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     private String INSERT_SQL = "INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?,?)";
     private String UPDATE_SQL = "UPDATE [Phim] SET [TenPhim] = ?, [NgayKhoiChieu] = ?, [NgayKetThuc] = ?, [QuocGia] = ?, [MaTheLoai] = ?,[DinhDang] = ?, [Hinh] = ?, [MaNhanVien] = ?, [HIDE] = ? WHERE [MaPhim] = ?";
     private String DELETE_SQL = "UPDATE [Phim] SET [HIDE] = 1 WHERE [MaPhim] = ?";
-    private String SELECT_BY_ID = "SELECT * FROM Phim WHERE [HIDE] = 0 AND [MaPhim] = ?";
-    private String SELECT_ALL = "SELECT * FROM Phim WHERE [HIDE] = 0";
+    private String SELECT_BY_ID = "SELECT * FROM [Phim] WHERE [HIDE] = 0 AND [MaPhim] = ?";
+    private String SELECT_ALL = "SELECT * FROM [Phim] WHERE [HIDE] = 0";
 
     @Override
     public void insert(Phim entity) {
@@ -64,7 +63,7 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
 
     @Override
     protected List<Phim> selectBySql(String sql, Object... args) {
-        List<Phim> list = new ArrayList<>();
+        List<Phim> list = new ArrayList<Phim>();
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()) {
@@ -86,5 +85,8 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
             throw new RuntimeException(e);
         }
     }
-
+    public List<Phim> selectByTenPhim(String tenPhim) {
+        String sql = "SELECT * FROM Phim WHERE TenPhim LIKE ?";
+        return this.selectBySql(sql, "%" + tenPhim + "%");
+    }
 }

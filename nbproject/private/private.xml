@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/taoda/Desktop/nghia/src/com/GUI/form/QuanLyLichChieu_Form.java</file>
-            <file>file:/C:/Users/taoda/Desktop/nghia/src/com/GUI/model/ModelCard.java</file>
-            <file>file:/C:/Users/taoda/Desktop/nghia/src/com/GUI/form/DashBoard.java</file>
-            <file>file:/C:/Users/taoda/Desktop/nghia/src/com/GUI/component/Card.java</file>
-            <file>file:/C:/Users/taoda/Desktop/nghia/src/com/GUI/form/Phim/QuanLyPhim_Form.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/com/GUI/form/BanVe/BanVe_Form.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/Entity/Ghe.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/DAO/GheDAO.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/DAO/HDCTDAO.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/Entity/KhuyenMai.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/Entity/Phong.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/DAO/PhongDAO.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/DAO/VeDAO.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/Entity/LichChieu.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/com/GUI/component/seat.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/com/GUI/main/Main.java</file>
+            <file>file:/D:/Works/Workspace/PRO1/PJ/QLRapPhim/src/com/GUI/form/BanVe/ChonGhe_Form.java</file>
         </group>
     </open-files>
 </project-private>

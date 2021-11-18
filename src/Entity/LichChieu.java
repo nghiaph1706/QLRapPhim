@@ -7,6 +7,7 @@ import java.util.Date;
 
 
 public class LichChieu {
+    private String TenPhim;
     private String MaLichChieu;
     private Date NgayChieu;
     private String GioChieu;
@@ -30,6 +31,15 @@ public class LichChieu {
         this.MaPhong = MaPhong;
         this.HIDE = HIDE;
     }
+
+    public String getTenPhim() {
+        return TenPhim;
+    }
+
+    public void setTenPhim(String TenPhim) {
+        this.TenPhim = TenPhim;
+    }
+    
 
     public String getMaLichChieu() {
         return MaLichChieu;

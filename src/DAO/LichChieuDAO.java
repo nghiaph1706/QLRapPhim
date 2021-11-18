@@ -20,6 +20,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     private String DELETE_SQL = "UPDATE [LichChieu] SET [HIDE] = 1 WHERE [MaLichChieu] = ?";
     private String SELECT_BY_ID = "SELECT * FROM LichChieu WHERE [HIDE] = 0 AND [MaLichChieu] = ?";
     private String SELECT_ALL = "SELECT * FROM LichChieu WHERE [HIDE] = 0";
+    private String SELECT_BY_LC = "SELECT CONCAT(ph.TenPhim,' ', NgayChieu, ' ',GioChieu) as Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim GROUP BY ph.TenPhim, NgayChieu, GioChieu";
     
     @Override
     public void insert(LichChieu entity) {
@@ -75,6 +76,20 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
                 lc.setGioChieu(rs.getString("GioChieu"));
                 lc.setHIDE(rs.getBoolean("HIDE"));
                 list.add(lc);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<String> selectPhimTheoLichChieu()
+    {
+        try {
+            List<String> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query(SELECT_BY_LC);
+            while(rs.next()) {
+                list.add(rs.getString(1));
             }
             rs.getStatement().getConnection().close();
             return list;

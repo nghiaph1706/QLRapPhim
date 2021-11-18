@@ -1,6 +1,14 @@
 ﻿USE QL_RAPPHIM
 GO
 
+CREATE PROC sp_PhimTheoLichChieu
+as Begin
+	SELECT CONCAT(TenPhim,' ', NgayChieu, ' ',GioChieu) as PHIM
+	FROM LichChieu lc
+		INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim
+	GROUP BY ph.TenPhim, NgayChieu, GioChieu
+End
+
 --Tạo ghế
 CREATE PROC sp_TaoGhe(@MaPhong VARCHAR(10))
 as begin

@@ -3,6 +3,7 @@
 
 package com.GUI.component;
 
+import Entity.Ghe;
 import com.GUI.swing.Button;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,9 +17,12 @@ import javax.swing.JPanel;
 
 
 public class seat extends JPanel{
-    List<ModelButton> list_btn_selected = new ArrayList<>();
-    int i;
-    public seat(){
+    public static boolean status = false;
+    public static int index = 0;
+    public static List<ModelButton> list_btn_selected = new ArrayList<>();
+    private int i;
+    public static List<Ghe> listGhe = new ArrayList<>();
+    public seat(String maPhong){
         this.setBackground(Color.white);
         setLayout(new GridLayout(14,10,18,18));
         for (i = 1; i <= 140; i++) {
@@ -35,6 +39,7 @@ public class seat extends JPanel{
             button.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                    status = true;
                     button.setBackground(Color.red);
                     button.setForeground(Color.white);
                     list_btn_selected.add(new ModelButton(i,button));

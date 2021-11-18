@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DAO;
+
+import Entity.Ghe;
+import Utilities.XJdbc;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author berug
+ */
+public class GheDAO extends QLRapPhimDAO<Ghe, String>{
+
+    private String INSERT_SQL = "INSERT INTO [Ghe]([MaGhe], [LoaiGhe], [GiaGhe], [MaPhong], [TrangThai]) VALUES (?,?,?,?,?)";
+    private String UPDATE_SQL = "UPDATE [Ghe] SET [LoaiGhe] = ?, [GiaGhe] = ?,[MaPhong] = ?,[TrangThai] = ? WHERE [MaGhe] = ?";
+    private String DELETE_SQL = "DELETE FROM Ghe WHERE [MaGhe] = ?";
+    private String SELECT_BY_ID = "SELECT * FROM Ghe WHERE [MaGhe] = ?";
+    private String SELECT_ALL = "SELECT * FROM Ghe";
+    private String SELECT_BY_MaPhong = "SELECT * FROM Ghe WHERE MaPhong = ?";
+
+    @Override
+    public void insert(Ghe entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(Ghe entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Ghe> selectAll() {
+        return this.selectBySql(SELECT_ALL);
+    }
+
+    @Override
+    public Ghe selectById(String key) {
+        List<Ghe> list = this.selectBySql(SELECT_BY_ID, key);
+        return list.isEmpty() ? list.get(0) : null;
+    }
+
+    @Override
+    protected List<Ghe> selectBySql(String sql, Object... args) {
+        List<Ghe> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while(rs.next()) {
+                Ghe gh = new Ghe();
+                gh.setMaGhe(rs.getString(1));
+                gh.setLoaiGhe(rs.getBoolean(2));
+                gh.setGiaGhe(rs.getDouble(3));
+                gh.setMaPhong(rs.getString(4));
+                gh.setTrangThai(rs.getBoolean(5));
+                list.add(gh);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
