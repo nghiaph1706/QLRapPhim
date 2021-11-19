@@ -38,6 +38,10 @@ public class Main extends javax.swing.JFrame {
     private Animator animator;
     public static BanVe_Form banVe = new BanVe_Form();
     public static ChonGhe_Form chonGhe = new ChonGhe_Form();
+<<<<<<< Updated upstream
+=======
+    public static HoaDon_Form hoaDon = new HoaDon_Form();
+>>>>>>> Stashed changes
     public static List<Ghe> listGhe = new ArrayList<>();
     public static GheDAO ghDAO = new GheDAO();
 
@@ -64,6 +68,12 @@ public class Main extends javax.swing.JFrame {
                     main.showForm(banVe);
                     if (subMenuIndex == 0) {
                         main.showForm(chonGhe);
+<<<<<<< Updated upstream
+=======
+                    } else if(subMenuIndex == 1){
+                        main.showForm(hoaDon);
+                        main.showForm(new ChonGhe_Form());
+>>>>>>> Stashed changes
                     }
                 } else if (menuIndex == 2) {
                     if (subMenuIndex == 0) {

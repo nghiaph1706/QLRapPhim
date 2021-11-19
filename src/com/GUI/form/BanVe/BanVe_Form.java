@@ -43,6 +43,12 @@ public class BanVe_Form extends javax.swing.JPanel {
         initComponents();
         init();
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
+        
+        
+        HoaDon hd = new HoaDon();
+        hd.setHIDE(false);
+        hdDAO.insert(hd);
+        maHDNow = hdDAO.selectNewHD();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -417,7 +423,28 @@ public class BanVe_Form extends javax.swing.JPanel {
     {
         model.setRowCount(0);
         try {
+<<<<<<< Updated upstream
             List<HDCT> list = hdctDAO.selectAll();
+=======
+            List<HDCT> list = hdctDAO.selectByID(maHDNow);
+            for(HDCT hdct : list) {
+                Object[] row = {
+                    hdct.getMaDichVu(),
+                    hdct.getMaHoaDon()
+                };
+                model.addRow(row);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadDatabaseFromMaHD()
+    {
+        model.setRowCount(0);
+        try {
+            MaHDTuHDCT = cboMaHD.getSelectedItem().toString();
+            List<HDCT> list = hdctDAO.selectByID(MaHDTuHDCT);
+>>>>>>> Stashed changes
             for(HDCT hdct : list) {
                 Object[] row = {
                     hdct.getMaDichVu(),
@@ -445,10 +472,6 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void insertDichVu()
     {
         HDCT hdct = new HDCT();
-        HoaDon hd = new HoaDon();
-        hd.setHIDE(false);
-        hdDAO.insert(hd);
-        maHDNow = hdDAO.selectNewHD();
         
         int bap = (int) spnBap.getValue();
         int nuoc = (int) spnNuoc.getValue();
@@ -519,6 +542,7 @@ public class BanVe_Form extends javax.swing.JPanel {
         }
     }
     private VeDAO vDAO = new VeDAO();
+<<<<<<< Updated upstream
     private HDCT insertMaVe()
     {
         HDCT hdct = new HDCT();
@@ -536,6 +560,44 @@ public class BanVe_Form extends javax.swing.JPanel {
         hdct.setMaHoaDon(MaPhong);
         hdct.setHIDE(true);
         return hdct;
+=======
+    
+    public void insertMaVe()
+    {   
+        
+        HDCT hdct = new HDCT();
+        
+        String tmp = cboPhim.getSelectedItem().toString();
+        String maphim = tmp.substring(0, tmp.indexOf("-")).trim();
+        tmp = cboPhongChieu.getSelectedItem().toString();
+        String giochieu = tmp.substring(3).trim();
+        String malc = lcDAO.selectLCbyTT(maphim, MaPhong, giochieu);
+        System.out.println(malc);
+        
+        for (Ghe ghe : ChonGhe_Form.listGheSelected) {
+            Ve ve = new Ve();
+            ve.setMaghe(ghe.getMaGhe());
+            ve.setMalichchieu(malc);
+            ve.setMaphong(MaPhong);
+            ve.setMaphim(maphim);
+            vDAO.insert(ve);
+        }
+        
+        
+        int count = ChonGhe_Form.listGheSelected.size();
+        List<Ve> velList = vDAO.selectNewVe(count);
+        
+        for (int i = 0; i < velList.size(); i++) {
+            Ve ve =velList.get(i);
+            hdct.setMaDichVu(ve.getMave());
+            hdct.setGiaTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
+            hdct.setSoLuong(1);
+            hdct.setThanhTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
+            hdct.setHIDE(false);
+            hdct.setMaHoaDon(maHDNow);
+            hdctDAO.insertVe(hdct);
+        }
+>>>>>>> Stashed changes
     }
     
     // SUB-FUNCTIONAL

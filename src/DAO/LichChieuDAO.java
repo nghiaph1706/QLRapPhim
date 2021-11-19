@@ -114,4 +114,18 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
             throw new RuntimeException(e);
         }
     }
+    
+    public String selectLCbyTT(String maphim, String maphong, String giochieu){
+        String sql = "select malichchieu from lichchieu where MaPhim = ? and MaPhong = ? and GioChieu = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql,maphim,maphong,giochieu);
+            while(rs.next()) {
+                return rs.getString(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

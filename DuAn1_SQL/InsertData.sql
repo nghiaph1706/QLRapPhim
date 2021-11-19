@@ -133,4 +133,13 @@ SELECT * FROM Ghe WHERE MaPhong = 'P1' ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBST
 SELECT COUNT(Ghe.MaGhe) FROM Ghe WHERE MaPhong = 'P1' and TrangThai = 0
 
 
-SELECT * FROM HoaDon
+SELECT * FROM lichchieu
+
+select malichchieu from lichchieu where MaPhim = 'MP1' and MaPhong = 'P1' and GioChieu = '08:30'
+select *from HoaDon
+select *from HoaDonChiTiet
+select *from Ve
+Select top(2) MaVe from Ve ORDER BY cast(SUBSTRING(MaVe,3,len(MaVe)) as int) desc
+
+INSERT INTO [Ve]([MaPhim],[MaLichChieu],[MaPhong],[MaGhe]) VALUES 
+('MP1','LC10','P1','A1')
