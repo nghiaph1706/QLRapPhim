@@ -20,6 +20,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     private String DELETE_SQL = "UPDATE [LichChieu] SET [HIDE] = 1 WHERE [MaLichChieu] = ?";
     private String SELECT_BY_ID = "SELECT * FROM LichChieu WHERE [HIDE] = 0 AND [MaLichChieu] = ?";
     private String SELECT_ALL = "SELECT * FROM LichChieu WHERE [HIDE] = 0";
+    private String SELECT_BY_LC = "SELECT ph.MaPhim Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim GROUP BY ph.MaPhim, NgayChieu";
     
     @Override
     public void insert(LichChieu entity) {
@@ -74,6 +75,37 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
                 lc.setNgayChieu(rs.getDate("NgayChieu"));
                 lc.setGioChieu(rs.getString("GioChieu"));
                 lc.setHIDE(rs.getBoolean("HIDE"));
+                list.add(lc);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<LichChieu> selectPhongChieuTheoPhim(String maPhim)
+    {
+        try {
+            List<LichChieu> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
+            while(rs.next()) {
+                LichChieu lc = new LichChieu();
+                lc.setMaPhong(rs.getString(1));
+                list.add(lc);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<LichChieu> selectPhimTheoLichChieu() {
+       try {
+            List<LichChieu> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query(SELECT_BY_LC);
+            while(rs.next()) {
+                LichChieu lc = new LichChieu();
+                lc.setMaPhim(rs.getString(1));
                 list.add(lc);
             }
             rs.getStatement().getConnection().close();

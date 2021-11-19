@@ -1,6 +1,12 @@
 package com.GUI.form.BanVe;
 
+import DAO.GheDAO;
+import Entity.Ghe;
+import com.GUI.Chart.ChartPie.ModelChartPie;
+import com.GUI.main.Main;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -11,8 +17,22 @@ public class ChonGhe_Form extends javax.swing.JPanel {
     /**
      * Creates new form ChonGhe_Form
      */
+    public static boolean status = false;
+    public static double giaTienGhe;
+    public static List<Ghe> listGheSelected = new ArrayList<>();
     public ChonGhe_Form() {
         initComponents();
+        seat1.fillGhe(BanVe_Form.MaPhong);
+        fillchart(BanVe_Form.MaPhong);
+    }
+    
+    void fillchart(String maPhong){
+        GheDAO gheDAO = new GheDAO();
+        List <ModelChartPie> list = new ArrayList<>();
+        int emptyseat = gheDAO.selectEmptySeat(maPhong);
+        list.add(new ModelChartPie("Ghế trống", emptyseat, Color.yellow));
+        list.add(new ModelChartPie("Đã đặt", 140-emptyseat, Color.blue));       
+        chartPie1.setModel(list);
     }
 
     /**
@@ -174,22 +194,21 @@ public class ChonGhe_Form extends javax.swing.JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(1215, 747));
         jPanel1.setMinimumSize(new java.awt.Dimension(1215, 747));
 
-        seat1.setMaximumSize(new java.awt.Dimension(294, 290));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(seat1, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(seat1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(seat1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         buttonBadges1.setBackground(new java.awt.Color(51, 51, 51));
@@ -211,8 +230,6 @@ public class ChonGhe_Form extends javax.swing.JPanel {
                 buttonBadges2ActionPerformed(evt);
             }
         });
-
-        chartPie1.setBackground(new java.awt.Color(255, 153, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -251,7 +268,7 @@ public class ChonGhe_Form extends javax.swing.JPanel {
                         .addComponent(buttonBadges1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,11 +281,16 @@ public class ChonGhe_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_button13ActionPerformed
 
     private void buttonBadges1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBadges1ActionPerformed
-        // TODO add your handling code here:
+        seat1.reset();
     }//GEN-LAST:event_buttonBadges1ActionPerformed
 
     private void buttonBadges2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBadges2ActionPerformed
-        // TODO add your handling code here:
+        listGheSelected = seat1.selectedSeat();
+        for (Ghe ghe : listGheSelected) {
+            giaTienGhe = ghe.getGiaGhe();
+            System.out.println(ghe.getMaGhe() + " " + giaTienGhe);
+        }
+        Main.main.showForm(Main.banVe);
     }//GEN-LAST:event_buttonBadges2ActionPerformed
 
 

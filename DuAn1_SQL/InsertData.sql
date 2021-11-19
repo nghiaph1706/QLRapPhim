@@ -25,13 +25,14 @@ INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai]
 (N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','NV1',0);
 GO
 
-INSERT INTO [Phong]([SoHang],[HIDE]) VALUES 
-(10, '0'),
-(15, '0'),
-(20, '0'),
-(7, '0'),
-(8, '0');
+INSERT INTO [Phong]([HIDE]) VALUES 
+(0),
+(0),
+(0),
+(0),
+(0);
 GO
+
 
 INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES 
 ('2021-11-20', '08:30', 'MP1', 'P1', 0),
@@ -127,5 +128,6 @@ INSERT INTO [HoaDonChiTiet]([MaDichVu],[GiaTien],[SoLuong],[ThanhTien],[MaHoaDon
 GO
 
 
+SELECT * FROM Ghe WHERE MaPhong = 'P1' ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBSTRING(MaGhe,2,len(MaGhe)-1) as int) asc
 
-
+SELECT COUNT(Ghe.MaGhe) FROM Ghe WHERE MaPhong = 'P1' and TrangThai = 0

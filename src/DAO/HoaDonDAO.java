@@ -48,7 +48,7 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
 
     @Override
     public List<HoaDon> selectAll() {
-        return  selectBySql(select_All_Sql);
+        return selectBySql(select_All_Sql);
     }
 
     @Override
@@ -62,9 +62,17 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                list.add(new HoaDon(rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getString(4), 
-                                    rs.getInt(5), rs.getDouble(6), rs.getDate(7),
-                                    rs.getString(8),rs.getBoolean(9)));
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString("MaHoaDon"));
+                hd.setTongTien(rs.getDouble("TongTien"));
+                hd.setMaKM(rs.getString("MaKM"));
+                hd.setMaKHTT(rs.getString("makhtt"));
+                hd.setMucGiamGia(rs.getInt("Mucgiamgia"));
+                hd.setThanhTien(rs.getDouble("ThanhTien"));
+                hd.setNgayLap(rs.getDate("ngaylap"));
+                hd.setMaNhanVien(rs.getString("Manhanvien"));
+                hd.setHIDE(rs.getBoolean("hide"));
+                list.add(hd);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DichVuDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -52,8 +52,7 @@ GO
 CREATE TABLE [Phong] (
 	ID INT IDENTITY(1,1) NOT NULL,
 	[MaPhong] as cast('P'+Cast(ID as VARCHAR(10))as VARCHAR(10))  PERSISTED PRIMARY KEY,
-	[SoHang] INT CHECK ([SoHang] <= 25),
-	[HIDE] BIT DEFAULT 0
+	[HIDE] bit
 );
 GO
 

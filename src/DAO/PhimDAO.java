@@ -7,7 +7,6 @@ package DAO;
 import Entity.Phim;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,8 +18,8 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     private String INSERT_SQL = "INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?,?)";
     private String UPDATE_SQL = "UPDATE [Phim] SET [TenPhim] = ?, [NgayKhoiChieu] = ?, [NgayKetThuc] = ?, [QuocGia] = ?, [MaTheLoai] = ?,[DinhDang] = ?, [Hinh] = ?, [MaNhanVien] = ?, [HIDE] = ? WHERE [MaPhim] = ?";
     private String DELETE_SQL = "UPDATE [Phim] SET [HIDE] = 1 WHERE [MaPhim] = ?";
-    private String SELECT_BY_ID = "SELECT * FROM Phim WHERE [HIDE] = 0 AND [MaPhim] = ?";
-    private String SELECT_ALL = "SELECT * FROM Phim WHERE [HIDE] = 0";
+    private String SELECT_BY_ID = "SELECT * FROM [Phim] WHERE [HIDE] = 0 AND [MaPhim] = ?";
+    private String SELECT_ALL = "SELECT * FROM [Phim] WHERE [HIDE] = 0";
 
     @Override
     public void insert(Phim entity) {
@@ -64,7 +63,7 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
 
     @Override
     protected List<Phim> selectBySql(String sql, Object... args) {
-        List<Phim> list = new ArrayList<>();
+        List<Phim> list = new ArrayList<Phim>();
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()) {
@@ -86,5 +85,20 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
             throw new RuntimeException(e);
         }
     }
-
+    public List<Phim> selectPhimTheoLichChieu(String ma)
+    {
+        try {
+            List<Phim> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query("SELECT ph.TenPhim FROM Phim ph INNER JOIN LichChieu lc ON ph.MaPhim = lc.MaPhim WHERE ph.MaPhim=? GROUP BY ph.TenPhim, lc.MaPhim", ma);
+            while(rs.next()) {
+                Phim ph = new Phim();
+                ph.setTenPhim(rs.getString(1));
+                list.add(ph);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

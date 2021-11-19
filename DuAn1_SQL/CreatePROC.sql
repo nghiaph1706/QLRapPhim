@@ -1,16 +1,24 @@
 ﻿USE QL_RAPPHIM
 GO
 
+CREATE PROC sp_PhimTheoLichChieu
+as Begin
+	SELECT CONCAT(TenPhim,' ', NgayChieu, ' ',GioChieu) as PHIM
+	FROM LichChieu lc
+		INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim
+	GROUP BY ph.TenPhim, NgayChieu, GioChieu
+End
+
 --Tạo ghế
 CREATE PROC sp_TaoGhe(@MaPhong VARCHAR(10))
 as begin
 	DECLARE @i int = 1, @j int =1, @maHang varchar(50)
 	DECLARE @Hang varchar(50) = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	DECLARE @soHang int = (SELECT SoHang from Phong where MaPhong = @MaPhong)
+	DECLARE @soHang int = 14
 	while @i <= @soHang 
 		begin
 			SET @maHang = SUBSTRING(@Hang,@i,1)
-			while @j <=20
+			while @j <=10
 				begin
 					if @i > 4 
 						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),1,100000, @MaPhong, 0)
@@ -23,6 +31,7 @@ as begin
 		end
 end
 GO
+
 
 --Doanh thu theo năm truyền tham số XXX
 CREATE PROCEDURE SP_DOANHTHUTHEONAM @year varchar(4)

@@ -1,5 +1,7 @@
 package com.GUI.main;
 
+import DAO.GheDAO;
+import Entity.Ghe;
 import com.GUI.component.Header;
 import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
@@ -19,6 +21,8 @@ import com.GUI.form.ThongKe.TKDoanhThu_Form;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
 import com.GUI.swing.icon.IconFontSwing;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -32,10 +36,16 @@ public class Main extends javax.swing.JFrame {
     private Header header;
     public static MainForm main;
     private Animator animator;
+    public static BanVe_Form banVe = new BanVe_Form();
+    public static ChonGhe_Form chonGhe = new ChonGhe_Form();
+    public static List<Ghe> listGhe = new ArrayList<>();
+    public static GheDAO ghDAO = new GheDAO();
 
     public Main() {
         initComponents();
         init();
+        listGhe = ghDAO.selectAll();
+        
     }
 
     private void init() {
@@ -51,9 +61,9 @@ public class Main extends javax.swing.JFrame {
                 if (menuIndex == 0) {
                     main.showForm(new DashBoard());
                 } if (menuIndex == 1) {
-                    main.showForm(new BanVe_Form());
+                    main.showForm(banVe);
                     if (subMenuIndex == 0) {
-                        main.showForm(new ChonGhe_Form());
+                        main.showForm(chonGhe);
                     }
                 } else if (menuIndex == 2) {
                     if (subMenuIndex == 0) {

@@ -1,8 +1,9 @@
 /* @author nghiacubu */
-
-
 package com.GUI.component;
 
+import DAO.GheDAO;
+import Entity.Ghe;
+import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.swing.Button;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,43 +15,73 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
+public class seat extends JPanel {
 
-public class seat extends JPanel{
-    List<ModelButton> list_btn_selected = new ArrayList<>();
+//    public static boolean status = false;
     int i;
-    public seat(){
+    public List<ModelButton> list_btn = new ArrayList<>();
+
+    public List<Ghe> listGhe = new ArrayList<>();
+    public GheDAO gheDAO = new GheDAO();
+
+    public seat() {
         this.setBackground(Color.white);
-        setLayout(new GridLayout(14,10,18,18));
+        setLayout(new GridLayout(14, 10, 18, 18));
+
         for (i = 1; i <= 140; i++) {
             Button button = new Button();
-            button.setBackground(new Color(204,204,204));
+            button.setBackground(new Color(204, 204, 204));
             button.setForeground(Color.red);
-            if (i%10!=0) {
-                button.setLabel(""+ i%10);
+            if (i % 10 != 0) {
+                button.setLabel("" + i % 10);
             } else {
-                button.setLabel(""+ 10);
+                button.setLabel("" + 10);
             }
-            button.setFont(new Font("Segoe UI Black",Font.BOLD,18));
+            button.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
             button.setSize(new Dimension(19, 35));
-            button.addActionListener(new ActionListener(){
+            ModelButton mb = new ModelButton(i, button,false);
+            button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     button.setBackground(Color.red);
                     button.setForeground(Color.white);
-                    list_btn_selected.add(new ModelButton(i,button));
+                    mb.setStt(true);
                 }
             });
+            list_btn.add(mb);
             this.add(button);
         }
     }
-    
-    public void reset(){
-        for (ModelButton button : list_btn_selected) {
-            button.getBtn().setBackground(Color.white);
-            button.getBtn().setForeground(Color.red);
+
+    public void fillGhe(String maPhong) {
+        listGhe = gheDAO.selectByMaPhong(maPhong);
+        int i = 0;
+        for (Ghe ghe : listGhe) {
+            if (ghe.isTrangThai()) {
+                list_btn.get(i).setStt(true);
+                list_btn.get(i).getBtn().setEnabled(false);
+            }
         }
-        list_btn_selected.clear();
     }
-    
-    
+
+    public void reset() {
+        for (ModelButton button : list_btn) {
+            if (button.isStt()) {
+                button.getBtn().setBackground(new Color(204, 204, 204));
+                button.getBtn().setForeground(Color.red);
+                button.setStt(false);
+            }
+        }
+    }
+
+    public List<Ghe> selectedSeat() {
+        List<Ghe> listSelect = new ArrayList<>();
+        for (int i = 0; i <= list_btn.size()-1; i++) {
+            ModelButton btn = list_btn.get(i);
+            if (btn.isStt() == true) {
+                listSelect.add(listGhe.get(i));
+            }
+        }
+        return listSelect;
+    }
 }

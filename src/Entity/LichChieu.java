@@ -13,6 +13,7 @@ public class LichChieu {
     private String MaPhim;
     private String MaPhong;
     private boolean HIDE;
+    private String PhongChieu;
 
     @Override
     public String toString() {
@@ -30,6 +31,7 @@ public class LichChieu {
         this.MaPhong = MaPhong;
         this.HIDE = HIDE;
     }
+    
 
     public String getMaLichChieu() {
         return MaLichChieu;
@@ -77,6 +79,14 @@ public class LichChieu {
 
     public void setHIDE(boolean HIDE) {
         this.HIDE = HIDE;
+    }
+
+    public String getPhongChieu() {
+        return PhongChieu;
+    }
+
+    public void setPhongChieu(String PhongChieu) {
+        this.PhongChieu = PhongChieu;
     }
     
     

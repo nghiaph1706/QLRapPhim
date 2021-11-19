@@ -18,6 +18,7 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
     static String selectall = "Select * from KhuyenMai Where HIDE = 0;";
     static String selectallbydate = "{CALL SP_SUKIENDANGDIENRA (?)}";
     static String selectbyid = "Select * from KhuyenMai Where MaKM like ?";
+    private String SELECT_MAKM = "SELECT MaKM FROM KhuyenMai";
 
     @Override
     public void insert(KhuyenMai entity) {
@@ -58,7 +59,14 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                KhuyenMai km = readFromResultSet(rs);
+                KhuyenMai km = new KhuyenMai();
+                km.setMaKM(rs.getString("MaKM"));
+                km.setThongTinKM(rs.getNString("ThongTinKM"));
+                km.setMucGiamGia(rs.getDouble("MucGiamGia"));
+                km.setNgayBatDau(rs.getDate("NgayBatDau"));
+                km.setNgayKetThuc(rs.getDate("NgayKetThuc"));
+                km.setMaNhanVien(rs.getString("MaNhanVien"));
+                km.setHIDE(rs.getBoolean("HIDE"));
                 list.add(km);
             }
             rs.getStatement().getConnection().close();
@@ -79,5 +87,23 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         obj.setMaNhanVien(rs.getString("MaNhanVien"));
         obj.setHIDE(rs.getBoolean("HIDE"));
         return obj;
+    }
+    public List<String> listKhuyenMai()
+    {
+        try {
+            List<String> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query(SELECT_MAKM);
+            while(rs.next()) {
+                list.add(rs.getString(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<KhuyenMai> selectByMaKM(String id) {
+        String sql = "SELECT * FROM KhuyenMai WHERE MaKM = ?";
+        return this.selectBySql(sql, id);
     }
 }
