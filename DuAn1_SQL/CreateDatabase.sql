@@ -179,3 +179,6 @@ CREATE TABLE [HoaDonChiTiet] (
 			REFERENCES [HoaDon]([MaHoaDon]) ON DELETE CASCADE
 );
 GO
+
+
+count(maphim) from ve where ng
