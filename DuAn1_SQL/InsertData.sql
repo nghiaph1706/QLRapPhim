@@ -17,12 +17,12 @@ INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUE
 (N'Đào Đức Nguyên','0990090905',1,0,'123',0);
 GO
 
-INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
-(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','NV1',0),
-(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','NV2',0),
-(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','NV3',0),
-(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NV4',0),
-(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','NV1',0);
+INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES
+(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','MatBiec.jpg','NV1',0),
+(N'AVENGER SECOND GAME','11-17-2021','11-20-2021',N'VIỆT NAM','TL2','2D','Avengers.jpg','NV2',0),
+(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','AntMain.jpg','NV3',0),
+(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NguoiNhen.jpg','NV4',0),
+(N'AVENGER','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','avg.jpg','NV1',0);
 GO
 
 INSERT INTO [Phong]([HIDE]) VALUES 
