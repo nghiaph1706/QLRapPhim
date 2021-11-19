@@ -4,11 +4,14 @@ import DAO.HoaDonDAO;
 import DAO.KhuyenMaiDAO;
 import DAO.LichChieuDAO;
 import DAO.PhimDAO;
+import DAO.VeDAO;
 import Entity.DichVu;
 import Entity.Ghe;
+import Entity.HDCT;
 import Entity.HoaDon;
 import Entity.KHTT;
 import Entity.KhuyenMai;
+import Entity.LichChieu;
 import Entity.Phim;
 import Entity.Ve;
 import Utilities.Auth;
@@ -25,8 +28,9 @@ public class BanVe_Form extends javax.swing.JPanel {
     private KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
     private HoaDonDAO hdDAO = new HoaDonDAO();
     private PhimDAO phDAO = new PhimDAO();
+    public static String MaPhong;
     private String[] header = {
-        "MHD", "Tổng Tiền", "Mã KM", "Mã KHTT", "Mức GG", "Thành Tiền"
+        "Mã vé/DV", "Giá tiền", "Số lượng", "Thành tiền", "Mã hóa đơn"
     };
     private DefaultTableModel model = new DefaultTableModel(header, 0);
     public BanVe_Form() {
@@ -62,6 +66,8 @@ public class BanVe_Form extends javax.swing.JPanel {
         cboPTThanhToan = new javax.swing.JComboBox<>();
         btnChuyen = new com.GUI.swing.Button();
         txtMaKHTT = new com.GUI.swing.TextField();
+        cboPhongChieu = new javax.swing.JComboBox<>();
+        lblCheckMa = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -100,12 +106,17 @@ public class BanVe_Form extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("HÓA ĐƠN");
+        jLabel1.setText("HÓA ĐƠN CHI TIẾT");
 
         cboPhim.setBackground(new java.awt.Color(224, 224, 224));
         cboPhim.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         cboPhim.setForeground(new java.awt.Color(204, 204, 204));
         cboPhim.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
+        cboPhim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboPhimActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
@@ -230,12 +241,27 @@ public class BanVe_Form extends javax.swing.JPanel {
         cboPTThanhToan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
 
         btnChuyen.setForeground(new java.awt.Color(255, 255, 255));
-        btnChuyen.setText("->");
+        btnChuyen.setText(">");
         btnChuyen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChuyenActionPerformed(evt);
             }
         });
+
+        cboPhongChieu.setBackground(new java.awt.Color(224, 224, 224));
+        cboPhongChieu.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        cboPhongChieu.setForeground(new java.awt.Color(204, 204, 204));
+        cboPhongChieu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
+        cboPhongChieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboPhongChieuActionPerformed(evt);
+            }
+        });
+
+        lblCheckMa.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblCheckMa.setForeground(new java.awt.Color(51, 51, 51));
+        lblCheckMa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCheckMa.setText("jLabel9");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -246,29 +272,30 @@ public class BanVe_Form extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(cboPhieuGG, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkPhieuGG)
+                            .addComponent(cboPhongChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMaKHTT, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(btnChuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCheckMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                                .addComponent(txtMaKHTT, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnChuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(267, 267, 267)
+                                .addComponent(btnXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(cboPhieuGG, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chkPhieuGG))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addComponent(btnXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(panelDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(50, 50, 50)
+                                .addComponent(panelDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(166, 166, 166)
+                                .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboPTThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,17 +319,21 @@ public class BanVe_Form extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaKHTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnChuyen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMaKHTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkPhieuGG)
+                            .addComponent(cboPhongChieu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCheckMa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkPhieuGG)
+                            .addComponent(btnChuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cboPhieuGG, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboPhieuGG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -348,11 +379,23 @@ public class BanVe_Form extends javax.swing.JPanel {
         Main.main.showForm(Main.chonGhe);
     }//GEN-LAST:event_btnChuyenActionPerformed
 
+    private void cboPhongChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongChieuActionPerformed
+
+        String tmp = cboPhongChieu.getSelectedItem().toString().trim();
+        MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
+    }//GEN-LAST:event_cboPhongChieuActionPerformed
+
+    private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed
+        // TODO add your handling code here:
+        comboBoxPhongChieu();
+    }//GEN-LAST:event_cboPhimActionPerformed
+
     // MAIN FUNCTIONAL
     
     private void init()
     {
         loadDatabase();
+        txtMaKHTT.setLabelText("Mã KHTT");
         tblHoaDon.setModel(model);
         cboPhieuGG.setEnabled(false);
         checkDichVu(false);
@@ -400,34 +443,56 @@ public class BanVe_Form extends javax.swing.JPanel {
     }
     private HoaDon getForm()
     {
+        boolean checkMaKM = false, checkMaKHTT = false;
         double soLuong = 0;
-        double mucGiamGiaKM = 0, mucGiamGiaKHTT = 0;
+        double mucGiamGiaKM = 0, mucGiamGiaKHTT = 0, giaGhe = 0;
         String maKM = "";
         //Entity
         HoaDon hd = new HoaDon();
         DichVu dv = new DichVu();
         KHTT khtt = new KHTT();
-        KhuyenMai km = new KhuyenMai();
         Ghe gh = new Ghe();
+        Phim ph = new Phim();
         //Vé Phim
         //Phiếu giảm giá
+        KhuyenMai km = (KhuyenMai) cboPhieuGG.getSelectedItem();
         List<KhuyenMai> listKM = kmDAO.selectByMaKM(km.getMaKM());
         for(KhuyenMai kh : listKM) {
-            if(cboPhieuGG.getSelectedItem().equals(kh.getMaKM())) {
+            if(chkPhieuGG.isSelected() && cboPhieuGG.getSelectedItem().equals(kh.getMaKM())) {
                 mucGiamGiaKM = kh.getMucGiamGia();
                 maKM = kh.getMaKM();
+                checkMaKM = true;
+            }
+            else {
+                mucGiamGiaKM = 0;
+                maKM = null;
+                checkMaKM = false;
             }
         }
+        
         hd.setMaKM(maKM);
         hd.setMucGiamGia((int)mucGiamGiaKM);
         //Phòng xem phim = Phòng && Chọn ghế = (Vị trí từ A-N 1-10)
         //Thành tiền = (phí dịch vụ + vé xem phim) * ((100 - (mức giảm giá của KHTT + mức giảm giá của vé))/100)
         //Tổng tiền = (phí dịch vụ + vé xem phim)
         hd.setMaKHTT(txtMaKHTT.getText());
-        if(txtMaKHTT.getText().equals(khtt.getMAKHTT())) {
+        if(txtMaKHTT.getText().equals(khtt.getMAKHTT()) && !txtMaKHTT.getText().isEmpty()) {
             mucGiamGiaKHTT = khtt.getMucGiacGia();
+            checkMaKHTT = true;
         }
-        double mucGiamGia = mucGiamGiaKM + mucGiamGiaKHTT;
+        double mucGiamGia = 0;
+        if(checkMaKM && checkMaKHTT) {
+            mucGiamGia = mucGiamGiaKM + mucGiamGiaKHTT;
+        }
+        else if(checkMaKM && !checkMaKHTT) {
+            mucGiamGia = mucGiamGiaKM;
+        }
+        else if(!checkMaKM && checkMaKHTT) {
+            mucGiamGia = mucGiamGiaKHTT;
+        }
+        else {
+            mucGiamGia = 0;
+        }
         //Giá dịch vụ = Tổng hoặc từng dịch vụ
         int bap = (int) spnBap.getValue();
         int nuoc = (int) spnNuoc.getValue();
@@ -449,19 +514,84 @@ public class BanVe_Form extends javax.swing.JPanel {
             dv.setGiaDichVu(tongTienDV);
         }
         //Chọn ghế
-        for(Ghe ghe : Main.listGhe) {
-            if(ghe.getMaGhe().equals(ABORT)){
-                
+        for(Ghe ghe : ChonGhe_Form.listGheSelected) {
+            if(ghe.getMaGhe().equals(ChonGhe_Form.listGheSelected)) {
+                giaGhe = ghe.getGiaGhe();
             }
         }
-        double thanhTien = (dv.getGiaDichVu() + gh.getGiaGhe()) * ((100 - mucGiamGia)/100);
-        hd.setTongTien(dv.getGiaDichVu() + gh.getGiaGhe());
+        //Thành tiền
+        double thanhTien = 0;
+        if(mucGiamGia != 0) {
+            thanhTien = (dv.getGiaDichVu() + giaGhe) * ((100 - mucGiamGia)/100);
+        }
+        else {
+            thanhTien = (dv.getGiaDichVu() + giaGhe);
+        }
+        hd.setTongTien(dv.getGiaDichVu() + giaGhe);
         hd.setThanhTien(thanhTien);
         java.util.Date date = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         hd.setNgayLap(sqlDate);
-        hd.setMaNhanVien(Auth.user.getMaNhanVien());
+        hd.setMaNhanVien("NV1");
         return hd;
+    }
+    //
+    private HDCT insertDichVu()
+    {
+        HDCT hdct = new HDCT();
+        DichVu dv = new DichVu();
+        String maDichVu = "";
+        int bap = (int) spnBap.getValue();
+        int nuoc = (int) spnNuoc.getValue();
+        int cb1 = (int) spnCombo1.getValue();
+        int cb2 = (int) spnCombo2.getValue();
+        int soLuong = 0;
+        double tongTienDV = 0;
+        if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
+            //Bắp = 25000, Nước = 25000, Combo1 = 50000, Combo2 = 75000
+            soLuong = (bap + nuoc + cb1 + cb2);
+            if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
+                dv.setGiaDichVu(tongTienDV + (25000 | 25000 | 50000 | 75000));
+            }
+        }
+        else {
+            soLuong = bap | nuoc | cb1 | cb2;
+            tongTienDV = (25000 | 25000 | 50000 | 75000) * soLuong;
+            dv.setGiaDichVu(tongTienDV);
+        }
+        String lch = (String) cboPhim.getSelectedItem();
+        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
+        List<DichVu> listDV = vDAO.selectByMaPhim(maPhim);
+        for(DichVu dcv : listDV) {
+            maDichVu = dcv.getMave();
+        }
+        hdct.setMaDichVu(MaPhong);
+        hdct.setGiaTien(WIDTH);
+        hdct.setSoLuong(SOMEBITS);
+        hdct.setThanhTien(HEIGHT);
+        hdct.setMaHoaDon(MaPhong);
+        hdct.setHIDE(true);
+        return hdct;
+    }
+    private VeDAO vDAO = new VeDAO();
+    private HDCT insertMaVe()
+    {
+        HDCT hdct = new HDCT();
+        String maVe = "";
+        String lch = (String) cboPhim.getSelectedItem();
+        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
+        List<Ve> listVe = vDAO.selectByMaPhim(maPhim);
+        for(Ve v : listVe) {
+            maVe = v.getMave();
+        }
+        hdct.setMaVe(maVe);
+        
+        hdct.setGiaTien(WIDTH);
+        hdct.setSoLuong(1);
+        hdct.setThanhTien(HEIGHT);
+        hdct.setMaHoaDon(MaPhong);
+        hdct.setHIDE(true);
+        return hdct;
     }
     
     // SUB-FUNCTIONAL
@@ -474,9 +604,24 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void comboBoxPhim()
     {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhim.getModel();
-        List<String> list = lcDAO.selectPhimTheoLichChieu();
-        for(String lc : list)
-            cboModel.addElement(lc);
+        List<LichChieu> list = lcDAO.selectPhimTheoLichChieu();
+        
+        for(LichChieu lc : list) {
+            List<Phim> listPh = phDAO.selectPhimTheoLichChieu(lc.getMaPhim());
+            cboModel.addElement(lc.getMaPhim() + " - " + listPh.get(0).toString());
+        }
+    }
+    private void comboBoxPhongChieu()
+    {
+        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhongChieu.getModel();
+        cboModel.removeAllElements();
+        String lch = (String) cboPhim.getSelectedItem();
+        if(lch != null) {
+            List<LichChieu> list = lcDAO.selectPhongChieuTheoPhim(lch.substring(0, lch.indexOf("-")).trim());
+            for(LichChieu lc : list) {
+                cboModel.addElement(lc.getMaPhong());
+            }
+        }
     }
     private void comboBoxPhieuGiamGia()
     {
@@ -509,6 +654,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboPTThanhToan;
     private javax.swing.JComboBox<String> cboPhieuGG;
     private javax.swing.JComboBox<String> cboPhim;
+    private javax.swing.JComboBox<String> cboPhongChieu;
     private javax.swing.JCheckBox chkPhieuGG;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -519,6 +665,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCheckMa;
     private javax.swing.JPanel panelDichVu;
     private javax.swing.JSpinner spnBap;
     private javax.swing.JSpinner spnCombo1;

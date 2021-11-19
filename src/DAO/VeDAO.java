@@ -63,4 +63,7 @@ public class VeDAO extends QLRapPhimDAO<Ve, String> {
         return obj;
     }
 
+    public List<Ve> selectByMaPhim(String ma) {
+        return this.selectBySql(selectbyid, ma);
+    }
 }

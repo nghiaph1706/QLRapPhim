@@ -1,10 +1,9 @@
 /* @author nghiacubu */
-
-
 package com.GUI.component;
 
 import DAO.GheDAO;
 import Entity.Ghe;
+import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.swing.Button;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,65 +15,71 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
+public class seat extends JPanel {
 
-public class seat extends JPanel{
-    
 //    public static boolean status = false;
-    public List<ModelButton> list_btn_selected = new ArrayList<>();
-            
+    int i;
+    public List<ModelButton> list_btn = new ArrayList<>();
+
     public List<Ghe> listGhe = new ArrayList<>();
     public GheDAO gheDAO = new GheDAO();
-    
-    public seat(String maPhong){
-        init();
-        
-        listGhe = gheDAO.selectByMaPhong(maPhong);
-        for (Ghe ghe : listGhe) {
+
+    public seat() {
+        this.setBackground(Color.white);
+        setLayout(new GridLayout(14, 10, 18, 18));
+
+        for (i = 1; i <= 140; i++) {
             Button button = new Button();
-            button.setText(ghe.getMaGhe());
-            button.setFont(new Font("Segoe UI Black",Font.BOLD,18));
-            button.setSize(new Dimension(19, 35));
-            if (ghe.isTrangThai()) {
-                button.setBackground(Color.BLACK);
-                button.setForeground(Color.red);
-                button.disable();
+            button.setBackground(new Color(204, 204, 204));
+            button.setForeground(Color.red);
+            if (i % 10 != 0) {
+                button.setLabel("" + i % 10);
             } else {
-                button.setBackground(new Color(204,204,204));
-                button.setForeground(Color.red);
-                button.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-//                        status = true;
-                        button.setBackground(Color.red);
-                        button.setForeground(Color.white);
-                        list_btn_selected.add(new ModelButton(ghe.getMaGhe(),button));
-                    }
-                });
-                this.add(button);
+                button.setLabel("" + 10);
+            }
+            button.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+            button.setSize(new Dimension(19, 35));
+            ModelButton mb = new ModelButton(i, button,false);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    button.setBackground(Color.red);
+                    button.setForeground(Color.white);
+                    mb.setStt(true);
+                }
+            });
+            list_btn.add(mb);
+            this.add(button);
+        }
+    }
+
+    public void fillGhe(String maPhong) {
+        listGhe = gheDAO.selectByMaPhong(maPhong);
+        int i = 0;
+        for (Ghe ghe : listGhe) {
+            if (ghe.isTrangThai()) {
+                list_btn.get(i).setStt(true);
+                list_btn.get(i).getBtn().setEnabled(false);
             }
         }
     }
-    
-    void init(){
-        this.setBackground(Color.white);
-        setLayout(new GridLayout(14,10,18,18));
-    }
-    
-    void reset(){
-        for (ModelButton button : list_btn_selected) {
-            button.getBtn().setBackground(Color.white);
-            button.getBtn().setForeground(Color.red);
+
+    public void reset() {
+        for (ModelButton button : list_btn) {
+            if (button.isStt()) {
+                button.getBtn().setBackground(new Color(204, 204, 204));
+                button.getBtn().setForeground(Color.red);
+                button.setStt(false);
+            }
         }
-        list_btn_selected.clear();
     }
-    
-    List<Ghe> selectedSeat(){
+
+    public List<Ghe> selectedSeat() {
         List<Ghe> listSelect = new ArrayList<>();
-        for (ModelButton modelButton : list_btn_selected) {
-            for (Ghe ghe : listGhe) {
-                if (modelButton.getMa().equals(ghe.getMaGhe())) {
-                    listSelect.add(ghe);
-                }
+        for (int i = 0; i <= list_btn.size()-1; i++) {
+            ModelButton btn = list_btn.get(i);
+            if (btn.isStt() == true) {
+                listSelect.add(listGhe.get(i));
             }
         }
         return listSelect;

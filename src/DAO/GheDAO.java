@@ -22,7 +22,8 @@ public class GheDAO extends QLRapPhimDAO<Ghe, String>{
     private String DELETE_SQL = "DELETE FROM Ghe WHERE [MaGhe] = ?";
     private String SELECT_BY_ID = "SELECT * FROM Ghe WHERE [MaGhe] = ?";
     private String SELECT_ALL = "SELECT * FROM Ghe";
-    private String SELECT_BY_MaPhong = "SELECT * FROM Ghe WHERE MaPhong = ?";
+    private String SELECT_BY_MaPhong = "SELECT * FROM Ghe WHERE MaPhong = ? ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBSTRING(MaGhe,2,len(MaGhe)-1) as int) asc";
+    private String SELECT_EMPTY_SEAT = "SELECT COUNT(Ghe.MaGhe) as count FROM Ghe WHERE MaPhong = ? and TrangThai = 0";
 
     @Override
     public void insert(Ghe entity) {
@@ -73,5 +74,16 @@ public class GheDAO extends QLRapPhimDAO<Ghe, String>{
     
     public List<Ghe> selectByMaPhong(String maPhong){
         return this.selectBySql(SELECT_BY_MaPhong, maPhong);
+    }
+    public int selectEmptySeat(String maPhong){
+        String sql = SELECT_EMPTY_SEAT;
+        try {
+            ResultSet rs = XJdbc.query(sql, maPhong);
+            while(rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
     }
 }

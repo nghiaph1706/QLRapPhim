@@ -7,13 +7,13 @@ import java.util.Date;
 
 
 public class LichChieu {
-    private String TenPhim;
     private String MaLichChieu;
     private Date NgayChieu;
     private String GioChieu;
     private String MaPhim;
     private String MaPhong;
     private boolean HIDE;
+    private String PhongChieu;
 
     @Override
     public String toString() {
@@ -30,14 +30,6 @@ public class LichChieu {
         this.MaPhim = MaPhim;
         this.MaPhong = MaPhong;
         this.HIDE = HIDE;
-    }
-
-    public String getTenPhim() {
-        return TenPhim;
-    }
-
-    public void setTenPhim(String TenPhim) {
-        this.TenPhim = TenPhim;
     }
     
 
@@ -87,6 +79,14 @@ public class LichChieu {
 
     public void setHIDE(boolean HIDE) {
         this.HIDE = HIDE;
+    }
+
+    public String getPhongChieu() {
+        return PhongChieu;
+    }
+
+    public void setPhongChieu(String PhongChieu) {
+        this.PhongChieu = PhongChieu;
     }
     
     

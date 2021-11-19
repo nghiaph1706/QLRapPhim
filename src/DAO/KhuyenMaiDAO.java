@@ -59,7 +59,6 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-<<<<<<< HEAD
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString("MaKM"));
                 km.setThongTinKM(rs.getNString("ThongTinKM"));
@@ -68,9 +67,6 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
                 km.setNgayKetThuc(rs.getDate("NgayKetThuc"));
                 km.setMaNhanVien(rs.getString("MaNhanVien"));
                 km.setHIDE(rs.getBoolean("HIDE"));
-=======
-                KhuyenMai km = readFromResultSet(rs);
->>>>>>> 42d0d9dc8b48fdede6363cfdfdcfba7a6bf37d05
                 list.add(km);
             }
             rs.getStatement().getConnection().close();
@@ -92,7 +88,6 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         obj.setHIDE(rs.getBoolean("HIDE"));
         return obj;
     }
-<<<<<<< HEAD
     public List<String> listKhuyenMai()
     {
         try {
@@ -112,6 +107,3 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         return this.selectBySql(sql, id);
     }
 }
-=======
-}
->>>>>>> 42d0d9dc8b48fdede6363cfdfdcfba7a6bf37d05

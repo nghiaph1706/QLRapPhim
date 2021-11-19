@@ -85,8 +85,20 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
             throw new RuntimeException(e);
         }
     }
-    public List<Phim> selectByTenPhim(String tenPhim) {
-        String sql = "SELECT * FROM Phim WHERE TenPhim LIKE ?";
-        return this.selectBySql(sql, "%" + tenPhim + "%");
+    public List<Phim> selectPhimTheoLichChieu(String ma)
+    {
+        try {
+            List<Phim> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query("SELECT ph.TenPhim FROM Phim ph INNER JOIN LichChieu lc ON ph.MaPhim = lc.MaPhim WHERE ph.MaPhim=? GROUP BY ph.TenPhim, lc.MaPhim", ma);
+            while(rs.next()) {
+                Phim ph = new Phim();
+                ph.setTenPhim(rs.getString(1));
+                list.add(ph);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
