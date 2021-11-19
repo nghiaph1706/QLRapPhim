@@ -56,5 +56,22 @@ public class DichVuDAO extends QLRapPhimDAO<DichVu, String> {
         }
         return list;
     }
-
+    
+    public List<DichVu> selectByMaDV(String ma) {
+        return selectBySql(select_sql_byID, ma);
+    }
+    public double selectByMaDichVu(String maDV)
+    {
+        String sql = "SELECT GiaDichVu FROM DichVu WHERE MaDichVu=? AND HIDE=0";
+        try {
+            ResultSet rs = XJdbc.query(sql, maDV);
+            while(rs.next())
+            {
+                return rs.getDouble(1);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

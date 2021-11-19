@@ -13,8 +13,8 @@ public class PhongDAO extends QLRapPhimDAO<Phong, String> {
     static String insert = "INSERT INTO [Phong]([SoHang],[HIDE]) VALUES (?,?,0)";
     static String update = "Update Phong Set Sohang =? Where maphong like ?";
     static String delete = "Update Phong Set Hide = 1 Where maphong like ?";
-    static String selectall = "Select * from Phong where hide = 0";
-    static String selectbyid = "Select * from Phong where maphong like ? and hide = 0";
+    static String selectall = "Select * from Phong";
+    static String selectbyid = "Select * from Phong where maphong like";
 
     @Override
     public void insert(Phong entity) {
@@ -48,7 +48,7 @@ public class PhongDAO extends QLRapPhimDAO<Phong, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                Phong p = new Phong(rs.getInt("id"),rs.getInt("sohang"),rs.getString("maphong"),rs.getBoolean("hide"));
+                Phong p = new Phong();
                 list.add(p);
             }
             rs.getStatement().getConnection().close();

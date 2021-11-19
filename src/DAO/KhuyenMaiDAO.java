@@ -61,7 +61,6 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString("MaKM"));
-                km.setTenKM(rs.getString("TenKM"));
                 km.setThongTinKM(rs.getNString("ThongTinKM"));
                 km.setMucGiamGia(rs.getDouble("MucGiamGia"));
                 km.setNgayBatDau(rs.getDate("NgayBatDau"));

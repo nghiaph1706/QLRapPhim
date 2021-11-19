@@ -26,7 +26,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
             + "                                    [HIDE] = ? WHERE [MaHoaDonChiTiet] = ?";
     String deleteSql = "UPDATE [HoaDonChiTiet] SET [HIDE] = 1 WHERE [MaHoaDonChiTiet] = ?";
     String select_All_Sql = "Select * from [HoaDonChiTiet] where hide = 0";
-    String select_sql_byID = "Select * from [HoaDonChiTiet] WHERE [MaHoaDonChiTiet] = ? and hide = 0";
+    String select_sql_byID = "Select * from [HoaDonChiTiet] WHERE [MaHoaDon] = ? and hide = 0";
 
     @Override
     public void insert(HDCT entity) {
@@ -62,7 +62,20 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                list.add(new HDCT(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getInt(6), rs.getDouble(7), rs.getString(8), rs.getBoolean(9)));
+                HDCT hdct = new HDCT();
+                hdct.setMaHoaDonChiTiet(rs.getString("MaHoaDonChiTiet"));
+                if(rs.getString("MaVe") == (null)) {
+                    hdct.setMaDichVu(rs.getString("MaDichVu"));
+                }
+                else {
+                    hdct.setMaDichVu(rs.getString("MaVe"));
+                }
+                hdct.setGiaTien(rs.getDouble("GiaTien"));
+                hdct.setSoLuong(rs.getInt("SoLuong"));
+                hdct.setThanhTien(rs.getDouble("ThanhTien"));
+                hdct.setMaHoaDon(rs.getString("MaHoaDon"));
+                hdct.setHIDE(rs.getBoolean("HIDE"));
+                list.add(hdct);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DichVuDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,13 +83,16 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         return list;
     }
     public void insertVe(HDCT entity) {
-        XJdbc.update(insertSqlDichVu, entity.getMaVe(),entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
+        XJdbc.update(insertSqlDichVu,entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
     }
     public void insertDichVu(HDCT entity) {
         XJdbc.update(insertSqlDichVu, entity.getMaDichVu(),entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
     }
-}
+    public List<HDCT> selectByID(String id) {
+        return this.selectBySql(select_sql_byID, id);
+    }
 
+}
 
 /*
 

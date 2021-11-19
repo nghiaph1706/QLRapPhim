@@ -7,7 +7,6 @@ package Entity;
 public class HDCT {
     private String MaHoaDonChiTiet;
     private String MaDichVu;
-    private String MaVe;
     private double GiaTien;
     private int SoLuong;
     private double ThanhTien;
@@ -22,7 +21,7 @@ public class HDCT {
     public HDCT(String MaHoaDonChiTiet, String MaDichVu, String MaVe, double GiaTien, int SoLuong, double ThanhTien, String MaHoaDon, boolean HIDE) {
         this.MaHoaDonChiTiet = MaHoaDonChiTiet;
         this.MaDichVu = MaDichVu;
-        this.MaVe = MaVe;
+//        this.MaVe = MaVe;
         this.GiaTien = GiaTien;
         this.SoLuong = SoLuong;
         this.ThanhTien = ThanhTien;
@@ -51,13 +50,13 @@ public class HDCT {
         this.MaDichVu = MaDichVu;
     }
 
-    public String getMaVe() {
-        return MaVe;
-    }
-
-    public void setMaVe(String MaVe) {
-        this.MaVe = MaVe;
-    }
+//    public String getMaVe() {
+//        return MaVe;
+//    }
+//
+//    public void setMaVe(String MaVe) {
+//        this.MaVe = MaVe;
+//    }
 
     public double getGiaTien() {
         return GiaTien;

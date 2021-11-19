@@ -19,7 +19,7 @@ public class Phim {
 
     @Override
     public String toString() {
-        return this.MaPhim +" -"+ this.TenPhim;
+        return this.TenPhim;
     }
 
     public Phim() {
