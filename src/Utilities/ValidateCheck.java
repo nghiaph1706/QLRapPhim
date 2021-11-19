@@ -1,10 +1,8 @@
 package Utilities;
 
-import static Utilities.XDate.formater;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ValidateCheck implements Serializable {
@@ -99,6 +97,64 @@ public class ValidateCheck implements Serializable {
             }
         }
         JOptionPane.showMessageDialog(null, NameStringAfter + " Sau Ngày " + NameStringBefore + "!", "Lỗi", 0);
+        return false;
+    }
+
+//regex string
+    public boolean RegexString(String NameString, String string) {
+        if (string.matches("[a-zA-Z]")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex numbers
+
+    public boolean RegexNumber(String NameString, String number) {
+        if (number.matches("[0-9]")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex numbers
+
+    public boolean RegexPhoneNumber(String NameString, String number, int length) {
+        if (number.matches("[0-9]") && number.length() == length) {
+            return true;
+        }
+        if (number.matches("[0-9]") && number.length() < length || number.matches("[0-9]") && number.length() > length) {
+            JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Phải Dài " + length + " Kí Tự!", "Lỗi", 0);
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex string and number
+
+    public boolean RegexStringAndNumber(String NameString, String string) {
+        if (string.matches("[a-zA-Z_0-9]")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex Email
+
+    public boolean RegexEmail(String NameString, String email) {
+        if (email.matches("^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//Check Password and ConfirmPassword
+
+    public boolean CheckValuesPassAndConFirmPass(String NameString1, String pass1, String NameString2, String Pass2) {
+        if (pass1.equals(Pass2)) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString1 + " Không Giống "+NameString2, "Lỗi", 0);
         return false;
     }
 }
