@@ -131,3 +131,16 @@ GO
 SELECT * FROM Ghe WHERE MaPhong = 'P1' ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBSTRING(MaGhe,2,len(MaGhe)-1) as int) asc
 
 SELECT COUNT(Ghe.MaGhe) FROM Ghe WHERE MaPhong = 'P1' and TrangThai = 0
+
+Select top(1) MaHoaDon from [HoaDon] order by cast(SUBSTRING(MaHoaDon,3,len(MaHoaDon)) as int) desc
+
+select *from HoaDonChiTiet where MaHoaDon = 'HD1'
+
+select * from LichChieu
+select malichchieu from LichChieu where MaPhim = 'MP1' and MaPhong = 'P1' and GioChieu = '08:30'
+
+select top(2) * from ve order by id desc
+select *from HoaDonChiTiet
+select *from HoaDon
+
+select giadichvu from DichVu where MaDichVu = 'BAP' and hide = 0

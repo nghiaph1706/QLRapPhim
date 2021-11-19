@@ -593,7 +593,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-
+        txtsearchFirstDate.setDate(null);
         txtsearchLastDate.setDate(null);
         fillTable();
         cboPhimTimKiem.setSelectedItem("Tất cả");

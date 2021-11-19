@@ -8,6 +8,7 @@ as Begin
 		INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim
 	GROUP BY ph.TenPhim, NgayChieu, GioChieu
 End
+go
 
 --Tạo ghế
 CREATE PROC sp_TaoGhe(@MaPhong VARCHAR(10))

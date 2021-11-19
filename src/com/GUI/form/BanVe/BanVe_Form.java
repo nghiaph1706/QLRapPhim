@@ -35,7 +35,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private DefaultTableModel model = new DefaultTableModel(header, 0);
     public BanVe_Form() {
         initComponents();
-        init();
+       // init();
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     @SuppressWarnings("unchecked")
@@ -354,20 +354,20 @@ public class BanVe_Form extends javax.swing.JPanel {
 
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
         // TODO add your handling code here:
-        checkDichVu(true);
+     //   checkDichVu(true);
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     private void chkPhieuGGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPhieuGGActionPerformed
         // TODO add your handling code here:
-        if(checkPhieuGiamGia())
-            cboPhieuGG.setEnabled(true);
-        else
-            cboPhieuGG.setEnabled(false);
+//        if(checkPhieuGiamGia())
+//            cboPhieuGG.setEnabled(true);
+//        else
+//            cboPhieuGG.setEnabled(false);
     }//GEN-LAST:event_chkPhieuGGActionPerformed
 
     private void btnXuLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuLyActionPerformed
         // TODO add your handling code here:
-        xuLyDuLieu();
+        //xuLyDuLieu();
     }//GEN-LAST:event_btnXuLyActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -387,264 +387,264 @@ public class BanVe_Form extends javax.swing.JPanel {
 
     private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed
         // TODO add your handling code here:
-        comboBoxPhongChieu();
+       // comboBoxPhongChieu();
     }//GEN-LAST:event_cboPhimActionPerformed
 
     // MAIN FUNCTIONAL
     
-    private void init()
-    {
-        loadDatabase();
-        txtMaKHTT.setLabelText("Mã KHTT");
-        tblHoaDon.setModel(model);
-        cboPhieuGG.setEnabled(false);
-        checkDichVu(false);
-        comboBoxPhim();
-        comboBoxPhieuGiamGia();
-        comboBoxThanhToan();
-    }
-    private void loadDatabase()
-    {
-        model.setRowCount(0);
-        try {
-            List<HoaDon> list = hdDAO.selectAll();
-            for(HoaDon hd : list) {
-                Object[] row = {
-                    hd.getMaHoaDon(),
-                    hd.getTongTien(),
-                    hd.getMaKM(),
-                    hd.getMaKHTT(),
-                    hd.getMucGiamGia(),
-                    hd.getThanhTien()
-                };
-                model.addRow(row);
-            }
-        } catch(Exception e) {
-            
-        }
-    }
-    private void XuLy()
-    {
-        
-    }
-    private void ThanhToan()
-    {
-        
-    }
-    private void xuLyDuLieu()
-    {
-        try {
-            HoaDon hd = getForm();
-            hdDAO.insert(hd);
-            loadDatabase();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private HoaDon getForm()
-    {
-        boolean checkMaKM = false, checkMaKHTT = false;
-        double soLuong = 0;
-        double mucGiamGiaKM = 0, mucGiamGiaKHTT = 0, giaGhe = 0;
-        String maKM = "";
-        //Entity
-        HoaDon hd = new HoaDon();
-        DichVu dv = new DichVu();
-        KHTT khtt = new KHTT();
-        Ghe gh = new Ghe();
-        Phim ph = new Phim();
-        //Vé Phim
-        //Phiếu giảm giá
-        KhuyenMai km = (KhuyenMai) cboPhieuGG.getSelectedItem();
-        List<KhuyenMai> listKM = kmDAO.selectByMaKM(km.getMaKM());
-        for(KhuyenMai kh : listKM) {
-            if(chkPhieuGG.isSelected() && cboPhieuGG.getSelectedItem().equals(kh.getMaKM())) {
-                mucGiamGiaKM = kh.getMucGiamGia();
-                maKM = kh.getMaKM();
-                checkMaKM = true;
-            }
-            else {
-                mucGiamGiaKM = 0;
-                maKM = null;
-                checkMaKM = false;
-            }
-        }
-        
-        hd.setMaKM(maKM);
-        hd.setMucGiamGia((int)mucGiamGiaKM);
-        //Phòng xem phim = Phòng && Chọn ghế = (Vị trí từ A-N 1-10)
-        //Thành tiền = (phí dịch vụ + vé xem phim) * ((100 - (mức giảm giá của KHTT + mức giảm giá của vé))/100)
-        //Tổng tiền = (phí dịch vụ + vé xem phim)
-        hd.setMaKHTT(txtMaKHTT.getText());
-        if(txtMaKHTT.getText().equals(khtt.getMAKHTT()) && !txtMaKHTT.getText().isEmpty()) {
-            mucGiamGiaKHTT = khtt.getMucGiacGia();
-            checkMaKHTT = true;
-        }
-        double mucGiamGia = 0;
-        if(checkMaKM && checkMaKHTT) {
-            mucGiamGia = mucGiamGiaKM + mucGiamGiaKHTT;
-        }
-        else if(checkMaKM && !checkMaKHTT) {
-            mucGiamGia = mucGiamGiaKM;
-        }
-        else if(!checkMaKM && checkMaKHTT) {
-            mucGiamGia = mucGiamGiaKHTT;
-        }
-        else {
-            mucGiamGia = 0;
-        }
-        //Giá dịch vụ = Tổng hoặc từng dịch vụ
-        int bap = (int) spnBap.getValue();
-        int nuoc = (int) spnNuoc.getValue();
-        int cb1 = (int) spnCombo1.getValue();
-        int cb2 = (int) spnCombo2.getValue();
-        double tongTienDV = 0;
-        if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
-            //Bắp = 25000, Nước = 25000, Combo1 = 50000, Combo2 = 75000
-            soLuong = (bap + nuoc + cb1 + cb2);
-            tongTienDV = ((25000*2) + 50000 + 75000);
-            dv.setGiaDichVu(tongTienDV);
-            if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
-                dv.setGiaDichVu(tongTienDV + (25000 | 25000 | 50000 | 75000));
-            }
-        }
-        else {
-            soLuong = bap | nuoc | cb1 | cb2;
-            tongTienDV = (25000 | 25000 | 50000 | 75000) * soLuong;
-            dv.setGiaDichVu(tongTienDV);
-        }
-        //Chọn ghế
-        for(Ghe ghe : ChonGhe_Form.listGheSelected) {
-            if(ghe.getMaGhe().equals(ChonGhe_Form.listGheSelected)) {
-                giaGhe = ghe.getGiaGhe();
-            }
-        }
-        //Thành tiền
-        double thanhTien = 0;
-        if(mucGiamGia != 0) {
-            thanhTien = (dv.getGiaDichVu() + giaGhe) * ((100 - mucGiamGia)/100);
-        }
-        else {
-            thanhTien = (dv.getGiaDichVu() + giaGhe);
-        }
-        hd.setTongTien(dv.getGiaDichVu() + giaGhe);
-        hd.setThanhTien(thanhTien);
-        java.util.Date date = new java.util.Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        hd.setNgayLap(sqlDate);
-        hd.setMaNhanVien("NV1");
-        return hd;
-    }
-    //
-    private HDCT insertDichVu()
-    {
-        HDCT hdct = new HDCT();
-        DichVu dv = new DichVu();
-        String maDichVu = "";
-        int bap = (int) spnBap.getValue();
-        int nuoc = (int) spnNuoc.getValue();
-        int cb1 = (int) spnCombo1.getValue();
-        int cb2 = (int) spnCombo2.getValue();
-        int soLuong = 0;
-        double tongTienDV = 0;
-        if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
-            //Bắp = 25000, Nước = 25000, Combo1 = 50000, Combo2 = 75000
-            soLuong = (bap + nuoc + cb1 + cb2);
-            if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
-                dv.setGiaDichVu(tongTienDV + (25000 | 25000 | 50000 | 75000));
-            }
-        }
-        else {
-            soLuong = bap | nuoc | cb1 | cb2;
-            tongTienDV = (25000 | 25000 | 50000 | 75000) * soLuong;
-            dv.setGiaDichVu(tongTienDV);
-        }
-        String lch = (String) cboPhim.getSelectedItem();
-        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
-        List<DichVu> listDV = vDAO.selectByMaPhim(maPhim);
-        for(DichVu dcv : listDV) {
-            maDichVu = dcv.getMave();
-        }
-        hdct.setMaDichVu(MaPhong);
-        hdct.setGiaTien(WIDTH);
-        hdct.setSoLuong(SOMEBITS);
-        hdct.setThanhTien(HEIGHT);
-        hdct.setMaHoaDon(MaPhong);
-        hdct.setHIDE(true);
-        return hdct;
-    }
-    private VeDAO vDAO = new VeDAO();
-    private HDCT insertMaVe()
-    {
-        HDCT hdct = new HDCT();
-        String maVe = "";
-        String lch = (String) cboPhim.getSelectedItem();
-        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
-        List<Ve> listVe = vDAO.selectByMaPhim(maPhim);
-        for(Ve v : listVe) {
-            maVe = v.getMave();
-        }
-        hdct.setMaVe(maVe);
-        
-        hdct.setGiaTien(WIDTH);
-        hdct.setSoLuong(1);
-        hdct.setThanhTien(HEIGHT);
-        hdct.setMaHoaDon(MaPhong);
-        hdct.setHIDE(true);
-        return hdct;
-    }
-    
-    // SUB-FUNCTIONAL
-    private void comboBoxThanhToan()
-    {
-        cboPTThanhToan.addItem("Thanh toán bằng tiền mặt");
-        cboPTThanhToan.addItem("Thanh toán bằng thẻ tín dụng");
-        cboPTThanhToan.addItem("Thanh toán bằng MOMO");
-    }
-    private void comboBoxPhim()
-    {
-        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhim.getModel();
-        List<LichChieu> list = lcDAO.selectPhimTheoLichChieu();
-        
-        for(LichChieu lc : list) {
-            List<Phim> listPh = phDAO.selectPhimTheoLichChieu(lc.getMaPhim());
-            cboModel.addElement(lc.getMaPhim() + " - " + listPh.get(0).toString());
-        }
-    }
-    private void comboBoxPhongChieu()
-    {
-        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhongChieu.getModel();
-        cboModel.removeAllElements();
-        String lch = (String) cboPhim.getSelectedItem();
-        if(lch != null) {
-            List<LichChieu> list = lcDAO.selectPhongChieuTheoPhim(lch.substring(0, lch.indexOf("-")).trim());
-            for(LichChieu lc : list) {
-                cboModel.addElement(lc.getMaPhong());
-            }
-        }
-    }
-    private void comboBoxPhieuGiamGia()
-    {
-        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
-        List<String> list = kmDAO.listKhuyenMai();
-        for(String km : list)
-            cboModel.addElement(km);
-    }
-    private boolean checkPhieuGiamGia()
-    {
-        if(!chkPhieuGG.isSelected())
-            return false;
-        return true;
-    }
-    private void checkDichVu(boolean check) {
-        spnBap.setEnabled(check);
-        spnNuoc.setEnabled(check);
-        spnCombo1.setEnabled(check);
-        spnCombo2.setEnabled(check);
-    }
-    private void setStatus(boolean stt) {
-        
-    }
+//    private void init()
+//    {
+//        loadDatabase();
+//        txtMaKHTT.setLabelText("Mã KHTT");
+//        tblHoaDon.setModel(model);
+//        cboPhieuGG.setEnabled(false);
+//        checkDichVu(false);
+//        comboBoxPhim();
+//        comboBoxPhieuGiamGia();
+//        comboBoxThanhToan();
+//    }
+//    private void loadDatabase()
+//    {
+//        model.setRowCount(0);
+//        try {
+//            List<HoaDon> list = hdDAO.selectAll();
+//            for(HoaDon hd : list) {
+//                Object[] row = {
+//                    hd.getMaHoaDon(),
+//                    hd.getTongTien(),
+//                    hd.getMaKM(),
+//                    hd.getMaKHTT(),
+//                    hd.getMucGiamGia(),
+//                    hd.getThanhTien()
+//                };
+//                model.addRow(row);
+//            }
+//        } catch(Exception e) {
+//            
+//        }
+//    }
+//    private void XuLy()
+//    {
+//        
+//    }
+//    private void ThanhToan()
+//    {
+//        
+//    }
+//    private void xuLyDuLieu()
+//    {
+//        try {
+//            HoaDon hd = getForm();
+//            hdDAO.insert(hd);
+//            loadDatabase();
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    private HoaDon getForm()
+//    {
+//        boolean checkMaKM = false, checkMaKHTT = false;
+//        double soLuong = 0;
+//        double mucGiamGiaKM = 0, mucGiamGiaKHTT = 0, giaGhe = 0;
+//        String maKM = "";
+//        //Entity
+//        HoaDon hd = new HoaDon();
+//        DichVu dv = new DichVu();
+//        KHTT khtt = new KHTT();
+//        Ghe gh = new Ghe();
+//        Phim ph = new Phim();
+//        //Vé Phim
+//        //Phiếu giảm giá
+//        KhuyenMai km = (KhuyenMai) cboPhieuGG.getSelectedItem();
+//        List<KhuyenMai> listKM = kmDAO.selectByMaKM(km.getMaKM());
+//        for(KhuyenMai kh : listKM) {
+//            if(chkPhieuGG.isSelected() && cboPhieuGG.getSelectedItem().equals(kh.getMaKM())) {
+//                mucGiamGiaKM = kh.getMucGiamGia();
+//                maKM = kh.getMaKM();
+//                checkMaKM = true;
+//            }
+//            else {
+//                mucGiamGiaKM = 0;
+//                maKM = null;
+//                checkMaKM = false;
+//            }
+//        }
+//        
+//        hd.setMaKM(maKM);
+//        hd.setMucGiamGia((int)mucGiamGiaKM);
+//        //Phòng xem phim = Phòng && Chọn ghế = (Vị trí từ A-N 1-10)
+//        //Thành tiền = (phí dịch vụ + vé xem phim) * ((100 - (mức giảm giá của KHTT + mức giảm giá của vé))/100)
+//        //Tổng tiền = (phí dịch vụ + vé xem phim)
+//        hd.setMaKHTT(txtMaKHTT.getText());
+//        if(txtMaKHTT.getText().equals(khtt.getMAKHTT()) && !txtMaKHTT.getText().isEmpty()) {
+//            mucGiamGiaKHTT = khtt.getMucGiacGia();
+//            checkMaKHTT = true;
+//        }
+//        double mucGiamGia = 0;
+//        if(checkMaKM && checkMaKHTT) {
+//            mucGiamGia = mucGiamGiaKM + mucGiamGiaKHTT;
+//        }
+//        else if(checkMaKM && !checkMaKHTT) {
+//            mucGiamGia = mucGiamGiaKM;
+//        }
+//        else if(!checkMaKM && checkMaKHTT) {
+//            mucGiamGia = mucGiamGiaKHTT;
+//        }
+//        else {
+//            mucGiamGia = 0;
+//        }
+//        //Giá dịch vụ = Tổng hoặc từng dịch vụ
+//        int bap = (int) spnBap.getValue();
+//        int nuoc = (int) spnNuoc.getValue();
+//        int cb1 = (int) spnCombo1.getValue();
+//        int cb2 = (int) spnCombo2.getValue();
+//        double tongTienDV = 0;
+//        if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
+//            //Bắp = 25000, Nước = 25000, Combo1 = 50000, Combo2 = 75000
+//            soLuong = (bap + nuoc + cb1 + cb2);
+//            tongTienDV = ((25000*2) + 50000 + 75000);
+//            dv.setGiaDichVu(tongTienDV);
+//            if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
+//                dv.setGiaDichVu(tongTienDV + (25000 | 25000 | 50000 | 75000));
+//            }
+//        }
+//        else {
+//            soLuong = bap | nuoc | cb1 | cb2;
+//            tongTienDV = (25000 | 25000 | 50000 | 75000) * soLuong;
+//            dv.setGiaDichVu(tongTienDV);
+//        }
+//        //Chọn ghế
+//        for(Ghe ghe : ChonGhe_Form.listGheSelected) {
+//            if(ghe.getMaGhe().equals(ChonGhe_Form.listGheSelected)) {
+//                giaGhe = ghe.getGiaGhe();
+//            }
+//        }
+//        //Thành tiền
+//        double thanhTien = 0;
+//        if(mucGiamGia != 0) {
+//            thanhTien = (dv.getGiaDichVu() + giaGhe) * ((100 - mucGiamGia)/100);
+//        }
+//        else {
+//            thanhTien = (dv.getGiaDichVu() + giaGhe);
+//        }
+//        hd.setTongTien(dv.getGiaDichVu() + giaGhe);
+//        hd.setThanhTien(thanhTien);
+//        java.util.Date date = new java.util.Date();
+//        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//        hd.setNgayLap(sqlDate);
+//        hd.setMaNhanVien("NV1");
+//        return hd;
+//    }
+//    //
+//    private HDCT insertDichVu()
+//    {
+//        HDCT hdct = new HDCT();
+//        DichVu dv = new DichVu();
+//        String maDichVu = "";
+//        int bap = (int) spnBap.getValue();
+//        int nuoc = (int) spnNuoc.getValue();
+//        int cb1 = (int) spnCombo1.getValue();
+//        int cb2 = (int) spnCombo2.getValue();
+//        int soLuong = 0;
+//        double tongTienDV = 0;
+//        if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
+//            //Bắp = 25000, Nước = 25000, Combo1 = 50000, Combo2 = 75000
+//            soLuong = (bap + nuoc + cb1 + cb2);
+//            if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
+//                dv.setGiaDichVu(tongTienDV + (25000 | 25000 | 50000 | 75000));
+//            }
+//        }
+//        else {
+//            soLuong = bap | nuoc | cb1 | cb2;
+//            tongTienDV = (25000 | 25000 | 50000 | 75000) * soLuong;
+//            dv.setGiaDichVu(tongTienDV);
+//        }
+//        String lch = (String) cboPhim.getSelectedItem();
+//        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
+//        List<DichVu> listDV = vDAO.selectByMaPhim(maPhim);
+//        for(DichVu dcv : listDV) {
+//            maDichVu = dcv.getMave();
+//        }
+//        hdct.setMaDichVu(MaPhong);
+//        hdct.setGiaTien(WIDTH);
+//        hdct.setSoLuong(SOMEBITS);
+//        hdct.setThanhTien(HEIGHT);
+//        hdct.setMaHoaDon(MaPhong);
+//        hdct.setHIDE(true);
+//        return hdct;
+//    }
+//    private VeDAO vDAO = new VeDAO();
+//    private HDCT insertMaVe()
+//    {
+//        HDCT hdct = new HDCT();
+//        String maVe = "";
+//        String lch = (String) cboPhim.getSelectedItem();
+//        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
+//        List<Ve> listVe = vDAO.selectByMaPhim(maPhim);
+//        for(Ve v : listVe) {
+//            maVe = v.getMave();
+//        }
+//        hdct.setMaVe(maVe);
+//        
+//        hdct.setGiaTien(WIDTH);
+//        hdct.setSoLuong(1);
+//        hdct.setThanhTien(HEIGHT);
+//        hdct.setMaHoaDon(MaPhong);
+//        hdct.setHIDE(true);
+//        return hdct;
+//    }
+//    
+//    // SUB-FUNCTIONAL
+//    private void comboBoxThanhToan()
+//    {
+//        cboPTThanhToan.addItem("Thanh toán bằng tiền mặt");
+//        cboPTThanhToan.addItem("Thanh toán bằng thẻ tín dụng");
+//        cboPTThanhToan.addItem("Thanh toán bằng MOMO");
+//    }
+//    private void comboBoxPhim()
+//    {
+//        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhim.getModel();
+//        List<LichChieu> list = lcDAO.selectPhimTheoLichChieu();
+//        
+//        for(LichChieu lc : list) {
+//            List<Phim> listPh = phDAO.selectPhimTheoLichChieu(lc.getMaPhim());
+//            cboModel.addElement(lc.getMaPhim() + " - " + listPh.get(0).toString());
+//        }
+//    }
+//    private void comboBoxPhongChieu()
+//    {
+//        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhongChieu.getModel();
+//        cboModel.removeAllElements();
+//        String lch = (String) cboPhim.getSelectedItem();
+//        if(lch != null) {
+//            List<LichChieu> list = lcDAO.selectPhongChieuTheoPhim(lch.substring(0, lch.indexOf("-")).trim());
+//            for(LichChieu lc : list) {
+//                cboModel.addElement(lc.getMaPhong());
+//            }
+//        }
+//    }
+//    private void comboBoxPhieuGiamGia()
+//    {
+//        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
+//        List<String> list = kmDAO.listKhuyenMai();
+//        for(String km : list)
+//            cboModel.addElement(km);
+//    }
+//    private boolean checkPhieuGiamGia()
+//    {
+//        if(!chkPhieuGG.isSelected())
+//            return false;
+//        return true;
+//    }
+//    private void checkDichVu(boolean check) {
+//        spnBap.setEnabled(check);
+//        spnNuoc.setEnabled(check);
+//        spnCombo1.setEnabled(check);
+//        spnCombo2.setEnabled(check);
+//    }
+//    private void setStatus(boolean stt) {
+//        
+//    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnChuyen;
