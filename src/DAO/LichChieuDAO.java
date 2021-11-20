@@ -85,6 +85,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     }
     public List<LichChieu> selectPhongChieuTheoPhim(String maPhim)
     {
+<<<<<<< HEAD
         try {
             List<LichChieu> list = new ArrayList<>();
             ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
@@ -127,5 +128,35 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
             throw new RuntimeException(e);
         }
         return null;
+=======
+        try {
+            List<LichChieu> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
+            while(rs.next()) {
+                LichChieu lc = new LichChieu();
+                lc.setMaPhong(rs.getString(1));
+                list.add(lc);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<LichChieu> selectPhimTheoLichChieu() {
+       try {
+            List<LichChieu> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query(SELECT_BY_LC);
+            while(rs.next()) {
+                LichChieu lc = new LichChieu();
+                lc.setMaPhim(rs.getString(1));
+                list.add(lc);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+>>>>>>> parent of ce43191 (Merge branch 'nguyen')
     }
 }
