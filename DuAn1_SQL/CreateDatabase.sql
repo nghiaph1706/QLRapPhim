@@ -22,7 +22,6 @@ CREATE TABLE [NhanVien] (
 	[MaNhanVien] as cast('NV'+Cast(ID as VARCHAR(10))as VARCHAR(10))  PERSISTED PRIMARY KEY,
 	[HoTen] NVARCHAR(100),
 	[SDT] VARCHAR(10),
-	[Email] NVARCHAR(100),
 	[GioiTinh] BIT DEFAULT 0,
 	[ChucVu] BIT DEFAULT 0,
 	[MatKhau] VARCHAR(30),

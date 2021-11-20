@@ -2,7 +2,7 @@
 
 INSERT INTO [TheLoai]([TenTheLoai],[HIDE]) VALUES (?,?)
 
-INSERT INTO [NhanVien]([HoTen],[SDT],[Email],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[HIDE]) VALUES (?,?,?,?,?,?,?)
+INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[HIDE]) VALUES (?,?,?,?,?,?,?)
 
 INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES (?,?,?,?,?,?,?,?,?)
 

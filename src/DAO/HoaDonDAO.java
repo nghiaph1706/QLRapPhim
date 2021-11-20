@@ -92,4 +92,8 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
         }
         return null;
     }
+    public List<HoaDon> selectByMaHDFromHDCT(String id) {
+        String sql = "SELECT * FROM HoaDon WHERE MaHoaDon = ?";
+        return this.selectBySql(sql, id);
+    }
 }

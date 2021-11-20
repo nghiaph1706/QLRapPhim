@@ -8,25 +8,12 @@ public class NhanVien {
     private String MaNhanVien;
     private String HoTen;
     private String SDT;
+    private String Email;
     private boolean GioiTinh;
     private boolean ChucVu;
     private String MatKhau;
     private String Hinh;
     private boolean HIDE;
-
-    public NhanVien() {
-    }
-
-    public NhanVien(String MaNhanVien, String HoTen, String SDT, boolean GioiTinh, boolean ChucVu, String MatKhau, String Hinh, boolean HIDE) {
-        this.MaNhanVien = MaNhanVien;
-        this.HoTen = HoTen;
-        this.SDT = SDT;
-        this.GioiTinh = GioiTinh;
-        this.ChucVu = ChucVu;
-        this.MatKhau = MatKhau;
-        this.Hinh = Hinh;
-        this.HIDE = HIDE;
-    }
 
     public String getMaNhanVien() {
         return MaNhanVien;
@@ -50,6 +37,14 @@ public class NhanVien {
 
     public void setSDT(String SDT) {
         this.SDT = SDT;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public boolean isGioiTinh() {
@@ -92,11 +87,20 @@ public class NhanVien {
         this.HIDE = HIDE;
     }
 
-    @Override
-    public String toString() {
-        return this.HoTen;
+    public NhanVien(String MaNhanVien, String HoTen, String SDT, String Email, boolean GioiTinh, boolean ChucVu, String MatKhau, String Hinh, boolean HIDE) {
+        this.MaNhanVien = MaNhanVien;
+        this.HoTen = HoTen;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.GioiTinh = GioiTinh;
+        this.ChucVu = ChucVu;
+        this.MatKhau = MatKhau;
+        this.Hinh = Hinh;
+        this.HIDE = HIDE;
     }
-    
-    
 
+    public NhanVien() {
+    }
+
+    
 }

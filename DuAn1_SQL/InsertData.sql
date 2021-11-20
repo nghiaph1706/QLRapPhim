@@ -9,20 +9,20 @@ INSERT INTO [TheLoai]([TenTheLoai],[HIDE]) VALUES
 (N'Tâm Lý',0);
 GO
 
-INSERT INTO [NhanVien]([HoTen],[SDT],[Email],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES 
-(N'Phạm Lễ Nghĩa','0990090909','nghiaplps17855@fpt.edu.vn',1,1,'123',0),
-(N'Trần Chí','0990090908','nghiaplps17855@fpt.edu.vn',0,1,'123',0),
-(N'Võ Hùng Dương','0990090907','nghiaplps17855@fpt.edu.vn',1,0,'123',0),
-(N'Ngô Tiên Duy','0990090906','nghiaplps17855@fpt.edu.vn',0,0,'123',0),
-(N'Đào Đức Nguyên','0990090905','nghiaplps17855@fpt.edu.vn',1,0,'123',0);
+INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES 
+(N'Phạm Lễ Nghĩa','0990090909',1,1,'123',0),
+(N'Trần Chí','0990090908',0,1,'123',0),
+(N'Võ Hùng Dương','0990090907',1,0,'123',0),
+(N'Ngô Tiên Duy','0990090906',0,0,'123',0),
+(N'Đào Đức Nguyên','0990090905',1,0,'123',0);
 GO
 
-INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
-(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','NV1',0),
-(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','NV2',0),
-(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','NV3',0),
-(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NV4',0),
-(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','NV1',0);
+INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES
+(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','MatBiec.jpg','NV1',0),
+(N'AVENGER SECOND GAME','11-17-2021','11-20-2021',N'VIỆT NAM','TL2','2D','Avengers.jpg','NV2',0),
+(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','AntMain.jpg','NV3',0),
+(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NguoiNhen.jpg','NV4',0),
+(N'AVENGER','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','avg.jpg','NV1',0);
 GO
 
 INSERT INTO [Phong]([HIDE]) VALUES 
@@ -132,17 +132,15 @@ SELECT * FROM Ghe WHERE MaPhong = 'P1' ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBST
 
 SELECT COUNT(Ghe.MaGhe) FROM Ghe WHERE MaPhong = 'P1' and TrangThai = 0
 
+Select top(1) MaHoaDon from [HoaDon] order by cast(SUBSTRING(MaHoaDon,3,len(MaHoaDon)) as int) desc
 
-SELECT * FROM lichchieu
+select *from HoaDonChiTiet where MaHoaDon = 'HD1'
 
-select malichchieu from lichchieu where MaPhim = 'MP1' and MaPhong = 'P1' and GioChieu = '08:30'
-select *from HoaDon
+select * from LichChieu
+select malichchieu from LichChieu where MaPhim = 'MP1' and MaPhong = 'P1' and GioChieu = '08:30'
+
+select top(2) * from ve order by id desc
 select *from HoaDonChiTiet
-select *from Ve
-Select top(2) * from Ve ORDER BY cast(SUBSTRING(MaVe,3,len(MaVe)) as int) desc
+select *from HoaDon
 
-INSERT INTO [Ve]([MaPhim],[MaLichChieu],[MaPhong],[MaGhe]) VALUES 
-('MP1','LC10','P1','A1')
-
-INSERT INTO [HoaDonChiTiet]([MaVe],[GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) VALUES 
-('VE100',50000,1,50000,'HD1',0)
+select giadichvu from DichVu where MaDichVu = 'BAP' and hide = 0
