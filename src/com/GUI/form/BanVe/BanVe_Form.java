@@ -387,8 +387,10 @@ public class BanVe_Form extends javax.swing.JPanel {
 
     private void cboPhongChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongChieuActionPerformed
 
-        String tmp = cboPhim.getSelectedItem().toString().trim();
+        String tmp = cboPhim.getSelectedItem().toString();
+        System.out.println(tmp);
         MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
+         System.out.println(MaPhong);
     }//GEN-LAST:event_cboPhongChieuActionPerformed
 
     private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed

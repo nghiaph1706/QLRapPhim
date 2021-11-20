@@ -24,6 +24,7 @@ CREATE TABLE [NhanVien] (
 	[SDT] VARCHAR(10),
 	[GioiTinh] BIT DEFAULT 0,
 	[ChucVu] BIT DEFAULT 0,
+	[GhiChu] nvarchar(255),
 	[MatKhau] VARCHAR(30),
 	[Hinh] VARCHAR(200),
 	[HIDE] BIT DEFAULT 0
@@ -179,6 +180,3 @@ CREATE TABLE [HoaDonChiTiet] (
 			REFERENCES [HoaDon]([MaHoaDon]) ON DELETE CASCADE
 );
 GO
-
-
-count(maphim) from ve where ng
