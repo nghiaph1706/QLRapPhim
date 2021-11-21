@@ -59,14 +59,7 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                KhuyenMai km = new KhuyenMai();
-                km.setMaKM(rs.getString("MaKM"));
-                km.setThongTinKM(rs.getNString("ThongTinKM"));
-                km.setMucGiamGia(rs.getDouble("MucGiamGia"));
-                km.setNgayBatDau(rs.getDate("NgayBatDau"));
-                km.setNgayKetThuc(rs.getDate("NgayKetThuc"));
-                km.setMaNhanVien(rs.getString("MaNhanVien"));
-                km.setHIDE(rs.getBoolean("HIDE"));
+                KhuyenMai km = readFromResultSet(rs);
                 list.add(km);
             }
             rs.getStatement().getConnection().close();

@@ -1,6 +1,4 @@
 /* @author nghiacubu */
-
-
 package DAO;
 
 import Entity.NhanVien;
@@ -12,40 +10,31 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class NhanVienDAO extends QLRapPhimDAO<NhanVien, String> {
-    
-    private String INSERT_SQL = "INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[HIDE]) VALUES (?,?,?,?,?,?,?)";
-    private String UPDATE_SQL = "UPDATE [NhanVien] SET [HoTen] = ?, [SDT] = ?, [GioiTinh] = ?, [ChucVu] = ?, [MatKhau] = ?, [Hinh] = ?, [HIDE] = ? WHERE [MaNhanVien] = ?";
+
+    private String INSERT_SQL = "INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[GhiChu],[HIDE]) VALUES (?,?,?,?,?,?,?,?)";
+    private String UPDATE_SQL = "UPDATE [NhanVien] SET [HoTen] = ?, [SDT] = ?, [GioiTinh] = ?, [ChucVu] = ?, [Hinh] = ? ,[GhiChu] =? WHERE [MaNhanVien] = ?";
     private String DELETE_SQL = "UPDATE [NhanVien] SET HIDE = 1 WHERE [MaNhanVien] = ?";
-    private String SELECT_BY_ID = "SELECT * FROM NhanVien WHERE [HIDE] = 0 AND [MaNhanVien] = ?";
+    private String SELECT_BY_ID = "SELECT * FROM NhanVien WHERE [HIDE] = 0 AND [MaNhanVien] like ?";
     private String SELECT_ALL = "SELECT * FROM NhanVien WHERE [HIDE] = 0";
 
     @Override
     public void insert(NhanVien entity) {
-        try {
-            XJdbc.update(INSERT_SQL, entity.getHoTen(), entity.getSDT(), entity.isGioiTinh(), entity.isChucVu(), entity.getMatKhau(), entity.getHinh(), entity.isHIDE());
-        } catch (Exception e) {
-            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
+        XJdbc.update(INSERT_SQL, entity.getHoTen(), entity.getSDT(), entity.gioitinh(), entity.chucvu(), "123", entity.getHinh(), entity.getGhiChu(), 0);
     }
 
     @Override
     public void update(NhanVien entity) {
-        try {
-            XJdbc.update(UPDATE_SQL, entity.getHoTen(), entity.getSDT(), entity.isGioiTinh(), entity.isChucVu(), entity.getMatKhau(), entity.getHinh(), entity.isHIDE(), entity.getMaNhanVien());
-        } catch (Exception e) {
-            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
+        XJdbc.update(UPDATE_SQL, entity.getHoTen(), entity.getSDT(), entity.gioitinh(), entity.chucvu(), entity.getHinh(), entity.getGhiChu(), entity.getMaNhanVien());
+    }
+
+    public void UpdatePassword(NhanVien entity) {
+        XJdbc.update(UPDATE_SQL, entity.getMatKhau(), entity.getMaNhanVien());
     }
 
     @Override
     public void delete(String key) {
-        try {
-            XJdbc.update(DELETE_SQL, key);
-        } catch (Exception e) {
-            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
+        XJdbc.update(DELETE_SQL, key);
     }
 
     @Override
@@ -53,12 +42,14 @@ public class NhanVienDAO extends QLRapPhimDAO<NhanVien, String> {
         return this.selectBySql(SELECT_ALL);
     }
 
+    public List<NhanVien> selectbykey(String key) {
+        return this.selectBySql(SELECT_BY_ID, key);
+    }
+
     @Override
     public NhanVien selectById(String key) {
-        List<NhanVien> list = this.selectBySql(SELECT_BY_ID, key);
-        if(list.isEmpty())
-            return null;
-        return list.get(0);
+        List<NhanVien> list = selectBySql(SELECT_BY_ID, key);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     @Override
@@ -66,22 +57,28 @@ public class NhanVienDAO extends QLRapPhimDAO<NhanVien, String> {
         List<NhanVien> list = new ArrayList<>();
         try {
             ResultSet rs = XJdbc.query(sql, args);
-            while(rs.next()) {
-                NhanVien nv = new NhanVien();
-                nv.setMaNhanVien(rs.getString("MaNhanVien"));
-                nv.setHoTen(rs.getNString("HoTen"));
-                nv.setSDT(rs.getString("SDT"));
-                nv.setGioiTinh(rs.getBoolean("GioiTinh"));
-                nv.setChucVu(rs.getBoolean("ChucVu"));
-                nv.setMatKhau(rs.getString("MatKhau"));
-                nv.setHinh(rs.getString("Hinh"));
-                nv.setHIDE(rs.getBoolean("HIDE"));
+            while (rs.next()) {
+                NhanVien nv = readFromResultSet(rs);
                 list.add(nv);
             }
             rs.getStatement().getConnection().close();
             return list;
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public NhanVien readFromResultSet(ResultSet rs) throws SQLException {
+        NhanVien nv = new NhanVien();
+        nv.setMaNhanVien(rs.getString("MaNhanVien"));
+        nv.setHoTen(rs.getNString("HoTen"));
+        nv.setSDT(rs.getString("SDT"));
+        nv.setGioiTinh(rs.getBoolean("GioiTinh"));
+        nv.setChucVu(rs.getBoolean("ChucVu"));
+        nv.setMatKhau(rs.getString("MatKhau"));
+        nv.setHinh(rs.getString("Hinh"));
+        nv.setGhiChu(rs.getString("GhiChu"));
+        nv.setHIDE(rs.getBoolean("HIDE"));
+        return nv;
     }
 }
