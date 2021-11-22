@@ -106,4 +106,18 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
         String sql = "SELECT * FROM KhuyenMai WHERE MaKM = ?";
         return this.selectBySql(sql, id);
     }
+    
+    public int selectMucGiamGia(String maKM){
+        String sql = "select MucGiamGia from KhuyenMai where MaKM = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql, maKM);
+            while(rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

@@ -142,5 +142,12 @@ select malichchieu from LichChieu where MaPhim = 'MP1' and MaPhong = 'P1' and Gi
 select top(2) * from ve order by id desc
 select *from HoaDonChiTiet
 select *from HoaDon
-
+SELECT MaHoaDon FROM HoaDonChiTiet GROUP BY MaHoaDon
 select giadichvu from DichVu where MaDichVu = 'BAP' and hide = 0
+
+select MucGiamGia from KhuyenMai where MaKM = 'TET'
+select MucGiamGia from KhachHangThanThiet WHERE MaKHTT = 'KH1'
+select MaKHTT from KhachHangThanThiet
+
+select *from HoaDon
+select sum(ThanhTien) from HoaDonChiTiet where MaHoaDon = 'HD1'

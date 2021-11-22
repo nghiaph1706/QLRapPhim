@@ -292,7 +292,6 @@ public class ChonGhe_Form extends javax.swing.JPanel {
         }
         Main.banVe.insertMaVe();
         Main.banVe.loadDatabase();
-        Main.banVe.loadDatabaseFromMaHD();
         Main.main.showForm(Main.banVe);
     }//GEN-LAST:event_buttonBadges2ActionPerformed
 

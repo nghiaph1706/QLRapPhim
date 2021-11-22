@@ -22,6 +22,7 @@ public class KHTTDAO extends QLRapPhimDAO<KHTT, String> {
     String deleteSql = "UPDATE [KhachHangThanThiet] SET [HIDE] = 1 WHERE [MaKHTT] = ?";
     String select_All_Sql = "Select * from [KhachHangThanThiet] where hide = 0";
     String select_sql_byID = "Select * from [KhachHangThanThiet] where [MaKHTT] = ? and hide = 0";
+    String select_All_byID = "select MaKHTT from KhachHangThanThiet";
 
     @Override
     public void insert(KHTT entity) {
@@ -66,6 +67,34 @@ public class KHTTDAO extends QLRapPhimDAO<KHTT, String> {
             Logger.getLogger(DichVuDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    
+    public int selectMucGiamGia(String maKHTT){
+        String sql = "select MucGiamGia from KhachHangThanThiet WHERE MaKHTT = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql, maKHTT);
+            while(rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+    
+    public List<String> selectMaKHTT() {
+        List<String> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(select_All_byID);
+            while(rs.next()) {
+                list.add(rs.getString(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

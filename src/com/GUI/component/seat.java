@@ -76,7 +76,7 @@ public class seat extends JPanel {
 
     public List<Ghe> selectedSeat() {
         List<Ghe> listSelect = new ArrayList<>();
-        for (int i = 0; i < list_btn.size(); i++) {
+        for (int i = 0; i <= list_btn.size()-1; i++) {
             ModelButton btn = list_btn.get(i);
             if (btn.isStt() == true) {
                 listSelect.add(listGhe.get(i));

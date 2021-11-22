@@ -101,6 +101,10 @@ public class XExcel {
         }
     }
     
+    public static void export(){
+        
+    }
+    
     public static CellStyle headerCellStyle() {
         CellStyle cellStyle = workbook.createCellStyle();
         cellStyle.setAlignment(HorizontalAlignment.CENTER);

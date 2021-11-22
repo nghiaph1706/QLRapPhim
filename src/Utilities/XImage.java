@@ -1,9 +1,7 @@
 
 package Utilities;
 
-import java.awt.Image;
 import java.io.File;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,13 +10,8 @@ import javax.swing.ImageIcon;
 
 public class XImage {
     
-    public static Image getAppIcon(){
-        URL url = XImage.class.getResource("/com/edusys/icon/1.png");
-        return new ImageIcon(url).getImage();
-    }
-    
-    public static void saveImageChuyenDe(File src){
-        File dst = new File("Hinh/ChuyenDe/",src.getName());
+    public static void saveImagePhim(File src){
+        File dst = new File("imagePhim/",src.getName());
         if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdirs();
         }
@@ -32,7 +25,7 @@ public class XImage {
     }
     
     public static void saveImageNhanVien(File src){
-        File dst = new File("Hinh/NhanVien/", src.getName());
+        File dst = new File("imageNhanVien/", src.getName());
         if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdirs();
         }
@@ -45,13 +38,32 @@ public class XImage {
         }
     }
     
-    public static ImageIcon readImageChuyenDe(String fileName){
-        File path = new File("Hinh/ChuyenDe",fileName);
+    public static void saveImageSuKien(File src){
+        File dst = new File("imageSuKien/", src.getName());
+        if (!dst.getParentFile().exists()) {
+            dst.getParentFile().mkdirs();
+        }
+        try {
+            Path from = Paths.get(src.getAbsolutePath());
+            Path to = Paths.get(dst.getAbsolutePath());
+            Files.copy(from,to,StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public static ImageIcon readImagePhim(String fileName){
+        File path = new File("imagePhim/",fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
     
     public static ImageIcon readImageNhanVien(String fileName){
-        File path = new File("Hinh/NhanVien",fileName);
+        File path = new File("imageNhanVien/",fileName);
+        return new ImageIcon(path.getAbsolutePath());
+    }
+    
+    public static ImageIcon readImageSuKien(String fileName){
+        File path = new File("imageSuKien/",fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
 }

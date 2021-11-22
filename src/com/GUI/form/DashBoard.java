@@ -27,11 +27,11 @@ public class DashBoard extends javax.swing.JPanel {
         chartPie1.setModel(list);
         
         
-        Icon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel1.getPreferredSize().width, jLabel1.getPreferredSize().height, Image.SCALE_SMOOTH));
+        Icon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel1.getPreferredSize().width, jLabel1.getPreferredSize().height, Image.SCALE_SMOOTH));
         jLabel1.setIcon(imageIcon);
-        imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel2.getPreferredSize().width, jLabel2.getPreferredSize().height, Image.SCALE_SMOOTH));
+        imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel2.getPreferredSize().width, jLabel2.getPreferredSize().height, Image.SCALE_SMOOTH));
         jLabel2.setIcon(imageIcon);
-        imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel3.getPreferredSize().width, jLabel3.getPreferredSize().height, Image.SCALE_SMOOTH));
+        imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/imagePhim/Inception.jpg")).getImage().getScaledInstance(jLabel3.getPreferredSize().width, jLabel3.getPreferredSize().height, Image.SCALE_SMOOTH));
         jLabel3.setIcon(imageIcon);
        
     }
