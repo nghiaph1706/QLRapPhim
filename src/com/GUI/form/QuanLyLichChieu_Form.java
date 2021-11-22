@@ -67,7 +67,6 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             ts.setRowFilter(RowFilter.regexFilter(txtTimKiem.getText()));
         } catch (Exception e) {
         }
-
     }
 
     public void fillSearchPhimCbo() {

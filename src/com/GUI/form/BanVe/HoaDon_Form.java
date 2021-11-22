@@ -6,15 +6,27 @@
 package com.GUI.form.BanVe;
 
 import DAO.DichVuDAO;
+import DAO.HDCTDAO;
 import DAO.HoaDonDAO;
+import DAO.KHTTDAO;
 import DAO.KhuyenMaiDAO;
 import DAO.LichChieuDAO;
 import DAO.PhimDAO;
 import Entity.HoaDon;
+import Utilities.MsgBox;
+import Utilities.XDate;
 import com.GUI.main.Main;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -25,13 +37,15 @@ public class HoaDon_Form extends javax.swing.JPanel {
     /**
      * Creates new form HoaDon_Form
      */
+    private HDCTDAO hdctdao = new HDCTDAO();
     private LichChieuDAO lcDAO = new LichChieuDAO();
     private KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
+    private KHTTDAO khttdao = new KHTTDAO();
     private HoaDonDAO hdDAO = new HoaDonDAO();
     private PhimDAO phDAO = new PhimDAO();
     private DichVuDAO dvDAO = new DichVuDAO();
     private String[] header = {
-        "Tổng tiền", "Mã KM", "Mã KHTT", "Mức giảm giá", "Thành Tiền", "Ngày lập", "Mã NV"
+        "Mã HD","Tổng tiền", "Mã KM", "Mã KHTT", "Mức giảm giá", "Thành Tiền", "Ngày lập", "Mã NV"
     };
     private DefaultTableModel model = new DefaultTableModel(header, 0);
     public HoaDon_Form() {
@@ -42,18 +56,36 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private void init()
     {
         tblHoaDon.setModel(model);
-        loadDatabase();
         comboBoxThanhToan();
     }
-    private void loadDatabase()
+    
+    public void tinhTien(){
+        System.out.println("Tính tiền");
+        HoaDon hd = new HoaDon();
+        hd.setMaHoaDon(BanVe_Form.maHDNow);
+        System.out.println(BanVe_Form.maHDNow);
+        int tongTien = (int) hdctdao.getTongTien(BanVe_Form.maHDNow);
+        System.out.println(tongTien);
+        hd.setTongTien(tongTien);
+        hd.setMaKM(BanVe_Form.MaKM);
+        hd.setMaKHTT(BanVe_Form.MaKHTT);
+        int mucGG = kmDAO.selectMucGiamGia(BanVe_Form.MaKM) + khttdao.selectMucGiamGia(BanVe_Form.MaKHTT);
+        System.out.println(mucGG);
+        hd.setMucGiamGia(mucGG);
+        double thanhTien = tongTien *(100-mucGG)/100 ;
+        System.out.println(thanhTien);
+        hd.setThanhTien(thanhTien);
+        hd.setNgayLap(XDate.now());
+        hd.setMaNhanVien("NV1"); //Login
+        hd.setHIDE(false);
+        hdDAO.update(hd);
+    }
+    public void loadDatabase()
     {
         model.setRowCount(0);
-        try {
-            System.out.println(BanVe_Form.MaHDTuHDCT);
-            List<HoaDon> list = hdDAO.selectByMaHDFromHDCT(BanVe_Form.MaHDTuHDCT);
-            for(HoaDon hd : list)
-            {
+            HoaDon hd = hdDAO.selectById(BanVe_Form.maHDNow);
                 Object[] row = {
+                    hd.getMaHoaDon(),
                     hd.getTongTien(),
                     hd.getMaKM(),
                     hd.getMaKHTT(),
@@ -63,10 +95,6 @@ public class HoaDon_Form extends javax.swing.JPanel {
                     hd.getMaNhanVien()
                 };
                 model.addRow(row);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
     private void comboBoxThanhToan()
     {
@@ -204,7 +232,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        // TODO add your handling code here:
+       printHoaDon();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
@@ -223,4 +251,65 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private com.GUI.swing.Table tblHoaDon;
     // End of variables declaration//GEN-END:variables
+
+    private void printHoaDon()
+    {
+        try {
+            File file = new File("test.txt");
+            if(!file.exists())
+            {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < 1; i++) {
+                for (int j = 0; j < tblHoaDon.getColumnCount(); j++) {
+                    bw.write(tblHoaDon.getColumnName(j) + "  ");
+                }
+                bw.write("\n------------------------------------------------------------------\n");
+            }
+            for (int i = 0; i < 1; i++) {
+                for (int j = 0; j < tblHoaDon.getColumnCount(); j++) {
+                    if(tblHoaDon.getModel().getValueAt(i, j) == null) {
+                        tblHoaDon.getModel().setValueAt("NULL", i, j);
+                    }
+                    bw.write(tblHoaDon.getModel().getValueAt(i, j).toString() + " | ");
+                }
+                bw.write("\n------------------------------------------------------------------\n");
+            }
+            MsgBox.alert(this, "Xuất hóa đơn thành công");
+            bw.close();
+            fw.close();
+        }
+        catch(IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
+    private void exportExcelHoadon()
+    {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("HoaDon");
+            for (int i = 0; i < 1; i++) {
+                XSSFRow headerRow = sheet.createRow(i);
+                for (int j = 0; j < tblHoaDon.getColumnCount(); j++) {
+                    headerRow.createCell(j).setCellValue(tblHoaDon.getColumnName(j));
+                }
+            }
+            for (int i = 1; i < 2; i++) {
+                XSSFRow valueRow = sheet.createRow(i);
+                for (int j = 0; j < header.length; j++) {
+                    valueRow.createCell(j).setCellValue(tblHoaDon.getValueAt(0, j).toString());
+                }
+            }
+            FileOutputStream out = new FileOutputStream(
+                    new File("HoaDon.xlsx")
+            );
+            workbook.write(out);
+            out.close();
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -102,6 +102,18 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         }
         return list;
     }
+
+    public double getTongTien(String maHD) {
+        String sql = "select sum(ThanhTien) from HoaDonChiTiet where MaHoaDon = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql, maHD);
+            while(rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 }
 
 /*
