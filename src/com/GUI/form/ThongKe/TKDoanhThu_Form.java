@@ -1,64 +1,66 @@
 package com.GUI.form.ThongKe;
 
+import DAO.HoaDonDAO;
+import DAO.ThongKeDao;
+import com.GUI.Chart.BarChart.BarChart;
 import com.GUI.Chart.BarChart.ModelChart;
 import com.GUI.Chart.ChartLine.ModelChartLine;
 import com.GUI.Chart.ChartPie.ModelChartPie;
 import com.GUI.swing.scrollbar.ScrollBarCustom;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 public class TKDoanhThu_Form extends javax.swing.JPanel {
+
+    ThongKeDao tkDao = new ThongKeDao();
+    DefaultComboBoxModel cboModelNam = new DefaultComboBoxModel();
+    DefaultComboBoxModel cboModelThang = new DefaultComboBoxModel();
 
     public TKDoanhThu_Form() {
         initComponents();
         setOpaque(false);
-        initText();
+//        initText();
+        fillCboNam();
+        fillCboThang();
+        init();
     }
-    public void initText(){
-        barChart1.addLegend("Doanh thu", new Color(245, 189,135));
-        barChart1.addData(new ModelChart("Năm 1", new double[]{200}));
-        barChart1.addData(new ModelChart("Năm 1", new double[]{250}));
-        barChart1.addData(new ModelChart("Năm 1", new double[]{300}));
-        barChart1.addData(new ModelChart("Năm 1", new double[]{200}));
-        barChart1.addData(new ModelChart("Năm 1", new double[]{150}));
-        
-        List<ModelChartPie>  modelChartPies = new ArrayList<>();
-        modelChartPies.add(new ModelChartPie("Dịch vụ", 200, new Color(245, 189,135)));
-        modelChartPies.add(new ModelChartPie("Vé", 200, new Color(135, 189,245)));
-        modelChartPies.add(new ModelChartPie("Dịch vụ", 200, new Color(245, 189,135)));
-        modelChartPies.add(new ModelChartPie("Vé", 200, new Color(135, 189,245)));
-        chartPie1.setModel(modelChartPies);
-        
-        
+
+    public void initText() {
+
         List<ModelChartLine> modelChartLines = new ArrayList<>();
-        modelChartLines.add(new ModelChartLine("Quí 1",800));
-        modelChartLines.add(new ModelChartLine("Quí 1",950));
-        modelChartLines.add(new ModelChartLine("Quí 1",700));
-        modelChartLines.add(new ModelChartLine("Quí 1",800));
-        modelChartLines.add(new ModelChartLine("Quí 1",800));
-        modelChartLines.add(new ModelChartLine("Quí 1",950));
-        modelChartLines.add(new ModelChartLine("Quí 1",700));
-        modelChartLines.add(new ModelChartLine("Quí 1",800));
+        modelChartLines.add(new ModelChartLine("Quí 1", 800));
+        modelChartLines.add(new ModelChartLine("Quí 1", 950));
+        modelChartLines.add(new ModelChartLine("Quí 1", 700));
+        modelChartLines.add(new ModelChartLine("Quí 1", 800));
+        modelChartLines.add(new ModelChartLine("Quí 1", 800));
+        modelChartLines.add(new ModelChartLine("Quí 1", 950));
+        modelChartLines.add(new ModelChartLine("Quí 1", 700));
+        modelChartLines.add(new ModelChartLine("Quí 1", 800));
         chartLine1.setModel(modelChartLines);
-        
-        barChart2.addLegend("Doanh thu", new Color(245, 189,135));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{250}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{300}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{150}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{160}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{80}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{70}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{300}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{320}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{360}));
-        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
-        
+
+//        barChart2.addLegend("Doanh thu", new Color(245, 189, 135));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{250}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{300}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{150}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{160}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{80}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{70}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{300}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{320}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{360}));
+//        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
-        
+
 //        List<ModelChartPie>  modelChartPies1 = new ArrayList<>();
 //        modelChartPies1.add(new ModelChartPie("Dịch vụ", 200, new Color(245, 189,135)));
 //        modelChartPies1.add(new ModelChartPie("Vé", 200, new Color(135, 189,245)));
@@ -73,6 +75,107 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
 //        modelChartLines1.add(new ModelChartLine("Tuần 1",800));
 //        chartLine2.setModel(modelChartLines1);
     }
+
+    public void init() {
+
+        try {
+            thongKeDTQuaTungNam();
+        } catch (SQLException ex) {
+            Logger.getLogger(TKDoanhThu_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        thongKeDTBieuDoTron();
+        thongKeTheoQuy();
+
+    }
+
+    public void fillCboNam() {
+        cboNam.setModel(cboModelNam);
+        cboModelNam.removeAllElements();
+        for (Integer nam : new HoaDonDAO().selectYear()) {
+            cboModelNam.addElement(String.valueOf(nam));
+        }
+    }
+
+    public void fillCboThang() {
+        cboThang.setModel(cboModelThang);
+        cboModelThang.removeAllElements();
+        for (int i = 1; i <= 12; i++) {
+            cboModelThang.addElement(String.valueOf(i));
+        }
+    }
+
+    public void thongKeDTQuaTungNam() throws SQLException {
+        barChart1.addLegend("Doanh thu", new Color(245, 189, 135));
+        List<Object[]> list = tkDao.getDoanhThuNam();
+        for (Object obj[] : list) {
+            barChart1.addData(new ModelChart(obj[1].toString(), new double[]{Double.parseDouble(obj[0].toString())}));
+        }
+    }
+
+    public void thongKeDTBieuDoTron() {
+        List<ModelChartPie> modelChartPies = new ArrayList<>();
+        String ten[] = {"Vé", "Dịch Vụ"};
+        Double[] veVaDVArray = tkDao.getDoanhThuTheoVeVaDichvu();
+        for (int i = 0; i < veVaDVArray.length; i++) {
+            if (i > 0) {
+                modelChartPies.add(new ModelChartPie(ten[i], veVaDVArray[i], new Color(135, 189, 245)));
+            } else {
+                modelChartPies.add(new ModelChartPie(ten[i], veVaDVArray[i], new Color(245, 189, 135)));
+            }
+
+        }
+        chartPie1.setModel(modelChartPies);
+    }
+
+    public void thongKeDTChonNam() {
+        BarChart barchartTKNam = new BarChart();
+        String year = "";
+        year = cboModelNam.getSelectedItem().toString();
+        System.out.println(year);
+        barchartTKNam.addLegend("Doanh thu", new Color(245, 189, 135));
+        List<Object[]> list = tkDao.getDTTungThangTheoNam(year);
+        for (Object obj[] : list) {
+            barchartTKNam.addData(new ModelChart(obj[0].toString(), new double[]{Double.parseDouble(obj[1].toString())}));
+        }
+
+        jpanelTKNam.removeAll();
+        jpanelTKNam.add(barchartTKNam, BorderLayout.CENTER);
+        jpanelTKNam.validate();
+
+    }
+
+    public void thongKeTheoQuy() {
+        try {
+            List<ModelChartLine> modelChartLines = new ArrayList<>();
+            List<Object[]> list = tkDao.getDoanhThuNam();
+            for (Object obj[] : list) {
+                modelChartLines.add(new ModelChartLine(obj[1].toString(), Double.parseDouble(obj[0].toString())));
+            }
+            chartLine1.setModel(modelChartLines);
+        } catch (SQLException ex) {
+            Logger.getLogger(TKDoanhThu_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+        public void thongKeDTTungNgayTheoThang() {
+        DefaultTableModel model = new DefaultTableModel();
+        tblDTTungNgayTheoThang.setModel(model);
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"Ngày", "Tổng vé", "Tổng dịch vụ", "Tổng tiền ngày"});
+        String year = "";
+        String month = "";
+        try {
+            year = cboModelNam.getSelectedItem().toString();
+            month = cboModelThang.getSelectedItem().toString();
+        } catch (Exception e) {
+        }
+        List<Object[]> list = tkDao.getDTTungNgayTheoThang(year, month);
+
+        for (Object[] a : list) {
+            model.addRow(a);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -83,14 +186,14 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         chartPie1 = new com.GUI.Chart.ChartPie.ChartPie();
         chartLine1 = new com.GUI.Chart.ChartLine.ChartLine();
         jPanel2 = new javax.swing.JPanel();
-        barChart2 = new com.GUI.Chart.BarChart.BarChart();
+        jpanelTKNam = new javax.swing.JPanel();
+        cboNam = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new com.GUI.swing.Table();
+        tblDTTungNgayTheoThang = new com.GUI.swing.Table();
+        jLabel3 = new javax.swing.JLabel();
+        cboThang = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -132,13 +235,37 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        jpanelTKNam.setLayout(new java.awt.BorderLayout());
+
+        cboNam.setBackground(new java.awt.Color(224, 224, 224));
+        cboNam.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
+        cboNam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboNamItemStateChanged(evt);
+            }
+        });
+        cboNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNamActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("CHỌN NĂM");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("CHỌN THÁNG");
-
-        table1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDTTungNgayTheoThang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -158,78 +285,24 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
                 "Ngày", "Vé", "Dịch vụ", "Tổng ngày"
             }
         ));
-        jScrollPane1.setViewportView(table1);
+        jScrollPane1.setViewportView(tblDTTungNgayTheoThang);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("CHỌN THÁNG");
+
+        cboThang.setBackground(new java.awt.Color(224, 224, 224));
+        cboThang.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
+        cboThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboThangActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton2.setText("Xuất báo báo");
         jButton2.setBorder(null);
-
-        jComboBox1.setBackground(new java.awt.Color(224, 224, 224));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jComboBox4.setBackground(new java.awt.Color(224, 224, 224));
-        jComboBox4.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(barChart2, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(3, 3, 3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox4))
-                        .addGap(19, 19, 19)
-                        .addComponent(barChart2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -238,7 +311,27 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jpanelTKNam, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -247,34 +340,57 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cboThang)
+                                .addGap(18, 18, 18)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboNam)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jpanelTKNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
+        thongKeDTTungNgayTheoThang();
+    }//GEN-LAST:event_cboThangActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    private void cboNamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboNamItemStateChanged
+
+    }//GEN-LAST:event_cboNamItemStateChanged
+
+    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
+        thongKeDTChonNam();
+        thongKeDTTungNgayTheoThang();
+    }//GEN-LAST:event_cboNamActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.Chart.BarChart.BarChart barChart1;
-    private com.GUI.Chart.BarChart.BarChart barChart2;
+    private javax.swing.JComboBox<String> cboNam;
+    private javax.swing.JComboBox<String> cboThang;
     private com.GUI.Chart.ChartLine.ChartLine chartLine1;
     private com.GUI.Chart.ChartPie.ChartPie chartPie1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.GUI.swing.Table table1;
+    private javax.swing.JPanel jpanelTKNam;
+    private com.GUI.swing.Table tblDTTungNgayTheoThang;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,7 +38,16 @@ public class BarChart extends javax.swing.JPanel {
                }
         });
     }
-    
+    public void removeLegend(){
+        if(legends.size()>0){
+            legends.removeAll(legends);
+        }
+    }
+    public void removeData(){
+        if(models.size()>0){
+            models.removeAll(models);
+        }
+    }
     public void addLegend(String name, Color color){
         ModelLegend data = new ModelLegend(name,color);
         legends.add(data);

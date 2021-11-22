@@ -26,7 +26,7 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
     String select_All_Sql = "Select * from [HoaDon] where hide = 0";
     String select_sql_byID = "Select * from [HoaDon] WHERE [MaHoaDon] = ? and hide = 0";
     String select_newHD = "Select top(1) MaHoaDon from [HoaDon] order by cast(SUBSTRING(MaHoaDon,3,len(MaHoaDon)) as int) desc";
-
+    String select_year = " select distinct(year(ngaylap)) from HoaDon";
 
     @Override
     public void insert(HoaDon entity) {
@@ -92,8 +92,15 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
         }
         return null;
     }
-    public List<HoaDon> selectByMaHDFromHDCT(String id) {
-        String sql = "SELECT * FROM HoaDon WHERE MaHoaDon = ?";
-        return this.selectBySql(sql, id);
+    public List<Integer> selectYear(){
+          List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(select_year);
+            while(rs.next()) {
+               list.add(rs.getInt(1));
+            }
+        } catch (Exception e) {
+        }
+        return list;        
     }
 }
