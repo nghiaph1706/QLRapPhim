@@ -15,7 +15,9 @@ import java.util.logging.Logger;
 
 public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
 
-    String insertSqlVe = "INSERT INTO [HoaDonChiTiet]([MaVe],[GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) VALUES (?,?,?,?,?,?)";
+    String insertSqlVe = "INSERT INTO [HoaDonChiTiet]([MaVe],[GiaTien],"
+            + "                       [SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) "
+            + "                       VALUES (?,?,?,?,?,?)";
     String insertSqlDichVu = "INSERT INTO [HoaDonChiTiet]([MaDichVu],"
             + "               [GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) "
             + "               VALUES (?,?,?,?,?,?)";
@@ -24,7 +26,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
             + "                                    [HIDE] = ? WHERE [MaHoaDonChiTiet] = ?";
     String deleteSql = "UPDATE [HoaDonChiTiet] SET [HIDE] = 1 WHERE [MaHoaDonChiTiet] = ?";
     String select_All_Sql = "Select * from [HoaDonChiTiet] where hide = 0";
-    String select_sql_byID = "Select * from [HoaDonChiTiet] WHERE [MaHoaDon] = ? and hide = 0 ORDER BY MaHoaDon ASC";
+    String select_sql_byID = "Select * from [HoaDonChiTiet] WHERE [MaHoaDon] = ? and hide = 0";
 
     @Override
     public void insert(HDCT entity) {
@@ -81,7 +83,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         return list;
     }
     public void insertVe(HDCT entity) {
-        XJdbc.update(insertSqlVe,entity.getMaDichVu(),entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
+        XJdbc.update(insertSqlDichVu,entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
     }
     public void insertDichVu(HDCT entity) {
         XJdbc.update(insertSqlDichVu, entity.getMaDichVu(),entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
@@ -89,19 +91,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
     public List<HDCT> selectByID(String id) {
         return this.selectBySql(select_sql_byID, id);
     }
-    public List<String> selectMaHD()
-    {
-        String sql = "SELECT MaHoaDon FROM HoaDonChiTiet GROUP BY MaHoaDon";
-        List<String> list = new ArrayList<>();
-        try {
-            ResultSet rs = XJdbc.query(sql);
-            while(rs.next()) {
-                list.add(rs.getString("MaHoaDon"));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+
 }
 
 /*

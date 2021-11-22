@@ -35,29 +35,22 @@ public class BanVe_Form extends javax.swing.JPanel {
     private HDCTDAO hdctDAO = new HDCTDAO();
     public static String MaPhong;
     public static String maHDNow;
-    public static String MaHDTuHDCT;
     private String[] header = {
-        "Mã vé/DV", "Mã hóa đơn"
+        "Mã vé/DV", "Giá tiền", "Số lượng", "Thành tiền", "Mã hóa đơn"
     };
     private DefaultTableModel model = new DefaultTableModel(header, 0);
     public BanVe_Form() {
         initComponents();
         init();
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
-        
-        
-        HoaDon hd = new HoaDon();
-        hd.setHIDE(false);
-        hdDAO.insert(hd);
-        maHDNow = hdDAO.selectNewHD();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHoaDonCT = new com.GUI.swing.Table();
-        btnXuatHD = new com.GUI.swing.Button();
+        tblHoaDon = new com.GUI.swing.Table();
+        btnThanhToan = new com.GUI.swing.Button();
         jLabel1 = new javax.swing.JLabel();
         cboPhim = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -75,16 +68,16 @@ public class BanVe_Form extends javax.swing.JPanel {
         spnCombo2 = new javax.swing.JSpinner();
         btnXuLy = new com.GUI.swing.Button();
         btnThemDichVu = new com.GUI.swing.Button();
+        jLabel8 = new javax.swing.JLabel();
+        cboPTThanhToan = new javax.swing.JComboBox<>();
         btnChuyen = new com.GUI.swing.Button();
         txtMaKHTT = new com.GUI.swing.TextField();
         cboPhongChieu = new javax.swing.JComboBox<>();
         lblCheckMa = new javax.swing.JLabel();
-        cboMaHD = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        tblHoaDonCT.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,21 +97,16 @@ public class BanVe_Form extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblHoaDonCT.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
-        tblHoaDonCT.setSelectionBackground(new java.awt.Color(255, 51, 51));
-        tblHoaDonCT.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        tblHoaDonCT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblHoaDonCTMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblHoaDonCT);
+        tblHoaDon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        tblHoaDon.setSelectionBackground(new java.awt.Color(255, 51, 51));
+        tblHoaDon.setSelectionForeground(new java.awt.Color(51, 51, 51));
+        jScrollPane1.setViewportView(tblHoaDon);
 
-        btnXuatHD.setForeground(new java.awt.Color(255, 255, 255));
-        btnXuatHD.setText("XUẤT HÓA ĐƠN");
-        btnXuatHD.addActionListener(new java.awt.event.ActionListener() {
+        btnThanhToan.setForeground(new java.awt.Color(255, 255, 255));
+        btnThanhToan.setText("THANH TOÁN");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXuatHDActionPerformed(evt);
+                btnThanhToanActionPerformed(evt);
             }
         });
 
@@ -249,6 +237,15 @@ public class BanVe_Form extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel8.setText("PHƯƠNG THỨC THANH TOÁN: ");
+
+        cboPTThanhToan.setBackground(new java.awt.Color(224, 224, 224));
+        cboPTThanhToan.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        cboPTThanhToan.setForeground(new java.awt.Color(51, 51, 51));
+        cboPTThanhToan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
+
         btnChuyen.setForeground(new java.awt.Color(255, 255, 255));
         btnChuyen.setText(">");
         btnChuyen.addActionListener(new java.awt.event.ActionListener() {
@@ -271,21 +268,6 @@ public class BanVe_Form extends javax.swing.JPanel {
         lblCheckMa.setForeground(new java.awt.Color(51, 51, 51));
         lblCheckMa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCheckMa.setText("jLabel9");
-
-        cboMaHD.setBackground(new java.awt.Color(224, 224, 224));
-        cboMaHD.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        cboMaHD.setForeground(new java.awt.Color(51, 51, 51));
-        cboMaHD.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
-        cboMaHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboMaHDActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Mã hóa đơn");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -320,20 +302,18 @@ public class BanVe_Form extends javax.swing.JPanel {
                                 .addGap(166, 166, 166)
                                 .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(232, 232, 232))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(213, 213, 213))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboPTThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8))
+                            .addGap(31, 31, 31))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(232, 232, 232)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,18 +343,17 @@ public class BanVe_Form extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(panelDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboMaHD)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboPTThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -397,36 +376,25 @@ public class BanVe_Form extends javax.swing.JPanel {
         xuLyDuLieu();
     }//GEN-LAST:event_btnXuLyActionPerformed
 
-    private void btnXuatHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHDActionPerformed
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        Main.main.showForm(Main.hoaDon);
-    }//GEN-LAST:event_btnXuatHDActionPerformed
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnChuyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenActionPerformed
-        String tmp = cboPhongChieu.getSelectedItem().toString().trim();
-        MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
-        System.out.println(MaPhong);
-        Main.main.showForm(new ChonGhe_Form());
+        // TODO add your handling code here      
+        Main.main.showForm(Main.chonGhe);
     }//GEN-LAST:event_btnChuyenActionPerformed
 
     private void cboPhongChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongChieuActionPerformed
 
-        
+        String tmp = cboPhim.getSelectedItem().toString().trim();
+        MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
     }//GEN-LAST:event_cboPhongChieuActionPerformed
 
     private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed
         // TODO add your handling code here:
         comboBoxPhongChieu();
     }//GEN-LAST:event_cboPhimActionPerformed
-
-    private void tblHoaDonCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonCTMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblHoaDonCTMouseClicked
-
-    private void cboMaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMaHDActionPerformed
-        // TODO add your handling code here:
-        loadDatabaseFromMaHD();
-    }//GEN-LAST:event_cboMaHDActionPerformed
 
     // MAIN FUNCTIONAL
     
@@ -438,38 +406,24 @@ public class BanVe_Form extends javax.swing.JPanel {
         spnCombo1.setToolTipText("COMBO1");
         spnCombo2.setToolTipText("COMBO2");
         txtMaKHTT.setLabelText("Mã KHTT");
-        tblHoaDonCT.setModel(model);
+        tblHoaDon.setModel(model);
         cboPhieuGG.setEnabled(false);
         checkDichVu(false);
         comboBoxPhim();
         comboBoxPhieuGiamGia();
-        comboBoxMaHoaDon();
+        comboBoxThanhToan();
     }
-    public void loadDatabase()
+    private void loadDatabase()
     {
         model.setRowCount(0);
         try {
-            List<HDCT> list = hdctDAO.selectByID(maHDNow);
+            List<HDCT> list = hdctDAO.selectAll();
             for(HDCT hdct : list) {
                 Object[] row = {
                     hdct.getMaDichVu(),
-                    hdct.getMaHoaDon()
-                };
-                model.addRow(row);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void loadDatabaseFromMaHD()
-    {
-        model.setRowCount(0);
-        try {
-            MaHDTuHDCT = cboMaHD.getSelectedItem().toString();
-            List<HDCT> list = hdctDAO.selectByID(MaHDTuHDCT);
-            for(HDCT hdct : list) {
-                Object[] row = {
-                    hdct.getMaDichVu(),
+                    hdct.getGiaTien(),
+                    hdct.getSoLuong(),
+                    hdct.getThanhTien(),
                     hdct.getMaHoaDon()
                 };
                 model.addRow(row);
@@ -491,6 +445,10 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void insertDichVu()
     {
         HDCT hdct = new HDCT();
+        HoaDon hd = new HoaDon();
+        hd.setHIDE(false);
+        hdDAO.insert(hd);
+        maHDNow = hdDAO.selectNewHD();
         
         int bap = (int) spnBap.getValue();
         int nuoc = (int) spnNuoc.getValue();
@@ -561,51 +519,35 @@ public class BanVe_Form extends javax.swing.JPanel {
         }
     }
     private VeDAO vDAO = new VeDAO();
-    public void insertMaVe()
-    {   
-        
+    private HDCT insertMaVe()
+    {
         HDCT hdct = new HDCT();
-        
-        String tmp = cboPhim.getSelectedItem().toString();
-        String maphim = tmp.substring(0, tmp.indexOf("-")).trim();
-        tmp = cboPhongChieu.getSelectedItem().toString();
-        String giochieu = tmp.substring(3).trim();
-        String malc = lcDAO.selectLCbyTT(maphim, MaPhong, giochieu);
-        System.out.println(malc);
-        
-        for (Ghe ghe : ChonGhe_Form.listGheSelected) {
-            Ve ve = new Ve();
-            ve.setMaghe(ghe.getMaGhe());
-            ve.setMalichchieu(malc);
-            ve.setMaphong(MaPhong);
-            ve.setMaphim(maphim);
-            vDAO.insert(ve);
+        String maVe = "";
+        String lch = (String) cboPhim.getSelectedItem();
+        String maPhim = lch.substring(0, lch.indexOf("-")).trim();
+        List<Ve> listVe = vDAO.selectByMaPhim(maPhim);
+        for(Ve v : listVe) {
+            maVe = v.getMave();
         }
         
-        
-        int count = ChonGhe_Form.listGheSelected.size();
-        System.out.println(count);
-        List<Ve> velList = vDAO.selectNewVe(count);
-        
-        for (int i = 0; i < velList.size(); i++) {
-            Ve ve =velList.get(i);
-            hdct.setMaDichVu(ve.getMave());
-            System.out.println(ve.getMave());
-            hdct.setGiaTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
-            hdct.setSoLuong(1);
-            hdct.setThanhTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
-            hdct.setHIDE(false);
-            hdct.setMaHoaDon(maHDNow);
-            hdctDAO.insertVe(hdct);
-        }
+        hdct.setGiaTien(WIDTH);
+        hdct.setSoLuong(1);
+        hdct.setThanhTien(HEIGHT);
+        hdct.setMaHoaDon(MaPhong);
+        hdct.setHIDE(true);
+        return hdct;
     }
     
     // SUB-FUNCTIONAL
-
+    private void comboBoxThanhToan()
+    {
+        cboPTThanhToan.addItem("Thanh toán bằng tiền mặt");
+        cboPTThanhToan.addItem("Thanh toán bằng thẻ tín dụng");
+        cboPTThanhToan.addItem("Thanh toán bằng MOMO");
+    }
     private void comboBoxPhim()
     {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhim.getModel();
-        cboModel.removeAllElements();
         List<LichChieu> list = lcDAO.selectPhimTheoLichChieu();
         
         for(LichChieu lc : list) {
@@ -628,16 +570,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void comboBoxPhieuGiamGia()
     {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
-        cboModel.removeAllElements();
         List<String> list = kmDAO.listKhuyenMai();
-        for(String km : list)
-            cboModel.addElement(km);
-    }
-    private void comboBoxMaHoaDon()
-    {
-        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboMaHD.getModel();
-        cboModel.removeAllElements();
-        List<String> list = hdctDAO.selectMaHD();
         for(String km : list)
             cboModel.addElement(km);
     }
@@ -749,10 +682,10 @@ public class BanVe_Form extends javax.swing.JPanel {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnChuyen;
+    private com.GUI.swing.Button btnThanhToan;
     private com.GUI.swing.Button btnThemDichVu;
     private com.GUI.swing.Button btnXuLy;
-    private com.GUI.swing.Button btnXuatHD;
-    private javax.swing.JComboBox<String> cboMaHD;
+    private javax.swing.JComboBox<String> cboPTThanhToan;
     private javax.swing.JComboBox<String> cboPhieuGG;
     private javax.swing.JComboBox<String> cboPhim;
     private javax.swing.JComboBox<String> cboPhongChieu;
@@ -772,7 +705,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private javax.swing.JSpinner spnCombo1;
     private javax.swing.JSpinner spnCombo2;
     private javax.swing.JSpinner spnNuoc;
-    private com.GUI.swing.Table tblHoaDonCT;
+    private com.GUI.swing.Table tblHoaDon;
     private com.GUI.swing.TextField txtMaKHTT;
     // End of variables declaration//GEN-END:variables
 }

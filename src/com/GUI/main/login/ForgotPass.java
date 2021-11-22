@@ -1,24 +1,9 @@
 package com.GUI.main.login;
 
 
-import DAO.NhanVienDAO;
-import Entity.NhanVien;
-import Utilities.Auth;
-import Utilities.MsgBox;
 import java.awt.Color;
-import java.awt.Font;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -30,8 +15,6 @@ public class ForgotPass extends javax.swing.JFrame {
 
     ForgotPass forgotPass;
     Loading loading = new Loading();
-    String code = "";
-    NhanVienDAO nvdao = new NhanVienDAO();
     
     public ForgotPass() {
         initComponents();
@@ -73,89 +56,6 @@ public class ForgotPass extends javax.swing.JFrame {
                 }
             }
         }.start();
-    }
-    
-    void sendCode() {
-        try {
-            Properties p = new Properties();
-            p.put("mail.smtp.auth", "true");
-            p.put("mail.smtp.starttls.enable", "true");
-            p.put("mail.smtp.host", "smtp.gmail.com");
-            p.put("mail.smtp.port", 587);
-            String accountName = "cflcinema.nhom02@gmail.com";
-            String accountPassword = "CFLnhom02";
-            Session s = Session.getInstance(p,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(accountName, accountPassword);
-                }
-            });
-            String from = "cflcinema.nhom02@gmail.com";
-            String to = txtEmail.getText().trim();
-            String subject = "Xác nhận đổi mật khẩu";
-
-            for (int i = 0; i < 6; i++) {
-                code += String.valueOf(new Random().nextInt(10));
-            }
-            System.out.println(code);
-
-            String body = "Mã xác nhận của bạn là: " + code;
-
-            Message msg = new MimeMessage(s);
-            msg.setFrom(new InternetAddress(from));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            msg.setSubject(subject);
-            msg.setText(body);
-            Transport.send(msg);
-        } catch (MessagingException ex) {
-            MsgBox.alert(this, "Không thể gửi Code. Vui lòng kiểm tra lại Email.");
-            throw new RuntimeException(ex);
-        }
-    }
-
-    void checkUser(String manv, String email) throws InterruptedException {
-        boolean check = false;
-        List<NhanVien> list = nvdao.selectAll();
-
-        for (NhanVien nv : list) {
-            if (manv.equals(nv.getMaNhanVien()) && email.equals(nv.getEmail())) {
-                check = true;
-                Auth.user = nv;
-            }
-        }
-
-        if (check) {
-            panelEnterMail.setVisible(false);
-            panelEnterCode.setVisible(true);
-            sendCode();
-            showLoading(forgotPass,"Nhập code đã gửi vào Email.");
-        } else {
-            showLoading(forgotPass,"Mã nhân viên nhập không khớp với Email.");
-        }
-    }
-
-    void checkCode(String codeType) throws InterruptedException {
-        if (codeType.equalsIgnoreCase(code)) {
-            panelEnterCode.setVisible(false);
-            panelEnterNewPass.setVisible(true);
-            showLoading(forgotPass,"");
-        } else {
-            showLoading(forgotPass,"Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
-            txtCode.setText("");
-        }
-    }
-
-    void doiMatKhau(String matKhauMoi, String xacNhan) throws InterruptedException {
-        if (!matKhauMoi.equalsIgnoreCase(xacNhan)) {
-            showLoading(new Login(),"Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
-            pwdNewPass.setText("");
-            pwdConfirmPass.setText("");
-        } else {
-            Auth.user.setMatKhau(xacNhan);
-            nvdao.update(Auth.user);
-            Auth.clear();
-            showLoading(new Login(),"Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
-        }
     }
 
     /**
@@ -292,7 +192,7 @@ public class ForgotPass extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel6.setText("Verification code");
+        jLabel6.setText("Code");
 
         btnNext1.setBorder(null);
         btnNext1.setForeground(new java.awt.Color(255, 255, 255));
@@ -306,7 +206,6 @@ public class ForgotPass extends javax.swing.JFrame {
 
         txtCode.setBackground(new java.awt.Color(204, 204, 204));
         txtCode.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        txtCode.setLabelText("Verification code");
 
         btnCancel1.setBorder(null);
         btnCancel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -320,19 +219,11 @@ public class ForgotPass extends javax.swing.JFrame {
 
         lblResentCode.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lblResentCode.setForeground(new java.awt.Color(255, 51, 51));
-        lblResentCode.setText("Did not receive the verification code. Click here.");
+        lblResentCode.setText("Không nhan duoc code. Nhan vao day.");
         lblResentCode.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblResentCode.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                lblResentCodeMouseMoved(evt);
-            }
-        });
         lblResentCode.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblResentCodeMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblResentCodeMouseExited(evt);
             }
         });
 
@@ -344,13 +235,14 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(panelEnterCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEnterCodeLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap(264, Short.MAX_VALUE))
+                        .addGroup(panelEnterCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(lblResentCode, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelEnterCodeLayout.createSequentialGroup()
-                        .addGroup(panelEnterCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblResentCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
-                            .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelEnterCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                            .addComponent(txtCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 81, Short.MAX_VALUE))))
             .addGroup(panelEnterCodeLayout.createSequentialGroup()
                 .addGap(127, 127, 127)
@@ -418,11 +310,9 @@ public class ForgotPass extends javax.swing.JFrame {
 
         pwdNewPass.setBackground(new java.awt.Color(204, 204, 204));
         pwdNewPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        pwdNewPass.setLabelText("New Password");
 
         pwdConfirmPass.setBackground(new java.awt.Color(204, 204, 204));
         pwdConfirmPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        pwdConfirmPass.setLabelText("Confirm");
 
         javax.swing.GroupLayout panelEnterNewPassLayout = new javax.swing.GroupLayout(panelEnterNewPass);
         panelEnterNewPass.setLayout(panelEnterNewPassLayout);
@@ -478,7 +368,6 @@ public class ForgotPass extends javax.swing.JFrame {
         dispose();
         try {
             showLoading(new Login(), "");
-            Auth.clear();
         } catch (InterruptedException ex) {
             Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -488,7 +377,6 @@ public class ForgotPass extends javax.swing.JFrame {
         dispose();
         try {
             showLoading(new Login(), "");
-            Auth.clear();
         } catch (InterruptedException ex) {
             Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -498,18 +386,28 @@ public class ForgotPass extends javax.swing.JFrame {
         dispose();
         try {
             showLoading(new Login(), "");
-            Auth.clear();
         } catch (InterruptedException ex) {
             Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCancel2ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        try {
-            checkUser(txtUser.getText().trim(), txtEmail.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+        if (txtUser.getText().equals("admin") && txtEmail.getText().equals("admin@")) {
+            try {
+                panelEnterMail.setVisible(false);
+                panelEnterCode.setVisible(true);
+                showLoading(forgotPass,"");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                showLoading(forgotPass,"oken't");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void lblResentCodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseClicked
@@ -521,30 +419,40 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_lblResentCodeMouseClicked
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
-        try {
-            checkCode(txtCode.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if (txtCode.getText().equals("123")) {
+            panelEnterCode.setVisible(false);
+            panelEnterNewPass.setVisible(true);
+            try {
+                showLoading(forgotPass,"");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                showLoading(forgotPass,"oken't");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnNext1ActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        try {
-            doiMatKhau(pwdConfirmPass.getText().trim(), pwdNewPass.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if (pwdConfirmPass.getText().equals(pwdNewPass.getText())) {
+            try {
+                showLoading(new Login(),"oke");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                showLoading(new Login(),"oken't");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnChangeActionPerformed
-
-    private void lblResentCodeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseMoved
-        lblResentCode.setForeground(Color.red);
-        lblResentCode.setFont(new Font("Tahoma",Font.BOLD | Font.ITALIC,14));
-    }//GEN-LAST:event_lblResentCodeMouseMoved
-
-    private void lblResentCodeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseExited
-        lblResentCode.setForeground(new Color(255,51,51));
-        lblResentCode.setFont(new Font("Tahoma",Font.PLAIN | Font.ITALIC,14));
-    }//GEN-LAST:event_lblResentCodeMouseExited
 
     /**
      * @param args the command line arguments

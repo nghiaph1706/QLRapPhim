@@ -290,9 +290,6 @@ public class ChonGhe_Form extends javax.swing.JPanel {
             giaTienGhe = ghe.getGiaGhe();
             System.out.println(ghe.getMaGhe() + " " + giaTienGhe);
         }
-        Main.banVe.insertMaVe();
-        Main.banVe.loadDatabase();
-        Main.banVe.loadDatabaseFromMaHD();
         Main.main.showForm(Main.banVe);
     }//GEN-LAST:event_buttonBadges2ActionPerformed
 

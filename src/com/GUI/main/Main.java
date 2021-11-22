@@ -7,7 +7,6 @@ import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
 import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.form.BanVe.ChonGhe_Form;
-import com.GUI.form.BanVe.HoaDon_Form;
 import com.GUI.form.DashBoard;
 import com.GUI.form.MainForm;
 import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
@@ -38,7 +37,7 @@ public class Main extends javax.swing.JFrame {
     public static MainForm main;
     private Animator animator;
     public static BanVe_Form banVe = new BanVe_Form();
-    public static HoaDon_Form hoaDon = new HoaDon_Form();
+    public static ChonGhe_Form chonGhe = new ChonGhe_Form();
     public static List<Ghe> listGhe = new ArrayList<>();
     public static GheDAO ghDAO = new GheDAO();
 
@@ -58,14 +57,13 @@ public class Main extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
+                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     main.showForm(new DashBoard());
                 } if (menuIndex == 1) {
                     main.showForm(banVe);
                     if (subMenuIndex == 0) {
-                        main.showForm(new ChonGhe_Form());
-                    } else if(subMenuIndex == 1){
-                        main.showForm(hoaDon);
+                        main.showForm(chonGhe);
                     }
                 } else if (menuIndex == 2) {
                     if (subMenuIndex == 0) {

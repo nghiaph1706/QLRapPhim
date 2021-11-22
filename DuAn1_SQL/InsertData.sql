@@ -17,12 +17,12 @@ INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUE
 (N'Đào Đức Nguyên','0990090905',1,0,'123',0);
 GO
 
-INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES
-(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','MatBiec.jpg','NV1',0),
-(N'AVENGER SECOND GAME','11-17-2021','11-20-2021',N'VIỆT NAM','TL2','2D','Avengers.jpg','NV2',0),
-(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','AntMain.jpg','NV3',0),
-(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NguoiNhen.jpg','NV4',0),
-(N'AVENGER','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','avg.jpg','NV1',0);
+INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
+(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','NV1',0),
+(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','NV2',0),
+(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','NV3',0),
+(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NV4',0),
+(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','NV1',0);
 GO
 
 INSERT INTO [Phong]([HIDE]) VALUES 
@@ -132,15 +132,5 @@ SELECT * FROM Ghe WHERE MaPhong = 'P1' ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBST
 
 SELECT COUNT(Ghe.MaGhe) FROM Ghe WHERE MaPhong = 'P1' and TrangThai = 0
 
-Select top(1) MaHoaDon from [HoaDon] order by cast(SUBSTRING(MaHoaDon,3,len(MaHoaDon)) as int) desc
 
-select *from HoaDonChiTiet where MaHoaDon = 'HD1'
-
-select * from LichChieu
-select malichchieu from LichChieu where MaPhim = 'MP1' and MaPhong = 'P1' and GioChieu = '08:30'
-
-select top(2) * from ve order by id desc
-select *from HoaDonChiTiet
-select *from HoaDon
-
-select giadichvu from DichVu where MaDichVu = 'BAP' and hide = 0
+SELECT * FROM HoaDon
