@@ -1,10 +1,22 @@
 package com.GUI.form.NhanVien;
 
+import DAO.NhanVienDAO;
+import Entity.NhanVien;
+import Utilities.Option;
+import Utilities.ValidateCheck;
+import Utilities.XImage;
+
 /**
  *
  * @author Admin
  */
 public class ChangePassForm extends javax.swing.JFrame {
+
+    private ValidateCheck vld = new ValidateCheck();
+    private XImage xImage = new XImage();
+    private NhanVienDAO nvdao = new NhanVienDAO();
+    private Option dialog = new Option();
+    private String pass = "";
 
     /**
      * Creates new form ChangePassForm
@@ -24,60 +36,65 @@ public class ChangePassForm extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new com.GUI.swing.PanelBorder();
-        imageAvatar1 = new com.GUI.swing.ImageAvatar();
-        jLabel1 = new javax.swing.JLabel();
-        passwordField1 = new com.GUI.swing.PasswordField();
-        passwordField2 = new com.GUI.swing.PasswordField();
-        passwordField3 = new com.GUI.swing.PasswordField();
-        button1 = new com.GUI.swing.Button();
-        button2 = new com.GUI.swing.Button();
-        jLabel2 = new javax.swing.JLabel();
+        lblavatar = new com.GUI.swing.ImageAvatar();
+        txttennhanvien = new javax.swing.JLabel();
+        txtoldpass = new com.GUI.swing.PasswordField();
+        txtnewpass1 = new com.GUI.swing.PasswordField();
+        txtnewpass2 = new com.GUI.swing.PasswordField();
+        btnchangepass = new com.GUI.swing.Button();
+        btncancel = new com.GUI.swing.Button();
+        txtmanhanvien = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(56, 56, 56));
 
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
+        lblavatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tên Nhân Viên");
+        txttennhanvien.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
+        txttennhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        txttennhanvien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txttennhanvien.setText("Tên Nhân Viên");
 
-        passwordField1.setText("passwordField1");
-        passwordField1.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
-        passwordField1.setLabelText("Old PassWord");
+        txtoldpass.setText("passwordField1");
+        txtoldpass.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
+        txtoldpass.setLabelText("Old PassWord");
 
-        passwordField2.setText("passwordField1");
-        passwordField2.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
-        passwordField2.setLabelText("Old PassWord");
+        txtnewpass1.setText("passwordField1");
+        txtnewpass1.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
+        txtnewpass1.setLabelText("New PassWord");
 
-        passwordField3.setText("passwordField1");
-        passwordField3.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
-        passwordField3.setLabelText("Old PassWord");
+        txtnewpass2.setText("passwordField1");
+        txtnewpass2.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
+        txtnewpass2.setLabelText("Confirm PassWord");
 
-        button1.setBackground(new java.awt.Color(255, 0, 0));
-        button1.setBorder(null);
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Đổi Mật Khẩu");
-        button1.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
-
-        button2.setBackground(new java.awt.Color(255, 0, 0));
-        button2.setBorder(null);
-        button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("Hủy");
-        button2.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        btnchangepass.setBackground(new java.awt.Color(255, 0, 0));
+        btnchangepass.setBorder(null);
+        btnchangepass.setForeground(new java.awt.Color(255, 255, 255));
+        btnchangepass.setText("Đổi Mật Khẩu");
+        btnchangepass.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
+        btnchangepass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                btnchangepassActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Mã Nhân Viên");
+        btncancel.setBackground(new java.awt.Color(255, 0, 0));
+        btncancel.setBorder(null);
+        btncancel.setForeground(new java.awt.Color(255, 255, 255));
+        btncancel.setText("Hủy");
+        btncancel.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
+        btncancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelActionPerformed(evt);
+            }
+        });
+
+        txtmanhanvien.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
+        txtmanhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        txtmanhanvien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtmanhanvien.setText("Mã Nhân Viên");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -87,47 +104,47 @@ public class ChangePassForm extends javax.swing.JFrame {
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtoldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(passwordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtnewpass1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(passwordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtnewpass2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelBorder1Layout.createSequentialGroup()
-                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnchangepass, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(59, 59, 59)
-                                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblavatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtmanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txttennhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(39, 39, 39))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblavatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(jLabel2)
+                .addComponent(txtmanhanvien)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(txttennhanvien)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtoldpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtnewpass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtnewpass2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnchangepass, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
         );
 
@@ -145,10 +162,15 @@ public class ChangePassForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void btncancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_btncancelActionPerformed
+
+    private void btnchangepassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchangepassActionPerformed
+        // TODO add your handling code here:
+        ChangePass();
+    }//GEN-LAST:event_btnchangepassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,14 +208,52 @@ public class ChangePassForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.GUI.swing.Button button1;
-    private com.GUI.swing.Button button2;
-    private com.GUI.swing.ImageAvatar imageAvatar1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private com.GUI.swing.Button btncancel;
+    private com.GUI.swing.Button btnchangepass;
+    private com.GUI.swing.ImageAvatar lblavatar;
     private com.GUI.swing.PanelBorder panelBorder1;
-    private com.GUI.swing.PasswordField passwordField1;
-    private com.GUI.swing.PasswordField passwordField2;
-    private com.GUI.swing.PasswordField passwordField3;
+    private javax.swing.JLabel txtmanhanvien;
+    private com.GUI.swing.PasswordField txtnewpass1;
+    private com.GUI.swing.PasswordField txtnewpass2;
+    private com.GUI.swing.PasswordField txtoldpass;
+    private javax.swing.JLabel txttennhanvien;
     // End of variables declaration//GEN-END:variables
+    public void initEntity(String imglink, String manv, String tennv) {
+        xImage.ReadAndScaleIMG(lblavatar, "/imageNhanVien/" + imglink, lblavatar.getWidth() - 1, lblavatar.getHeight() - 1);
+        txtmanhanvien.setText(manv);
+        txttennhanvien.setText(tennv);
+    }
+
+    private void getpass() {
+
+    }
+
+    private boolean validatepass() {
+        String oldpass = txtoldpass.getText();
+        String newpass1 = txtnewpass1.getText();
+        String newpass2 = txtnewpass2.getText();
+        if (vld.CheckString("Mật Khẩu Cũ", oldpass, 30, false)
+                && vld.CheckString("Mật Khẩu Mới", oldpass, 30, false)
+                && vld.CheckString("Nhập Lại Mật Khẩu Mới", oldpass, 30, false)
+                && vld.CheckDulicase2("Mật Khẩu Cũ", oldpass, "Mật Khẩu Của Bạn\nVui Lòng Nhập Lại!", pass)
+                && vld.CheckDulicase2("Mật Khẩu Mới", newpass1, "Nhập Lại Mật Khẩu Mới", newpass2)) {
+            return true;
+        }
+        return false;
+    }
+
+    private void ChangePass() {
+        if (validatepass()) {
+            try {
+                NhanVien pass = new NhanVien();
+                pass.setMaNhanVien(txtmanhanvien.getText());
+                pass.setMatKhau("123");
+                nvdao.UpdatePassword(pass);
+                dialog.Done(this, "Đổi Mật Khẩu Thành Công", "Hoàn Thành");
+            } catch (Exception e) {
+                dialog.Error(this, "Đổi Mật Khẩu Không Thành Công\n" + e, "Lỗi");
+            }
+        }
+    }
+
 }

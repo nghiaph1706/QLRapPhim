@@ -1,19 +1,20 @@
 /* @author nghiacubu */
-
-
 package Entity;
 
-
 public class NhanVien {
+
     private String MaNhanVien;
     private String HoTen;
     private String SDT;
-    private String Email;
     private boolean GioiTinh;
     private boolean ChucVu;
     private String MatKhau;
     private String Hinh;
+    private String GhiChu;
     private boolean HIDE;
+
+    public NhanVien() {
+    }
 
     public String getMaNhanVien() {
         return MaNhanVien;
@@ -39,16 +40,19 @@ public class NhanVien {
         this.SDT = SDT;
     }
 
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
     public boolean isGioiTinh() {
         return GioiTinh;
+    }
+
+    public int gioitinh() {
+        return GioiTinh ? 1 : 0;
+    }
+
+    public String getGioiTinh() {
+        if (GioiTinh) {
+            return "Nam";
+        }
+        return "Nữ";
     }
 
     public void setGioiTinh(boolean GioiTinh) {
@@ -57,6 +61,17 @@ public class NhanVien {
 
     public boolean isChucVu() {
         return ChucVu;
+    }
+
+    public int chucvu() {
+        return ChucVu ? 1 : 0;
+    }
+
+    public String getChucVu() {
+        if (ChucVu) {
+            return "Quản Lý";
+        }
+        return "Nhân Viên";
     }
 
     public void setChucVu(boolean ChucVu) {
@@ -79,6 +94,14 @@ public class NhanVien {
         this.Hinh = Hinh;
     }
 
+    public String getGhiChu() {
+        return GhiChu;
+    }
+
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
+    }
+
     public boolean isHIDE() {
         return HIDE;
     }
@@ -87,20 +110,4 @@ public class NhanVien {
         this.HIDE = HIDE;
     }
 
-    public NhanVien(String MaNhanVien, String HoTen, String SDT, String Email, boolean GioiTinh, boolean ChucVu, String MatKhau, String Hinh, boolean HIDE) {
-        this.MaNhanVien = MaNhanVien;
-        this.HoTen = HoTen;
-        this.SDT = SDT;
-        this.Email = Email;
-        this.GioiTinh = GioiTinh;
-        this.ChucVu = ChucVu;
-        this.MatKhau = MatKhau;
-        this.Hinh = Hinh;
-        this.HIDE = HIDE;
-    }
-
-    public NhanVien() {
-    }
-
-    
 }

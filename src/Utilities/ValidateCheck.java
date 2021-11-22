@@ -47,6 +47,15 @@ public class ValidateCheck implements Serializable {
         }
         return true;
     }
+    //Check Duplicase Key2
+
+    public boolean CheckDulicase2(String NameStringAfter, String string, String NameStringBefore, String string1) {
+        if (string.equals(string1)) {
+            return true;
+        }
+         JOptionPane.showMessageDialog(null, NameStringAfter + "Không Trùng Với " + NameStringBefore + "!", "Lỗi", 0);
+        return false;
+    }
 //Check String to Float 
 
     public boolean CheckFloat(String NameString, String string) {
@@ -101,4 +110,41 @@ public class ValidateCheck implements Serializable {
         JOptionPane.showMessageDialog(null, NameStringAfter + " Sau Ngày " + NameStringBefore + "!", "Lỗi", 0);
         return false;
     }
+
+//regex string
+    public boolean RegexString(String NameString, String string) {
+        if (string.matches("^[a-z A-Z]{1,50}$")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex numbers
+
+    public boolean RegexPhoneNumber(String NameString, String number) {
+        if (number.matches("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex string and number
+
+    public boolean RegexStringAndNumber(String NameString, String string) {
+        if (string.matches("[a-zA-Z_0-9]")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+//regex Email
+
+    public boolean RegexEmail(String NameString, String email) {
+        if (email.matches("^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+        return false;
+    }
+
 }
