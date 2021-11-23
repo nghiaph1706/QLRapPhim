@@ -22,6 +22,7 @@ CREATE TABLE [NhanVien] (
 	[MaNhanVien] as cast('NV'+Cast(ID as VARCHAR(10))as VARCHAR(10))  PERSISTED PRIMARY KEY,
 	[HoTen] NVARCHAR(100),
 	[SDT] VARCHAR(10),
+	[Email] VARCHAR(100),
 	[GioiTinh] BIT DEFAULT 0,
 	[ChucVu] BIT DEFAULT 0,
 	[GhiChu] nvarchar(255),
@@ -77,6 +78,7 @@ CREATE TABLE [Ghe] (
 	[LoaiGhe] BIT,
 	[GiaGhe] FLOAT,
 	[MaPhong] VARCHAR(10),
+	[GioChieu] VARCHAR(10),
 	[TrangThai] BIT DEFAULT 0,
 	PRIMARY KEY ([MaGhe],[MaPhong]),
 	CONSTRAINT [FK_Ghe.MaPhong] FOREIGN KEY ([MaPhong]) 
@@ -124,6 +126,7 @@ CREATE TABLE [HoaDon](
 	[MucGiamGia] INT,
 	[ThanhTien] FLOAT,
 	[NgayLap] DATE,
+	[TrangThai] BIT,
 	[MaNhanVien] VARCHAR(10),
 	[HIDE] BIT DEFAULT 0,
 	CONSTRAINT [FK_HoaDon.MaKM] FOREIGN KEY ([MaKM]) 

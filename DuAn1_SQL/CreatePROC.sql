@@ -21,9 +21,9 @@ as begin
 			while @j <=10
 				begin
 					if @i > 4 
-						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),1,100000, @MaPhong, 0)
+						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),1,100000, @MaPhong,null, 0)
 					else 
-						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),0,50000, @MaPhong, 0)
+						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),0,50000, @MaPhong,null, 0)
 					set @j = @j +1
 				end
 				set @j = 1
@@ -164,3 +164,22 @@ CREATE PROCEDURE SP_SUKIENDANGDIENRA @TIMENOW DATE
 		WHERE @TIMENOW BETWEEN NgayBatDau AND NgayKetThuc AND HIDE=0
 	END
 GO
+
+--nguyen
+-- Doanh thu từng tháng theo năm --------
+create PROCEDURE sp_TKDT_TungThangTheoNam (@Nam INT)
+as BEGIN
+	select month(ngaylap),sum(tongtien) from hoadon where year(ngaylap) = @nam group by month(NgayLap) 
+	 
+END
+GO
+
+-- Doanh thu từng ngày theo tháng theo năm--------
+create PROCEDURE sp_TKDT_TungNgayTheoThang(@Nam INT, @Thang INT)
+as BEGIN
+select day(ngaylap) as 'Ngay',count(mave) as 'TongVe',count(madichvu) as 'TongDichVu', sum(hoadonchitiet.thanhtien)  as 'TongTienNgay'
+from hoadonchitiet inner join hoadon on HoaDonChiTiet.MaHoaDon = HoaDon.MaHoaDon
+where month(ngaylap) = @Thang and year(ngaylap) = @Nam group by DAY(ngaylap)
+END
+GO
+

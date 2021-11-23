@@ -13,10 +13,11 @@ public class HoaDon {
     private int MucGiamGia;
     private double ThanhTien;
     private Date NgayLap;
+    private boolean TrangThai;
     private String MaNhanVien;
     private boolean HIDE;
 
-    public HoaDon(String MaHoaDon, double TongTien, String MaKM, String MaKHTT, int MucGiamGia, double ThanhTien, Date NgayLap, String MaNhanVien, boolean HIDE) {
+    public HoaDon(String MaHoaDon, double TongTien, String MaKM, String MaKHTT, int MucGiamGia, double ThanhTien, Date NgayLap, boolean TrangThai, String MaNhanVien, boolean HIDE) {
         this.MaHoaDon = MaHoaDon;
         this.TongTien = TongTien;
         this.MaKM = MaKM;
@@ -24,18 +25,15 @@ public class HoaDon {
         this.MucGiamGia = MucGiamGia;
         this.ThanhTien = ThanhTien;
         this.NgayLap = NgayLap;
+        this.TrangThai = TrangThai;
         this.MaNhanVien = MaNhanVien;
         this.HIDE = HIDE;
     }
-    
-    @Override
-    public String toString() {
-        return this.MaHoaDon;
-    }
 
     public HoaDon() {
+        
     }
-    
+
     public String getMaHoaDon() {
         return MaHoaDon;
     }
@@ -92,6 +90,14 @@ public class HoaDon {
         this.NgayLap = NgayLap;
     }
 
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
     public String getMaNhanVien() {
         return MaNhanVien;
     }
@@ -107,7 +113,6 @@ public class HoaDon {
     public void setHIDE(boolean HIDE) {
         this.HIDE = HIDE;
     }
-    
-    
+
     
 }

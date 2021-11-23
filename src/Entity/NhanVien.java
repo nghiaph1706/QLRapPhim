@@ -6,6 +6,7 @@ public class NhanVien {
     private String MaNhanVien;
     private String HoTen;
     private String SDT;
+    private String Email;
     private boolean GioiTinh;
     private boolean ChucVu;
     private String MatKhau;
@@ -110,4 +111,26 @@ public class NhanVien {
         this.HIDE = HIDE;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public NhanVien(String MaNhanVien, String HoTen, String SDT, String Email, boolean GioiTinh, boolean ChucVu, String MatKhau, String Hinh, String GhiChu, boolean HIDE) {
+        this.MaNhanVien = MaNhanVien;
+        this.HoTen = HoTen;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.GioiTinh = GioiTinh;
+        this.ChucVu = ChucVu;
+        this.MatKhau = MatKhau;
+        this.Hinh = Hinh;
+        this.GhiChu = GhiChu;
+        this.HIDE = HIDE;
+    }
+    
+    
 }

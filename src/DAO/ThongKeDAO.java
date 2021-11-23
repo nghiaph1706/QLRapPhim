@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ThongKeDao {
+public class ThongKeDAO {
 
     private List<Object[]> getList(String sql, String cols[], Object... args) throws SQLException {
         List<Object[]> list = new ArrayList<>();
@@ -45,7 +45,7 @@ public class ThongKeDao {
                 db[1] = rs.getDouble(2);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ThongKeDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return db;
     }
@@ -71,7 +71,7 @@ public class ThongKeDao {
                 }
             }            
         } catch (SQLException ex) {
-            Logger.getLogger(ThongKeDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return list;
@@ -82,7 +82,7 @@ public class ThongKeDao {
             String cols[] = {"Ngay","TongVe","TongDichVu","TongTienNgay"};
             return this.getList(sql, cols, year, month);
         } catch (SQLException ex) {
-            Logger.getLogger(ThongKeDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -21,6 +21,9 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     private String SELECT_BY_ID = "SELECT * FROM LichChieu WHERE [HIDE] = 0 AND [MaLichChieu] = ?";
     private String SELECT_ALL = "SELECT * FROM LichChieu WHERE [HIDE] = 0";
     private String SELECT_BY_LC = "SELECT ph.MaPhim Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim GROUP BY ph.MaPhim, NgayChieu";
+    private String SELECT_ALL_BY_MaPhim = "Select * from lichchieu where maphim = ?";
+    private String SELECT_ALL_BY_DATE = "Select * from Lichchieu where ngaychieu between ? and ?";
+    private String SELECT_ALL_BY_LastDateNull = "select * from LichChieu where NgayChieu between ? and (select max(ngaychieu) from lichchieu)";
     
     @Override
     public void insert(LichChieu entity) {
@@ -113,5 +116,43 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
         } catch(Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    public List<LichChieu> selectAllByMa(String ma) {
+        return selectBySql(SELECT_ALL_BY_MaPhim, ma);
+    }
+    
+    public List<LichChieu> selectByDate(Object ngayDau, Object ngayCuoi) {
+        List<LichChieu> list = new ArrayList<>();
+        try {
+            list = selectBySql(SELECT_ALL_BY_DATE, ngayDau, ngayCuoi);
+        } catch (Exception e) {
+            list = selectBySql(SELECT_ALL_BY_LastDateNull, ngayDau);
+        }
+        return list;
+
+        //min(ngaycuoi)
+    }
+
+    public List<LichChieu> selectByDateWithoutLastDay(Object ngayDau) {
+        return selectBySql(SELECT_ALL_BY_LastDateNull, ngayDau);
+
+        //min(ngaycuoi)
+    } 
+    
+    public String selectLCbyTT(String maphim, String maphong, String giochieu)
+    {
+        String sql = "select malichchieu from LichChieu where MaPhim = ? and MaPhong = ? and GioChieu = ?";
+        try {
+            List<LichChieu> list = new ArrayList<>();
+            ResultSet rs = XJdbc.query(sql,maphim,maphong,giochieu);
+            while(rs.next()) {
+                return rs.getString(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }

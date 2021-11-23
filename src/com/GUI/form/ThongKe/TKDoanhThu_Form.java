@@ -1,7 +1,7 @@
 package com.GUI.form.ThongKe;
 
 import DAO.HoaDonDAO;
-import DAO.ThongKeDao;
+import DAO.ThongKeDAO;
 import com.GUI.Chart.BarChart.BarChart;
 import com.GUI.Chart.BarChart.ModelChart;
 import com.GUI.Chart.ChartLine.ModelChartLine;
@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TKDoanhThu_Form extends javax.swing.JPanel {
 
-    ThongKeDao tkDao = new ThongKeDao();
+    ThongKeDAO tkDao = new ThongKeDAO();
     DefaultComboBoxModel cboModelNam = new DefaultComboBoxModel();
     DefaultComboBoxModel cboModelThang = new DefaultComboBoxModel();
 

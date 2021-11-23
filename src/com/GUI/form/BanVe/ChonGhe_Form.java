@@ -288,7 +288,6 @@ public class ChonGhe_Form extends javax.swing.JPanel {
         listGheSelected = seat1.selectedSeat();
         for (Ghe ghe : listGheSelected) {
             giaTienGhe = ghe.getGiaGhe();
-            System.out.println(ghe.getMaGhe() + " " + giaTienGhe);
         }
         Main.banVe.insertMaVe();
         Main.banVe.loadDatabase();

@@ -16,11 +16,11 @@ import java.util.logging.Logger;
 public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
 
     String insertSql = "INSERT INTO [HoaDon]([TongTien],[MaKM],[MaKHTT],[MucGiamGia],[ThanhTien],"
-            + "                     [NgayLap],[MaNhanVien],[HIDE]) "
-            + "                      VALUES (?,?,?,?,?,?,?,?)";
+            + "                     [NgayLap],[TrangThai],[MaNhanVien],[HIDE]) "
+            + "                      VALUES (?,?,?,?,?,?,?,?,?)";
     
     String updateSql = "UPDATE [HoaDon] SET [TongTien] = ?, [MaKM] = ?, [MaKHTT] = ?, [MucGiamGia] = ?, "
-            + "                             [ThanhTien] = ?, [NgayLap] = ?, [MaNhanVien] = ?, [HIDE] = ? "
+            + "                             [ThanhTien] = ?, [NgayLap] = ?,[TrangThai] = ?, [MaNhanVien] = ?, [HIDE] = ? "
             + "                             WHERE [MaHoaDon] = ?";
     String deleteSql = "UPDATE [HoaDon] SET [HIDE] = 1 WHERE [MaHoaDon] = ?";
     String select_All_Sql = "Select * from [HoaDon] where hide = 0";
@@ -31,7 +31,7 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
     @Override
     public void insert(HoaDon entity) {
         XJdbc.update(insertSql, entity.getTongTien(), entity.getMaKM(), entity.getMaKHTT(), 
-                                entity.getMucGiamGia(),entity.getThanhTien(),entity.getNgayLap(),
+                                entity.getMucGiamGia(),entity.getThanhTien(),entity.getNgayLap(),entity.isTrangThai(),
                                 entity.getMaNhanVien(),entity.isHIDE());
         
     }
@@ -39,7 +39,7 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
     @Override
     public void update(HoaDon entity) {
         XJdbc.update(updateSql, entity.getTongTien(), entity.getMaKM(), entity.getMaKHTT(), 
-                                entity.getMucGiamGia(),entity.getThanhTien(),entity.getNgayLap(),
+                                entity.getMucGiamGia(),entity.getThanhTien(),entity.getNgayLap(),entity.isTrangThai(),
                                 entity.getMaNhanVien(),entity.isHIDE(),entity.getMaHoaDon());
     }
 
@@ -72,6 +72,7 @@ public class HoaDonDAO extends QLRapPhimDAO<HoaDon, String> {
                 hd.setMucGiamGia(rs.getInt("Mucgiamgia"));
                 hd.setThanhTien(rs.getDouble("ThanhTien"));
                 hd.setNgayLap(rs.getDate("ngaylap"));
+                hd.setHIDE(rs.getBoolean("TrangThai"));
                 hd.setMaNhanVien(rs.getString("Manhanvien"));
                 hd.setHIDE(rs.getBoolean("hide"));
                 list.add(hd);

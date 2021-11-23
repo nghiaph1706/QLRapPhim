@@ -18,6 +18,7 @@ import Entity.LichChieu;
 import Entity.Phim;
 import Entity.Ve;
 import Utilities.Auth;
+import Utilities.XDate;
 import com.GUI.component.seat;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
@@ -53,11 +54,7 @@ public class BanVe_Form extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
         
         
-        HoaDon hd = new HoaDon();
-        hd.setHIDE(false);
-        hdDAO.insert(hd);
-        maHDNow = hdDAO.selectNewHD();
-        System.out.println(maHDNow);
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -87,6 +84,7 @@ public class BanVe_Form extends javax.swing.JPanel {
         txtMaKHTT = new com.GUI.swing.TextField();
         cboPhongChieu = new javax.swing.JComboBox<>();
         lblCheckMa = new javax.swing.JLabel();
+        btnXuatHD1 = new com.GUI.swing.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -284,6 +282,14 @@ public class BanVe_Form extends javax.swing.JPanel {
         lblCheckMa.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblCheckMa.setForeground(new java.awt.Color(51, 51, 51));
 
+        btnXuatHD1.setForeground(new java.awt.Color(255, 255, 255));
+        btnXuatHD1.setText("New HD");
+        btnXuatHD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatHD1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -318,15 +324,17 @@ public class BanVe_Form extends javax.swing.JPanel {
                                 .addGap(166, 166, 166)
                                 .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnXuatHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
                         .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(232, 232, 232))))
+                        .addGap(101, 101, 101))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +375,8 @@ public class BanVe_Form extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXuatHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -398,7 +407,6 @@ public class BanVe_Form extends javax.swing.JPanel {
         } else {
             MaKHTT = null;
         }
-        System.out.println(MaKM + " " +MaKHTT);
         Main.hoaDon.tinhTien();
         Main.hoaDon.loadDatabase();
         Main.main.showForm(Main.hoaDon);
@@ -427,6 +435,15 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void txtMaKHTTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaKHTTKeyReleased
         checkMaKHTT();
     }//GEN-LAST:event_txtMaKHTTKeyReleased
+
+    private void btnXuatHD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHD1ActionPerformed
+        HoaDon hd = new HoaDon();
+        hd.setHIDE(false);
+        hd.setNgayLap(XDate.now());
+        hd.setTrangThai(false);
+        hdDAO.insert(hd);
+        maHDNow = hdDAO.selectNewHD();
+    }//GEN-LAST:event_btnXuatHD1ActionPerformed
 
     // MAIN FUNCTIONAL
     
@@ -561,7 +578,6 @@ public class BanVe_Form extends javax.swing.JPanel {
         tmp = cboPhongChieu.getSelectedItem().toString();
         String giochieu = tmp.substring(3).trim();
         String malc = lcDAO.selectLCbyTT(maphim, MaPhong, giochieu);
-        System.out.println(malc);
         
         for (Ghe ghe : ChonGhe_Form.listGheSelected) {
             Ve ve = new Ve();
@@ -574,13 +590,11 @@ public class BanVe_Form extends javax.swing.JPanel {
         
         
         int count = ChonGhe_Form.listGheSelected.size();
-        System.out.println(count);
         List<Ve> velList = vDAO.selectNewVe(count);
         
         for (int i = 0; i < velList.size(); i++) {
             Ve ve =velList.get(i);
             hdct.setMaDichVu(ve.getMave());
-            System.out.println(ve.getMave());
             hdct.setGiaTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
             hdct.setSoLuong(1);
             hdct.setThanhTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
@@ -645,7 +659,6 @@ public class BanVe_Form extends javax.swing.JPanel {
                 lblCheckMa.setText("False");
                 lblCheckMa.setForeground(Color.red);
             }
-        System.out.println(txtMaKHTT.getText() + " " + maKHTT);
         }
     }
     //    private HoaDon getForm()
@@ -747,6 +760,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private com.GUI.swing.Button btnThemDichVu;
     private com.GUI.swing.Button btnXuLy;
     private com.GUI.swing.Button btnXuatHD;
+    private com.GUI.swing.Button btnXuatHD1;
     private javax.swing.JComboBox<String> cboPhieuGG;
     private javax.swing.JComboBox<String> cboPhim;
     private javax.swing.JComboBox<String> cboPhongChieu;

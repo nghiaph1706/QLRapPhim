@@ -60,20 +60,16 @@ public class HoaDon_Form extends javax.swing.JPanel {
     }
     
     public void tinhTien(){
-        System.out.println("Tính tiền");
         HoaDon hd = new HoaDon();
         hd.setMaHoaDon(BanVe_Form.maHDNow);
         System.out.println(BanVe_Form.maHDNow);
         int tongTien = (int) hdctdao.getTongTien(BanVe_Form.maHDNow);
-        System.out.println(tongTien);
         hd.setTongTien(tongTien);
         hd.setMaKM(BanVe_Form.MaKM);
         hd.setMaKHTT(BanVe_Form.MaKHTT);
         int mucGG = kmDAO.selectMucGiamGia(BanVe_Form.MaKM) + khttdao.selectMucGiamGia(BanVe_Form.MaKHTT);
-        System.out.println(mucGG);
         hd.setMucGiamGia(mucGG);
         double thanhTien = tongTien *(100-mucGG)/100 ;
-        System.out.println(thanhTien);
         hd.setThanhTien(thanhTien);
         hd.setNgayLap(XDate.now());
         hd.setMaNhanVien("NV1"); //Login

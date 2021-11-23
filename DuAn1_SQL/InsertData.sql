@@ -9,12 +9,12 @@
 	(N'Tâm Lý',0);
 	GO
 
-	INSERT INTO [NhanVien]([HoTen],[SDT],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES 
-	(N'Phạm Lễ Nghĩa','0990090909',1,1,'123',0),
-	(N'Trần Chí','0990090908',0,1,'123',0),
-	(N'Võ Hùng Dương','0990090907',1,0,'123',0),
-	(N'Ngô Tiên Duy','0990090906',0,0,'123',0),
-	(N'Đào Đức Nguyên','0990090905',1,0,'123',0);
+	INSERT INTO [NhanVien]([HoTen],[SDT],[Email],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES 
+	(N'Phạm Lễ Nghĩa','0990090909','nghiaplps17855@fpt.edu.vn',1,1,'123',0),
+	(N'Trần Chí','0990090908','nghiaplps17855@fpt.edu.vn',0,1,'123',0),
+	(N'Võ Hùng Dương','0990090907','nghiaplps17855@fpt.edu.vn',1,0,'123',0),
+	(N'Ngô Tiên Duy','0990090906','nghiaplps17855@fpt.edu.vn',0,0,'123',0),
+	(N'Đào Đức Nguyên','0990090905','nghiaplps17855@fpt.edu.vn',1,0,'123',0);
 	GO
 
 	INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
@@ -134,3 +134,7 @@
 
 
 	SELECT * FROM HoaDon
+
+	delete from Hoadon where ngayLap is null
+
+	exec SP_DOANHTHUNAM

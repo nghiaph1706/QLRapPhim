@@ -66,4 +66,25 @@ public class VeDAO extends QLRapPhimDAO<Ve, String> {
     public List<Ve> selectByMaPhim(String ma) {
         return this.selectBySql(selectbyid, ma);
     }
+    
+    public List<Ve> selectNewVe(int count){
+        String sql = "Select top(?) * from Ve ORDER BY cast(SUBSTRING(MaVe,3,len(MaVe)) as int) desc";
+        List<Ve> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(sql, count);
+            while (rs.next()) {
+                Ve v = new Ve();
+                v.setMave(rs.getString("MaVe"));
+                v.setMaphim(rs.getString("MaPhim"));
+                v.setMalichchieu(rs.getString("MaLichChieu"));
+                v.setMaphong(rs.getString("MaPhong"));
+                v.setMaghe(rs.getString("MaGhe"));
+                list.add(v);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

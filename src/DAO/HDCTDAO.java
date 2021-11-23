@@ -15,9 +15,7 @@ import java.util.logging.Logger;
 
 public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
 
-    String insertSqlVe = "INSERT INTO [HoaDonChiTiet]([MaVe],[GiaTien],"
-            + "                       [SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) "
-            + "                       VALUES (?,?,?,?,?,?)";
+    String insertSqlVe = "INSERT INTO [HoaDonChiTiet]([MaVe],[GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) VALUES (?,?,?,?,?,?)";
     String insertSqlDichVu = "INSERT INTO [HoaDonChiTiet]([MaDichVu],"
             + "               [GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) "
             + "               VALUES (?,?,?,?,?,?)";
@@ -26,7 +24,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
             + "                                    [HIDE] = ? WHERE [MaHoaDonChiTiet] = ?";
     String deleteSql = "UPDATE [HoaDonChiTiet] SET [HIDE] = 1 WHERE [MaHoaDonChiTiet] = ?";
     String select_All_Sql = "Select * from [HoaDonChiTiet] where hide = 0";
-    String select_sql_byID = "Select * from [HoaDonChiTiet] WHERE [MaHoaDon] = ? and hide = 0";
+    String select_sql_byID = "Select * from [HoaDonChiTiet] WHERE [MaHoaDon] = ? and hide = 0 ORDER BY MaHoaDon ASC";
 
     @Override
     public void insert(HDCT entity) {
@@ -83,7 +81,7 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         return list;
     }
     public void insertVe(HDCT entity) {
-        XJdbc.update(insertSqlDichVu,entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
+        XJdbc.update(insertSqlVe,entity.getMaDichVu(),entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
     }
     public void insertDichVu(HDCT entity) {
         XJdbc.update(insertSqlDichVu, entity.getMaDichVu(),entity.getGiaTien(),entity.getSoLuong(),entity.getThanhTien(),entity.getMaHoaDon(),entity.isHIDE());
@@ -91,6 +89,20 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
     public List<HDCT> selectByID(String id) {
         return this.selectBySql(select_sql_byID, id);
     }
+    
+    public double getTongTien(String maHD) {
+        String sql = "select sum(ThanhTien) from HoaDonChiTiet where MaHoaDon = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql, maHD);
+            while(rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    
 
 }
 
