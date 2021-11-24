@@ -53,7 +53,7 @@ public class ValidateCheck implements Serializable {
         if (string.equals(string1)) {
             return true;
         }
-         JOptionPane.showMessageDialog(null, NameStringAfter + "Không Trùng Với " + NameStringBefore + "!", "Lỗi", 0);
+        JOptionPane.showMessageDialog(null, NameStringAfter + "Không Trùng Với " + NameStringBefore + "!", "Lỗi", 0);
         return false;
     }
 //Check String to Float 
@@ -61,6 +61,17 @@ public class ValidateCheck implements Serializable {
     public boolean CheckFloat(String NameString, String string) {
         try {
             Float x = Float.parseFloat(string);
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);
+            return false;
+        }
+    }
+    //Check String to Float 
+
+    public boolean CheckInt(String NameString, String string) {
+        try {
+            int x = Integer.valueOf(string);
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);

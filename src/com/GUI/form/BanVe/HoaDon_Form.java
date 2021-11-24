@@ -13,9 +13,11 @@ import DAO.KhuyenMaiDAO;
 import DAO.LichChieuDAO;
 import DAO.PhimDAO;
 import Entity.HoaDon;
+import Utilities.Auth;
 import Utilities.MsgBox;
 import Utilities.XDate;
 import com.GUI.main.Main;
+import java.awt.Image;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +25,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -44,6 +48,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private HoaDonDAO hdDAO = new HoaDonDAO();
     private PhimDAO phDAO = new PhimDAO();
     private DichVuDAO dvDAO = new DichVuDAO();
+    public static double thanhTien;
     private String[] header = {
         "Mã HD","Tổng tiền", "Mã KM", "Mã KHTT", "Mức giảm giá", "Thành Tiền", "Ngày lập", "Mã NV"
     };
@@ -57,6 +62,8 @@ public class HoaDon_Form extends javax.swing.JPanel {
     {
         tblHoaDon.setModel(model);
         comboBoxThanhToan();
+        Icon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/QRTT.jpg")).getImage().getScaledInstance(lblQRTT.getPreferredSize().width, lblQRTT.getPreferredSize().height, Image.SCALE_SMOOTH));
+        lblQRTT.setIcon(imageIcon);
     }
     
     public void tinhTien(){
@@ -69,10 +76,10 @@ public class HoaDon_Form extends javax.swing.JPanel {
         hd.setMaKHTT(BanVe_Form.MaKHTT);
         int mucGG = kmDAO.selectMucGiamGia(BanVe_Form.MaKM) + khttdao.selectMucGiamGia(BanVe_Form.MaKHTT);
         hd.setMucGiamGia(mucGG);
-        double thanhTien = tongTien *(100-mucGG)/100 ;
+        thanhTien = tongTien *(100-mucGG)/100 ;
         hd.setThanhTien(thanhTien);
         hd.setNgayLap(XDate.now());
-        hd.setMaNhanVien("NV1"); //Login
+        hd.setMaNhanVien(Auth.user.getMaNhanVien());
         hd.setHIDE(false);
         hdDAO.update(hd);
     }
@@ -95,9 +102,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private void comboBoxThanhToan()
     {
         cboPTThanhToan.addItem("Thanh toán bằng tiền mặt");
-        cboPTThanhToan.addItem("Thanh toán bằng thẻ tín dụng");
         cboPTThanhToan.addItem("Thanh toán bằng MOMO");
-        cboPTThanhToan.addItem("Thanh toán bằng quét mã QR");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,8 +119,11 @@ public class HoaDon_Form extends javax.swing.JPanel {
         cboPTThanhToan = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        lblQRTT = new javax.swing.JLabel();
         btnThanhToan = new com.GUI.swing.Button();
         btnQuayLai = new com.GUI.swing.Button();
+        txtMaHD = new com.GUI.swing.TextField();
+        txtThanhTien = new com.GUI.swing.TextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,17 +153,21 @@ public class HoaDon_Form extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("PHƯƠNG THỨC THANH TOÁN: ");
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblQRTT.setMaximumSize(new java.awt.Dimension(391, 385));
+        lblQRTT.setMinimumSize(new java.awt.Dimension(391, 385));
+        lblQRTT.setPreferredSize(new java.awt.Dimension(391, 385));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addComponent(lblQRTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addComponent(lblQRTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         btnThanhToan.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,21 +186,28 @@ public class HoaDon_Form extends javax.swing.JPanel {
             }
         });
 
+        txtMaHD.setBackground(new java.awt.Color(224, 224, 224));
+        txtMaHD.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtMaHD.setLabelText("Nội dung chuyển khoản");
+
+        txtThanhTien.setBackground(new java.awt.Color(224, 224, 224));
+        txtThanhTien.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtThanhTien.setLabelText("Số tiền");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(318, 318, 318)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(35, 35, 35)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(318, 318, 318)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1361, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -199,9 +218,13 @@ public class HoaDon_Form extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(218, 218, 218)
                                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGap(126, 126, 126)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +235,16 @@ public class HoaDon_Form extends javax.swing.JPanel {
                     .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(txtThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
@@ -223,7 +253,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
                         .addComponent(cboPTThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -245,7 +275,10 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblQRTT;
     private com.GUI.swing.Table tblHoaDon;
+    public static com.GUI.swing.TextField txtMaHD;
+    public static com.GUI.swing.TextField txtThanhTien;
     // End of variables declaration//GEN-END:variables
 
     private void printHoaDon()

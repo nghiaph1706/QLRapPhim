@@ -86,10 +86,31 @@ public class ThongKeDAO {
         }
         return null;
     }
-    public List<Object[]> getThongKeNguoiHoc() throws SQLException {
-        String sql = "{CALL sp_ThongKeNguoiHoc}";
-        String[] cols = {"Nam", "SoNH", "DKSomNhat", "DKMuonNhat"};
+    public List<Object[]> getDTTungNam() throws SQLException{
+        String sql = "{CALL sp_DTTungNam}";
+        String cols[] = {"Nam","TongVe","TongDichVu","TongTien"};
         return getList(sql, cols);
+    }
+    public List<Object[]> getDTTungThang(int nam) throws SQLException{
+        String sql = "{CALL sp_DTTungThang(?)}";
+        String cols[] = {"Thang","TongVe","TongDichVu","TongTien"};
+        return getList(sql, cols, nam);
+    }
+    public List<Object[]> getDTThang(int nam, int thang) throws SQLException{
+        String sql = "{CALL sp_DTThang(?,?)}";
+        String cols[] = {"Ngay","TongVe","TongDichVu","TongTien"};
+        return getList(sql, cols, nam, thang);
+    }
+    public List<Object[]> getTKLX(String Month, String Year) throws SQLException {
+            
+            List<Object[]> list = new ArrayList<>();
+            String sql = "{CALL sp_TKLX_TheoThang(?,?)}";
+            ResultSet rs = XJdbc.query(sql, Month, Year);
+            while (rs.next()) {
+                Object[] a = {rs.getString(2), rs.getString(1)};
+                list.add(a);
+                }
+        return list;
     }
 
 }

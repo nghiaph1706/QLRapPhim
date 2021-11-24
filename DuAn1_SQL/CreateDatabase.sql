@@ -80,7 +80,7 @@ CREATE TABLE [Ghe] (
 	[MaPhong] VARCHAR(10),
 	[GioChieu] VARCHAR(10),
 	[TrangThai] BIT DEFAULT 0,
-	PRIMARY KEY ([MaGhe],[MaPhong]),
+	PRIMARY KEY ([MaGhe],[MaPhong],[GioChieu]),
 	CONSTRAINT [FK_Ghe.MaPhong] FOREIGN KEY ([MaPhong]) 
 			REFERENCES [Phong]([MaPhong]) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -106,7 +106,7 @@ CREATE TABLE [KhachHangThanThiet] (
 	[MaKHTT] as cast('KH'+Cast(ID as VARCHAR(10))as VARCHAR(10))  PERSISTED PRIMARY KEY,
 	[Ten] NVARCHAR(50),
 	[SDT] VARCHAR(10),
-	[Email] VARCHAR(50),
+	[Email] VARCHAR(255 ),
 	[NgayDK] DATE,
 	[MucGiamGia] FLOAT,
 	[SoLanSuDung] INT,
@@ -145,14 +145,15 @@ CREATE TABLE [Ve] (
 	[MaLichChieu] VARCHAR(10),
 	[MaPhong] VARCHAR(10),
 	[MaGhe] VARCHAR(5),
+	[GioChieu] VARCHAR(10),
 	CONSTRAINT [FK_Ve.MaPhim] FOREIGN KEY ([MaPhim]) 
 			REFERENCES [Phim]([MaPhim]) ON DELETE NO ACTION ON UPDATE CASCADE,
 	CONSTRAINT [FK_Ve.MaLichChieu] FOREIGN KEY ([MaLichChieu]) 
 			REFERENCES [LichChieu]([MaLichChieu]) ON DELETE NO ACTION,
 	CONSTRAINT [FK_Ve.MaPhong] FOREIGN KEY ([MaPhong]) 
 			REFERENCES [Phong]([MaPhong]) ON DELETE NO ACTION ON UPDATE CASCADE,
-	CONSTRAINT [FK_Ve.MaGhe] FOREIGN KEY ([MaGhe],[MaPhong]) 
-			REFERENCES [Ghe]([MaGhe],[MaPhong]) ON DELETE NO ACTION
+	CONSTRAINT [FK_Ve.MaGhe] FOREIGN KEY ([MaGhe],[MaPhong],[GioChieu]) 
+			REFERENCES [Ghe]([MaGhe],[MaPhong],[GioChieu]) ON DELETE NO ACTION
 );
 GO
 

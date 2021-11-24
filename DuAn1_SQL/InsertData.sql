@@ -34,23 +34,28 @@
 	GO
 
 
-	INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES 
-	('2021-11-20', '08:30', 'MP1', 'P1', 0),
-	('2021-11-20', '10:30', 'MP2', 'P2', 0),
-	('2021-11-20', '18:30', 'MP3', 'P3', 0),
-	('2021-11-20', '20:30', 'MP4', 'P4', 0),
-	('2021-11-20', '22:30', 'MP5', 'P5', 0);
-	GO
+INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
+('2021-11-20', '08:30', 'MP1', 'P1', 0),
+('2021-11-20', '10:30', 'MP2', 'P2', 0),
+('2021-11-20', '18:30', 'MP3', 'P3', 0),
+('2021-11-20', '20:30', 'MP4', 'P4', 0),
+('2021-11-20', '22:30', 'MP5', 'P5', 0),
+('2020-08-02', '08:30', 'MP1', 'P1', 0),
+('2020-12-12', '10:30', 'MP2', 'P2', 0),
+('2020-03-16', '18:30', 'MP3', 'P3', 0),
+('2020-04-01', '20:30', 'MP4', 'P4', 0),
+('2020-05-04', '22:30', 'MP5', 'P5', 0);
+GO
 
-	EXEC sp_TaoGhe 'P1'
+	EXEC sp_timeSeat 'P1'
 	GO
-	EXEC sp_TaoGhe 'P2'
+	EXEC sp_timeSeat 'P2'
 	GO
-	EXEC sp_TaoGhe 'P3'
+	EXEC sp_timeSeat 'P3'
 	GO
-	EXEC sp_TaoGhe 'P4'
+	EXEC sp_timeSeat 'P4'
 	GO
-	EXEC sp_TaoGhe 'P5'
+	EXEC sp_timeSeat 'P5'
 	GO
 
 	INSERT INTO [KhuyenMai]([MaKM],[TenKM],[ThongTinKM],[MucGiamGia],[NgayBatDau],[NgayKetThuc],[MaNhanVien],[HIDE]) VALUES --dương sửa
@@ -74,8 +79,15 @@
 	(270000,'MUNGDANGMUNGXUAN','KH2',30,189000,'2021-02-12','NV1',0), --2vé vip -combo2
 	(100000,'QUOCKHANH','KH3',25,75000,'2021-03-16','NV2',0), --1vé thường -1bắp -1nước
 	(150000,'TET',null,10,135000,'2021-04-01','NV3',0), --1vé vip -combo1
-	(50000,null,null,0,50000,'2021-05-04','NV1',0); --1vé thường
+	(50000,null,null,0,50000,'2021-05-04','NV1',0), --1vé thường
+	(150000,null,'KH1',20,120000,'2020-08-02','NV1',0), --2vé thường -1bắp -1nước
+	(270000,null,'KH2',30,189000,'2020-12-12','NV1',0), --2vé vip -combo2
+	(100000,null,'KH3',25,75000,'2020-03-16','NV2',0), --1vé thường -1bắp -1nước
+	(150000,null,null,10,135000,'2020-04-01','NV3',0), --1vé vip -combo1
+	(200000,null,'KH1',10,180000,'2020-09-02','NV1',0),
+	(50000,null,null,0,50000,'2020-05-04','NV1',0); --1vé thường
 	GO
+
 
 	INSERT INTO [Ve]([MaPhim],[MaLichChieu],[MaPhong],[MaGhe]) VALUES 
 	('MP1','LC1','P1','A1'), 
@@ -97,7 +109,27 @@
 	('MP3','LC2','P1','B2'),
 	('MP3','LC2','P1','B3'),
 	('MP3','LC2','P1','C3'),
-	('MP3','LC2','P1','E5');
+	('MP3','LC2','P1','E5'),
+	('MP1','LC6','P1','A1'),
+	('MP1','LC6','P1','B2'),
+	('MP1','LC6','P1','C3'),
+	('MP1','LC6','P1','D4'),
+	('MP1','LC6','P1','E5'),
+	('MP1','LC6','P1','A1'),
+	('MP1','LC6','P1','B2'),
+	('MP1','LC6','P1','B3'),
+	('MP1','LC6','P1','C3'),
+	('MP1','LC7','P1','E5'),
+	('MP2','LC7','P1','A1'),
+	('MP2','LC7','P1','B2'),
+	('MP2','LC8','P1','B3'),
+	('MP2','LC8','P1','C3'),
+	('MP2','LC8','P1','E5'),
+	('MP3','LC9','P1','A1'),
+	('MP3','LC9','P1','B2'),
+	('MP3','LC9','P1','B3'),
+	('MP3','LC9','P1','C3'),
+	('MP3','LC9','P1','E5');
 	GO
 
 	INSERT INTO [DichVu]([MaDichVu],[TenDichVu],[GiaDichVu],[HIDE]) VALUES 
@@ -115,7 +147,14 @@
 	('VE10',50000,1,50000,'HD2',0),
 	('VE3',100000,1,100000,'HD3',0),
 	('VE15',100000,1,100000,'HD4',0),
-	('VE4',50000,1,50000,'HD5',0);
+	('VE4',50000,1,50000,'HD5',0),
+	('VE28',50000,1,50000,'HD6',0),
+	('VE29',50000,1,50000,'HD6',0),
+	('VE31',100000,1,100000,'HD7',0),
+	('VE32',50000,1,50000,'HD7',0),
+	('VE40',100000,1,100000,'HD8',0),
+	('VE38',100000,1,100000,'HD9',0),
+	('VE39',50000,1,50000,'HD10',0);
 	GO
 
 	INSERT INTO [HoaDonChiTiet]([MaDichVu],[GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) VALUES 
@@ -124,17 +163,13 @@
 	('COMBO2',70000,1,70000,'HD2',0),
 	('BAP',25000,1,25000,'HD3',0),
 	('NUOC',25000,1,25000,'HD3',0),
-	('COMBO1',50000,1,50000,'HD4',0);
+	('COMBO1',50000,1,50000,'HD4',0),
+	('BAP',25000,1,25000,'HD6',0),
+	('NUOC',25000,1,25000,'HD6',0),
+	('COMBO2',70000,1,70000,'HD7',0),
+	('BAP',25000,1,25000,'HD8',0),
+	('NUOC',25000,1,25000,'HD8',0),
+	('COMBO1',50000,1,50000,'HD9',0);
 	GO
 
-
-	SELECT * FROM Ghe WHERE MaPhong = 'P1' ORDER BY SUBSTRING(MaGhe,1,1), cast(SUBSTRING(MaGhe,2,len(MaGhe)-1) as int) asc
-
-	SELECT COUNT(Ghe.MaGhe) FROM Ghe WHERE MaPhong = 'P1' and TrangThai = 0
-
-
-	SELECT * FROM HoaDon
-
-	delete from Hoadon where ngayLap is null
-
-	exec SP_DOANHTHUNAM
+	select *from ghe

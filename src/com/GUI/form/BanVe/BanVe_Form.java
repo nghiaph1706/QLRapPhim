@@ -40,6 +40,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     public static KHTTDAO khttdao = new KHTTDAO();
     public List<String> khttList = new ArrayList<>();
     public static String MaPhong;
+    public static String GioChieu;
     public static String maHDNow;
     public static String MaHDTuHDCT;
     public static String MaKM;
@@ -408,6 +409,8 @@ public class BanVe_Form extends javax.swing.JPanel {
             MaKHTT = null;
         }
         Main.hoaDon.tinhTien();
+        HoaDon_Form.txtMaHD.setText(BanVe_Form.maHDNow);
+        HoaDon_Form.txtThanhTien.setText(""+HoaDon_Form.thanhTien);
         Main.hoaDon.loadDatabase();
         Main.main.showForm(Main.hoaDon);
     }//GEN-LAST:event_btnXuatHDActionPerformed
@@ -415,6 +418,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void btnChuyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenActionPerformed
         String tmp = cboPhongChieu.getSelectedItem().toString().trim();
         MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
+        GioChieu = tmp.substring(2).trim();
         Main.main.showForm(new ChonGhe_Form());
     }//GEN-LAST:event_btnChuyenActionPerformed
 

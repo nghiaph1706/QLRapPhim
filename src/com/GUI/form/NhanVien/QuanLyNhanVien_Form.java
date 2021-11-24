@@ -10,7 +10,9 @@ import java.awt.Image;
 import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class QuanLyNhanVien_Form extends javax.swing.JPanel {
 
@@ -185,6 +187,11 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblnhanvien);
 
         txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSearchCaretUpdate(evt);
+            }
+        });
 
         btnSearch.setBackground(new java.awt.Color(255, 0, 0));
         btnSearch.setBorder(null);
@@ -197,9 +204,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             }
         });
 
-        txtghichu.setBackground(new java.awt.Color(255, 255, 255));
         txtghichu.setColumns(20);
-        txtghichu.setForeground(new java.awt.Color(0, 0, 0));
         txtghichu.setRows(5);
         jScrollPane2.setViewportView(txtghichu);
 
@@ -362,6 +367,11 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
     private void btnresestpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresestpasswordActionPerformed
         ResestPass();
     }//GEN-LAST:event_btnresestpasswordActionPerformed
+
+    private void txtSearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchCaretUpdate
+        // TODO add your handling code here:
+        Search2();
+    }//GEN-LAST:event_txtSearchCaretUpdate
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnSearch;
@@ -574,6 +584,17 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             }
         } else {
             dialog.Error(this, "Chưa Chọn Nhân Viên", "Lỗi");
+        }
+    }
+
+    private void Search2() {
+        try {
+            TableRowSorter<DefaultTableModel> ts = new TableRowSorter<>(modeltable);
+            tblnhanvien.setRowSorter(ts);
+            ts.setRowFilter(RowFilter.regexFilter(txtSearch.getText().toUpperCase()));
+        } catch (Exception e) {
+            modeltable.setRowCount(0);
+            tblnhanvien.setModel(modeltable);
         }
     }
 }

@@ -9,12 +9,12 @@ import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.form.BanVe.ChonGhe_Form;
 import com.GUI.form.BanVe.HoaDon_Form;
 import com.GUI.form.DashBoard;
+import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
 import com.GUI.form.MainForm;
 import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
 import com.GUI.form.Phim.PhimDangChieu_Form;
 import com.GUI.form.Phim.QuanLyPhim_Form;
 import com.GUI.form.QuanLyLichChieu_Form;
-import com.GUI.form.SaoLuu.KhoiPhuc_Form;
 import com.GUI.form.SaoLuu.SaoLuu_Form;
 import com.GUI.form.SuKien.QuanLySuKien_Form;
 import com.GUI.form.SuKien.SKDangDienRa_Form;
@@ -68,38 +68,38 @@ public class Main extends javax.swing.JFrame {
 //                        main.showForm(new HoaDon_Form());
                     }
                 } else if (menuIndex == 2) {
+                    main.showForm(new KhachHangThanThiet_Form());
+                } else if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QuanLyPhim_Form());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new PhimDangChieu_Form());
                     }
-                } else if (menuIndex == 3) {
+                } else if (menuIndex == 4) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QuanLyLichChieu_Form());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new QuanLyLichChieu_Form());
                     }
-                } else if (menuIndex == 4) {
+                } else if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QuanLySuKien_Form());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new SKDangDienRa_Form());
                     }
-                } else if (menuIndex == 5) {
-                    main.showForm(new QuanLyNhanVien_Form());
                 } else if (menuIndex == 6) {
+                    main.showForm(new QuanLyNhanVien_Form());
+                } else if (menuIndex == 7) {
                     if (subMenuIndex == 0) {
                         main.showForm(new TKDoanhThu_Form());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new TKLuotXem_Form());
                     }
-                } else if (menuIndex == 7) {
+                } else if (menuIndex == 8) {
                     if (subMenuIndex == 0) {
                         main.showForm(new SaoLuu_Form());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new KhoiPhuc_Form());
                     }
-                }  else if (menuIndex == 8) {
+                }  else if (menuIndex == 9) {
                     JOptionPane.showMessageDialog(null, "dang xuat");
                 }
             }

@@ -9,7 +9,6 @@ import com.GUI.Chart.ChartPie.ModelChartPie;
 import com.GUI.swing.scrollbar.ScrollBarCustom;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,8 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
     ThongKeDAO tkDao = new ThongKeDAO();
     DefaultComboBoxModel cboModelNam = new DefaultComboBoxModel();
     DefaultComboBoxModel cboModelThang = new DefaultComboBoxModel();
+    public static String Year_Select;
+    public static String Month_Select;
 
     public TKDoanhThu_Form() {
         initComponents();
@@ -45,35 +46,7 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         modelChartLines.add(new ModelChartLine("Quí 1", 700));
         modelChartLines.add(new ModelChartLine("Quí 1", 800));
         chartLine1.setModel(modelChartLines);
-
-//        barChart2.addLegend("Doanh thu", new Color(245, 189, 135));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{250}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{300}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{150}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{160}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{80}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{70}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{300}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{320}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{360}));
-//        barChart2.addData(new ModelChart("Tháng 1", new double[]{200}));
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
-
-//        List<ModelChartPie>  modelChartPies1 = new ArrayList<>();
-//        modelChartPies1.add(new ModelChartPie("Dịch vụ", 200, new Color(245, 189,135)));
-//        modelChartPies1.add(new ModelChartPie("Vé", 200, new Color(135, 189,245)));
-//        modelChartPies1.add(new ModelChartPie("Dịch vụ", 200, new Color(245, 189,135)));
-//        modelChartPies1.add(new ModelChartPie("Vé", 200, new Color(135, 189,245)));
-//        chartPie2.setModel(modelChartPies1);
-//        
-//        List<ModelChartLine> modelChartLines1 = new ArrayList<>();
-//        modelChartLines1.add(new ModelChartLine("Tuần 1",800));
-//        modelChartLines1.add(new ModelChartLine("Tuần 1",950));
-//        modelChartLines1.add(new ModelChartLine("Tuần 1",700));
-//        modelChartLines1.add(new ModelChartLine("Tuần 1",800));
-//        chartLine2.setModel(modelChartLines1);
     }
 
     public void init() {
@@ -129,11 +102,10 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
 
     public void thongKeDTChonNam() {
         BarChart barchartTKNam = new BarChart();
-        String year = "";
-        year = cboModelNam.getSelectedItem().toString();
-        System.out.println(year);
+        Year_Select = cboModelNam.getSelectedItem().toString();
+        System.out.println(Year_Select);
         barchartTKNam.addLegend("Doanh thu", new Color(245, 189, 135));
-        List<Object[]> list = tkDao.getDTTungThangTheoNam(year);
+        List<Object[]> list = tkDao.getDTTungThangTheoNam(Year_Select);
         for (Object obj[] : list) {
             barchartTKNam.addData(new ModelChart(obj[0].toString(), new double[]{Double.parseDouble(obj[1].toString())}));
         }
@@ -162,14 +134,12 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         tblDTTungNgayTheoThang.setModel(model);
         model.setRowCount(0);
         model.setColumnIdentifiers(new Object[]{"Ngày", "Tổng vé", "Tổng dịch vụ", "Tổng tiền ngày"});
-        String year = "";
-        String month = "";
         try {
-            year = cboModelNam.getSelectedItem().toString();
-            month = cboModelThang.getSelectedItem().toString();
+            Year_Select = cboModelNam.getSelectedItem().toString();
+            Month_Select = cboModelThang.getSelectedItem().toString();
         } catch (Exception e) {
         }
-        List<Object[]> list = tkDao.getDTTungNgayTheoThang(year, month);
+        List<Object[]> list = tkDao.getDTTungNgayTheoThang(Year_Select, Month_Select);
 
         for (Object[] a : list) {
             model.addRow(a);
@@ -303,6 +273,11 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton2.setText("Xuất báo báo");
         jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -376,6 +351,10 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         thongKeDTChonNam();
         thongKeDTTungNgayTheoThang();
     }//GEN-LAST:event_cboNamActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new XuatBaoCao_Frame().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.Chart.BarChart.BarChart barChart1;

@@ -9,8 +9,10 @@ as Begin
 	GROUP BY ph.TenPhim, NgayChieu, GioChieu
 End
 GO
+
+
 --Tạo ghế
-CREATE PROC sp_TaoGhe(@MaPhong VARCHAR(10))
+CREATE PROC sp_TaoGhe(@MaPhong VARCHAR(10), @time varchar(10))
 as begin
 	DECLARE @i int = 1, @j int =1, @maHang varchar(50)
 	DECLARE @Hang varchar(50) = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -21,9 +23,9 @@ as begin
 			while @j <=10
 				begin
 					if @i > 4 
-						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),1,100000, @MaPhong,null, 0)
+						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),1,100000, @MaPhong,@time, 0)
 					else 
-						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),0,50000, @MaPhong,null, 0)
+						insert into Ghe values (@maHang + CAST(@j AS varchar(5)),0,50000, @MaPhong,@time, 0)
 					set @j = @j +1
 				end
 				set @j = 1
@@ -31,6 +33,28 @@ as begin
 		end
 end
 GO
+--time
+create proc sp_timeSeat(@MaPhong VARCHAR(10))
+as begin
+	declare @h int =17, @m int = 0, @time varchar(10)
+	while @h <= 23
+		begin
+			if @m % 2 = 0
+				begin
+					set @time = concat(cast(@h as varchar(5)),':','00')
+				end
+			else
+				begin
+					set @time = concat(cast(@h as varchar(5)),':','30')
+				end
+			exec sp_TaoGhe @MaPhong , @time
+			set @h = @h + 1
+			set @m = @m + 1
+		end
+end
+go
+
+
 
 
 --Doanh thu theo năm truyền tham số XXX
@@ -169,7 +193,7 @@ GO
 -- Doanh thu từng tháng theo năm --------
 create PROCEDURE sp_TKDT_TungThangTheoNam (@Nam INT)
 as BEGIN
-	select month(ngaylap),sum(tongtien) from hoadon where year(ngaylap) = @nam group by month(NgayLap) 
+	select month(ngaylap),sum(tongtien) from hoadon where year(ngaylap) = @Nam group by month(NgayLap) 
 	 
 END
 GO
@@ -183,3 +207,40 @@ where month(ngaylap) = @Thang and year(ngaylap) = @Nam group by DAY(ngaylap)
 END
 GO
 
+
+create PROCEDURE sp_DTTungNam
+as begin
+select year(ngaylap) as 'Nam', count(mave) as 'TongVe',count(madichvu) as 'TongDichVu', sum(hoadonchitiet.thanhtien)  as 'TongTien'
+from hoadonchitiet inner join hoadon on HoaDonChiTiet.MaHoaDon = HoaDon.MaHoaDon
+group by year(ngaylap)
+end 
+go
+
+create PROCEDURE sp_DTTungThang(@nam int)
+as begin
+select month(ngaylap) as 'Thang', count(mave) as 'TongVe',count(madichvu) as 'TongDichVu', sum(hoadonchitiet.thanhtien)  as 'TongTien'
+from hoadonchitiet inner join hoadon on HoaDonChiTiet.MaHoaDon = HoaDon.MaHoaDon where year(ngaylap) = @nam
+group by month(ngaylap)
+end 
+go
+
+create PROCEDURE sp_DTThang(@nam int, @thang int)
+as begin
+select ngaylap as 'Ngay', count(mave) as 'TongVe',count(madichvu) as 'TongDichVu', sum(hoadonchitiet.thanhtien)  as 'TongTien'
+from hoadonchitiet inner join hoadon on HoaDonChiTiet.MaHoaDon = HoaDon.MaHoaDon where year(ngaylap) = @nam and month(ngaylap) = @thang
+group by ngaylap
+end 
+go
+
+-- Thống kê lượt xem theo tháng
+create PROCEDURE sp_TKLX_TheoThang(@thang int, @nam int)
+as
+begin
+select TenPhim,count(hdct.MaVe) from HoaDonChiTiet hdct 
+inner join hoadon hd on hdct.MaHoaDon=hd.MaHoaDon
+inner join ve on ve.MaVe = hdct.MaVe inner join Phim on ve.MaPhim = phim.MaPhim
+where MONTH(ngaylap) = @thang and year(ngaylap) = @nam 
+group by TenPhim, month(NgayLap)
+end
+go
+select * from LichChieu

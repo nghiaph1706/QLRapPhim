@@ -22,14 +22,14 @@ public class ChonGhe_Form extends javax.swing.JPanel {
     public static List<Ghe> listGheSelected = new ArrayList<>();
     public ChonGhe_Form() {
         initComponents();
-        seat1.fillGhe(BanVe_Form.MaPhong);
-        fillchart(BanVe_Form.MaPhong);
+        seat1.fillGhe(BanVe_Form.MaPhong,BanVe_Form.GioChieu);
+        fillchart(BanVe_Form.MaPhong,BanVe_Form.GioChieu);
     }
     
-    void fillchart(String maPhong){
+    void fillchart(String maPhong, String gioChieu){
         GheDAO gheDAO = new GheDAO();
         List <ModelChartPie> list = new ArrayList<>();
-        int emptyseat = gheDAO.selectEmptySeat(maPhong);
+        int emptyseat = gheDAO.selectEmptySeat(maPhong, gioChieu);
         list.add(new ModelChartPie("Ghế trống", emptyseat, Color.yellow));
         list.add(new ModelChartPie("Đã đặt", 140-emptyseat, Color.blue));       
         chartPie1.setModel(list);

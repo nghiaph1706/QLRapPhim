@@ -2,8 +2,10 @@
 package Utilities;
 
 
+import DAO.ThongKeDAO;
 import com.GUI.swing.Table;
 import java.io.FileOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -23,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class XExcel {
     public static XSSFWorkbook workbook;
+    public static ThongKeDAO tkdao = new ThongKeDAO();
     
     public static void exportTable(Table table){
         
@@ -101,8 +104,244 @@ public class XExcel {
         }
     }
     
-    public static void export(){
+    public static void exportDTTungNam() throws SQLException{
+        List<Object[]> List = tkdao.getDTTungNam();
         
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Save as");
+        FileNameExtensionFilter f = new FileNameExtensionFilter("xls", "xlsx");
+        FileOutputStream out = null;
+        chooser.setFileFilter(f);
+        
+        int excel = chooser.showSaveDialog(null);
+        
+        if (excel == JFileChooser.APPROVE_OPTION) {
+            
+            try {
+                workbook = new XSSFWorkbook();
+                XSSFSheet spreadsheet = workbook.createSheet("Doanh thu theo từng năm");
+                
+                XSSFRow rows = null;
+                Cell cells = null;
+                CellStyle cs = headerCellStyle();
+                CellStyle csc = coCellStyle();
+                
+                rows = spreadsheet.createRow((short) 3);
+                rows.setHeight((short) 700);
+                
+                cells = rows.createCell(0, CellType.STRING);
+                cells.setCellValue("Năm");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(1, CellType.STRING);
+                cells.setCellValue("Vé");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(2, CellType.STRING);
+                cells.setCellValue("Dịch vụ");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(3, CellType.STRING);
+                cells.setCellValue("Tổng");
+                cells.setCellStyle(cs);
+                
+                
+                for (int i = 0; i < List.size(); i++) {
+                    Object[] obj = List.get(i);
+                    rows = spreadsheet.createRow((short) 4 + i);
+                    rows.setHeight((short) 500);
+                    
+                    cells = rows.createCell(0);
+                    cells.setCellValue(obj[0].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(1);
+                    cells.setCellValue(obj[1].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(2);
+                    cells.setCellValue(obj[2].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(3);
+                    cells.setCellValue(obj[3].toString());
+                    cells.setCellStyle(csc);
+                }
+
+                for (int i = 0; i < List.size(); i++) {
+                    spreadsheet.autoSizeColumn(i);
+                }
+
+                out = new FileOutputStream(chooser.getSelectedFile() + ".xlsx");
+                workbook.write(out);
+                out.close();
+                JOptionPane.showMessageDialog(null, "Export file excel thành công");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+        }
+    }
+    
+    public static void exportDTTungThang(int Nam) throws SQLException{
+        List<Object[]> List = tkdao.getDTTungThang(Nam);
+        
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Save as");
+        FileNameExtensionFilter f = new FileNameExtensionFilter("xls", "xlsx");
+        FileOutputStream out = null;
+        chooser.setFileFilter(f);
+        
+        int excel = chooser.showSaveDialog(null);
+        
+        if (excel == JFileChooser.APPROVE_OPTION) {
+            
+            try {
+                workbook = new XSSFWorkbook();
+                XSSFSheet spreadsheet = workbook.createSheet("Doanh thu năm "+Nam);
+                
+                XSSFRow rows = null;
+                Cell cells = null;
+                CellStyle cs = headerCellStyle();
+                CellStyle csc = coCellStyle();
+                
+                rows = spreadsheet.createRow((short) 3);
+                rows.setHeight((short) 700);
+                
+                cells = rows.createCell(0, CellType.STRING);
+                cells.setCellValue("Tháng");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(1, CellType.STRING);
+                cells.setCellValue("Vé");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(2, CellType.STRING);
+                cells.setCellValue("Dịch vụ");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(3, CellType.STRING);
+                cells.setCellValue("Tổng");
+                cells.setCellStyle(cs);
+                
+                
+                for (int i = 0; i < List.size(); i++) {
+                    Object[] obj = List.get(i);
+                    rows = spreadsheet.createRow((short) 4 + i);
+                    rows.setHeight((short) 500);
+                    
+                    cells = rows.createCell(0);
+                    cells.setCellValue(obj[0].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(1);
+                    cells.setCellValue(obj[1].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(2);
+                    cells.setCellValue(obj[2].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(3);
+                    cells.setCellValue(obj[3].toString());
+                    cells.setCellStyle(csc);
+                }
+
+                for (int i = 0; i < List.size(); i++) {
+                    spreadsheet.autoSizeColumn(i);
+                }
+
+                out = new FileOutputStream(chooser.getSelectedFile() + ".xlsx");
+                workbook.write(out);
+                out.close();
+                JOptionPane.showMessageDialog(null, "Export file excel thành công");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+        }
+    }
+    
+    public static void exportDTThang(int Nam, int Thang) throws SQLException{
+        List<Object[]> List = tkdao.getDTThang(Nam, Thang);
+        
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Save as");
+        FileNameExtensionFilter f = new FileNameExtensionFilter("xls", "xlsx");
+        FileOutputStream out = null;
+        chooser.setFileFilter(f);
+        
+        int excel = chooser.showSaveDialog(null);
+        
+        if (excel == JFileChooser.APPROVE_OPTION) {
+            
+            try {
+                workbook = new XSSFWorkbook();
+                XSSFSheet spreadsheet = workbook.createSheet("Doanh thu" +Thang + " năm "+Nam);
+                
+                XSSFRow rows = null;
+                Cell cells = null;
+                CellStyle cs = headerCellStyle();
+                CellStyle csc = coCellStyle();
+                
+                rows = spreadsheet.createRow((short) 3);
+                rows.setHeight((short) 700);
+                
+                cells = rows.createCell(0, CellType.STRING);
+                cells.setCellValue("Ngày");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(1, CellType.STRING);
+                cells.setCellValue("Vé");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(2, CellType.STRING);
+                cells.setCellValue("Dịch vụ");
+                cells.setCellStyle(cs);
+                
+                cells = rows.createCell(3, CellType.STRING);
+                cells.setCellValue("Tổng");
+                cells.setCellStyle(cs);
+                
+                
+                for (int i = 0; i < List.size(); i++) {
+                    Object[] obj = List.get(i);
+                    rows = spreadsheet.createRow((short) 4 + i);
+                    rows.setHeight((short) 500);
+                    
+                    cells = rows.createCell(0);
+                    cells.setCellValue(obj[0].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(1);
+                    cells.setCellValue(obj[1].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(2);
+                    cells.setCellValue(obj[2].toString());
+                    cells.setCellStyle(csc);
+                    
+                    cells = rows.createCell(3);
+                    cells.setCellValue(obj[3].toString());
+                    cells.setCellStyle(csc);
+                }
+
+                for (int i = 0; i < List.size(); i++) {
+                    spreadsheet.autoSizeColumn(i);
+                }
+
+                out = new FileOutputStream(chooser.getSelectedFile() + ".xlsx");
+                workbook.write(out);
+                out.close();
+                JOptionPane.showMessageDialog(null, "Export file excel thành công");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+        }
     }
     
     public static CellStyle headerCellStyle() {

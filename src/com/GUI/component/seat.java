@@ -3,7 +3,6 @@ package com.GUI.component;
 
 import DAO.GheDAO;
 import Entity.Ghe;
-import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.swing.Button;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -53,8 +52,8 @@ public class seat extends JPanel {
         }
     }
 
-    public void fillGhe(String maPhong) {
-        listGhe = gheDAO.selectByMaPhong(maPhong);
+    public void fillGhe(String maPhong, String gioChieu) {
+        listGhe = gheDAO.selectByMaPhong(maPhong,gioChieu);
         int i = 0;
         for (Ghe ghe : listGhe) {
             if (ghe.isTrangThai()) {
