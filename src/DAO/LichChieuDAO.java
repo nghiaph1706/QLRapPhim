@@ -20,7 +20,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     private String DELETE_SQL = "UPDATE [LichChieu] SET [HIDE] = 1 WHERE [MaLichChieu] = ?";
     private String SELECT_BY_ID = "SELECT * FROM LichChieu WHERE [HIDE] = 0 AND [MaLichChieu] = ?";
     private String SELECT_ALL = "SELECT * FROM LichChieu WHERE [HIDE] = 0";
-    private String SELECT_BY_LC = "SELECT ph.MaPhim Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim GROUP BY ph.MaPhim, NgayChieu";
+    private String SELECT_BY_LC = "SELECT ph.MaPhim Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim where NgayChieu = CONVERT(char(10), GetDate(),126) GROUP BY ph.MaPhim, NgayChieu";
     private String SELECT_ALL_BY_MaPhim = "Select * from lichchieu where maphim = ?";
     private String SELECT_ALL_BY_DATE = "Select * from Lichchieu where ngaychieu between ? and ?";
     private String SELECT_ALL_BY_LastDateNull = "select * from LichChieu where NgayChieu between ? and (select max(ngaychieu) from lichchieu)";

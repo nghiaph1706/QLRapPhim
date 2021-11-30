@@ -6,7 +6,6 @@ import Utilities.Option;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
 import com.GUI.swing.ScrollBar;
-import java.awt.Image;
 import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -22,6 +21,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
     private XImage xImage = new XImage();
     private String HinhTam = "";
     private NhanVienDAO nvdao = new NhanVienDAO();
+    private NhanVien nv;
     private Option dialog = new Option();
     private String pathDefaultFile = System.getProperty("user.dir");
     private ImageIcon icon;
@@ -486,11 +486,12 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         obj.setGioiTinh(rdoquanly.isSelected() ? true : false);
         obj.setGhiChu(txtghichu.getText());
         obj.setHinh(HinhTam);
+        obj.setMaNhanVien(nv.getMaNhanVien());
         return obj;
     }
 
     private void chooseImageAvatar() {
-        File file = xImage.getImageFile();
+        File file = xImage.getImageFile(HinhTam);
         if (file != null) {
             xImage.saveImageNhanVien(file);
             HinhTam = file.getName();
@@ -596,5 +597,9 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             modeltable.setRowCount(0);
             tblnhanvien.setModel(modeltable);
         }
+    }
+
+    public void setNV(NhanVien nv) {
+        this.nv = nv;
     }
 }

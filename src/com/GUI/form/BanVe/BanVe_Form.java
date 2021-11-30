@@ -20,13 +20,18 @@ import Entity.Ve;
 import Utilities.Auth;
 import Utilities.XDate;
 import com.GUI.component.seat;
+import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BanVe_Form extends javax.swing.JPanel {
@@ -38,7 +43,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private DichVuDAO dvDAO = new DichVuDAO();
     private HDCTDAO hdctDAO = new HDCTDAO();
     public static KHTTDAO khttdao = new KHTTDAO();
-    public List<String> khttList = new ArrayList<>();
+    public static List<String> khttList = new ArrayList<>();
     public static String MaPhong;
     public static String GioChieu;
     public static String maHDNow;
@@ -311,8 +316,8 @@ public class BanVe_Form extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtMaKHTT, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                 .addComponent(btnChuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(lblCheckMa, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(83, 83, 83))
+                            .addComponent(lblCheckMa, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -402,8 +407,13 @@ public class BanVe_Form extends javax.swing.JPanel {
 
     private void btnXuatHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHDActionPerformed
         DefaultComboBoxModel cbxModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
-        MaKM = cbxModel.getSelectedItem().toString().trim();
-        if (lblCheckMa.getText().equals("True")) {
+        String tmp = cbxModel.getSelectedItem().toString().trim();
+        if (!tmp.equals("-")) {
+            MaKM = tmp;
+        } else {
+            MaKM = null;
+        }
+        if (lblCheckMa.getText().equals("Mã hợp lệ")) {
             MaKHTT = txtMaKHTT.getText().trim();
         } else {
             MaKHTT = null;
@@ -417,14 +427,17 @@ public class BanVe_Form extends javax.swing.JPanel {
 
     private void btnChuyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenActionPerformed
         String tmp = cboPhongChieu.getSelectedItem().toString().trim();
-        MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
-        GioChieu = tmp.substring(2).trim();
-        Main.main.showForm(new ChonGhe_Form());
+        if (!tmp.equals("-")) {
+            MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
+            GioChieu = tmp.substring(2).trim();
+            Main.main.showForm(new ChonGhe_Form());
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn phim");
+        }
     }//GEN-LAST:event_btnChuyenActionPerformed
 
     private void cboPhongChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongChieuActionPerformed
 
-        
     }//GEN-LAST:event_cboPhongChieuActionPerformed
 
     private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed
@@ -614,6 +627,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhim.getModel();
         cboModel.removeAllElements();
+        cboModel.addElement("-");
         List<LichChieu> list = lcDAO.selectPhimTheoLichChieu();
         
         for(LichChieu lc : list) {
@@ -625,11 +639,14 @@ public class BanVe_Form extends javax.swing.JPanel {
     {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhongChieu.getModel();
         cboModel.removeAllElements();
+        cboModel.addElement("-");
         String lch = (String) cboPhim.getSelectedItem();
-        if(lch != null) {
-            List<LichChieu> list = lcDAO.selectPhongChieuTheoPhim(lch.substring(0, lch.indexOf("-")).trim());
-            for(LichChieu lc : list) {
-                cboModel.addElement(lc.getMaPhong());
+        if (!lch.equals("-")) {
+            if(lch != null) {
+                List<LichChieu> list = lcDAO.selectPhongChieuTheoPhim(lch.substring(0, lch.indexOf("-")).trim());
+                for(LichChieu lc : list) {
+                    cboModel.addElement(lc.getMaPhong());
+                }
             }
         }
     }
@@ -637,6 +654,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
         cboModel.removeAllElements();
+        cboModel.addElement("-");
         List<String> list = kmDAO.listKhuyenMai();
         for(String km : list)
             cboModel.addElement(km);
@@ -656,109 +674,21 @@ public class BanVe_Form extends javax.swing.JPanel {
     private void checkMaKHTT() {
         for (String maKHTT : khttList) {
             if (maKHTT.equals(txtMaKHTT.getText())) {
-                lblCheckMa.setText("True");
+                lblCheckMa.setText("Mã hợp lệ");
                 lblCheckMa.setForeground(Color.green);
                 return;
             } else {
-                lblCheckMa.setText("False");
+                lblCheckMa.setText("Chưa có mã. Đăng kí mới?");
                 lblCheckMa.setForeground(Color.red);
+                lblCheckMa.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent me) {
+                        Main.main.showForm(new KhachHangThanThiet_Form());
+                    }
+                });
             }
         }
     }
-    //    private HoaDon getForm()
-//    {
-//        boolean checkMaKM = false, checkMaKHTT = false;
-//        double soLuong = 0;
-//        double mucGiamGiaKM = 0, mucGiamGiaKHTT = 0, giaGhe = 0;
-//        String maKM = "";
-//        //Entity
-//        HoaDon hd = new HoaDon();
-//        DichVu dv = new DichVu();
-//        KHTT khtt = new KHTT();
-//        Ghe gh = new Ghe();
-//        Phim ph = new Phim();
-//        //Vé Phim
-//        //Phiếu giảm giá
-//        KhuyenMai km = (KhuyenMai) cboPhieuGG.getSelectedItem();
-//        List<KhuyenMai> listKM = kmDAO.selectByMaKM(km.getMaKM());
-//        for(KhuyenMai kh : listKM) {
-//            if(chkPhieuGG.isSelected() && cboPhieuGG.getSelectedItem().equals(kh.getMaKM())) {
-//                mucGiamGiaKM = kh.getMucGiamGia();
-//                maKM = kh.getMaKM();
-//                checkMaKM = true;
-//            }
-//            else {
-//                mucGiamGiaKM = 0;
-//                maKM = null;
-//                checkMaKM = false;
-//            }
-//        }
-//        
-//        hd.setMaKM(maKM);
-//        hd.setMucGiamGia((int)mucGiamGiaKM);
-//        //Phòng xem phim = Phòng && Chọn ghế = (Vị trí từ A-N 1-10)
-//        //Thành tiền = (phí dịch vụ + vé xem phim) * ((100 - (mức giảm giá của KHTT + mức giảm giá của vé))/100)
-//        //Tổng tiền = (phí dịch vụ + vé xem phim)
-//        hd.setMaKHTT(txtMaKHTT.getText());
-//        if(txtMaKHTT.getText().equals(khtt.getMAKHTT()) && !txtMaKHTT.getText().isEmpty()) {
-//            mucGiamGiaKHTT = khtt.getMucGiacGia();
-//            checkMaKHTT = true;
-//        }
-//        double mucGiamGia = 0;
-//        if(checkMaKM && checkMaKHTT) {
-//            mucGiamGia = mucGiamGiaKM + mucGiamGiaKHTT;
-//        }
-//        else if(checkMaKM && !checkMaKHTT) {
-//            mucGiamGia = mucGiamGiaKM;
-//        }
-//        else if(!checkMaKM && checkMaKHTT) {
-//            mucGiamGia = mucGiamGiaKHTT;
-//        }
-//        else {
-//            mucGiamGia = 0;
-//        }
-//        //Giá dịch vụ = Tổng hoặc từng dịch vụ
-//        int bap = (int) spnBap.getValue();
-//        int nuoc = (int) spnNuoc.getValue();
-//        int cb1 = (int) spnCombo1.getValue();
-//        int cb2 = (int) spnCombo2.getValue();
-//        double tongTienDV = 0;
-//        if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
-//            //Bắp = 25000, Nước = 25000, Combo1 = 50000, Combo2 = 75000
-//            soLuong = (bap + nuoc + cb1 + cb2);
-//            tongTienDV = ((25000*2) + 50000 + 75000);
-//            dv.setGiaDichVu(tongTienDV);
-//            if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
-//                dv.setGiaDichVu(tongTienDV + (25000 | 25000 | 50000 | 75000));
-//            }
-//        }
-//        else {
-//            soLuong = bap | nuoc | cb1 | cb2;
-//            tongTienDV = (25000 | 25000 | 50000 | 75000) * soLuong;
-//            dv.setGiaDichVu(tongTienDV);
-//        }
-//        //Chọn ghế
-//        for(Ghe ghe : ChonGhe_Form.listGheSelected) {
-//            if(ghe.getMaGhe().equals(ChonGhe_Form.listGheSelected)) {
-//                giaGhe = ghe.getGiaGhe();
-//            }
-//        }
-//        //Thành tiền
-//        double thanhTien = 0;
-//        if(mucGiamGia != 0) {
-//            thanhTien = (dv.getGiaDichVu() + giaGhe) * ((100 - mucGiamGia)/100);
-//        }
-//        else {
-//            thanhTien = (dv.getGiaDichVu() + giaGhe);
-//        }
-//        hd.setTongTien(dv.getGiaDichVu() + giaGhe);
-//        hd.setThanhTien(thanhTien);
-//        java.util.Date date = new java.util.Date();
-//        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-//        hd.setNgayLap(sqlDate);
-//        hd.setMaNhanVien("NV1");
-//        return hd;
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnChuyen;
     private com.GUI.swing.Button btnThemDichVu;

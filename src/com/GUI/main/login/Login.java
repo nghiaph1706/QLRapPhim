@@ -9,8 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,40 +33,27 @@ public class Login extends javax.swing.JFrame {
         pwdPass.setLabelText("Password");
     }
     
-    void showLoading(JFrame jFrame, String mess) throws InterruptedException{
-        new Thread() {
-            @Override
-            public void run() {
-                jFrame.dispose();
+    void showLoading() throws InterruptedException{
                 loading.setVisible(true);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                Thread.sleep(1000);
                 loading.dispose();
-                jFrame.setVisible(true);
-                if (mess.equals("")) {
-                    
-                } else {
-                    JOptionPane.showMessageDialog(login,mess);
-                }
-            }
-        }.start();
     }
     
     void dangNhap(String manv, String matkhau) throws InterruptedException{
         NhanVien nhanVien = dao.selectById(manv);
-        if (nhanVien == null) {
-            MsgBox.alert(this, "Sai tên đăng nhập.");
-        } else if (!matkhau.equals(nhanVien.getMatKhau())) {
-            MsgBox.alert(this, "Sai mật khẩu.");
-        } else {
-            Auth.user = nhanVien;
-            showLoading(new Main(),"");
-            dispose();
-        }
+                if (nhanVien == null) {
+                    MsgBox.alert(null, "Sai tên đăng nhập.");
+                } else if (!matkhau.equals(nhanVien.getMatKhau())) {
+                    MsgBox.alert(null, "Sai mật khẩu.");
+                } else {
+                    Main x = new Main();
+                    x.setNV(nhanVien);
+                    x.check();
+                    x.setVisible(true);
+                    Auth.user = nhanVien;
+                    x.setVisible(true);
+                    dispose();
+                }
     }
 
     /**
@@ -146,6 +131,11 @@ public class Login extends javax.swing.JFrame {
         pwdPass.setForeground(new java.awt.Color(51, 51, 51));
         pwdPass.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         pwdPass.setLabelText("Password");
+        pwdPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdPassActionPerformed(evt);
+            }
+        });
 
         lblExit.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lblExit.setForeground(new java.awt.Color(255, 51, 51));
@@ -230,11 +220,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblQuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseClicked
-        try {
-            showLoading(new ForgotPass(),"");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                login.dispose();
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                new ForgotPass().setVisible(true);
+            }
+        }.start();
     }//GEN-LAST:event_lblQuenMatKhauMouseClicked
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
@@ -242,12 +242,26 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
-            dangNhap(txtUser.getText().trim(), pwdPass.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        new Thread(){
+            public void run(){
+                try {
+                    loading.setVisible(true);
+                    Thread.sleep(3000);
+                    loading.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    dangNhap(txtUser.getText().trim(), pwdPass.getText().trim());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblQuenMatKhauMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseMoved
@@ -269,6 +283,27 @@ public class Login extends javax.swing.JFrame {
         lblExit.setForeground(new Color(255,51,51));
         lblExit.setFont(new Font("Tahoma",Font.PLAIN | Font.ITALIC,14));
     }//GEN-LAST:event_lblExitMouseExited
+
+    private void pwdPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdPassActionPerformed
+        new Thread(){
+            public void run(){
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    dangNhap(txtUser.getText().trim(), pwdPass.getText().trim());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+    }//GEN-LAST:event_pwdPassActionPerformed
 
     /**
      * @param args the command line arguments

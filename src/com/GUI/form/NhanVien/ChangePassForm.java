@@ -5,6 +5,7 @@ import Entity.NhanVien;
 import Utilities.Option;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,13 +17,14 @@ public class ChangePassForm extends javax.swing.JFrame {
     private XImage xImage = new XImage();
     private NhanVienDAO nvdao = new NhanVienDAO();
     private Option dialog = new Option();
-    private String pass = "";
+    private NhanVien nv;
 
     /**
      * Creates new form ChangePassForm
      */
     public ChangePassForm() {
         initComponents();
+        setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -44,13 +46,14 @@ public class ChangePassForm extends javax.swing.JFrame {
         btnchangepass = new com.GUI.swing.Button();
         btncancel = new com.GUI.swing.Button();
         txtmanhanvien = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(56, 56, 56));
 
-        lblavatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/0cf1c017d3491b174258.jpg"))); // NOI18N
+        lblavatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/staff.png"))); // NOI18N
 
         txttennhanvien.setFont(new java.awt.Font("Segoe UI Black", 1, 15)); // NOI18N
         txttennhanvien.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,6 +99,16 @@ public class ChangePassForm extends javax.swing.JFrame {
         txtmanhanvien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtmanhanvien.setText("Mã Nhân Viên");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/icons8_multiply_60px.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
@@ -103,34 +116,44 @@ public class ChangePassForm extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(txtoldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(txtnewpass1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtnewpass2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelBorder1Layout.createSequentialGroup()
-                                .addComponent(btnchangepass, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(btncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(lblavatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblavatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtmanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txttennhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(39, 39, 39))
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(txtoldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(txtnewpass1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtnewpass2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                                        .addComponent(btnchangepass, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(btncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtmanhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txttennhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 32, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblavatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblavatar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
                 .addGap(15, 15, 15)
                 .addComponent(txtmanhanvien)
                 .addGap(18, 18, 18)
@@ -172,6 +195,14 @@ public class ChangePassForm extends javax.swing.JFrame {
         ChangePass();
     }//GEN-LAST:event_btnchangepassActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+//        int input = JOptionPane.showConfirmDialog(rootPane, "Bạn Có Muốn Thoát Không", "Exit?", 0);
+//        if (input == 0) {
+//            this.dispose();
+//        }
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +241,7 @@ public class ChangePassForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btncancel;
     private com.GUI.swing.Button btnchangepass;
+    private javax.swing.JLabel jLabel1;
     private com.GUI.swing.ImageAvatar lblavatar;
     private com.GUI.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel txtmanhanvien;
@@ -218,10 +250,10 @@ public class ChangePassForm extends javax.swing.JFrame {
     private com.GUI.swing.PasswordField txtoldpass;
     private javax.swing.JLabel txttennhanvien;
     // End of variables declaration//GEN-END:variables
-    public void initEntity(String imglink, String manv, String tennv) {
-        xImage.ReadAndScaleIMG(lblavatar, "/imageNhanVien/" + imglink, lblavatar.getWidth() - 1, lblavatar.getHeight() - 1);
-        txtmanhanvien.setText(manv);
-        txttennhanvien.setText(tennv);
+    public void initEntity() {
+        xImage.ReadAndScaleIMG(lblavatar, "/imageNhanVien/" + nv.getHinh(), lblavatar.getWidth() - 1, lblavatar.getHeight() - 1);
+        txtmanhanvien.setText(nv.getMaNhanVien());
+        txttennhanvien.setText(nv.getHoTen());
     }
 
     private void getpass() {
@@ -235,7 +267,7 @@ public class ChangePassForm extends javax.swing.JFrame {
         if (vld.CheckString("Mật Khẩu Cũ", oldpass, 30, false)
                 && vld.CheckString("Mật Khẩu Mới", oldpass, 30, false)
                 && vld.CheckString("Nhập Lại Mật Khẩu Mới", oldpass, 30, false)
-                && vld.CheckDulicase2("Mật Khẩu Cũ", oldpass, "Mật Khẩu Của Bạn\nVui Lòng Nhập Lại!", pass)
+                && vld.CheckDulicase2("Mật Khẩu Cũ ", oldpass, "Mật Khẩu Của Bạn\nVui Lòng Nhập Lại!", nv.getMatKhau())
                 && vld.CheckDulicase2("Mật Khẩu Mới", newpass1, "Nhập Lại Mật Khẩu Mới", newpass2)) {
             return true;
         }
@@ -247,13 +279,17 @@ public class ChangePassForm extends javax.swing.JFrame {
             try {
                 NhanVien pass = new NhanVien();
                 pass.setMaNhanVien(txtmanhanvien.getText());
-                pass.setMatKhau("123");
+                pass.setMatKhau(txtnewpass1.getText());
                 nvdao.UpdatePassword(pass);
                 dialog.Done(this, "Đổi Mật Khẩu Thành Công", "Hoàn Thành");
+                dispose();
             } catch (Exception e) {
                 dialog.Error(this, "Đổi Mật Khẩu Không Thành Công\n" + e, "Lỗi");
             }
         }
     }
 
+    public void setNV(NhanVien nv) {
+        this.nv = nv;
+    }
 }

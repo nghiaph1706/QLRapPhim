@@ -101,22 +101,25 @@ public class ValidateCheck implements Serializable {
 //Check Date After And Before
 
     public boolean CheckAfterAndBefore(String NameStringAfter, Date after, String NameStringBefore, Date before) {
-        if (after.getYear() <= before.getYear()) {
-            if (after.getYear() == before.getYear()) {
-                if (after.getMonth() <= before.getMonth()) {
-                    if (after.getMonth() == before.getMonth()) {
-                        if (after.getDay() <= before.getDay()) {
-                            return true;
-                        }
-                    }
-                    if (after.getMonth() < before.getMonth()) {
-                        return true;
-                    }
-                }
-            }
-            if (after.getYear() < before.getYear()) {
-                return true;
-            }
+//        if (after.getYear() <= before.getYear()) {
+//            if (after.getYear() == before.getYear()) {
+//                if (after.getMonth() <= before.getMonth()) {
+//                    if (after.getMonth() == before.getMonth()) {
+//                        if (after.getDay() <= before.getDay()) {
+//                            return true;
+//                        }
+//                    }
+//                    if (after.getMonth() < before.getMonth()) {
+//                        return true;
+//                    }
+//                }
+//            }
+//            if (after.getYear() < before.getYear()) {
+//                return true;
+//            }
+//        }
+        if (after.getTime() < before.getTime()) {
+            return true;
         }
         JOptionPane.showMessageDialog(null, NameStringAfter + " Sau Ngày " + NameStringBefore + "!", "Lỗi", 0);
         return false;

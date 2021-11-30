@@ -14,15 +14,15 @@
 	(N'Trần Chí','0990090908','nghiaplps17855@fpt.edu.vn',0,1,'123',0),
 	(N'Võ Hùng Dương','0990090907','nghiaplps17855@fpt.edu.vn',1,0,'123',0),
 	(N'Ngô Tiên Duy','0990090906','nghiaplps17855@fpt.edu.vn',0,0,'123',0),
-	(N'Đào Đức Nguyên','0990090905','nghiaplps17855@fpt.edu.vn',1,0,'123',0);
+	(N'Đào Đức Nguyên','0990090905','nguyenddps17838@fpt.edu.vn',1,0,'123',0);
 	GO
 
-	INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[MaNhanVien],[HIDE]) VALUES
-	(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','NV1',0),
-	(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','NV2',0),
-	(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','NV3',0),
-	(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NV4',0),
-	(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','NV1',0);
+	INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES
+	(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','MatBiec.jpg','NV1',0),
+	(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','avg.jpg','NV2',0),
+	(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','AntMain.jpg','NV3',0),
+	(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NguoiNhen.jpg','NV4',0),
+	(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','Avengers.jpg','NV1',0);
 	GO
 
 	INSERT INTO [Phong]([HIDE]) VALUES 
@@ -35,13 +35,13 @@
 
 
 INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
-('2021-11-20', '08:30', 'MP1', 'P1', 0),
-('2021-11-20', '10:30', 'MP2', 'P2', 0),
+('2021-11-20', '21:30', 'MP1', 'P1', 0),
+('2021-11-20', '23:30', 'MP2', 'P2', 0),
 ('2021-11-20', '18:30', 'MP3', 'P3', 0),
 ('2021-11-20', '20:30', 'MP4', 'P4', 0),
 ('2021-11-20', '22:30', 'MP5', 'P5', 0),
-('2020-08-02', '08:30', 'MP1', 'P1', 0),
-('2020-12-12', '10:30', 'MP2', 'P2', 0),
+('2020-08-02', '18:00', 'MP1', 'P1', 0),
+('2020-12-12', '21:00', 'MP2', 'P2', 0),
 ('2020-03-16', '18:30', 'MP3', 'P3', 0),
 ('2020-04-01', '20:30', 'MP4', 'P4', 0),
 ('2020-05-04', '22:30', 'MP5', 'P5', 0);
@@ -67,11 +67,11 @@ GO
 	GO
 
 	INSERT INTO [KhachHangThanThiet]([Ten],[SDT],[Email],[NgayDK],[MucGiamGia],[SoLanSuDung],[MaNhanVien],[HIDE]) VALUES
-	(N'Nguyễn Văn Tèo', '0123456789', 'nvteo@gmail.com', '2021-11-07', 10, '0', 'NV1', 0),
-	(N'Nguyễn Văn Toàn', '0123456788', 'nvtoan@gmail.com', '2021-11-07', 10, '0', 'NV1', 0),
-	(N'Nguyễn Văn Tâm', '0123456787', 'nvtam@gmail.com', '2021-11-07', 10, '0', 'NV2', 0),
-	(N'Nguyễn Văn Thanh', '0123456786', 'nvthanh@gmail.com', '2021-11-07', 10, '0', 'NV3', 0),
-	(N'Nguyễn Văn Tin', '0123456785', 'nvtin@gmail.com', '2021-11-07', 10, '0', 'NV1', 0);
+	(N'Nguyễn Văn Tèo', '0123456789', 'nguyenddps17838@fpt.edu.vn', '2021-11-07', 10, '0', 'NV1', 0),
+	(N'Nguyễn Văn Toàn', '0123456788', 'onguyn6@gmail.com', '2021-11-07', 10, '0', 'NV1', 0),
+	(N'Nguyễn Văn Tâm', '0123456787', 'onguyn9@gmail.com', '2021-11-07', 10, '0', 'NV2', 0),
+	(N'Nguyễn Văn Thanh', '0123456786', 'onguyn24@gmail.com', '2021-11-07', 10, '0', 'NV3', 0),
+	(N'Nguyễn Văn Tin', '0123456785', 'nghiaplps17855@fpt.edu.vn', '2021-11-07', 10, '0', 'NV1', 0);
 	GO
 
 	INSERT INTO [HoaDon]([TongTien],[MaKM],[MaKHTT],[MucGiamGia],[ThanhTien],[NgayLap],[MaNhanVien],[HIDE]) VALUES 
@@ -172,4 +172,7 @@ GO
 	('COMBO1',50000,1,50000,'HD9',0);
 	GO
 
-	select *from ghe
+	exec sp_ThemPhimHomNay '2021-11-30'
+	go
+
+	select*from NhanVien

@@ -39,17 +39,11 @@ as begin
 	declare @h int =17, @m int = 0, @time varchar(10)
 	while @h <= 23
 		begin
-			if @m % 2 = 0
-				begin
-					set @time = concat(cast(@h as varchar(5)),':','00')
-				end
-			else
-				begin
-					set @time = concat(cast(@h as varchar(5)),':','30')
-				end
+			if @m % 2 = 0 set @time = concat(cast(@h as varchar(5)),':','00')
+			if @m % 2 != 0 set @time = concat(cast(@h as varchar(5)),':','30')
 			exec sp_TaoGhe @MaPhong , @time
-			set @h = @h + 1
 			set @m = @m + 1
+			set @h = @h + (@m % 2)
 		end
 end
 go
@@ -243,4 +237,30 @@ where MONTH(ngaylap) = @thang and year(ngaylap) = @nam
 group by TenPhim, month(NgayLap)
 end
 go
-select * from LichChieu
+
+create PROCEDURE sp_TKLX_TheoNam(@nam int)
+as
+begin
+select MONTH(hd.NgayLap) as 'Thang',count(hdct.Mave) as 'LuotXem' from HoaDonChiTiet hdct 
+inner join hoadon hd on hdct.MaHoaDon=hd.MaHoaDon
+inner join ve on ve.MaVe = hdct.MaVe
+where year(hd.NgayLap) = @nam 
+group by month(hd.NgayLap)
+end
+go
+
+CREATE PROC sp_ThemPhimHomNay(@date date)
+as Begin
+INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
+(@date, '21:30', 'MP1', 'P1', 0),
+(@date, '23:30', 'MP2', 'P2', 0),
+(@date, '18:30', 'MP3', 'P3', 0),
+(@date, '20:30', 'MP4', 'P4', 0),
+(@date, '22:30', 'MP5', 'P5', 0),
+(@date, '18:00', 'MP1', 'P1', 0),
+(@date, '21:00', 'MP2', 'P2', 0),
+(@date, '18:30', 'MP3', 'P3', 0),
+(@date, '20:30', 'MP4', 'P4', 0),
+(@date, '22:30', 'MP5', 'P5', 0);
+End
+GO

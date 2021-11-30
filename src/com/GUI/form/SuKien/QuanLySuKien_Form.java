@@ -1,10 +1,24 @@
 package com.GUI.form.SuKien;
 
+import DAO.KHTTDAO;
 import DAO.KhuyenMaiDAO;
+import Entity.KHTT;
 import Entity.KhuyenMai;
+import Entity.NhanVien;
+import Utilities.MsgBox;
 import Utilities.ValidateCheck;
 import com.GUI.swing.ScrollBar;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +28,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     private List<KhuyenMai> list;
     private ValidateCheck vld = new ValidateCheck();
     private KhuyenMaiDAO KmAction;
+    private NhanVien nv;
 
     public QuanLySuKien_Form() {
         initComponents();
@@ -298,7 +313,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         km.setNgayKetThuc(DateClose.getDate());
         km.setMucGiamGia(Float.valueOf(txtMucKhuyenMai.getText()));
         km.setThongTinKM(txtthongtin.getText());
-//        km.setMaNhanVien(""); cái này hoàn thiện khi login
+        km.setMaNhanVien(nv.getMaNhanVien());
         return km;
     }
 
@@ -342,7 +357,10 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             try {
                 KmAction.insert(values);
-                JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!", "Hoàn Thành", 0);
+                JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!", "Hoàn Thành", 0);   
+                if(MsgBox.confirm(this, "Bạn có muốn thông báo sự kiện này đến KHTT không?")){
+                    new SKDangDienRa_Form().guiMail2(new KhuyenMaiDAO().selectById(txtMaSuKien.getText()));
+                }
             } catch (Exception e) {
                 try {
                     KmAction.updatehide(values.getMaKM());
@@ -357,16 +375,18 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     }
 
     private void FillToComp() {
-        txtMaSuKien.setEditable(false);
         int index = tblsukien.getSelectedRow();
-        for (int i = 0; i < list.size(); i++) {
-            if (tblsukien.getValueAt(index, 0).equals(list.get(i).getMaKM())) {
-                txtMaSuKien.setText(list.get(i).getMaKM());
-                txtTenSuKien.setText(list.get(i).getTenKM());
-                DateOpen.setDate(list.get(i).getNgayBatDau());
-                DateClose.setDate(list.get(i).getNgayKetThuc());
-                txtMucKhuyenMai.setText(String.valueOf(list.get(i).getMucGiamGia()));
-                txtthongtin.setText(list.get(i).getThongTinKM());
+        if (index != -1) {
+            txtMaSuKien.setEditable(false);
+            for (int i = 0; i < list.size(); i++) {
+                if (tblsukien.getValueAt(index, 0).equals(list.get(i).getMaKM())) {
+                    txtMaSuKien.setText(list.get(i).getMaKM());
+                    txtTenSuKien.setText(list.get(i).getTenKM());
+                    DateOpen.setDate(list.get(i).getNgayBatDau());
+                    DateClose.setDate(list.get(i).getNgayKetThuc());
+                    txtMucKhuyenMai.setText(String.valueOf(list.get(i).getMucGiamGia()));
+                    txtthongtin.setText(list.get(i).getThongTinKM());
+                }
             }
         }
     }
@@ -400,5 +420,96 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Chưa Chọn Dòng Để Xóa!", "Lỗi", 0);
         }
+    }
+    private void guiMail(){
+        if(MsgBox.confirm(this, "Bạn có muốn gửi thông tin sự kiện đến KHTT không ?")){
+            
+        List<KHTT> listMailKH = new KHTTDAO().selectAll();
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", 587);
+        String accountName = "cflcinema.nhom02@gmail.com";
+        String accountPassword = "CFLnhom02";
+        Session s = Session.getInstance(p, new javax.mail.Authenticator() {
+            @Override
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication(accountName, accountPassword);
+            }
+        });
+        String from = accountName;
+        // gửi đến mail nào       
+        for (int j = 0; j < listMailKH.size(); j++) {
+            String email = listMailKH.get(j).getEmail();
+            String nameKH = listMailKH.get(j).getTen();
+            
+            // chủ đề
+            Thread a = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        String subject = "CFL Cinema";
+                        // nội dung
+                        String body = "<!DOCTYPE html>\n"
+                                + "<html lang=\"en\">\n"
+                                + "<head>\n"
+                                + "    <meta charset=\"UTF-8\">\n"
+                                + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+                                + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                                + "    <title>Document</title>\n"
+                                + "</head>\n"
+                                + "<body>\n"
+                                + "    <div class = \"bocNgoai\" >\n"
+                                + "        <h1 style = \"text-align: center;color: #B22222;\">CFL Cinema</h1>\n"
+                                + "\n"
+                                + "        <div class =\"bocTrong\" style=\"margin: 0 auto;width: 430px; height: 350px;border: 5px outset gray;padding: 15px;\">\n"
+                                + "            <p  style=\"font-size: 18px\">\n"
+                                + "                <span>Xin chào </span><b>"+nameKH+"</b>\n"
+                                + "                <br><br>\n"
+                                + "                <p style=\"\"> Công ty TNHH CFL Cinema trân trọng thông báo. Cảm ơn Quý khách đã cùng tin tưởng, đồng hành và bình chọn \n"
+                                + "                  CFL Cinema là công ty dẫn đầu về trải nghiệm khách hàng rạp chiếu phim. \n"
+                                + "                  Nay chúng tôi tổ chức sự kiện tri ân khách hàng. Kính mong quý khách\n"
+                                + "                  có mặt tại buổi tri ân \n"
+                                + "                  <ul>\n"
+                                + "                      <li><b>Tên sự kiện: Ăn mừng giám đốc Nguyên qua môn</b></li>\n"
+                                + "                      <li><b>Thời gian bắt đầu : 19:00 PM 30/02/2021</b></li>\n"
+                                + "                      <li><b>Thời gian kết thúc: 19:00 PM 30/02/2021</b></li>\n"
+                                + "                      <li><b>Giảm giá: 90%</b></li>\n"
+                                + "                      \n"
+                                + "                  </ul>\n"
+                                + "                  Chúng tôi mong nhận được sự phản hồi sớm từ Quý khách ! <br><br>\n"
+                                + "                  Giám Đốc: <b>Đào Đức Nguyên</b>\n"
+                                + "                </p>\n"
+                                + "                </p>\n"
+                                + "\n"
+                                + "        </div>\n"
+                                + "\n"
+                                + "\n"
+                                + "\n"
+                                + "    </div>\n"
+                                + "</body>\n"
+                                + "</html>";
+                        Message msg = new MimeMessage(s);
+                        msg.setFrom(new InternetAddress(from));
+                        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+                        msg.setSubject(subject);
+                        msg.setContent(body, "text/html;charset = utf-8");
+
+                        Transport.send(msg);
+                    } catch (AddressException ex) {
+                        Logger.getLogger(SKDangDienRa_Form.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SKDangDienRa_Form.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            };
+            a.start();
+        }
+        MsgBox.alert(this, "Gửi mail thành công");
+        }
+    }
+    public void setNV(NhanVien nv) {
+        this.nv = nv;
     }
 }

@@ -4,6 +4,7 @@ import DAO.HoaDonDAO;
 import DAO.ThongKeDAO;
 import com.GUI.Chart.BarChart.BarChart;
 import com.GUI.Chart.BarChart.ModelChart;
+import com.GUI.Chart.ChartLine.ChartLine;
 import com.GUI.Chart.ChartLine.ModelChartLine;
 import com.GUI.Chart.ChartPie.ModelChartPie;
 import com.GUI.model.ModelCard;
@@ -25,25 +26,30 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
     ThongKeDAO tkDao = new ThongKeDAO();
     DefaultComboBoxModel cboModelThang = new DefaultComboBoxModel();
     DefaultComboBoxModel cboModelNam = new DefaultComboBoxModel();
+    int month;
+    int year;
+    List<ModelChartLine> modelChartLines = new ArrayList<>();
 
     public TKLuotXem_Form() {
         initComponents();
         setOpaque(false);
+        defaultset();
         init();
-        fillCboThang();
-        fillCboNam();
+    }
+
+    private void defaultset() {
         List<ModelChartPie> modelChartPies = new ArrayList<>();
         modelChartPies.add(new ModelChartPie("KHTT", 200, new Color(245, 189, 135)));
         modelChartPies.add(new ModelChartPie("Khách vãng lai", 200, new Color(135, 189, 245)));
         modelChartPies.add(new ModelChartPie("Khác", 200, new Color(245, 189, 135)));
         chartPie1.setModel(modelChartPies);
-
-        
         card1.setData(new ModelCard("Value1", 255, 80, new ImageIcon("/com/GUI/icon/1.png")));
         card1.setColorGradient(Color.pink);
     }
 
     public void init() {
+        fillCboNam();
+        fillCboThang();
         try {
             thongkeluotxem();
         } catch (SQLException ex) {
@@ -53,37 +59,41 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
     }
 
     public void fillCboThang() {
-        cboThang.setModel(cboModelThang);
-        cboModelThang.removeAllElements();
+        cboThang.removeAllItems();
         for (int i = 1; i <= 12; i++) {
             cboModelThang.addElement(String.valueOf(i));
         }
-        
+        cboThang.setModel(cboModelThang);
+        month = Integer.parseInt(cboThang.getSelectedItem().toString());
+        System.out.println(month);
     }
 
     public void fillCboNam() {
-        cboNam.setModel(cboModelNam);
-        cboModelNam.removeAllElements();
+        cboNam.removeAllItems();
         for (Integer nam : new HoaDonDAO().selectYear()) {
             cboModelNam.addElement(String.valueOf(nam));
         }
+        cboNam.setModel(cboModelNam);
+        year = Integer.parseInt(cboNam.getSelectedItem().toString());
+        System.out.println(year);
     }
 
     public void thongkeluotxem() throws SQLException {
         BarChart barchartTKNam = new BarChart();
         barchartTKNam.addLegend("LƯỢT XEM", new Color(245, 189, 135));
-        String year = "";
+        String year2 = "";
         String month = "";
         try {
-            year = cboModelNam.getSelectedItem().toString();
+            year2 = cboModelNam.getSelectedItem().toString();
             month = cboModelThang.getSelectedItem().toString();
             System.out.println(month);
             System.out.println(year);
+            year = Integer.valueOf(year2);
         } catch (Exception e) {
         }
-        List<Object[]> list = tkDao.getTKLX(month, year);
+        List<Object[]> list = tkDao.getTKLX(month, year2);
         for (Object obj[] : list) {
-            barchartTKNam.addData(new ModelChart(obj[1].toString(), new double[]{Double.parseDouble(obj[0].toString())})); // bi lsao
+            barchartTKNam.addData(new ModelChart(obj[1].toString(), new double[]{Double.parseDouble(obj[0].toString())})); 
         }
         jpanelTKNam.removeAll();
         jpanelTKNam.add(barchartTKNam, BorderLayout.CENTER);
@@ -91,23 +101,21 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
     }
 
     public void thongKeTheoMP() {
+        ChartLine chartlineTKNam = new ChartLine();     
         try {
             List<ModelChartLine> modelChartLines = new ArrayList<>();
-            String month = "";
-            String year = "";
-            try {
-                year = cboModelNam.getSelectedItem().toString();
-                month = cboModelThang.getSelectedItem().toString();
-            } catch (Exception e) {
+            List<Object[]> list = tkDao.getTKLX_TheoNam(year);
+            for (int i = 0; i < list.size(); i++) {
+                Object[] obj = list.get(i);
+                modelChartLines.add(new ModelChartLine(obj[0].toString(), Double.parseDouble((String) obj[1])));
             }
-            List<Object[]> list = tkDao.getTKLX(month, year);
-            for (Object obj[] : list) {
-                modelChartLines.add(new ModelChartLine(obj[1].toString(), Double.parseDouble(obj[0].toString())));
-            }
-            chartLine1.setModel(modelChartLines);
+            chartlineTKNam.setModel(modelChartLines);
         } catch (SQLException ex) {
             Logger.getLogger(TKLuotXem_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jPanel1.removeAll();
+        jPanel1.add(chartlineTKNam, BorderLayout.CENTER);
+        jPanel1.validate();
     }
 
     @SuppressWarnings("unchecked")
@@ -117,13 +125,14 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cboThang = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        chartLine1 = new com.GUI.Chart.ChartLine.ChartLine();
         chartPie1 = new com.GUI.Chart.ChartPie.ChartPie();
         card1 = new com.GUI.component.Card();
         card2 = new com.GUI.component.Card();
         jLabel4 = new javax.swing.JLabel();
         cboNam = new javax.swing.JComboBox<>();
         jpanelTKNam = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        chartLine1 = new com.GUI.Chart.ChartLine.ChartLine();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,6 +166,9 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
 
         jpanelTKNam.setLayout(new java.awt.BorderLayout());
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(chartLine1, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,10 +192,12 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jpanelTKNam, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chartLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpanelTKNam, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
@@ -198,9 +212,9 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cboNam))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chartLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpanelTKNam, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpanelTKNam, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(card1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -213,7 +227,7 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
         try {
             // TODO add your handling code here:
-            thongkeluotxem();                          
+            thongkeluotxem();
         } catch (SQLException ex) {
             Logger.getLogger(TKLuotXem_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -223,9 +237,11 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             thongkeluotxem();
+            thongKeTheoMP();
         } catch (SQLException ex) {
             Logger.getLogger(TKLuotXem_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_cboNamActionPerformed
 
 
@@ -239,6 +255,7 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpanelTKNam;
     // End of variables declaration//GEN-END:variables
 }

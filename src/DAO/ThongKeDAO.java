@@ -112,5 +112,21 @@ public class ThongKeDAO {
                 }
         return list;
     }
+    public List<Object[]> getTKLX_TheoNam(int Year) throws SQLException {  
+            List<Object[]> list = new ArrayList<>();
+            String sql = "{CALL sp_TKLX_TheoNam(?)}";
+            try {
+                ResultSet rs = XJdbc.query(sql, Year);
+            while (rs.next()) {
+                
+                Object[] a = {rs.getString("Thang"), rs.getString("LuotXem")};
+                System.out.println(rs.getString("Thang")+ rs.getString("LuotXem"));
+                list.add(a);
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }

@@ -16,6 +16,7 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
     private ValidateCheck vld = new ValidateCheck();
     private KHTTDAO khdao = new KHTTDAO();
     private Option dialog = new Option();
+    private NhanVien nv;
 
     public KhachHangThanThiet_Form() {
         initComponents();
@@ -390,7 +391,7 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         obj.setMucGiacGia(Double.valueOf(txtMucGiamGia.getText()));
         obj.setSoLanSuDung(Integer.valueOf(txtsolansudung.getText()));
         obj.setNgayDK(DateNgayDK.getDate());
-//        obj.setMaNhanVien();
+        obj.setMaNhanVien(nv.getMaNhanVien());
         return obj;
     }
 
@@ -466,5 +467,9 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
             modeltable.setRowCount(0);
             tblkhachhangthanthiet.setModel(modeltable);
         }
+    }
+
+    public void setNV(NhanVien nv) {
+        this.nv = nv;
     }
 }

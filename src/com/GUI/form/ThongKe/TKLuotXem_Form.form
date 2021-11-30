@@ -43,10 +43,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cboNam" min="-2" pref="169" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jpanelTKNam" min="-2" pref="666" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="chartLine1" min="-2" pref="656" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jpanelTKNam" min="-2" pref="666" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -66,9 +69,9 @@
                   <Component id="cboNam" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="chartLine1" min="-2" pref="301" max="-2" attributes="0"/>
-                  <Component id="jpanelTKNam" min="-2" pref="329" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="jpanelTKNam" pref="329" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -125,8 +128,6 @@
         <Property name="text" type="java.lang.String" value="CH&#x1ecc;N TH&#xc1;NG"/>
       </Properties>
     </Component>
-    <Component class="com.GUI.Chart.ChartLine.ChartLine" name="chartLine1">
-    </Component>
     <Component class="com.GUI.Chart.ChartPie.ChartPie" name="chartPie1">
     </Component>
     <Component class="com.GUI.component.Card" name="card1">
@@ -168,6 +169,19 @@
     <Container class="javax.swing.JPanel" name="jpanelTKNam">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Component class="com.GUI.Chart.ChartLine.ChartLine" name="chartLine1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

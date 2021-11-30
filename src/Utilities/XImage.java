@@ -22,7 +22,7 @@ public class XImage {
         lbl.setIcon(new ImageIcon(img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)));
     }
 
-    public File getImageFile() {
+    public File getImageFile(String hinhtam) {
         JFileChooser Jfile = new JFileChooser(pathDefaultFile);
         Jfile.setDialogTitle("Chọn Hình");
         int returnVal = Jfile.showOpenDialog(null);
@@ -30,7 +30,10 @@ public class XImage {
             java.io.File file = Jfile.getSelectedFile();
             return file;
         } else {
-            dialog.Error(null, "Chưa Chọn Hình!", "Lỗi!");
+            if (hinhtam == null) {
+                dialog.Error(null, "Chưa Chọn Hình!", "Lỗi!");
+                return null;
+            }
             return null;
         }
     }

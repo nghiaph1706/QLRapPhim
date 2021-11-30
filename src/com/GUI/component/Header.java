@@ -1,8 +1,15 @@
 package com.GUI.component;
 
+import Entity.NhanVien;
+import Utilities.XImage;
+import com.GUI.form.NhanVien.ChangePassForm;
 import java.awt.event.ActionListener;
 
 public class Header extends javax.swing.JPanel {
+    private XImage xImage = new XImage();
+    private ChangePassForm cpf = new ChangePassForm();
+    private NhanVien nv;
+    private String path = System.getProperty("user.dir");
 
     public Header() {
         initComponents();
@@ -21,7 +28,12 @@ public class Header extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(224, 224, 224));
 
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/profile1.jpg"))); // NOI18N
+        pic.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\DUAN1\\QLRapPhim\\imageNhanVien\\trunks.png")); // NOI18N
+        pic.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                picMouseClicked(evt);
+            }
+        });
 
         lbUserName.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lbUserName.setForeground(new java.awt.Color(127, 127, 127));
@@ -85,6 +97,12 @@ public class Header extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void picMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_picMouseClicked
+        if (evt.getClickCount() == 2) {
+            ShowFormChangePass();
+        }
+    }//GEN-LAST:event_picMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
@@ -93,4 +111,20 @@ public class Header extends javax.swing.JPanel {
     private javax.swing.JLabel lbUserName;
     private com.GUI.swing.ImageAvatar pic;
     // End of variables declaration//GEN-END:variables
+
+    public void setNV(NhanVien nv) {
+        this.nv = nv;
+    }
+
+    public void init() {
+        lbRole.setText(nv.getChucVu());
+        lbUserName.setText(nv.getHoTen());
+        pic.setIcon(new javax.swing.ImageIcon(path +"\\imageNhanVien\\"+nv.getHinh()));
+    }
+
+    private void ShowFormChangePass() {
+        cpf.setNV(nv);
+        cpf.initEntity();
+        cpf.setVisible(true);
+    }
 }

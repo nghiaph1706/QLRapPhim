@@ -2,17 +2,16 @@ package com.GUI.main;
 
 import DAO.GheDAO;
 import Entity.Ghe;
+import Entity.NhanVien;
 import com.GUI.component.Header;
 import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
 import com.GUI.form.BanVe.BanVe_Form;
-import com.GUI.form.BanVe.ChonGhe_Form;
 import com.GUI.form.BanVe.HoaDon_Form;
 import com.GUI.form.DashBoard;
 import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
 import com.GUI.form.MainForm;
 import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
-import com.GUI.form.Phim.PhimDangChieu_Form;
 import com.GUI.form.Phim.QuanLyPhim_Form;
 import com.GUI.form.QuanLyLichChieu_Form;
 import com.GUI.form.SaoLuu.SaoLuu_Form;
@@ -20,10 +19,13 @@ import com.GUI.form.SuKien.QuanLySuKien_Form;
 import com.GUI.form.SuKien.SKDangDienRa_Form;
 import com.GUI.form.ThongKe.TKDoanhThu_Form;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
+import com.GUI.main.login.Login;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
 import com.GUI.swing.icon.IconFontSwing;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -41,12 +43,23 @@ public class Main extends javax.swing.JFrame {
     public static HoaDon_Form hoaDon = new HoaDon_Form();
     public static List<Ghe> listGhe = new ArrayList<>();
     public static GheDAO ghDAO = new GheDAO();
+    private KhachHangThanThiet_Form khtt;
+    private QuanLyNhanVien_Form qlnv;
+    private NhanVien nv;
 
     public Main() {
         initComponents();
         init();
         listGhe = ghDAO.selectAll();
-        
+    }
+
+    public void setNV(NhanVien nv) {
+        this.nv = nv;
+    }
+
+    public void check() {
+        header.setNV(nv);
+        header.init();
     }
 
     private void init() {
@@ -60,7 +73,8 @@ public class Main extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 if (menuIndex == 0) {
                     main.showForm(new DashBoard());
-                } if (menuIndex == 1) {
+                }
+                if (menuIndex == 1) {
                     main.showForm(banVe);
                     if (subMenuIndex == 0) {
 //                        main.showForm(new ChonGhe_Form());
@@ -68,12 +82,12 @@ public class Main extends javax.swing.JFrame {
 //                        main.showForm(new HoaDon_Form());
                     }
                 } else if (menuIndex == 2) {
-                    main.showForm(new KhachHangThanThiet_Form());
+                    khtt = new KhachHangThanThiet_Form();
+                    khtt.setNV(nv);
+                    main.showForm(khtt);
                 } else if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
                         main.showForm(new QuanLyPhim_Form());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new PhimDangChieu_Form());
                     }
                 } else if (menuIndex == 4) {
                     if (subMenuIndex == 0) {
@@ -83,12 +97,16 @@ public class Main extends javax.swing.JFrame {
                     }
                 } else if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new QuanLySuKien_Form());
+                        QuanLySuKien_Form sk = new QuanLySuKien_Form();
+                        sk.setNV(nv);
+                        main.showForm(sk);
                     } else if (subMenuIndex == 1) {
                         main.showForm(new SKDangDienRa_Form());
                     }
                 } else if (menuIndex == 6) {
-                    main.showForm(new QuanLyNhanVien_Form());
+                    QuanLyNhanVien_Form nvf = new QuanLyNhanVien_Form();
+                    nvf.setNV(nv);
+                    main.showForm(nvf);
                 } else if (menuIndex == 7) {
                     if (subMenuIndex == 0) {
                         main.showForm(new TKDoanhThu_Form());
@@ -99,8 +117,16 @@ public class Main extends javax.swing.JFrame {
                     if (subMenuIndex == 0) {
                         main.showForm(new SaoLuu_Form());
                     }
-                }  else if (menuIndex == 9) {
-                    JOptionPane.showMessageDialog(null, "dang xuat");
+                } else if (menuIndex == 9) {
+                    int input = JOptionPane.showConfirmDialog(rootPane, "Bạn Có Muốn Đăng Xuất Không?", "Đăng Xuất!", 0);
+                    if (input == 0) {
+                        try {
+                            new Login().setVisible(true);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        dispose();
+                    }
                 }
             }
         });

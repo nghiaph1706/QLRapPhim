@@ -52,27 +52,10 @@ public class ForgotPass extends javax.swing.JFrame {
         pwdConfirmPass.setLabelText("Confirm Password");
     }
     
-    void showLoading(JFrame jFrame, String mess) throws InterruptedException{
-        new Thread() {
-            @Override
-            public void run() {
-                jFrame.dispose();
+    void showLoading() throws InterruptedException{
                 loading.setVisible(true);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                Thread.sleep(1500);
                 loading.dispose();
-                jFrame.setVisible(true);
-                if (mess.equals("")) {
-                    
-                } else {
-                    JOptionPane.showMessageDialog(forgotPass,mess);
-                }
-            }
-        }.start();
     }
     
     void sendCode() {
@@ -109,7 +92,6 @@ public class ForgotPass extends javax.swing.JFrame {
             Transport.send(msg);
         } catch (MessagingException ex) {
             MsgBox.alert(this, "Không thể gửi Code. Vui lòng kiểm tra lại Email.");
-            throw new RuntimeException(ex);
         }
     }
 
@@ -118,7 +100,7 @@ public class ForgotPass extends javax.swing.JFrame {
         List<NhanVien> list = nvdao.selectAll();
 
         for (NhanVien nv : list) {
-            if (manv.equals(nv.getMaNhanVien()) && email.equals(nv.getEmail())) {
+            if (manv.equalsIgnoreCase(nv.getMaNhanVien()) && email.equals(nv.getEmail())) {
                 check = true;
                 Auth.user = nv;
             }
@@ -127,10 +109,26 @@ public class ForgotPass extends javax.swing.JFrame {
         if (check) {
             panelEnterMail.setVisible(false);
             panelEnterCode.setVisible(true);
-            sendCode();
-            showLoading(forgotPass,"Nhập code đã gửi vào Email.");
+            
+            new Thread(){
+                public void run(){
+                    try {
+                        showLoading();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }.start();
+            
+            new Thread(){
+                public void run(){
+                    sendCode();
+                }
+            }.start();
+            JOptionPane.showMessageDialog(this, "Nhập code đã gửi vào Email.");
         } else {
-            showLoading(forgotPass,"Mã nhân viên nhập không khớp với Email.");
+            showLoading();
+            JOptionPane.showMessageDialog(this, "Mã nhân viên nhập không khớp với Email.");
         }
     }
 
@@ -138,23 +136,28 @@ public class ForgotPass extends javax.swing.JFrame {
         if (codeType.equalsIgnoreCase(code)) {
             panelEnterCode.setVisible(false);
             panelEnterNewPass.setVisible(true);
-            showLoading(forgotPass,"");
+            showLoading();
         } else {
-            showLoading(forgotPass,"Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
+            showLoading();
+            JOptionPane.showMessageDialog(this, "Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
             txtCode.setText("");
         }
     }
 
     void doiMatKhau(String matKhauMoi, String xacNhan) throws InterruptedException {
         if (!matKhauMoi.equalsIgnoreCase(xacNhan)) {
-            showLoading(new Login(),"Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
+            showLoading();
+            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
             pwdNewPass.setText("");
             pwdConfirmPass.setText("");
         } else {
             Auth.user.setMatKhau(xacNhan);
             nvdao.update(Auth.user);
             Auth.clear();
-            showLoading(new Login(),"Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
+            showLoading();
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
+            dispose();
+            new Login().setVisible(true);
         }
     }
 
@@ -475,65 +478,153 @@ public class ForgotPass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        dispose();
-        try {
-            showLoading(new Login(), "");
-            Auth.clear();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                forgotPass.dispose();
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Auth.clear();
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                    new Login().setVisible(true);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel1ActionPerformed
-        dispose();
-        try {
-            showLoading(new Login(), "");
-            Auth.clear();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                forgotPass.dispose();
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Auth.clear();
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                    new Login().setVisible(true);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnCancel1ActionPerformed
 
     private void btnCancel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel2ActionPerformed
-        dispose();
-        try {
-            showLoading(new Login(), "");
-            Auth.clear();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                forgotPass.dispose();
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Auth.clear();
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                    new Login().setVisible(true);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnCancel2ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        try {
-            checkUser(txtUser.getText().trim(), txtEmail.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                try {
+                    checkUser(txtUser.getText().trim(), txtEmail.getText().trim());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void lblResentCodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseClicked
-        try {
-            showLoading(forgotPass,"oke");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                sendCode();
+            }
+        }.start();
     }//GEN-LAST:event_lblResentCodeMouseClicked
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
-        try {
-            checkCode(txtCode.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                    checkCode(txtCode.getText().trim());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnNext1ActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        try {
-            doiMatKhau(pwdConfirmPass.getText().trim(), pwdNewPass.getText().trim());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(){
+            public void run(){
+                try {
+                    showLoading();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                    doiMatKhau(pwdConfirmPass.getText().trim(), pwdNewPass.getText().trim());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ForgotPass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_btnChangeActionPerformed
 
     private void lblResentCodeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseMoved

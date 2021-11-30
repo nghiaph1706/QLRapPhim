@@ -18,7 +18,7 @@ import java.util.List;
 public class GheDAO extends QLRapPhimDAO<Ghe, String>{
 
     private String INSERT_SQL = "INSERT INTO [Ghe]([MaGhe], [LoaiGhe], [GiaGhe], [MaPhong], [TrangThai]) VALUES (?,?,?,?,?)";
-    private String UPDATE_SQL = "UPDATE [Ghe] SET [LoaiGhe] = ?, [GiaGhe] = ?,[MaPhong] = ?,[TrangThai] = ? WHERE [MaGhe] = ?";
+    private String UPDATE_SQL = "UPDATE [Ghe] SET [TrangThai] = 1 WHERE [MaGhe] = ? and [MaPhong] = ? and [GioChieu] = ?";
     private String DELETE_SQL = "DELETE FROM Ghe WHERE [MaGhe] = ?";
     private String SELECT_BY_ID = "SELECT * FROM Ghe WHERE [MaGhe] = ?";
     private String SELECT_ALL = "SELECT * FROM Ghe";
@@ -32,7 +32,7 @@ public class GheDAO extends QLRapPhimDAO<Ghe, String>{
 
     @Override
     public void update(Ghe entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        XJdbc.update(UPDATE_SQL, entity.getMaGhe(), entity.getMaPhong(), entity.getGioChieu());
     }
 
     @Override
@@ -62,7 +62,8 @@ public class GheDAO extends QLRapPhimDAO<Ghe, String>{
                 gh.setLoaiGhe(rs.getBoolean(2));
                 gh.setGiaGhe(rs.getDouble(3));
                 gh.setMaPhong(rs.getString(4));
-                gh.setTrangThai(rs.getBoolean(5));
+                gh.setGioChieu(rs.getString(5));
+                gh.setTrangThai(rs.getBoolean(6));
                 list.add(gh);
             }
             rs.getStatement().getConnection().close();

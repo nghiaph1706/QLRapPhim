@@ -6,20 +6,21 @@ public class Ghe {
     private boolean loaiGhe;
     private double giaGhe;
     private String maPhong;
+    private String GioChieu;
     private boolean trangThai;
     
     public Ghe() {
         
     }
 
-    public Ghe(String maGhe, boolean loaiGhe, double giaGhe, String maPhong, boolean trangThai) {
+    public Ghe(String maGhe, boolean loaiGhe, double giaGhe, String maPhong, String GioChieu, boolean trangThai) {
         this.maGhe = maGhe;
         this.loaiGhe = loaiGhe;
         this.giaGhe = giaGhe;
         this.maPhong = maPhong;
+        this.GioChieu = GioChieu;
         this.trangThai = trangThai;
     }
-    
 
     public String getMaGhe() {
         return maGhe;
@@ -53,6 +54,14 @@ public class Ghe {
         this.maPhong = maPhong;
     }
 
+    public String getGioChieu() {
+        return GioChieu;
+    }
+
+    public void setGioChieu(String GioChieu) {
+        this.GioChieu = GioChieu;
+    }
+
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -60,5 +69,6 @@ public class Ghe {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+
 }

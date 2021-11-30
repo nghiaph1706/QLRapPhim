@@ -7,29 +7,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class NhanVienDAO extends QLRapPhimDAO<NhanVien, String> {
 
     private String INSERT_SQL = "INSERT INTO [NhanVien]([HoTen],[SDT],[Email],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[GhiChu],[HIDE]) VALUES (?,?,?,?,?,?,?,?,?)";
     private String UPDATE_SQL = "UPDATE [NhanVien] SET [HoTen] = ?, [SDT] = ?, [Email] =?, [GioiTinh] = ?, [ChucVu] = ?, [Hinh] = ? ,[GhiChu] =? WHERE [MaNhanVien] = ?";
+    private String UPDATE_PASSWORD = "UPDATE [NhanVien] SET [MatKhau] = ? Where [MaNhanVien]= ?";
     private String DELETE_SQL = "UPDATE [NhanVien] SET HIDE = 1 WHERE [MaNhanVien] = ?";
     private String SELECT_BY_ID = "SELECT * FROM NhanVien WHERE [HIDE] = 0 AND [MaNhanVien] like ?";
     private String SELECT_ALL = "SELECT * FROM NhanVien WHERE [HIDE] = 0";
 
     @Override
     public void insert(NhanVien entity) {
-        XJdbc.update(INSERT_SQL, entity.getHoTen(), entity.getSDT(),entity.getEmail(), entity.gioitinh(), entity.chucvu(), "123", entity.getHinh(), entity.getGhiChu(), 0);
+        XJdbc.update(INSERT_SQL, entity.getHoTen(), entity.getSDT(), entity.getEmail(), entity.gioitinh(), entity.chucvu(), "123", entity.getHinh(), entity.getGhiChu(), 0);
     }
 
     @Override
     public void update(NhanVien entity) {
-        XJdbc.update(UPDATE_SQL, entity.getHoTen(), entity.getSDT(),entity.getEmail(), entity.gioitinh(), entity.chucvu(), entity.getHinh(), entity.getGhiChu(), entity.getMaNhanVien());
+        XJdbc.update(UPDATE_SQL, entity.getHoTen(), entity.getSDT(), entity.getEmail(), entity.gioitinh(), entity.chucvu(), entity.getHinh(), entity.getGhiChu(), entity.getMaNhanVien());
     }
 
     public void UpdatePassword(NhanVien entity) {
-        XJdbc.update(UPDATE_SQL, entity.getMatKhau(), entity.getMaNhanVien());
+        XJdbc.update(UPDATE_PASSWORD, entity.getMatKhau(), entity.getMaNhanVien());
     }
 
     @Override
@@ -73,6 +72,7 @@ public class NhanVienDAO extends QLRapPhimDAO<NhanVien, String> {
         nv.setMaNhanVien(rs.getString("MaNhanVien"));
         nv.setHoTen(rs.getNString("HoTen"));
         nv.setSDT(rs.getString("SDT"));
+        nv.setEmail(rs.getString("Email"));
         nv.setGioiTinh(rs.getBoolean("GioiTinh"));
         nv.setChucVu(rs.getBoolean("ChucVu"));
         nv.setMatKhau(rs.getString("MatKhau"));

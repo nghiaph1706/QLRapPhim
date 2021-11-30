@@ -6,16 +6,20 @@
 package com.GUI.form.BanVe;
 
 import DAO.DichVuDAO;
+import DAO.GheDAO;
 import DAO.HDCTDAO;
 import DAO.HoaDonDAO;
 import DAO.KHTTDAO;
 import DAO.KhuyenMaiDAO;
 import DAO.LichChieuDAO;
 import DAO.PhimDAO;
+import Entity.Ghe;
 import Entity.HoaDon;
+import Entity.Ve;
 import Utilities.Auth;
 import Utilities.MsgBox;
 import Utilities.XDate;
+import static com.GUI.form.BanVe.BanVe_Form.MaPhong;
 import com.GUI.main.Main;
 import java.awt.Image;
 import java.io.BufferedWriter;
@@ -23,7 +27,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -48,6 +51,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private HoaDonDAO hdDAO = new HoaDonDAO();
     private PhimDAO phDAO = new PhimDAO();
     private DichVuDAO dvDAO = new DichVuDAO();
+    private HoaDon hd;
     public static double thanhTien;
     private String[] header = {
         "Mã HD","Tổng tiền", "Mã KM", "Mã KHTT", "Mức giảm giá", "Thành Tiền", "Ngày lập", "Mã NV"
@@ -67,9 +71,8 @@ public class HoaDon_Form extends javax.swing.JPanel {
     }
     
     public void tinhTien(){
-        HoaDon hd = new HoaDon();
+        hd = new HoaDon();
         hd.setMaHoaDon(BanVe_Form.maHDNow);
-        System.out.println(BanVe_Form.maHDNow);
         int tongTien = (int) hdctdao.getTongTien(BanVe_Form.maHDNow);
         hd.setTongTien(tongTien);
         hd.setMaKM(BanVe_Form.MaKM);
@@ -103,6 +106,24 @@ public class HoaDon_Form extends javax.swing.JPanel {
     {
         cboPTThanhToan.addItem("Thanh toán bằng tiền mặt");
         cboPTThanhToan.addItem("Thanh toán bằng MOMO");
+    }
+    
+    void updateHD(){
+        GheDAO gheDAO = new GheDAO();
+        for (Ghe ghe : ChonGhe_Form.listGheSelected) {
+            ghe.setTrangThai(true);
+            gheDAO.update(ghe);
+        }
+        hd.setTrangThai(true);
+        hdDAO.update(hd);
+        //remove all tmp
+        ChonGhe_Form.listGheSelected.clear();
+        BanVe_Form.MaPhong = "";
+        BanVe_Form.maHDNow = "";
+        hd = new HoaDon();
+        Main.banVe = new BanVe_Form();
+        Main.banVe.loadDatabase();
+        Main.main.showForm(Main.banVe);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -259,6 +280,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
        printHoaDon();
+       updateHD();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed

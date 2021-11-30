@@ -89,7 +89,7 @@ public class PhimDAO extends QLRapPhimDAO<Phim, String> {
     {
         try {
             List<Phim> list = new ArrayList<>();
-            ResultSet rs = XJdbc.query("SELECT ph.TenPhim FROM Phim ph INNER JOIN LichChieu lc ON ph.MaPhim = lc.MaPhim WHERE ph.MaPhim=? GROUP BY ph.TenPhim, lc.MaPhim", ma);
+            ResultSet rs = XJdbc.query("SELECT ph.TenPhim FROM Phim ph INNER JOIN LichChieu lc ON ph.MaPhim = lc.MaPhim WHERE ph.MaPhim=? and NgayChieu = CONVERT(char(10), GetDate(),126) GROUP BY ph.TenPhim, lc.MaPhim", ma);
             while(rs.next()) {
                 Phim ph = new Phim();
                 ph.setTenPhim(rs.getString(1));
