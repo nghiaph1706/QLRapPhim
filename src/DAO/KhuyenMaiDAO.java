@@ -18,7 +18,7 @@ public class KhuyenMaiDAO extends QLRapPhimDAO<KhuyenMai, String> {
     static String selectall = "Select * from KhuyenMai Where HIDE = 0;";
     static String selectallbydate = "{CALL SP_SUKIENDANGDIENRA (?)}";
     static String selectbyid = "Select * from KhuyenMai Where MaKM like ?";
-    private String SELECT_MAKM = "SELECT MaKM FROM KhuyenMai";
+    private String SELECT_MAKM = "SELECT MaKM FROM KhuyenMai where CONVERT(char(10), GetDate(),126) <= NgayKetThuc";
 
     @Override
     public void insert(KhuyenMai entity) {

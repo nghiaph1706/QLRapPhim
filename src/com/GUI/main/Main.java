@@ -41,6 +41,7 @@ public class Main extends javax.swing.JFrame {
     private Animator animator;
     public static BanVe_Form banVe = new BanVe_Form();
     public static HoaDon_Form hoaDon = new HoaDon_Form();
+    public static SaoLuu_Form saoLuu = new SaoLuu_Form();
     public static List<Ghe> listGhe = new ArrayList<>();
     public static GheDAO ghDAO = new GheDAO();
     private KhachHangThanThiet_Form khtt;
@@ -105,7 +106,6 @@ public class Main extends javax.swing.JFrame {
                     }
                 } else if (menuIndex == 6) {
                     QuanLyNhanVien_Form nvf = new QuanLyNhanVien_Form();
-                    nvf.setNV(nv);
                     main.showForm(nvf);
                 } else if (menuIndex == 7) {
                     if (subMenuIndex == 0) {
@@ -115,7 +115,7 @@ public class Main extends javax.swing.JFrame {
                     }
                 } else if (menuIndex == 8) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new SaoLuu_Form());
+                        main.showForm(saoLuu);
                     }
                 } else if (menuIndex == 9) {
                     int input = JOptionPane.showConfirmDialog(rootPane, "Bạn Có Muốn Đăng Xuất Không?", "Đăng Xuất!", 0);

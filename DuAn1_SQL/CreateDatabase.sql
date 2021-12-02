@@ -41,7 +41,7 @@ CREATE TABLE [Phim] (
 	[QuocGia] NVARCHAR(50),
 	[MaTheLoai] VARCHAR(10),
 	[DinhDang] VARCHAR(10),
-	[Hinh] VARCHAR(200),
+	[Hinh] VARCHAR(100),
 	[MaNhanVien] VARCHAR(10),
 	[HIDE] BIT DEFAULT 0,
 	CONSTRAINT [FK_Phim.MaTheLoai] FOREIGN KEY ([MaTheLoai]) 

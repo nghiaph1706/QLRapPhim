@@ -34,7 +34,6 @@
                           <Component id="buttonBadges1" max="32767" attributes="0"/>
                           <Component id="buttonBadges2" min="-2" pref="251" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="59" max="-2" attributes="0"/>
                   </Group>
                   <Component id="chartPie1" alignment="0" min="-2" pref="404" max="-2" attributes="0"/>
               </Group>

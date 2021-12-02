@@ -9,20 +9,20 @@
 	(N'Tâm Lý',0);
 	GO
 
-	INSERT INTO [NhanVien]([HoTen],[SDT],[Email],[GioiTinh],[ChucVu],[MatKhau],[HIDE]) VALUES 
-	(N'Phạm Lễ Nghĩa','0990090909','nghiaplps17855@fpt.edu.vn',1,1,'123',0),
-	(N'Trần Chí','0990090908','nghiaplps17855@fpt.edu.vn',0,1,'123',0),
-	(N'Võ Hùng Dương','0990090907','nghiaplps17855@fpt.edu.vn',1,0,'123',0),
-	(N'Ngô Tiên Duy','0990090906','nghiaplps17855@fpt.edu.vn',0,0,'123',0),
-	(N'Đào Đức Nguyên','0990090905','nguyenddps17838@fpt.edu.vn',1,0,'123',0);
+	INSERT INTO [NhanVien]([HoTen],[SDT],[Email],[GioiTinh],[ChucVu],[MatKhau],[Hinh],[HIDE]) VALUES 
+	(N'Phạm Lễ Nghĩa','0990090909','nghiaplps17855@fpt.edu.vn',1,1,'123','nghia.jpg',0),
+	(N'Trần Chí','0990090908','nghiaplps17855@fpt.edu.vn',0,1,'123','chi.png',0),
+	(N'Võ Hùng Dương','0990090907','nghiaplps17855@fpt.edu.vn',1,0,'123','duong.jpg',0),
+	(N'Ngô Tiên Duy','0990090906','nghiaplps17855@fpt.edu.vn',0,0,'123','duy.jpg',0),
+	(N'Đào Đức Nguyên','0990090905','nguyenddps17838@fpt.edu.vn',1,0,'123','nguyen.png',0);
 	GO
 
 	INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES
-	(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','MatBiec.jpg','NV1',0),
-	(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','avg.jpg','NV2',0),
-	(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','AntMain.jpg','NV3',0),
-	(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','NguoiNhen.jpg','NV4',0),
-	(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','Avengers.jpg','NV1',0);
+	(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','https://www.youtube.com/watch?v=KSFS0OfIK2c','NV1',0),
+	(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','https://www.youtube.com/watch?v=TcMBFSGVi1c','NV2',0),
+	(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','https://www.youtube.com/watch?v=8ugaeA-nMTc','NV3',0),
+	(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','https://www.youtube.com/watch?v=JfVOs4VSpmA','NV4',0),
+	(N'IRON WOMEN','10-10-2014','10-12-2014',N'VIỆT NAM','TL5','3D','https://www.youtube.com/watch?v=1Q8fG0TtVAY','NV1',0);
 	GO
 
 	INSERT INTO [Phong]([HIDE]) VALUES 
