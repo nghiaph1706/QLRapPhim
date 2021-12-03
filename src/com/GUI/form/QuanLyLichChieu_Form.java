@@ -9,6 +9,7 @@ import Entity.Phong;
 import Utilities.MsgBox;
 import Utilities.XDate;
 import Utilities.XRegex;
+import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -27,6 +28,10 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     LichChieuDAO lichChieuDao = new LichChieuDAO();
     PhimDAO phimDAO = new PhimDAO();
     PhongDAO phongDAO = new PhongDAO();
+    public static boolean add_LC = false;
+    public static boolean xoa_LC = false;
+    public static boolean sua_LC = false;
+    public static String MaLiCh;
 
     public QuanLyLichChieu_Form() {
         initComponents();
@@ -131,6 +136,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         lc.setGioChieu(txtGioChieu.getText());
         lc.setMaPhim(((Phim) cboPhim.getSelectedItem()).getMaPhim());
         lc.setMaPhong(cboMaPhong.getSelectedItem().toString());
+	MaLiCh = lc.getMaLichChieu();
         return lc;
     }
 
@@ -151,6 +157,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                 new MsgBox().showMess("Thêm thành công");
                 fillTable();
                 cboPhimTimKiem.setSelectedItem("Tất cả");
+		add_LC = true;
             }
         } catch (Exception e) {
             new MsgBox().showMess("Thêm thất bại");
@@ -171,6 +178,8 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                     lichChieuDao.update(lc);
                     new MsgBox().showMess("Sửa thành công");
                     fillTable();
+		    sua_LC = true;
+		    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
                     cboPhimTimKiem.setSelectedItem("Tất cả");
                 } catch (Exception e) {
                     new MsgBox().showMess("Sửa thất bại");
@@ -193,6 +202,8 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                     lichChieuDao.delete(tblLichChieu.getValueAt(index, 0).toString());
                     new MsgBox().showMess("Xóa thành công");
                     fillTable();
+		    xoa_LC = true;
+		    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
                     cboPhimTimKiem.setSelectedItem("Tất cả");
                 } catch (Exception e) {
                     new MsgBox().showMess("Xóa thất bại");
@@ -571,14 +582,17 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         them();
+	Main.saoLuu.logLC();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         sua();
+	Main.saoLuu.logLC();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         xoa();
+	Main.saoLuu.logLC();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
