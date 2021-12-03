@@ -129,4 +129,93 @@ public class ThongKeDAO {
         return list;
     }
 
+    public double doanhThuHomNay() {
+        double doanhThu = 0;
+        try {
+            String sql = "{CALL sp_doanhThuHomNay}";
+            ResultSet rs = XJdbc.query(sql);
+            if (rs.next()) {
+                doanhThu = rs.getDouble(1);
+            } else {
+                doanhThu = 0;
+            }
+            return doanhThu;
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return doanhThu;
+    }
+
+    public double doanhThuHomQua() {
+        double doanhThu = 0;
+        try {
+            String sql = "{CALL sp_doanhThuHomQua}";
+            ResultSet rs = XJdbc.query(sql);
+            while (rs.next()) {
+                doanhThu = rs.getDouble(1);
+            }
+            return doanhThu;
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return doanhThu;
+    }
+
+    public double doanhThuDVHomNay() {
+        double doanhThu = 0;
+        try {
+            String sql = "{CALL sp_doanhThuDichVuHomNay}";//
+            ResultSet rs = XJdbc.query(sql);
+            while (rs.next()) {
+                doanhThu = rs.getDouble(1);
+            }
+            return doanhThu;
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return doanhThu;
+    }
+
+    public double doanhThuVeHomNay() {
+        double doanhThu = 0;
+        try {
+            String sql = "{CALL sp_doanhThuVeHomNay}";//
+            ResultSet rs = XJdbc.query(sql);
+            while (rs.next()) {
+                doanhThu = rs.getDouble(1);
+            }
+            return doanhThu;
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return doanhThu;
+    }
+
+    public List<String> select5PhimBanChay() {
+        List<String> list = new ArrayList<>();
+        try {
+            String sql = "{CALL sp_select5PhimBanChay}";//
+            ResultSet rs = XJdbc.query(sql);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public List<Object[]> doanhThuTheoGio() {
+        List<Object[]> list = new ArrayList<>();
+        try {
+            String sql = "{CALL sp_DoanhThuTheoGio}";//
+            ResultSet rs = XJdbc.query(sql);
+            while(rs.next()){
+                list.add(new Object[]{rs.getString(1),rs.getString(2)});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ThongKeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

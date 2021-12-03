@@ -1,6 +1,5 @@
 package com.GUI.main.login;
 
-
 import DAO.NhanVienDAO;
 import Entity.NhanVien;
 import Utilities.Auth;
@@ -19,8 +18,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,16 +29,16 @@ public class ForgotPass extends javax.swing.JFrame {
     Loading loading = new Loading();
     String code = "";
     NhanVienDAO nvdao = new NhanVienDAO();
-    
+
     public ForgotPass() {
         initComponents();
         init();
-        forgotPass= this;
+        forgotPass = this;
     }
-    
-    void init(){
+
+    void init() {
         setLocationRelativeTo(this);
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         panelEnterMail.setVisible(true);
         panelEnterCode.setVisible(false);
         panelEnterNewPass.setVisible(false);
@@ -51,13 +48,13 @@ public class ForgotPass extends javax.swing.JFrame {
         pwdNewPass.setLabelText("New Password");
         pwdConfirmPass.setLabelText("Confirm Password");
     }
-    
-    void showLoading() throws InterruptedException{
-                loading.setVisible(true);
-                Thread.sleep(1500);
-                loading.dispose();
+
+    void showLoading() throws InterruptedException {
+        loading.setVisible(true);
+        Thread.sleep(1500);
+        loading.dispose();
     }
-    
+
     void sendCode() {
         try {
             Properties p = new Properties();
@@ -91,7 +88,7 @@ public class ForgotPass extends javax.swing.JFrame {
             msg.setText(body);
             Transport.send(msg);
         } catch (MessagingException ex) {
-            MsgBox.alert(this, "Không thể gửi Code. Vui lòng kiểm tra lại Email.");
+            new MsgBox().showMess("Không thể gửi Code. Vui lòng kiểm tra lại Email.");
         }
     }
 
@@ -109,9 +106,9 @@ public class ForgotPass extends javax.swing.JFrame {
         if (check) {
             panelEnterMail.setVisible(false);
             panelEnterCode.setVisible(true);
-            
-            new Thread(){
-                public void run(){
+
+            new Thread() {
+                public void run() {
                     try {
                         showLoading();
                     } catch (InterruptedException ex) {
@@ -119,16 +116,16 @@ public class ForgotPass extends javax.swing.JFrame {
                     }
                 }
             }.start();
-            
-            new Thread(){
-                public void run(){
+
+            new Thread() {
+                public void run() {
                     sendCode();
                 }
             }.start();
-            JOptionPane.showMessageDialog(this, "Nhập code đã gửi vào Email.");
+            new MsgBox().showMess("Nhập code đã gửi vào Email.");
         } else {
             showLoading();
-            JOptionPane.showMessageDialog(this, "Mã nhân viên nhập không khớp với Email.");
+            new MsgBox().showMess("Mã nhân viên nhập không khớp với Email.");
         }
     }
 
@@ -139,7 +136,7 @@ public class ForgotPass extends javax.swing.JFrame {
             showLoading();
         } else {
             showLoading();
-            JOptionPane.showMessageDialog(this, "Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
+            new MsgBox().showMess("Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
             txtCode.setText("");
         }
     }
@@ -147,7 +144,7 @@ public class ForgotPass extends javax.swing.JFrame {
     void doiMatKhau(String matKhauMoi, String xacNhan) throws InterruptedException {
         if (!matKhauMoi.equalsIgnoreCase(xacNhan)) {
             showLoading();
-            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
+            new MsgBox().showMess("Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
             pwdNewPass.setText("");
             pwdConfirmPass.setText("");
         } else {
@@ -155,7 +152,7 @@ public class ForgotPass extends javax.swing.JFrame {
             nvdao.update(Auth.user);
             Auth.clear();
             showLoading();
-            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
+            new MsgBox().showMess("Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
             dispose();
             new Login().setVisible(true);
         }
@@ -478,8 +475,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 forgotPass.dispose();
                 try {
                     showLoading();
@@ -489,8 +486,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 Auth.clear();
             }
         }.start();
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     Thread.sleep(1000);
                     new Login().setVisible(true);
@@ -502,8 +499,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel1ActionPerformed
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 forgotPass.dispose();
                 try {
                     showLoading();
@@ -513,8 +510,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 Auth.clear();
             }
         }.start();
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     Thread.sleep(1000);
                     new Login().setVisible(true);
@@ -526,8 +523,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancel1ActionPerformed
 
     private void btnCancel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel2ActionPerformed
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 forgotPass.dispose();
                 try {
                     showLoading();
@@ -537,8 +534,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 Auth.clear();
             }
         }.start();
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     Thread.sleep(1000);
                     new Login().setVisible(true);
@@ -550,8 +547,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancel2ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     checkUser(txtUser.getText().trim(), txtEmail.getText().trim());
                 } catch (InterruptedException ex) {
@@ -562,8 +559,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void lblResentCodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseClicked
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     showLoading();
                 } catch (InterruptedException ex) {
@@ -571,8 +568,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 }
             }
         }.start();
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
@@ -584,8 +581,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_lblResentCodeMouseClicked
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     showLoading();
                 } catch (InterruptedException ex) {
@@ -593,8 +590,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 }
             }
         }.start();
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     Thread.sleep(1000);
                     checkCode(txtCode.getText().trim());
@@ -606,8 +603,8 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNext1ActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     showLoading();
                 } catch (InterruptedException ex) {
@@ -615,8 +612,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 }
             }
         }.start();
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     Thread.sleep(1000);
                     doiMatKhau(pwdConfirmPass.getText().trim(), pwdNewPass.getText().trim());
@@ -629,17 +626,14 @@ public class ForgotPass extends javax.swing.JFrame {
 
     private void lblResentCodeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseMoved
         lblResentCode.setForeground(Color.red);
-        lblResentCode.setFont(new Font("Tahoma",Font.BOLD | Font.ITALIC,14));
+        lblResentCode.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
     }//GEN-LAST:event_lblResentCodeMouseMoved
 
     private void lblResentCodeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResentCodeMouseExited
-        lblResentCode.setForeground(new Color(255,51,51));
-        lblResentCode.setFont(new Font("Tahoma",Font.PLAIN | Font.ITALIC,14));
+        lblResentCode.setForeground(new Color(255, 51, 51));
+        lblResentCode.setFont(new Font("Tahoma", Font.PLAIN | Font.ITALIC, 14));
     }//GEN-LAST:event_lblResentCodeMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.GUI.form.NhanVien;
 
 import Utilities.*;
@@ -10,9 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.sql.SQLException;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 import org.bytedeco.javacpp.BytePointer;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imencode;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imwrite;
@@ -21,104 +14,91 @@ import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
 import static org.bytedeco.opencv.global.opencv_imgproc.rectangle;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.bytedeco.opencv.opencv_videoio.VideoCapture;
-import org.opencv.core.Core;
 import org.bytedeco.opencv.opencv_core.*;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 import static org.opencv.imgproc.Imgproc.COLOR_BGRA2GRAY;
 
-/**
- *
- * @author berug
- */
 public class FaceIDDangKy_Form extends javax.swing.JFrame {
 
-	/**
-	 * Creates new form FaceIDDangKy_Form
-	 */
-
     private FaceIDDangKy_Form check;
-	public FaceIDDangKy_Form() {
-		initComponents();
-                check = this;
-		lblId.setText(Auth.user.getMaNhanVien());
-		setLocationRelativeTo(null);
-	}
 
-	private DaemonThread myThread = null;
-	int count = 1;
-	VideoCapture webSource = null;
-	Mat frame = new Mat();
-	RectVector faceDetections = new RectVector();
-	CascadeClassifier faceDetector = new CascadeClassifier("src\\photo\\haarcascade_frontalface_alt.xml");
+    public FaceIDDangKy_Form() {
+        initComponents();
+        check = this;
+        lblId.setText(Auth.user.getMaNhanVien());
+        setLocationRelativeTo(null);
+    }
 
-	BytePointer mem = new BytePointer();
-	RectVector detectedFaces = new RectVector();
+    private DaemonThread myThread = null;
+    int count = 1;
+    VideoCapture webSource = null;
+    Mat frame = new Mat();
+    RectVector faceDetections = new RectVector();
+    CascadeClassifier faceDetector = new CascadeClassifier("src\\photo\\haarcascade_frontalface_alt.xml");
 
-	class DaemonThread implements Runnable {
+    BytePointer mem = new BytePointer();
+    RectVector detectedFaces = new RectVector();
 
-		protected volatile boolean runnable = false;
+    class DaemonThread implements Runnable {
 
-		@Override
-		public void run() {
-			synchronized (this) {
-				while (runnable) {
-					if (webSource.grab()) {
-						try {
-							webSource.retrieve(frame);
-							Graphics g = panelCamera.getGraphics();
-							Mat imageColor = new Mat();
-							imageColor = frame;
-							Mat imageGray = new Mat();
-							cvtColor(imageColor, imageGray, COLOR_BGRA2GRAY);
-							RectVector faceDetections = new RectVector();
-							faceDetector.detectMultiScale(imageGray, faceDetections);
-							for (int i = 0; i < faceDetections.size(); i++) {
-								Rect hi = faceDetections.get(0);
-								rectangle(imageColor, hi, new Scalar(0, 255, 0, 0));
-								Mat mat = new Mat(imageGray, hi);
-								opencv_imgproc.resize(mat, mat, new Size(160, 160));
-								if (btnChupAnh.getModel().isPressed()) {
-									if (count <= 25) {
-										String cropped = "src\\photo\\person." + lblId.getText().replaceAll("NV", "") + "." + count + ".jpg";
-										boolean imwrite = imwrite(cropped, mat);
-										lblSoLuong.setText(String.valueOf(count) + "/25");
-										count++;
-									}
-									if (count > 25) {
-										new luufile().luu();
-										JOptionPane.showMessageDialog(null, "Lưu thành công");
-                                                                                myThread.runnable = false;
-			webSource.release();
-                        check.dispose();
-									}
-								}
+        protected volatile boolean runnable = false;
 
-							}
-							imencode(".bmp", frame, mem);
-							Image im = ImageIO.read(new ByteArrayInputStream(mem.getStringBytes()));
-							BufferedImage buff = (BufferedImage) im;
-							if (g.drawImage(buff, 0, 0, 405, 398, 0, 0, buff.getWidth(), buff.getHeight(), null)) {
-								if (runnable == false) {
-									System.out.println("Paused ..... ");
-									this.wait();
-								}
-							}
-						} catch (Exception ex) {
-							System.out.println("Lỗi");
-							ex.printStackTrace();
-						}
-					}
-				}
-			}
-		}
-	}
+        @Override
+        public void run() {
+            synchronized (this) {
+                while (runnable) {
+                    if (webSource.grab()) {
+                        try {
+                            webSource.retrieve(frame);
+                            Graphics g = panelCamera.getGraphics();
+                            Mat imageColor = new Mat();
+                            imageColor = frame;
+                            Mat imageGray = new Mat();
+                            cvtColor(imageColor, imageGray, COLOR_BGRA2GRAY);
+                            RectVector faceDetections = new RectVector();
+                            faceDetector.detectMultiScale(imageGray, faceDetections);
+                            for (int i = 0; i < faceDetections.size(); i++) {
+                                Rect hi = faceDetections.get(0);
+                                rectangle(imageColor, hi, new Scalar(0, 255, 0, 0));
+                                Mat mat = new Mat(imageGray, hi);
+                                opencv_imgproc.resize(mat, mat, new Size(160, 160));
+                                if (btnChupAnh.getModel().isPressed()) {
+                                    if (count <= 25) {
+                                        String cropped = "src\\photo\\person." + lblId.getText().replaceAll("NV", "") + "." + count + ".jpg";
+                                        boolean imwrite = imwrite(cropped, mat);
+                                        lblSoLuong.setText(String.valueOf(count) + "/25");
+                                        count++;
+                                    }
+                                    if (count > 25) {
+                                        new luufile().luu();
+                                        new MsgBox().showMess("Lưu thành công");
+                                        myThread.runnable = false;
+                                        webSource.release();
+                                        check.dispose();
+                                    }
+                                }
 
-	/**
-	 * This method is called from within the constructor to initialize the
-	 * form. WARNING: Do NOT modify this code. The content of this method is
-	 * always regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
+                            }
+                            imencode(".bmp", frame, mem);
+                            Image im = ImageIO.read(new ByteArrayInputStream(mem.getStringBytes()));
+                            BufferedImage buff = (BufferedImage) im;
+                            if (g.drawImage(buff, 0, 0, 405, 398, 0, 0, buff.getWidth(), buff.getHeight(), null)) {
+                                if (runnable == false) {
+                                    System.out.println("Paused ..... ");
+                                    this.wait();
+                                }
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("Lỗi");
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -178,11 +158,6 @@ public class FaceIDDangKy_Form extends javax.swing.JFrame {
 
         btnChupAnh.setForeground(new java.awt.Color(255, 255, 255));
         btnChupAnh.setText("Chụp Ảnh");
-        btnChupAnh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChupAnhActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
@@ -267,68 +242,58 @@ public class FaceIDDangKy_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
         private void btnMoCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoCamActionPerformed
-		// TODO add your handling code here:
-		if (btnMoCam.getText().trim().equals("Mở CAMERA")) {
-			webSource = new VideoCapture(0);
-			myThread = new DaemonThread();
-			Thread t = new Thread(myThread);
-			t.setDaemon(true);
-			myThread.runnable = true;
-			t.start();
-			btnMoCam.setText("Tắt CAMERA");
-		} else {
-			myThread.runnable = false;
-			webSource.release();
-			btnMoCam.setText("Mở CAMERA");
-		}
+            if (btnMoCam.getText().trim().equals("Mở CAMERA")) {
+                webSource = new VideoCapture(0);
+                myThread = new DaemonThread();
+                Thread t = new Thread(myThread);
+                t.setDaemon(true);
+                myThread.runnable = true;
+                t.start();
+                btnMoCam.setText("Tắt CAMERA");
+            } else {
+                myThread.runnable = false;
+                webSource.release();
+                btnMoCam.setText("Mở CAMERA");
+            }
         }//GEN-LAST:event_btnMoCamActionPerformed
 
-        private void btnChupAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChupAnhActionPerformed
-		// TODO add your handling code here:
-
-        }//GEN-LAST:event_btnChupAnhActionPerformed
-
         private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
-                // TODO add your handling code here:
-                myThread.runnable = false;
-			webSource.release();
-		this.dispose();
+            myThread.runnable = false;
+            webSource.release();
+            this.dispose();
         }//GEN-LAST:event_lblExitMouseClicked
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FaceIDDangKy_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new FaceIDDangKy_Form().setVisible(true);
-			}
-		});
-	}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FaceIDDangKy_Form().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnChupAnh;

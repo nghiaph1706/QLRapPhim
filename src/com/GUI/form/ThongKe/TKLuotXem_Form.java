@@ -10,7 +10,6 @@ import com.GUI.Chart.ChartPie.ModelChartPie;
 import com.GUI.model.ModelCard;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import java.lang.String;
-import java.time.Year;
 import javax.swing.DefaultComboBoxModel;
 
 public class TKLuotXem_Form extends javax.swing.JPanel {
@@ -93,7 +91,7 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         }
         List<Object[]> list = tkDao.getTKLX(month, year2);
         for (Object obj[] : list) {
-            barchartTKNam.addData(new ModelChart(obj[1].toString(), new double[]{Double.parseDouble(obj[0].toString())})); 
+            barchartTKNam.addData(new ModelChart(obj[1].toString(), new double[]{Double.parseDouble(obj[0].toString())}));
         }
         jpanelTKNam.removeAll();
         jpanelTKNam.add(barchartTKNam, BorderLayout.CENTER);
@@ -101,7 +99,7 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
     }
 
     public void thongKeTheoMP() {
-        ChartLine chartlineTKNam = new ChartLine();     
+        ChartLine chartlineTKNam = new ChartLine();
         try {
             List<ModelChartLine> modelChartLines = new ArrayList<>();
             List<Object[]> list = tkDao.getTKLX_TheoNam(year);
@@ -226,7 +224,6 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
 
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
         try {
-            // TODO add your handling code here:
             thongkeluotxem();
         } catch (SQLException ex) {
             Logger.getLogger(TKLuotXem_Form.class.getName()).log(Level.SEVERE, null, ex);
@@ -235,7 +232,6 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
 
     private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
         try {
-            // TODO add your handling code here:
             thongkeluotxem();
             thongKeTheoMP();
         } catch (SQLException ex) {

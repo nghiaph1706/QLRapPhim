@@ -129,7 +129,7 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         }
     }
 
-        public void thongKeDTTungNgayTheoThang() {
+    public void thongKeDTTungNgayTheoThang() {
         DefaultTableModel model = new DefaultTableModel();
         tblDTTungNgayTheoThang.setModel(model);
         model.setRowCount(0);
@@ -221,11 +221,6 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
         cboNam.setBackground(new java.awt.Color(224, 224, 224));
         cboNam.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động", "Kinh dị", "Trinh thám", "Hoạt hình" }));
-        cboNam.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboNamItemStateChanged(evt);
-            }
-        });
         cboNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboNamActionPerformed(evt);
@@ -342,10 +337,6 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
         thongKeDTTungNgayTheoThang();
     }//GEN-LAST:event_cboThangActionPerformed
-
-    private void cboNamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboNamItemStateChanged
-
-    }//GEN-LAST:event_cboNamItemStateChanged
 
     private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
         thongKeDTChonNam();

@@ -110,12 +110,6 @@ public class SaoLuu_Form extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("DUNG LƯỢNG");
 
-        txtDuongDan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDuongDanActionPerformed(evt);
-            }
-        });
-
         progressBarCustom2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         progressBarCustom2.setForeground(new java.awt.Color(51, 255, 153));
         progressBarCustom2.setValue(50);
@@ -215,34 +209,24 @@ public class SaoLuu_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXuatTrucTiepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatTrucTiepActionPerformed
-        // TODO add your handling code here:
         backup_DuLieu_TrucTiep();
     }//GEN-LAST:event_btnXuatTrucTiepActionPerformed
 
     private void btnXuatDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatDenActionPerformed
-        // TODO add your handling code here:
         backup_DuLieu_Den();
     }//GEN-LAST:event_btnXuatDenActionPerformed
 
     private void btnXuatLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatLogActionPerformed
-        // TODO add your handling code here:
         xuatLog();
     }//GEN-LAST:event_btnXuatLogActionPerformed
 
     private void btnLayDuLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayDuLieuActionPerformed
-        // TODO add your handling code here:
         layDuLieu();
     }//GEN-LAST:event_btnLayDuLieuActionPerformed
 
     private void btnNhapDuLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapDuLieuActionPerformed
-
-        // TODO add your handling code here:
         nhapDuLieu();
     }//GEN-LAST:event_btnNhapDuLieuActionPerformed
-
-    private void txtDuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuongDanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDuongDanActionPerformed
 
     private void init() {
         tblNhatKyHD.setModel(model);
@@ -293,7 +277,7 @@ public class SaoLuu_Form extends javax.swing.JPanel {
                 }
                 bw.write("\n------------------------------------------------------------------\n");
             }
-            MsgBox.alert(this, "Xuất Log thành công");
+            new MsgBox().showMess("Xuất Log thành công");
             bw.close();
             fw.close();
         } catch (IOException ioe) {

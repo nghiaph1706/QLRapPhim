@@ -249,22 +249,18 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
-        // TODO add your handling code here:
         AddEntity();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
-        // TODO add your handling code here:
         UpdateEntity();
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
-        // TODO add your handling code here:
         DeleteEntity();
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
-        // TODO add your handling code here:
         RefreshGui();
     }//GEN-LAST:event_btnlammoiActionPerformed
 
@@ -281,7 +277,6 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtSearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchCaretUpdate
-        // TODO add your handling code here:
         Search2();
     }//GEN-LAST:event_txtSearchCaretUpdate
 

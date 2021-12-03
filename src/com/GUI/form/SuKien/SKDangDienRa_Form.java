@@ -12,9 +12,7 @@ import Utilities.XDate;
 import com.GUI.swing.ScrollBar;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +30,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class SKDangDienRa_Form extends javax.swing.JPanel {
@@ -43,6 +40,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private KhuyenMaiDAO KmAction;
     static SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
     int i = -1;
+
     public SKDangDienRa_Form() {
         initComponents();
         setOpaque(false);
@@ -144,16 +142,16 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         if (tblsukien.getRowCount() > 0) {
             DeleteValues();
         } else {
-            JOptionPane.showMessageDialog(this, "Chưa Có Dữ Liệu!", "Lỗi!", 0);
+            new MsgBox().showMess("Chưa Có Dữ Liệu!");
         }
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnGuiMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiMailActionPerformed
         i = tblsukien.getSelectedRow();
-        if(i<0){
-            MsgBox.alert(this, "Vui lòng chọn sự kiện cần gửi mail");
+        if (i < 0) {
+            new MsgBox().showMess("Vui lòng chọn sự kiện cần gửi mail");
             return;
-        }else{
+        } else {
             KhuyenMai km = new KhuyenMaiDAO().selectById(tblsukien.getValueAt(i, 0).toString());
             guiMail2(km);
         }
@@ -191,11 +189,11 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         if (index != -1) {
             KmAction = new KhuyenMaiDAO();
             KmAction.delete(tblsukien.getValueAt(index, 0).toString());
-            JOptionPane.showMessageDialog(this, "Xóa Dữ Liệu Thành Công!", "Hoàn Thành", 0);
+            new MsgBox().showMess("Xóa Dữ Liệu Thành Công!");
             FillTable();
             return;
         }
-        JOptionPane.showMessageDialog(this, "Xóa Dữ Liệu Không Thành Công!", "Lỗi!", 0);
+        new MsgBox().showMess("Xóa Dữ Liệu Không Thành Công!");
     }
 
     private void guiMail() throws AddressException, MessagingException {
@@ -280,7 +278,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
             };
             a.start();
         }
-        MsgBox.alert(this, "Gửi mail thành công");
+        new MsgBox().showMess("Gửi mail thành công");
     }
 
     public void guiMail2(KhuyenMai khuyenMai) {
@@ -302,61 +300,59 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         String from = accountName;
         // gửi đến mail nào       
 
-        String tenSK=khuyenMai.getTenKM();
-        String thoiGianKetThucSK=XDate.toString(khuyenMai.getNgayKetThuc());
-        String phanTramGiam =String.valueOf(khuyenMai.getMucGiamGia());
-        for(int i = 0 ; i < listMailKH.size();i++){
-        // chủ đề
-        String email = listMailKH.get(i).getEmail();
-        String tenKH =listMailKH.get(i).getTen();
-        
-        Thread a = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    String subject = "CFL Cinema";
-                    // nội dung
+        String tenSK = khuyenMai.getTenKM();
+        String thoiGianKetThucSK = XDate.toString(khuyenMai.getNgayKetThuc());
+        String phanTramGiam = String.valueOf(khuyenMai.getMucGiamGia());
+        for (int i = 0; i < listMailKH.size(); i++) {
+            // chủ đề
+            String email = listMailKH.get(i).getEmail();
+            String tenKH = listMailKH.get(i).getTen();
 
-                    Message msg = new MimeMessage(s);
-                    msg.setFrom(new InternetAddress(from));
-                    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-                    msg.setSubject(subject);
-                    // tạo html mime part
-                    MimeBodyPart messageBodyPart = new MimeBodyPart();
-                    messageBodyPart.setContent(htmlForMail(tenKH, tenSK, thoiGianKetThucSK, phanTramGiam,listPhim), "text/html;charset = utf-8");
-                    // tạo mutil part
-                    Multipart multipart = new MimeMultipart();
-                    multipart.addBodyPart(messageBodyPart);
-                    // tạo mảng key và values 
+            Thread a = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        String subject = "CFL Cinema";
+                        // nội dung
 
-                    // đẩy từng phần tử map + dường dẫn file vào trong từng phần của message
-                    Map<String,String> map = mapImage(listPhim);
-                    Set<String> set = map.keySet();
-                    for (String s : set) {
-                        MimeBodyPart imagePart = new MimeBodyPart();
-                        imagePart.setHeader("Content-ID", "<" + s + ">");
-                        imagePart.setDisposition(MimeBodyPart.INLINE);
-                        try {
-                            imagePart.attachFile(new File(map.get(s)).getAbsolutePath());
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        Message msg = new MimeMessage(s);
+                        msg.setFrom(new InternetAddress(from));
+                        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+                        msg.setSubject(subject);
+                        // tạo html mime part
+                        MimeBodyPart messageBodyPart = new MimeBodyPart();
+                        messageBodyPart.setContent(htmlForMail(tenKH, tenSK, thoiGianKetThucSK, phanTramGiam, listPhim), "text/html;charset = utf-8");
+                        // tạo mutil part
+                        Multipart multipart = new MimeMultipart();
+                        multipart.addBodyPart(messageBodyPart);
+                        // tạo mảng key và values 
+
+                        // đẩy từng phần tử map + dường dẫn file vào trong từng phần của message
+                        Map<String, String> map = mapImage(listPhim);
+                        Set<String> set = map.keySet();
+                        for (String s : set) {
+                            MimeBodyPart imagePart = new MimeBodyPart();
+                            imagePart.setHeader("Content-ID", "<" + s + ">");
+                            imagePart.setDisposition(MimeBodyPart.INLINE);
+                            try {
+                                imagePart.attachFile(new File(map.get(s)).getAbsolutePath());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            multipart.addBodyPart(imagePart);
                         }
-                        multipart.addBodyPart(imagePart);
+                        msg.setContent(multipart);
+                        Transport.send(msg);
+                    } catch (AddressException ex) {
+                        Logger.getLogger(SKDangDienRa_Form.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SKDangDienRa_Form.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    msg.setContent(multipart);
-                    Transport.send(msg);
-                } catch (AddressException ex) {
-                    Logger.getLogger(SKDangDienRa_Form.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (MessagingException ex) {
-                    Logger.getLogger(SKDangDienRa_Form.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        };
-        a.start();
-    }
-        
-
-        MsgBox.alert(this, "Gửi mail thành công");
+            };
+            a.start();
+        }
+        new MsgBox().showMess("Gửi mail thành công");
     }
 
     public String htmlForMail(String tenKhachHang, String tenSuKien, String thoiGianKetThucSK, String phanTramGiam, List<Phim> listPhim) {
@@ -568,7 +564,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																				CINEMA cảm ơn quý khách đã tin tưởng,\n"
                 + "																				đồng hành cùng chúng tôi trong quá trình\n"
                 + "																				phát triển. Nay chúng tôi tổ chức sự kiện khuyến mãi <strong style=\"font-size: 25px\">" + tenSuKien + "</strong>"
-                + "                                                                                                                                                         để cảm ơn quý khách, sự kiện này sẽ giảm giá lên tới <strong style=\"font-size: 25px\">" + phanTramGiam + "%"+"</strong> trên tổng tiền hóa đơn."
+                + "                                                                                                                                                         để cảm ơn quý khách, sự kiện này sẽ giảm giá lên tới <strong style=\"font-size: 25px\">" + phanTramGiam + "%" + "</strong> trên tổng tiền hóa đơn."
                 + "                                                                                                                                                         Chúc quý khách một ngày tốt lành và hẹn gặp quý khách ở một ngày sớm nhất\n"
                 + "																				</span></p>\n"
                 + "																	</div>\n"
@@ -626,7 +622,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center; letter-spacing: -1px;\">\n"
                 + "															<span style=\"font-size:88px;font-family: Arial\">SALE"
-                + "																				"+phanTramGiam+"%"+"</span></p>\n"
+                + "																				" + phanTramGiam + "%" + "</span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -921,7 +917,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "															<td style=\"padding-top:25px;text-align:center;width:100%;\">\n"
                 + "																<h3\n"
                 + "																	style=\"margin: 0; color: #201616; direction: ltr; font-family: 'Arial', Georgia, Times, 'Times New Roman', serif; font-size: 22px; font-weight: normal; letter-spacing: 1px; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;\">\n"
-                + "																	"+listPhim.get(0).getTenPhim()+"</h3>\n"
+                + "																	" + listPhim.get(0).getTenPhim() + "</h3>\n"
                 + "															</td>\n"
                 + "														</tr>\n"
                 + "													</table>\n"
@@ -935,7 +931,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																	<div\n"
                 + "																		style=\"font-size: 14px; mso-line-height-alt: 16.8px; color: #393d47; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;\">\n"
                 + "																		<p style=\"margin: 0; font-size: 14px;\"><span\n"
-                + "																				style=\"font-size:16px;\">"+listPhim.get(0).getTenPhim() +"dến từ" +listPhim.get(0).getQuocGia()+"</span></p>\n"
+                + "																				style=\"font-size:16px;\">" + listPhim.get(0).getTenPhim() + "dến từ" + listPhim.get(0).getQuocGia() + "</span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -967,7 +963,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "															<td style=\"padding-top:25px;text-align:center;width:100%;\">\n"
                 + "																<h3\n"
                 + "																	style=\"margin: 0; color: #201616; direction: ltr; font-family: 'Arial', Georgia, Times, 'Times New Roman', serif; font-size: 22px; font-weight: normal; letter-spacing: 1px; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;\">\n"
-                + "																	"+listPhim.get(1).getTenPhim()+"</h3>\n"
+                + "																	" + listPhim.get(1).getTenPhim() + "</h3>\n"
                 + "															</td>\n"
                 + "														</tr>\n"
                 + "													</table>\n"
@@ -981,7 +977,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																	<div\n"
                 + "																		style=\"font-size: 14px; mso-line-height-alt: 16.8px; color: #393d47; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;\">\n"
                 + "																		<p style=\"margin: 0; font-size: 14px;\"><span\n"
-                + "																				style=\"font-size:16px;\">"+listPhim.get(1).getTenPhim() +"dến từ" +listPhim.get(1).getQuocGia()+"</span></p>\n"
+                + "																				style=\"font-size:16px;\">" + listPhim.get(1).getTenPhim() + "dến từ" + listPhim.get(1).getQuocGia() + "</span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -1013,7 +1009,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "															<td style=\"padding-top:25px;text-align:center;width:100%;\">\n"
                 + "																<h3\n"
                 + "																	style=\"margin: 0; color: #201616; direction: ltr; font-family: 'Arial', Georgia, Times, 'Times New Roman', serif; font-size: 22px; font-weight: normal; letter-spacing: 1px; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;\">\n"
-                + "																	"+listPhim.get(2).getTenPhim()+"</h3>\n"
+                + "																	" + listPhim.get(2).getTenPhim() + "</h3>\n"
                 + "															</td>\n"
                 + "														</tr>\n"
                 + "													</table>\n"
@@ -1027,7 +1023,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																	<div\n"
                 + "																		style=\"font-size: 14px; mso-line-height-alt: 16.8px; color: #393d47; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;\">\n"
                 + "																		<p style=\"margin: 0; font-size: 14px;\"><span\n"
-                + "																				style=\"font-size:16px;\">"+listPhim.get(2).getTenPhim() +"dến từ" +listPhim.get(2).getQuocGia()+"</span></p>\n"
+                + "																				style=\"font-size:16px;\">" + listPhim.get(2).getTenPhim() + "dến từ" + listPhim.get(2).getQuocGia() + "</span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -1324,7 +1320,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     }
 
     public Map mapImage(List<Phim> listPhim) {
-         
+
         // Tạo map 
         Map<String, String> map = new HashMap<>();
         map.put("imgBgHeader", "src/images/bg_light__1___1___1___1___1___1_.png");
@@ -1336,9 +1332,9 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         map.put("imgUuDiem3", "src/images/hand.png");
         map.put("imgBgBody2", "src/images/bg_light__1___1___1___1___1___1_.png");
         map.put("imgBgBody3", "src/images/bg_light__1___1___1___1___1___1_.png");
-        map.put("imgPhim1", "src/imagePhim/"+listPhim.get(0).getHinh()+"");
-        map.put("imgPhim2", "src/imagePhim/"+listPhim.get(1).getHinh()+"");
-        map.put("imgPhim3", "src/imagePhim/"+listPhim.get(2).getHinh()+"");
+        map.put("imgPhim1", "src/imagePhim/" + listPhim.get(0).getHinh() + "");
+        map.put("imgPhim2", "src/imagePhim/" + listPhim.get(1).getHinh() + "");
+        map.put("imgPhim3", "src/imagePhim/" + listPhim.get(2).getHinh() + "");
         map.put("imgBgBody4", "src/images/bg_light__1___1___1___1___1___1_.png");
         map.put("imgAboutus", "src/images/d89f0523-ad7f-43e4-97ac-8df648461390.jpeg");
 

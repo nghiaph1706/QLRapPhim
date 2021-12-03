@@ -100,7 +100,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
         }
     }
     
@@ -180,7 +180,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
         }
     }
     
@@ -260,7 +260,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
         }
     }
     
@@ -340,7 +340,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            MsgBox.alert(chooser, "Vui lòng chọn ổ đĩa.");
+            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
         }
     }
     

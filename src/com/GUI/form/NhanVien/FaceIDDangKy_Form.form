@@ -188,9 +188,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ch&#x1ee5;p &#x1ea2;nh"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChupAnhActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

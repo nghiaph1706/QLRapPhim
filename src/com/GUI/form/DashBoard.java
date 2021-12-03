@@ -1,11 +1,9 @@
 package com.GUI.form;
 
 import Utilities.XImage;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 
 public class DashBoard extends javax.swing.JPanel {
-    
+
     public XImage xImage = new XImage();
 
     public DashBoard() {
@@ -14,6 +12,7 @@ public class DashBoard extends javax.swing.JPanel {
         xImage.ReadAndScaleIMG(jLabel6, "/imagePhim/Inception.jpg", jLabel6.getPreferredSize().width, jLabel6.getPreferredSize().height);
         xImage.ReadAndScaleIMG(jLabel7, "/imagePhim/MatBiec.jpg", jLabel7.getPreferredSize().width, jLabel7.getPreferredSize().height);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,8 +98,8 @@ public class DashBoard extends javax.swing.JPanel {
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

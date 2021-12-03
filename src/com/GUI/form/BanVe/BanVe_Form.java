@@ -14,6 +14,7 @@ import Entity.HoaDon;
 import Entity.LichChieu;
 import Entity.Phim;
 import Entity.Ve;
+import Utilities.MsgBox;
 import Utilities.XDate;
 import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
 import com.GUI.main.Main;
@@ -24,11 +25,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BanVe_Form extends javax.swing.JPanel {
-    
+
     private LichChieuDAO lcDAO = new LichChieuDAO();
     private KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
     private HoaDonDAO hdDAO = new HoaDonDAO();
@@ -47,14 +47,14 @@ public class BanVe_Form extends javax.swing.JPanel {
         "Mã vé/DV", "Số lượng", "Giá tiền", "Thành tiền", "Mã HD"
     };
     private DefaultTableModel model = new DefaultTableModel(header, 0);
+
     public BanVe_Form() {
         initComponents();
         init();
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
-        
-        
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,11 +110,6 @@ public class BanVe_Form extends javax.swing.JPanel {
         tblHoaDonCT.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         tblHoaDonCT.setSelectionBackground(new java.awt.Color(255, 51, 51));
         tblHoaDonCT.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        tblHoaDonCT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblHoaDonCTMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblHoaDonCT);
 
         btnXuatHD.setForeground(new java.awt.Color(255, 255, 255));
@@ -272,11 +267,6 @@ public class BanVe_Form extends javax.swing.JPanel {
         cboPhongChieu.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         cboPhongChieu.setForeground(new java.awt.Color(204, 204, 204));
         cboPhongChieu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
-        cboPhongChieu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboPhongChieuActionPerformed(evt);
-            }
-        });
 
         lblCheckMa.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblCheckMa.setForeground(new java.awt.Color(51, 51, 51));
@@ -381,20 +371,17 @@ public class BanVe_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
-        // TODO add your handling code here:
         checkDichVu(true);
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     private void chkPhieuGGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPhieuGGActionPerformed
-        // TODO add your handling code here:
-        if(checkPhieuGiamGia())
+        if (checkPhieuGiamGia())
             cboPhieuGG.setEnabled(true);
         else
             cboPhieuGG.setEnabled(false);
     }//GEN-LAST:event_chkPhieuGGActionPerformed
 
     private void btnXuLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuLyActionPerformed
-        // TODO add your handling code here:
         xuLyDuLieu();
     }//GEN-LAST:event_btnXuLyActionPerformed
 
@@ -413,7 +400,7 @@ public class BanVe_Form extends javax.swing.JPanel {
         }
         Main.hoaDon.tinhTien();
         HoaDon_Form.txtMaHD.setText(BanVe_Form.maHDNow);
-        HoaDon_Form.txtThanhTien.setText(""+HoaDon_Form.thanhTien);
+        HoaDon_Form.txtThanhTien.setText("" + HoaDon_Form.thanhTien);
         Main.hoaDon.loadDatabase();
         Main.main.showForm(Main.hoaDon);
     }//GEN-LAST:event_btnXuatHDActionPerformed
@@ -425,22 +412,13 @@ public class BanVe_Form extends javax.swing.JPanel {
             GioChieu = tmp.substring(2).trim();
             Main.main.showForm(new ChonGhe_Form());
         } else {
-            JOptionPane.showMessageDialog(this, "Chọn phim");
+            new MsgBox().showMess("Chọn phim");
         }
     }//GEN-LAST:event_btnChuyenActionPerformed
 
-    private void cboPhongChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongChieuActionPerformed
-
-    }//GEN-LAST:event_cboPhongChieuActionPerformed
-
     private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed
-        // TODO add your handling code here:
         comboBoxPhongChieu();
     }//GEN-LAST:event_cboPhimActionPerformed
-
-    private void tblHoaDonCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonCTMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblHoaDonCTMouseClicked
 
     private void txtMaKHTTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaKHTTKeyReleased
         checkMaKHTT();
@@ -456,9 +434,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXuatHD1ActionPerformed
 
     // MAIN FUNCTIONAL
-    
-    private void init()
-    {
+    private void init() {
         loadDatabase();
         spnBap.setToolTipText("BAP");
         spnNuoc.setToolTipText("NUOC");
@@ -476,12 +452,12 @@ public class BanVe_Form extends javax.swing.JPanel {
         spnCombo1.setSize(0, 100);
         spnCombo2.setSize(0, 100);
     }
-    public void loadDatabase()
-    {
+
+    public void loadDatabase() {
         model.setRowCount(0);
         try {
             List<HDCT> list = hdctDAO.selectByID(maHDNow);
-            for(HDCT hdct : list) {
+            for (HDCT hdct : list) {
                 Object[] row = {
                     hdct.getMaDichVu(),
                     hdct.getSoLuong(),
@@ -491,24 +467,23 @@ public class BanVe_Form extends javax.swing.JPanel {
                 };
                 model.addRow(row);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void xuLyDuLieu()
-    {
+
+    private void xuLyDuLieu() {
         try {
             insertDichVu();
             loadDatabase();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //
-    private void insertDichVu()
-    {
+
+    private void insertDichVu() {
         HDCT hdct = new HDCT();
-        
+
         int bap = (int) spnBap.getValue();
         int nuoc = (int) spnNuoc.getValue();
         int cb1 = (int) spnCombo1.getValue();
@@ -518,58 +493,31 @@ public class BanVe_Form extends javax.swing.JPanel {
         double giaNuoc = nuoc * dvDAO.selectByMaDichVu(spnNuoc.getToolTipText().trim());
         double giaCB1 = cb1 * dvDAO.selectByMaDichVu(spnCombo1.getToolTipText().trim());
         double giaCB2 = cb2 * dvDAO.selectByMaDichVu(spnCombo2.getToolTipText().trim());
-        
-//        String maDV = "";
-//        double thanhTien = 0;
-//        for(int i = 0; i < 10; i++) {
-//            hdct.setHIDE(false);
-//            hdct.setMaHoaDon(maHDNow);
-//            if(bap >= 0 && nuoc >= 0 && cb1 >= 0 && cb2 >= 0) {
-//                hdct.setMaDichVu(spnBap.getToolTipText().trim());
-//                hdct.setMaDichVu(spnNuoc.getToolTipText().trim());
-//                hdct.setMaDichVu(spnCombo1.getToolTipText().trim());
-//                hdct.setMaDichVu(spnCombo1.getToolTipText().trim());
-//                if(bap > 1 || nuoc > 1 || cb1 > 1 || cb2 > 1) {
-//                    hdct.setGiaTien((25000 | 25000 | 50000 | 75000));
-//                }
-//            }
-//            else {
-//                int soLuong = bap | nuoc | cb1 | cb2;
-//                hdct.setMaDichVu(
-//                        maDV.equals(null)?spnBap.getToolTipText().trim() :
-//                                maDV.equals(null)?spnNuoc.getToolTipText().trim() :
-//                                        maDV.equals(null)?spnCombo1.getToolTipText().trim() :
-//                                                maDV.equals(null)?spnCombo2.getToolTipText().trim():null
-//                );
-//                hdct.setGiaTien((25000 | 25000 | 50000 | 75000) * soLuong);
-//                hdct.setThanhTien(giaBap);
-//            }
-//        }
-        
+
         hdct.setHIDE(false);
         hdct.setMaHoaDon(maHDNow);
-        if(bap > 0) {
+        if (bap > 0) {
             hdct.setMaDichVu(spnBap.getToolTipText().trim());
             hdct.setGiaTien(25000);
             hdct.setSoLuong(bap);
             hdct.setThanhTien(giaBap);
             hdctDAO.insertDichVu(hdct);
         }
-        if(nuoc > 0) {
+        if (nuoc > 0) {
             hdct.setMaDichVu(spnNuoc.getToolTipText().trim());
             hdct.setGiaTien(25000);
             hdct.setSoLuong(nuoc);
             hdct.setThanhTien(giaNuoc);
             hdctDAO.insertDichVu(hdct);
         }
-        if(cb1 > 0) {
+        if (cb1 > 0) {
             hdct.setMaDichVu(spnCombo1.getToolTipText().trim());
             hdct.setGiaTien(50000);
             hdct.setSoLuong(cb1);
             hdct.setThanhTien(giaCB1);
             hdctDAO.insertDichVu(hdct);
         }
-        if(cb2 > 0) {
+        if (cb2 > 0) {
             hdct.setMaDichVu(spnCombo2.getToolTipText().trim());
             hdct.setGiaTien(75000);
             hdct.setSoLuong(cb2);
@@ -578,17 +526,17 @@ public class BanVe_Form extends javax.swing.JPanel {
         }
     }
     private VeDAO vDAO = new VeDAO();
-    public void insertMaVe()
-    {   
-        
+
+    public void insertMaVe() {
+
         HDCT hdct = new HDCT();
-        
+
         String tmp = cboPhim.getSelectedItem().toString();
         String maphim = tmp.substring(0, tmp.indexOf("-")).trim();
         tmp = cboPhongChieu.getSelectedItem().toString();
         String giochieu = tmp.substring(3).trim();
         String malc = lcDAO.selectLCbyTT(maphim, MaPhong, giochieu);
-        
+
         for (Ghe ghe : ChonGhe_Form.listGheSelected) {
             Ve ve = new Ve();
             ve.setMaghe(ghe.getMaGhe());
@@ -597,13 +545,12 @@ public class BanVe_Form extends javax.swing.JPanel {
             ve.setMaphim(maphim);
             vDAO.insert(ve);
         }
-        
-        
+
         int count = ChonGhe_Form.listGheSelected.size();
         List<Ve> velList = vDAO.selectNewVe(count);
-        
+
         for (int i = 0; i < velList.size(); i++) {
-            Ve ve =velList.get(i);
+            Ve ve = velList.get(i);
             hdct.setMaDichVu(ve.getMave());
             hdct.setGiaTien(ChonGhe_Form.listGheSelected.get(i).getGiaGhe());
             hdct.setSoLuong(1);
@@ -613,57 +560,59 @@ public class BanVe_Form extends javax.swing.JPanel {
             hdctDAO.insertVe(hdct);
         }
     }
-    
-    // SUB-FUNCTIONAL
 
-    private void comboBoxPhim()
-    {
+    // SUB-FUNCTIONAL
+    private void comboBoxPhim() {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhim.getModel();
         cboModel.removeAllElements();
         cboModel.addElement("-");
         List<LichChieu> list = lcDAO.selectPhimTheoLichChieu();
-        
-        for(LichChieu lc : list) {
+
+        for (LichChieu lc : list) {
             List<Phim> listPh = phDAO.selectPhimTheoLichChieu(lc.getMaPhim());
             cboModel.addElement(lc.getMaPhim() + " - " + listPh.get(0).toString());
         }
     }
-    private void comboBoxPhongChieu()
-    {
+
+    private void comboBoxPhongChieu() {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhongChieu.getModel();
         cboModel.removeAllElements();
         cboModel.addElement("-");
         String lch = (String) cboPhim.getSelectedItem();
         if (!lch.equals("-")) {
-            if(lch != null) {
+            if (lch != null) {
                 List<LichChieu> list = lcDAO.selectPhongChieuTheoPhim(lch.substring(0, lch.indexOf("-")).trim());
-                for(LichChieu lc : list) {
+                for (LichChieu lc : list) {
                     cboModel.addElement(lc.getMaPhong());
                 }
             }
         }
     }
-    private void comboBoxPhieuGiamGia()
-    {
+
+    private void comboBoxPhieuGiamGia() {
         DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
         cboModel.removeAllElements();
         cboModel.addElement("-");
         List<String> list = kmDAO.listKhuyenMai();
-        for(String km : list)
+        for (String km : list) {
             cboModel.addElement(km);
+        }
     }
-    private boolean checkPhieuGiamGia()
-    {
-        if(!chkPhieuGG.isSelected())
+
+    private boolean checkPhieuGiamGia() {
+        if (!chkPhieuGG.isSelected()) {
             return false;
+        }
         return true;
     }
+
     private void checkDichVu(boolean check) {
         spnBap.setEnabled(check);
         spnNuoc.setEnabled(check);
         spnCombo1.setEnabled(check);
         spnCombo2.setEnabled(check);
     }
+
     private void checkMaKHTT() {
         for (String maKHTT : khttList) {
             if (maKHTT.equals(txtMaKHTT.getText())) {
@@ -673,7 +622,7 @@ public class BanVe_Form extends javax.swing.JPanel {
             } else {
                 lblCheckMa.setText("Chưa có mã. Đăng kí mới?");
                 lblCheckMa.setForeground(Color.red);
-                lblCheckMa.addMouseListener(new MouseAdapter(){
+                lblCheckMa.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent me) {
                         Main.main.showForm(new KhachHangThanThiet_Form());
@@ -710,5 +659,4 @@ public class BanVe_Form extends javax.swing.JPanel {
     private com.GUI.swing.TextField txtMaKHTT;
     // End of variables declaration//GEN-END:variables
 
-   
 }

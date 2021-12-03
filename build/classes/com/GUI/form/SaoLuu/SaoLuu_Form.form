@@ -213,9 +213,6 @@
       </Properties>
     </Component>
     <Component class="com.GUI.swing.TextField" name="txtDuongDan">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDuongDanActionPerformed"/>
-      </Events>
     </Component>
     <Component class="com.GUI.swing.ProgressBarCustom" name="progressBarCustom2">
       <Properties>

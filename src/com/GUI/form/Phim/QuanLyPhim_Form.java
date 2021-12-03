@@ -1,36 +1,20 @@
 package com.GUI.form.Phim;
 
 import com.GUI.swing.ScrollBar;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import DAO.PhimDAO;
 import DAO.TheLoaiDAO;
-import java.io.File;
 import java.util.List;
-import javax.swing.JFileChooser;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import Entity.Phim;
 import Entity.TheLoai;
 import Utilities.MsgBox;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 public class QuanLyPhim_Form extends javax.swing.JPanel {
-    
+
 //    JFileChooser fileChooser = new JFileChooser();
     DefaultTableModel model;
     DefaultComboBoxModel cbomodelTheLoai = new DefaultComboBoxModel();
@@ -38,37 +22,36 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     private ValidateCheck vld = new ValidateCheck();
     PhimDAO phimDAO = new PhimDAO();
     private XImage xImage = new XImage();
-    
-            
+
     public QuanLyPhim_Form() {
         initComponents();
         setOpaque(false);
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
         init();
     }
-    
+
     public void init() {
         model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"Mã phim", "Tên phim", "Ngày Khởi Chiếu", "Ngày Kết Thúc", "Thể Loại", "Định Dạng", "Quốc Gia"});
         tblPhim.setModel(model);
         jdNgaykc.setDateFormatString("yyyy-MM-dd");
         jdNgaykt.setDateFormatString("yyyy-MM-dd");
-        fillcboTheLoai(); 
-        fillTable();      
+        fillcboTheLoai();
+        fillTable();
         try {
         } catch (Exception e) {
         }
     }
 
     public void fillcboTheLoai() {
-       cboTheLoai.setModel(cbomodelTheLoai);
-       cbomodelTheLoai.removeAllElements();
-       List<TheLoai> list = theLoaiDao.selectAll();
-       for (TheLoai theloai : list) {
-           cbomodelTheLoai.addElement(theloai); // ko co du lieu dc do vao
-       }
+        cboTheLoai.setModel(cbomodelTheLoai);
+        cbomodelTheLoai.removeAllElements();
+        List<TheLoai> list = theLoaiDao.selectAll();
+        for (TheLoai theloai : list) {
+            cbomodelTheLoai.addElement(theloai); // ko co du lieu dc do vao
+        }
     }
-    
+
     public void fillTableWithList(List<Phim> list) {
         model.setRowCount(0);
         for (Phim ph : list) {
@@ -82,7 +65,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         list = phimDAO.selectAll();
         fillTableWithList(list);
     }
-    
+
     public Phim getModel() {
         Phim ph = new Phim();
         ph.setMaPhim(txtMaPhim.getText());
@@ -95,7 +78,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         ph.setQuocGia(txtQuocGia.getText());
         return ph;
     }
-    
+
     public void setModel(Phim ph) {
         txtMaPhim.setText(ph.getMaPhim());
         txtTenPhim.setText(ph.getTenPhim());
@@ -107,17 +90,17 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         video1.loadlink(ph.getHinh());
         txtQuocGia.setText(ph.getQuocGia());
     }
-    
+
     public void them() {
         Phim ph = getModel();
         try {
             if (check(true)) {
                 phimDAO.insert(ph);
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                new MsgBox().showMess("Thêm thành công");
                 fillTable();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            new MsgBox().showMess("Thêm thất bại");
             e.printStackTrace();
         }
     }
@@ -125,7 +108,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     public void sua() {
         int index = tblPhim.getSelectedRow();
         if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Vui dòng chọn phim cần sửa");
+            new MsgBox().showMess("Vui dòng chọn phim cần sửa");
             return;
         } else {
             Phim ph = getModel();
@@ -133,10 +116,10 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
             if (check(true)) {
                 try {
                     phimDAO.update(ph);
-                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    new MsgBox().showMess("Sửa thành công");
                     fillTable();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                    new MsgBox().showMess("Sửa thất bại");
                     e.printStackTrace();
                 }
             }
@@ -147,28 +130,28 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     public void xoa() {
         int index = tblPhim.getSelectedRow();
         if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Vui dòng chọn cần xóa");
+            new MsgBox().showMess("Vui dòng chọn cần xóa");
             return;
         } else {
-            if (MsgBox.confirm(this, "Bạn có muốn xóa phim này không ?")) {
+            if (new MsgBox().showConfirm("Bạn có muốn xóa phim này không ?")) {
 
                 try {
                     phimDAO.delete(tblPhim.getValueAt(index, 0).toString());
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    new MsgBox().showMess("Xóa thành công");
                     fillTable();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    new MsgBox().showMess("Xóa thất bại");
                     e.printStackTrace();
                 }
 
             }
         }
     }
-    
-    public boolean check(boolean x){
+
+    public boolean check(boolean x) {
         if (x
                 && vld.CheckString("Mã Phim", txtMaPhim.getText(), 50, false)
-//                && Check(txtMaPhim.getText())
+                //                && Check(txtMaPhim.getText())
                 && vld.CheckString("Tên Phim", txtTenPhim.getText(), 255, false)
                 && vld.CheckNullDate("Ngày Khởi Chiếu", jdNgaykc.getDate())
                 && vld.CheckNullDate("Ngày Kết Thúc", jdNgaykt.getDate())
@@ -189,9 +172,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         }
         return false;
     }
-    
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -242,11 +223,6 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
                 tblPhimMouseClicked(evt);
             }
         });
-        tblPhim.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tblPhimKeyReleased(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblPhim);
 
         txtMaPhim.setBackground(new java.awt.Color(224, 224, 224));
@@ -256,11 +232,6 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         txtTenPhim.setBackground(new java.awt.Color(224, 224, 224));
         txtTenPhim.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         txtTenPhim.setLabelText("Tên phim");
-        txtTenPhim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenPhimActionPerformed(evt);
-            }
-        });
 
         txtQuocGia.setBackground(new java.awt.Color(224, 224, 224));
         txtQuocGia.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -273,11 +244,6 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         cboTheLoai.setBackground(new java.awt.Color(224, 224, 224));
         cboTheLoai.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         cboTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hành động - TL01", "Kinh dị", "Trinh thám", "Hoạt hình" }));
-        cboTheLoai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboTheLoaiActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
@@ -400,43 +366,25 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    private void txtTenPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenPhimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenPhimActionPerformed
-
-    private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        // TODO add your handling code here:
         them();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
         sua();
-        
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
         xoa();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblPhimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhimMouseClicked
-        // TODO add your handling code here:
         int index = tblPhim.getSelectedRow();
         Phim ph = phimDAO.selectById(tblPhim.getValueAt(index, 0).toString());
         setModel(ph);
     }//GEN-LAST:event_tblPhimMouseClicked
-
-    private void tblPhimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPhimKeyReleased
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_tblPhimKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnDelete;

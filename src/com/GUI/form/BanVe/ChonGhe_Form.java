@@ -20,19 +20,20 @@ public class ChonGhe_Form extends javax.swing.JPanel {
     public static boolean status = false;
     public static double giaTienGhe;
     public static List<Ghe> listGheSelected = new ArrayList<>();
+
     public ChonGhe_Form() {
         initComponents();
-        seat1.fillGhe(BanVe_Form.MaPhong,BanVe_Form.GioChieu);
-        fillchart(BanVe_Form.MaPhong,BanVe_Form.GioChieu);
+        seat1.fillGhe(BanVe_Form.MaPhong, BanVe_Form.GioChieu);
+        fillchart(BanVe_Form.MaPhong, BanVe_Form.GioChieu);
         System.out.println(BanVe_Form.GioChieu);
     }
-    
-    void fillchart(String maPhong, String gioChieu){
+
+    void fillchart(String maPhong, String gioChieu) {
         GheDAO gheDAO = new GheDAO();
-        List <ModelChartPie> list = new ArrayList<>();
+        List<ModelChartPie> list = new ArrayList<>();
         int emptyseat = gheDAO.selectEmptySeat(maPhong, gioChieu);
         list.add(new ModelChartPie("Ghế trống", emptyseat, Color.GRAY));
-        list.add(new ModelChartPie("Đã đặt", 140-emptyseat, new Color(255,51,51)));       
+        list.add(new ModelChartPie("Đã đặt", 140 - emptyseat, new Color(255, 51, 51)));
         chartPie1.setModel(list);
     }
 

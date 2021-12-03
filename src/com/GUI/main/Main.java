@@ -3,6 +3,7 @@ package com.GUI.main;
 import DAO.GheDAO;
 import Entity.Ghe;
 import Entity.NhanVien;
+import Utilities.MsgBox;
 import com.GUI.component.Header;
 import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
@@ -18,6 +19,7 @@ import com.GUI.form.SaoLuu.SaoLuu_Form;
 import com.GUI.form.SuKien.QuanLySuKien_Form;
 import com.GUI.form.SuKien.SKDangDienRa_Form;
 import com.GUI.form.ThongKe.TKDoanhThu_Form;
+import com.GUI.form.ThongKe.TKDoanhThu_Ngay;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
 import com.GUI.main.login.Login;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
@@ -26,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -109,8 +110,10 @@ public class Main extends javax.swing.JFrame {
                     main.showForm(nvf);
                 } else if (menuIndex == 7) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new TKDoanhThu_Form());
+                        main.showForm(new TKDoanhThu_Ngay());
                     } else if (subMenuIndex == 1) {
+                        main.showForm(new TKDoanhThu_Form());
+                    } else if (subMenuIndex == 2) {
                         main.showForm(new TKLuotXem_Form());
                     }
                 } else if (menuIndex == 8) {
@@ -118,8 +121,7 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(saoLuu);
                     }
                 } else if (menuIndex == 9) {
-                    int input = JOptionPane.showConfirmDialog(rootPane, "Bạn Có Muốn Đăng Xuất Không?", "Đăng Xuất!", 0);
-                    if (input == 0) {
+                    if (new MsgBox().showConfirm("Bạn Có Muốn Đăng Xuất Không?")) {
                         try {
                             new Login().setVisible(true);
                         } catch (InterruptedException ex) {
