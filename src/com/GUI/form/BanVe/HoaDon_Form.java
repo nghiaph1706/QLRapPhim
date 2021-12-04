@@ -40,6 +40,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private HoaDon hd;
     public static String maHoaDon_Paid;
     public static double thanhTien;
+    public static boolean checkThanhToan = false;
     private String[] header = {
         "Mã HD", "Tổng tiền", "Mã KM", "Mã KHTT", "Mức giảm giá", "Thành Tiền", "Ngày lập", "Mã NV"
     };
@@ -73,6 +74,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
         hd.setHIDE(false);
         hdDAO.update(hd);
         maHoaDon_Paid = hd.getMaHoaDon();
+	checkThanhToan = true;
     }
 
     public void loadDatabase() {
@@ -265,7 +267,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         printHoaDon();
         updateHD();
-        Main.saoLuu.logDuLieu();
+        Main.saoLuu.logHD();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed

@@ -10,6 +10,7 @@ import Entity.TheLoai;
 import Utilities.MsgBox;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
+import com.GUI.main.Main;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -22,6 +23,10 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     private ValidateCheck vld = new ValidateCheck();
     PhimDAO phimDAO = new PhimDAO();
     private XImage xImage = new XImage();
+    public static boolean add_Phim = false;
+    public static boolean xoa_Phim = false;
+    public static boolean sua_Phim = false;
+    public static String MaPHIM;
 
     public QuanLyPhim_Form() {
         initComponents();
@@ -76,6 +81,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         ph.setDinhDang(txtDinhDang.getText());
         ph.setHinh(txtvideo.getText());
         ph.setQuocGia(txtQuocGia.getText());
+	MaPHIM = ph.getMaNhanVien();
         return ph;
     }
 
@@ -98,6 +104,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
                 phimDAO.insert(ph);
                 new MsgBox().showMess("Thêm thành công");
                 fillTable();
+		add_Phim = true;
             }
         } catch (Exception e) {
             new MsgBox().showMess("Thêm thất bại");
@@ -118,6 +125,8 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
                     phimDAO.update(ph);
                     new MsgBox().showMess("Sửa thành công");
                     fillTable();
+		    sua_Phim = true;
+		    MaPHIM = tblPhim.getValueAt(index, 0).toString();
                 } catch (Exception e) {
                     new MsgBox().showMess("Sửa thất bại");
                     e.printStackTrace();
@@ -139,6 +148,8 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
                     phimDAO.delete(tblPhim.getValueAt(index, 0).toString());
                     new MsgBox().showMess("Xóa thành công");
                     fillTable();
+		    xoa_Phim = true;
+		    MaPHIM = tblPhim.getValueAt(index, 0).toString();
                 } catch (Exception e) {
                     new MsgBox().showMess("Xóa thất bại");
                     e.printStackTrace();
@@ -369,15 +380,18 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         them();
+	Main.saoLuu.logPhim();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         sua();
+	Main.saoLuu.logPhim();
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         xoa();
+	Main.saoLuu.logPhim();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblPhimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhimMouseClicked

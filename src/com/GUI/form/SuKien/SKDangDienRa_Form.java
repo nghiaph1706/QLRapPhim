@@ -40,6 +40,8 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private KhuyenMaiDAO KmAction;
     static SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
     int i = -1;
+    public static boolean xoa_SKDangDR = false;
+    public static String MaSuKiDDR;
 
     public SKDangDienRa_Form() {
         initComponents();
@@ -191,6 +193,8 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
             KmAction.delete(tblsukien.getValueAt(index, 0).toString());
             new MsgBox().showMess("Xóa Dữ Liệu Thành Công!");
             FillTable();
+	    xoa_SKDangDR = true;
+	    MaSuKiDDR = tblsukien.getValueAt(index, 0).toString();
             return;
         }
         new MsgBox().showMess("Xóa Dữ Liệu Không Thành Công!");

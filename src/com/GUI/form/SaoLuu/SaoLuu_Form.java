@@ -6,6 +6,12 @@ import Utilities.Log;
 import Utilities.MsgBox;
 import Utilities.XJdbc;
 import com.GUI.form.BanVe.HoaDon_Form;
+import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
+import com.GUI.form.NhanVien.QuanLyNhanVien_Form;
+import com.GUI.form.Phim.QuanLyPhim_Form;
+import com.GUI.form.QuanLyLichChieu_Form;
+import com.GUI.form.SuKien.QuanLySuKien_Form;
+import com.GUI.form.SuKien.SKDangDienRa_Form;
 import com.GUI.swing.ScrollBar;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -232,13 +238,159 @@ public class SaoLuu_Form extends javax.swing.JPanel {
         tblNhatKyHD.setModel(model);
     }
 
-    public static void logDuLieu() {
-        Log log = new Log();
-        log.setLogDangNhap(Auth.user.getMaNhanVien());
-        log.setLogThanhToan(HoaDon_Form.maHoaDon_Paid);
-        log.setLogThoiGian(new Date());
-        listLog.add(log);
-        fillTable();
+//    public static void logDuLieu() {
+//        
+//	//logKHTT(log);
+//	logNV(log);
+//	logPhim(log);
+//	logSuKien(log);
+//	logLC(log);
+//        listLog.add(log);
+//	
+//        fillTable();
+//    }
+    //HD
+    public static void logHD() {
+	    Log log = new Log();
+	    log.setLogDangNhap(Auth.user.getMaNhanVien());
+	    if (HoaDon_Form.checkThanhToan) {
+		    log.setLogThanhToan("Thanh toán " + HoaDon_Form.maHoaDon_Paid);
+		    log.setLogThoiGian(new Date());
+	    }
+	    listLog.add(log);
+	    fillTable();
+    }
+    //KHTT
+    public static void logKHTT() {
+	Log log = new Log();
+	log.setLogDangNhap(Auth.user.getMaNhanVien());
+	if(KhachHangThanThiet_Form.add_KHTT) {
+		log.setLogThanhToan("Thêm mới khách hàng" + KhachHangThanThiet_Form.MaKHTT);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		KhachHangThanThiet_Form.add_KHTT = false;
+	}
+	else if(KhachHangThanThiet_Form.sua_KHTT) {
+		log.setLogThanhToan("Thay đổi thông tin " + KhachHangThanThiet_Form.MaKHTT);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		KhachHangThanThiet_Form.sua_KHTT = false;
+	}
+	else if(KhachHangThanThiet_Form.xoa_KHTT) {
+		log.setLogThanhToan("Xóa " + KhachHangThanThiet_Form.MaKHTT);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		KhachHangThanThiet_Form.xoa_KHTT = false;
+	}
+	fillTable();
+    }
+    //NV
+    public static void logNV() {
+	Log log = new Log();
+	log.setLogDangNhap(Auth.user.getMaNhanVien());
+	if(QuanLyNhanVien_Form.add_NV) {
+		log.setLogThanhToan("Thêm mới nhân viên" + QuanLyNhanVien_Form.MaNV);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyNhanVien_Form.add_NV = false;
+	}
+	else if(QuanLyNhanVien_Form.sua_NV) {
+		log.setLogThanhToan("Thay đổi thông tin " + QuanLyNhanVien_Form.MaNV);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyNhanVien_Form.sua_NV = false;
+	}
+	else if(QuanLyNhanVien_Form.xoa_NV) {
+		log.setLogThanhToan("Xóa " + QuanLyNhanVien_Form.MaNV);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyNhanVien_Form.xoa_NV = false;
+	}
+	fillTable();
+    }
+    //Phim
+    public static void logPhim() {
+	    Log log = new Log();
+	    log.setLogDangNhap(Auth.user.getMaNhanVien());
+	if(QuanLyPhim_Form.add_Phim) {
+		log.setLogThanhToan("Thêm mới phim" + QuanLyPhim_Form.MaPHIM);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyPhim_Form.add_Phim = false;
+	}
+	else if(QuanLyPhim_Form.sua_Phim) {
+		log.setLogThanhToan("Thay đổi thông tin " + QuanLyPhim_Form.MaPHIM);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyPhim_Form.sua_Phim = false;
+	}
+	else if(QuanLyPhim_Form.xoa_Phim) {
+		log.setLogThanhToan("Xóa " + QuanLyPhim_Form.MaPHIM);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyPhim_Form.xoa_Phim = false;
+	}
+	fillTable();
+    }
+    //SuKien
+    public static void logSuKien() {
+	    Log log = new Log();
+	    log.setLogDangNhap(Auth.user.getMaNhanVien());
+	if(QuanLySuKien_Form.add_SK) {	
+		log.setLogThanhToan("Thêm mới sự kiện " + QuanLySuKien_Form.MaSuKi);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLySuKien_Form.add_SK = false;
+	}
+	else if(QuanLySuKien_Form.sua_SK) {
+		log.setLogThanhToan("Thay đổi thông tin " + QuanLySuKien_Form.MaSuKi);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLySuKien_Form.sua_SK = false;
+	}
+	else if(QuanLySuKien_Form.xoa_SK) {
+		log.setLogThanhToan("Xóa " + QuanLySuKien_Form.MaSuKi);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLySuKien_Form.xoa_SK = false;
+	}
+	fillTable();
+    }
+    //SKDDR
+    public static void logSKDDR() {
+	    Log log = new Log();
+	    log.setLogDangNhap(Auth.user.getMaNhanVien());
+	    if(SKDangDienRa_Form.xoa_SKDangDR) {
+		    log.setLogThanhToan("Xóa " + SKDangDienRa_Form.MaSuKiDDR);
+			log.setLogThoiGian(new Date());
+			listLog.add(log);
+			SKDangDienRa_Form.xoa_SKDangDR = false;
+	    }
+	fillTable();
+    }
+    //LC
+    public static void logLC() {
+	    Log log = new Log();
+	    log.setLogDangNhap(Auth.user.getMaNhanVien());
+	if(QuanLyLichChieu_Form.add_LC) {
+		log.setLogThanhToan("Thêm mới lịch chiếu" + QuanLyLichChieu_Form.MaLiCh);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyLichChieu_Form.add_LC = false;
+	}
+	else if(QuanLyLichChieu_Form.sua_LC) {
+		log.setLogThanhToan("Thay đổi thông tin " + QuanLyLichChieu_Form.MaLiCh);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyLichChieu_Form.sua_LC = false;
+	}
+	else if(QuanLyLichChieu_Form.xoa_LC) {
+		log.setLogThanhToan("Xóa " + QuanLyLichChieu_Form.MaLiCh);
+		log.setLogThoiGian(new Date());
+		listLog.add(log);
+		QuanLyLichChieu_Form.add_LC = false;
+	}
+	fillTable();
     }
 
     private static void fillTable() {

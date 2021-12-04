@@ -3,6 +3,7 @@ package com.GUI.form.KhachHangThanThiet;
 import Entity.*;
 import DAO.*;
 import Utilities.*;
+import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.util.List;
 import javax.swing.RowFilter;
@@ -17,6 +18,11 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
     private KHTTDAO khdao = new KHTTDAO();
     private Option dialog = new Option();
     private NhanVien nv;
+    public static boolean add_KHTT = false;
+    public static boolean xoa_KHTT = false;
+    public static boolean sua_KHTT = false;
+    public static String MaKHTT;
+    private String luuMaKHTT;
 
     public KhachHangThanThiet_Form() {
         initComponents();
@@ -250,14 +256,17 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         AddEntity();
+	Main.saoLuu.logKHTT();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
         UpdateEntity();
+	Main.saoLuu.logKHTT();
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         DeleteEntity();
+	Main.saoLuu.logKHTT();
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
@@ -387,6 +396,7 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         obj.setSoLanSuDung(Integer.valueOf(txtsolansudung.getText()));
         obj.setNgayDK(DateNgayDK.getDate());
         obj.setMaNhanVien(nv.getMaNhanVien());
+	luuMaKHTT = obj.getMAKHTT();
         return obj;
     }
 
@@ -395,6 +405,8 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
             try {
                 khdao.insert(GetKhachHangFromGui());
                 dialog.Done(this, "Thêm Mới Thành Công", "Hoàn Thành");
+		add_KHTT = true;
+		MaKHTT = luuMaKHTT;
             } catch (Exception e) {
                 dialog.Error(this, "Thêm Mới Không Thành Công\n" + e, "Lỗi");
             }
@@ -408,6 +420,8 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
             try {
                 khdao.update(GetKhachHangFromGui());
                 dialog.Done(this, "Cập Nhật Thành Công", "Hoàn Thành");
+		sua_KHTT = true;
+		MaKHTT = tblkhachhangthanthiet.getValueAt(index, 0).toString();
             } catch (Exception e) {
                 dialog.Error(this, "Cập Nhật Không Thành Công\n" + e, "Lỗi");
             }
@@ -421,6 +435,8 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
             try {
                 khdao.delete(tblkhachhangthanthiet.getValueAt(index, 0).toString());
                 dialog.Done(this, "Xóa Nhân Viên Thành Công", "Hoàn Thành");
+		xoa_KHTT = true;
+		MaKHTT = tblkhachhangthanthiet.getValueAt(index, 0).toString();
             } catch (Exception e) {
                 dialog.Error(this, "Xóa Nhân Viên Không Thành Công\n" + e, "Lỗi");
             }

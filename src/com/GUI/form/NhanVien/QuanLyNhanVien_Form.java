@@ -5,6 +5,7 @@ import DAO.*;
 import Utilities.Option;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
+import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.io.File;
 import java.util.List;
@@ -24,6 +25,10 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
     private Option dialog = new Option();
     private String pathDefaultFile = System.getProperty("user.dir");
     private ImageIcon icon;
+    public static boolean add_NV = false;
+    public static boolean xoa_NV = false;
+    public static boolean sua_NV = false;
+    public static String MaNV;
 
     public QuanLyNhanVien_Form() {
         initComponents();
@@ -341,14 +346,17 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         AddEntity();
+	Main.saoLuu.logNV();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
         UpdateEntity();
+	Main.saoLuu.logNV();
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         DeleteEntity();
+	Main.saoLuu.logNV();
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
@@ -508,6 +516,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         obj.setGioiTinh(rdoquanly.isSelected() ? true : false);
         obj.setGhiChu(txtghichu.getText());
         obj.setHinh(HinhTam);
+	MaNV = obj.getMaNhanVien();
         return obj;
     }
 
@@ -538,6 +547,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                 dialog.Done(this, "Thêm Mới Thành Công", "Hoàn Thành");
                 FillTable();
                 RefreshGui();
+		add_NV = true;
             } catch (Exception e) {
                 dialog.Error(this, "Thêm Mới Không Thành Công\n" + e, "Lỗi");
             }
@@ -552,6 +562,8 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                 dialog.Done(this, "Cập Nhật Thành Công", "Hoàn Thành");
                 FillTable();
                 RefreshGui();
+		sua_NV = true;
+		MaNV = tblnhanvien.getValueAt(index, 0).toString();
             } catch (Exception e) {
                 dialog.Error(this, "Cập Nhật Không Thành Công\n" + e, "Lỗi");
             }
@@ -564,6 +576,8 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             try {
                 nvdao.delete(tblnhanvien.getValueAt(index, 0).toString());
                 dialog.Done(this, "Xóa Nhân Viên Thành Công", "Hoàn Thành");
+		xoa_NV = true;
+		MaNV = tblnhanvien.getValueAt(index, 0).toString();
             } catch (Exception e) {
                 dialog.Error(this, "Xóa Nhân Viên Không Thành Công\n" + e, "Lỗi");
             }

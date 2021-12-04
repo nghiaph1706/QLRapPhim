@@ -7,6 +7,7 @@ import Entity.KhuyenMai;
 import Entity.NhanVien;
 import Utilities.MsgBox;
 import Utilities.ValidateCheck;
+import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.util.List;
 import java.util.Properties;
@@ -28,7 +29,11 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     private ValidateCheck vld = new ValidateCheck();
     private KhuyenMaiDAO KmAction;
     private NhanVien nv;
-
+    public static boolean add_SK = false;
+    public static boolean xoa_SK = false;
+    public static boolean sua_SK = false;
+    public static String MaSuKi;
+    
     public QuanLySuKien_Form() {
         initComponents();
         setOpaque(false);
@@ -244,14 +249,17 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         AddEvent();
+	Main.saoLuu.logSuKien();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
         UpdateEvent();
+	Main.saoLuu.logSuKien();
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         DeleteEvent();
+	Main.saoLuu.logSuKien();
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void tblsukienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblsukienKeyReleased
@@ -313,6 +321,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         km.setMucGiamGia(Float.valueOf(txtMucKhuyenMai.getText()));
         km.setThongTinKM(txtthongtin.getText());
         km.setMaNhanVien(nv.getMaNhanVien());
+	MaSuKi = km.getMaKM();
         return km;
     }
 
@@ -360,6 +369,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 if (new MsgBox().showConfirm("Bạn có muốn thông báo sự kiện này đến KHTT không?")) {
                     new SKDangDienRa_Form().guiMail2(new KhuyenMaiDAO().selectById(txtMaSuKien.getText()));
                 }
+		add_SK = true;
             } catch (Exception e) {
                 try {
                     KmAction.updatehide(values.getMaKM());
@@ -397,6 +407,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             try {
                 KmAction.update(values);
                 new MsgBox().showMess("Cập Nhật Thông Tin Thành Công!");
+		sua_SK = true;
             } catch (Exception e) {
                 new MsgBox().showMess("Cập Nhật Thông Tin Không Thành Công!\n" + e);
             }
@@ -411,6 +422,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             try {
                 KmAction.delete((String) tblsukien.getValueAt(index, 0));
                 new MsgBox().showMess("Xóa Sự Kiện Thành Công!");
+		xoa_SK = true;
             } catch (Exception e) {
                 new MsgBox().showMess("Xóa Sự Kiện Không Thành Công!\n" + e);
             }
