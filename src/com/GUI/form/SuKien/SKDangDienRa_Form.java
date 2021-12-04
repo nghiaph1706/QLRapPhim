@@ -6,7 +6,6 @@ import DAO.PhimDAO;
 import Entity.KHTT;
 import Entity.KhuyenMai;
 import Entity.Phim;
-import Utilities.MsgBox;
 import Utilities.ValidateCheck;
 import Utilities.XDate;
 import com.GUI.swing.ScrollBar;
@@ -30,6 +29,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class SKDangDienRa_Form extends javax.swing.JPanel {
@@ -144,14 +144,14 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         if (tblsukien.getRowCount() > 0) {
             DeleteValues();
         } else {
-            new MsgBox().showMess("Chưa Có Dữ Liệu!");
+            JOptionPane.showMessageDialog(null, "Chưa Có Dữ Liệu!");
         }
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnGuiMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiMailActionPerformed
         i = tblsukien.getSelectedRow();
         if (i < 0) {
-            new MsgBox().showMess("Vui lòng chọn sự kiện cần gửi mail");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sự kiện cần gửi mail");
             return;
         } else {
             KhuyenMai km = new KhuyenMaiDAO().selectById(tblsukien.getValueAt(i, 0).toString());
@@ -189,15 +189,15 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private void DeleteValues() {
         int index = tblsukien.getSelectedRow();
         if (index != -1) {
-            KmAction = new KhuyenMaiDAO();
-            KmAction.delete(tblsukien.getValueAt(index, 0).toString());
-            new MsgBox().showMess("Xóa Dữ Liệu Thành Công!");
-            FillTable();
 	    xoa_SKDangDR = true;
 	    MaSuKiDDR = tblsukien.getValueAt(index, 0).toString();
+            KmAction = new KhuyenMaiDAO();
+            KmAction.delete(tblsukien.getValueAt(index, 0).toString());
+            JOptionPane.showMessageDialog(null, "Xóa Dữ Liệu Thành Công!");
+            FillTable();
             return;
         }
-        new MsgBox().showMess("Xóa Dữ Liệu Không Thành Công!");
+        JOptionPane.showMessageDialog(null, "Xóa Dữ Liệu Không Thành Công!");
     }
 
     private void guiMail() throws AddressException, MessagingException {
@@ -282,7 +282,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
             };
             a.start();
         }
-        new MsgBox().showMess("Gửi mail thành công");
+        JOptionPane.showMessageDialog(null, "Gửi mail thành công");
     }
 
     public void guiMail2(KhuyenMai khuyenMai) {
@@ -356,7 +356,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
             };
             a.start();
         }
-        new MsgBox().showMess("Gửi mail thành công");
+        JOptionPane.showMessageDialog(null, "Gửi mail thành công");
     }
 
     public String htmlForMail(String tenKhachHang, String tenSuKien, String thoiGianKetThucSK, String phanTramGiam, List<Phim> listPhim) {

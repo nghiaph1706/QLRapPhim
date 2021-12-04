@@ -5,7 +5,6 @@ import DAO.KhuyenMaiDAO;
 import Entity.KHTT;
 import Entity.KhuyenMai;
 import Entity.NhanVien;
-import Utilities.MsgBox;
 import Utilities.ValidateCheck;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
@@ -20,6 +19,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class QuanLySuKien_Form extends javax.swing.JPanel {
@@ -365,8 +365,9 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             try {
                 KmAction.insert(values);
-                new MsgBox().showMess("Thêm Mới Thành Công!");
-                if (new MsgBox().showConfirm("Bạn có muốn thông báo sự kiện này đến KHTT không?")) {
+                JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
+                int test = JOptionPane.showConfirmDialog(null, "Bạn có muốn thông báo sự kiện này đến KHTT không?");
+                if (test == 0) {
                     new SKDangDienRa_Form().guiMail2(new KhuyenMaiDAO().selectById(txtMaSuKien.getText()));
                 }
 		add_SK = true;
@@ -374,9 +375,9 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 try {
                     KmAction.updatehide(values.getMaKM());
                     KmAction.update(values);
-                    new MsgBox().showMess("Thêm Mới Thành Công!");
+                    JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
                 } catch (Exception ex) {
-                    new MsgBox().showMess("Thêm Mới Không Thành Công!\n" + e);
+                    JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!\n" + e);
                 }
             }
             FillTable();
@@ -406,10 +407,10 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             try {
                 KmAction.update(values);
-                new MsgBox().showMess("Cập Nhật Thông Tin Thành Công!");
+                JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Thành Công!");
 		sua_SK = true;
             } catch (Exception e) {
-                new MsgBox().showMess("Cập Nhật Thông Tin Không Thành Công!\n" + e);
+                JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Không Thành Công!\n" + e);
             }
             FillTable();
         }
@@ -421,20 +422,21 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             try {
                 KmAction.delete((String) tblsukien.getValueAt(index, 0));
-                new MsgBox().showMess("Xóa Sự Kiện Thành Công!");
+                JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Thành Công!");
 		xoa_SK = true;
             } catch (Exception e) {
-                new MsgBox().showMess("Xóa Sự Kiện Không Thành Công!\n" + e);
+                JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Không Thành Công!\n" + e);
             }
             FillTable();
             FillToNull();
         } else {
-            new MsgBox().showMess("Chưa Chọn Dòng Để Xóa!");
+            JOptionPane.showMessageDialog(null, "Chưa Chọn Dòng Để Xóa!");
         }
     }
 
     private void guiMail() {
-        if (new MsgBox().showConfirm("Bạn có muốn gửi thông tin sự kiện đến KHTT không ?")) {
+        int test = JOptionPane.showConfirmDialog(null, "Bạn có muốn gửi thông tin sự kiện đến KHTT không ?");
+        if (test == 0) {
 
             List<KHTT> listMailKH = new KHTTDAO().selectAll();
             Properties p = new Properties();
@@ -518,7 +520,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 };
                 a.start();
             }
-            new MsgBox().showMess("Gửi mail thành công");
+            JOptionPane.showMessageDialog(null, "Gửi mail thành công");
         }
     }
 

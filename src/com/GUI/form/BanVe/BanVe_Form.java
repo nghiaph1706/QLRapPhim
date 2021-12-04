@@ -14,7 +14,6 @@ import Entity.HoaDon;
 import Entity.LichChieu;
 import Entity.Phim;
 import Entity.Ve;
-import Utilities.MsgBox;
 import Utilities.XDate;
 import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
 import com.GUI.main.Main;
@@ -25,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BanVe_Form extends javax.swing.JPanel {
@@ -412,7 +412,7 @@ public class BanVe_Form extends javax.swing.JPanel {
             GioChieu = tmp.substring(2).trim();
             Main.main.showForm(new ChonGhe_Form());
         } else {
-            new MsgBox().showMess("Chọn phim");
+            JOptionPane.showMessageDialog(null, "Chọn phim");
         }
     }//GEN-LAST:event_btnChuyenActionPerformed
 

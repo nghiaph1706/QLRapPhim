@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import org.bytedeco.javacpp.BytePointer;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imencode;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imwrite;
@@ -71,7 +72,7 @@ public class FaceIDDangKy_Form extends javax.swing.JFrame {
                                     }
                                     if (count > 25) {
                                         new luufile().luu();
-                                        new MsgBox().showMess("Lưu thành công");
+                                        JOptionPane.showMessageDialog(null, "Lưu thành công");
                                         myThread.runnable = false;
                                         webSource.release();
                                         check.dispose();

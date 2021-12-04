@@ -3,7 +3,6 @@ package com.GUI.main;
 import DAO.GheDAO;
 import Entity.Ghe;
 import Entity.NhanVien;
-import Utilities.MsgBox;
 import com.GUI.component.Header;
 import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -121,7 +121,8 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(saoLuu);
                     }
                 } else if (menuIndex == 9) {
-                    if (new MsgBox().showConfirm("Bạn Có Muốn Đăng Xuất Không?")) {
+                    int test = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Đăng Xuất Không?");
+                    if (test == 0) {
                         try {
                             new Login().setVisible(true);
                         } catch (InterruptedException ex) {

@@ -3,7 +3,6 @@ package com.GUI.form.SaoLuu;
 import Entity.HoaDon;
 import Utilities.Auth;
 import Utilities.Log;
-import Utilities.MsgBox;
 import Utilities.XJdbc;
 import com.GUI.form.BanVe.HoaDon_Form;
 import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class SaoLuu_Form extends javax.swing.JPanel {
@@ -373,7 +373,7 @@ public class SaoLuu_Form extends javax.swing.JPanel {
 	    Log log = new Log();
 	    log.setLogDangNhap(Auth.user.getMaNhanVien());
 	if(QuanLyLichChieu_Form.add_LC) {
-		log.setLogThanhToan("Thêm mới lịch chiếu" + QuanLyLichChieu_Form.MaLiCh);
+		log.setLogThanhToan(("Thêm mới lịch chiếu" + QuanLyLichChieu_Form.MaLiCh).replaceAll("null", ""));
 		log.setLogThoiGian(new Date());
 		listLog.add(log);
 		QuanLyLichChieu_Form.add_LC = false;
@@ -429,7 +429,7 @@ public class SaoLuu_Form extends javax.swing.JPanel {
                 }
                 bw.write("\n------------------------------------------------------------------\n");
             }
-            new MsgBox().showMess("Xuất Log thành công");
+            JOptionPane.showMessageDialog(null, "Xuất Log thành công");
             bw.close();
             fw.close();
         } catch (IOException ioe) {

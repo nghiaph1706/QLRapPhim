@@ -12,7 +12,6 @@ import DAO.PhimDAO;
 import Entity.Ghe;
 import Entity.HoaDon;
 import Utilities.Auth;
-import Utilities.MsgBox;
 import Utilities.XDate;
 import com.GUI.main.Main;
 import java.awt.Image;
@@ -23,6 +22,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -312,7 +312,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
                 }
                 bw.write("\n------------------------------------------------------------------\n");
             }
-            new MsgBox().showMess("Xuất hóa đơn thành công");
+            JOptionPane.showMessageDialog(null, "Xuất hóa đơn thành công");
             bw.close();
             fw.close();
         } catch (IOException ioe) {

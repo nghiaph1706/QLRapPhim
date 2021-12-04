@@ -100,7 +100,8 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ổ đĩa.");
+            JOptionPane.showMessageDialog(null, f);
         }
     }
     
@@ -180,7 +181,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ổ đĩa.");
         }
     }
     
@@ -260,7 +261,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ổ đĩa.");
         }
     }
     
@@ -340,7 +341,7 @@ public class XExcel {
                 throw new RuntimeException(e);
             }
         } else {
-            new MsgBox().showMess("Vui lòng chọn ổ đĩa.");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ổ đĩa.");
         }
     }
     

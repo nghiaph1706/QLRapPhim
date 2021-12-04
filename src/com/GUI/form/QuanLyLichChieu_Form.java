@@ -6,9 +6,9 @@ import DAO.PhongDAO;
 import Entity.LichChieu;
 import Entity.Phim;
 import Entity.Phong;
-import Utilities.MsgBox;
 import Utilities.XDate;
 import Utilities.XRegex;
+import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.awt.Dimension;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -154,13 +155,13 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         try {
             if (check()) {
                 lichChieuDao.insert(lc);
-                new MsgBox().showMess("Thêm thành công");
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
                 fillTable();
                 cboPhimTimKiem.setSelectedItem("Tất cả");
 		add_LC = true;
             }
         } catch (Exception e) {
-            new MsgBox().showMess("Thêm thất bại");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
             e.printStackTrace();
         }
     }
@@ -168,7 +169,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     public void sua() {
         int index = tblLichChieu.getSelectedRow();
         if (index < 0) {
-            new MsgBox().showMess("Vui dòng chọn lịch phim cần sửa");
+            JOptionPane.showMessageDialog(null, "Vui dòng chọn lịch phim cần sửa");
             return;
         } else {
             LichChieu lc = getModel();
@@ -176,13 +177,13 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             if (check()) {
                 try {
                     lichChieuDao.update(lc);
-                    new MsgBox().showMess("Sửa thành công");
+                    JOptionPane.showMessageDialog(null, "Sửa thành công");
                     fillTable();
 		    sua_LC = true;
 		    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
                     cboPhimTimKiem.setSelectedItem("Tất cả");
                 } catch (Exception e) {
-                    new MsgBox().showMess("Sửa thất bại");
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại");
                     e.printStackTrace();
                 }
             }
@@ -193,20 +194,20 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     public void xoa() {
         int index = tblLichChieu.getSelectedRow();
         if (index < 0) {
-            new MsgBox().showMess("Vui dòng chọn cần xóa");
+            JOptionPane.showMessageDialog(null, "Vui dòng chọn cần xóa");
             return;
         } else {
-            if (new MsgBox().showConfirm("Bạn có muốn xóa lịch chiếu này không ?")) {
-
+            int test = JOptionPane.showConfirmDialog(this ,"Bạn có muốn xóa lịch chiếu này không ?");
+            if (test == 0) {
                 try {
                     lichChieuDao.delete(tblLichChieu.getValueAt(index, 0).toString());
-                    new MsgBox().showMess("Xóa thành công");
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
                     fillTable();
 		    xoa_LC = true;
 		    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
                     cboPhimTimKiem.setSelectedItem("Tất cả");
                 } catch (Exception e) {
-                    new MsgBox().showMess("Xóa thất bại");
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại");
                     e.printStackTrace();
                 }
 
@@ -228,7 +229,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                 fillTable();
             } else {
                 if (txtsearchFirstDate.getDate().getTime() > txtsearchLastDate.getDate().getTime()) {
-                    new MsgBox().showMess("Ngày đầu không được lớn hơn ngày sau");
+                    JOptionPane.showMessageDialog(null, "Ngày đầu không được lớn hơn ngày sau");
                     return;
                 } else {
                     List<LichChieu> list = lichChieuDao.selectByDate(new java.sql.Date(txtsearchFirstDate.getDate().getTime()), new java.sql.Date(txtsearchLastDate.getDate().getTime()));
@@ -255,7 +256,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 //            thongbao += "Không thể chọn ngày đã qua\n";
 //        }
         if (thongbao.length() > 0) {
-            new MsgBox().showMess(thongbao);
+            JOptionPane.showMessageDialog(null, thongbao);
             return false;
         }
         return true;
@@ -583,6 +584,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         them();
 	Main.saoLuu.logLC();
+        Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

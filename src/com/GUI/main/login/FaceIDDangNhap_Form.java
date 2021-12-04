@@ -7,7 +7,6 @@ package com.GUI.main.login;
 
 import DAO.NhanVienDAO;
 import Entity.NhanVien;
-import Utilities.MsgBox;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -104,7 +103,7 @@ public class FaceIDDangNhap_Form extends javax.swing.JFrame {
                                 if (prediction == -1) {
                                     rectangle(frame, dadosFace, new Scalar(0, 255, 0, 0));
                                     id = 0;
-                                    new MsgBox().showMess("Không có dữ liệu");
+                                    JOptionPane.showMessageDialog(null, "Không có dữ liệu");
                                     check.dispose();
                                     myThread.runnable = false;
                                     webSource.release();

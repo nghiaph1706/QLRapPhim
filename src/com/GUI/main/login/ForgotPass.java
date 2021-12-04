@@ -3,7 +3,6 @@ package com.GUI.main.login;
 import DAO.NhanVienDAO;
 import Entity.NhanVien;
 import Utilities.Auth;
-import Utilities.MsgBox;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
@@ -18,6 +17,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -88,7 +88,7 @@ public class ForgotPass extends javax.swing.JFrame {
             msg.setText(body);
             Transport.send(msg);
         } catch (MessagingException ex) {
-            new MsgBox().showMess("Không thể gửi Code. Vui lòng kiểm tra lại Email.");
+            JOptionPane.showMessageDialog(this, "Không thể gửi Code. Vui lòng kiểm tra lại Email.");
         }
     }
 
@@ -122,10 +122,10 @@ public class ForgotPass extends javax.swing.JFrame {
                     sendCode();
                 }
             }.start();
-            new MsgBox().showMess("Nhập code đã gửi vào Email.");
+            JOptionPane.showMessageDialog(this, "Nhập code đã gửi vào Email.");
         } else {
             showLoading();
-            new MsgBox().showMess("Mã nhân viên nhập không khớp với Email.");
+            JOptionPane.showMessageDialog(this, "Mã nhân viên nhập không khớp với Email.");
         }
     }
 
@@ -136,7 +136,7 @@ public class ForgotPass extends javax.swing.JFrame {
             showLoading();
         } else {
             showLoading();
-            new MsgBox().showMess("Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
+            JOptionPane.showMessageDialog(this, "Code đã nhập không chính xác. Vui lòng kiểm tra lại email.");
             txtCode.setText("");
         }
     }
@@ -144,7 +144,7 @@ public class ForgotPass extends javax.swing.JFrame {
     void doiMatKhau(String matKhauMoi, String xacNhan) throws InterruptedException {
         if (!matKhauMoi.equalsIgnoreCase(xacNhan)) {
             showLoading();
-            new MsgBox().showMess("Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
+            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không đúng. Vui lòng nhập lại.");
             pwdNewPass.setText("");
             pwdConfirmPass.setText("");
         } else {
@@ -152,7 +152,7 @@ public class ForgotPass extends javax.swing.JFrame {
             nvdao.update(Auth.user);
             Auth.clear();
             showLoading();
-            new MsgBox().showMess("Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
             dispose();
             new Login().setVisible(true);
         }

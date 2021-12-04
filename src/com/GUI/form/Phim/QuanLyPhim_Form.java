@@ -7,12 +7,12 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Entity.Phim;
 import Entity.TheLoai;
-import Utilities.MsgBox;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
 import com.GUI.main.Main;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 public class QuanLyPhim_Form extends javax.swing.JPanel {
 
@@ -102,12 +102,12 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         try {
             if (check(true)) {
                 phimDAO.insert(ph);
-                new MsgBox().showMess("Thêm thành công");
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
                 fillTable();
 		add_Phim = true;
             }
         } catch (Exception e) {
-            new MsgBox().showMess("Thêm thất bại");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
             e.printStackTrace();
         }
     }
@@ -115,7 +115,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     public void sua() {
         int index = tblPhim.getSelectedRow();
         if (index < 0) {
-            new MsgBox().showMess("Vui dòng chọn phim cần sửa");
+            JOptionPane.showMessageDialog(null, "Vui dòng chọn phim cần sửa");
             return;
         } else {
             Phim ph = getModel();
@@ -123,12 +123,12 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
             if (check(true)) {
                 try {
                     phimDAO.update(ph);
-                    new MsgBox().showMess("Sửa thành công");
+                    JOptionPane.showMessageDialog(null, "Sửa thành công");
                     fillTable();
 		    sua_Phim = true;
 		    MaPHIM = tblPhim.getValueAt(index, 0).toString();
                 } catch (Exception e) {
-                    new MsgBox().showMess("Sửa thất bại");
+                    JOptionPane.showMessageDialog(null, "Sửa thất bại");
                     e.printStackTrace();
                 }
             }
@@ -139,19 +139,20 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     public void xoa() {
         int index = tblPhim.getSelectedRow();
         if (index < 0) {
-            new MsgBox().showMess("Vui dòng chọn cần xóa");
+            JOptionPane.showMessageDialog(null, "Vui dòng chọn cần xóa");
             return;
         } else {
-            if (new MsgBox().showConfirm("Bạn có muốn xóa phim này không ?")) {
+            int test = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa phim này không ?");
+            if (test == 0) {
 
                 try {
-                    phimDAO.delete(tblPhim.getValueAt(index, 0).toString());
-                    new MsgBox().showMess("Xóa thành công");
-                    fillTable();
 		    xoa_Phim = true;
 		    MaPHIM = tblPhim.getValueAt(index, 0).toString();
+                    phimDAO.delete(tblPhim.getValueAt(index, 0).toString());
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
+                    fillTable();
                 } catch (Exception e) {
-                    new MsgBox().showMess("Xóa thất bại");
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại");
                     e.printStackTrace();
                 }
 

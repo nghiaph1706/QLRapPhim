@@ -3,12 +3,12 @@ package com.GUI.main.login;
 import DAO.NhanVienDAO;
 import Entity.NhanVien;
 import Utilities.Auth;
-import Utilities.MsgBox;
 import com.GUI.main.Main;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
@@ -38,9 +38,9 @@ public class Login extends javax.swing.JFrame {
     void dangNhap(String manv, String matkhau) throws InterruptedException {
         NhanVien nhanVien = dao.selectById(manv);
         if (nhanVien == null) {
-            new MsgBox().showMess("Sai tên đăng nhập.");
+            JOptionPane.showMessageDialog(this, "Sai tên đăng nhập.");
         } else if (!matkhau.equals(nhanVien.getMatKhau())) {
-            new MsgBox().showMess("Sai mật khẩu.");
+            JOptionPane.showMessageDialog(this, "Sai mật khẩu.");
         } else {
             Main x = new Main();
             x.setNV(nhanVien);
