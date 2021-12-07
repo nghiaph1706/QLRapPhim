@@ -2,10 +2,6 @@ package DAO;
 
 import java.util.List;
 
-/**
- *
- * @author taoda
- */
 public abstract class QLRapPhimDAO<E,K> {
     
     abstract public void insert(E entity);

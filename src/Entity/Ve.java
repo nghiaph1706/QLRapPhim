@@ -1,4 +1,4 @@
-/* @author nghiacubu */
+
 package Entity;
 
 public class Ve {

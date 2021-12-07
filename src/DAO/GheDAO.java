@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import Entity.Ghe;
@@ -11,10 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author berug
- */
 public class GheDAO extends QLRapPhimDAO<Ghe, String>{
 
     private String INSERT_SQL = "INSERT INTO [Ghe]([MaGhe], [LoaiGhe], [GiaGhe], [MaPhong], [TrangThai]) VALUES (?,?,?,?,?)";

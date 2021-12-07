@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.GUI.main.login;
 
 import DAO.NhanVienDAO;
@@ -34,17 +30,9 @@ import org.bytedeco.opencv.opencv_face.LBPHFaceRecognizer;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 import org.bytedeco.opencv.opencv_videoio.VideoCapture;
 
-/**
- *
- * @author berug
- */
-
 
 public class FaceIDDangNhap_Form extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FaceID_Form
-     */
     private FaceIDDangNhap_Form check;
 
     public FaceIDDangNhap_Form() {

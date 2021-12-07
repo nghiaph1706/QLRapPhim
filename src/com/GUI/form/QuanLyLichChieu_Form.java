@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
 package com.GUI.form;
 
 import DAO.LichChieuDAO;
@@ -21,6 +25,10 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+/**
+ *
+ * @author Admin
+ */
 public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     DefaultTableModel model;
@@ -34,6 +42,9 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     public static boolean sua_LC = false;
     public static String MaLiCh;
 
+    /**
+     * Creates new form QuanLyLichChieu_Form2
+     */
     public QuanLyLichChieu_Form() {
         initComponents();
         setOpaque(false);
@@ -95,8 +106,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
         for (Phim phim : list) {
             cbomodelPhim.addElement(phim);
-            //                      1234567890op-ơ=ữzc
-            //                    maphim + tenphim
+
         }
     }
 
@@ -137,7 +147,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         lc.setGioChieu(txtGioChieu.getText());
         lc.setMaPhim(((Phim) cboPhim.getSelectedItem()).getMaPhim());
         lc.setMaPhong(cboMaPhong.getSelectedItem().toString());
-	MaLiCh = lc.getMaLichChieu();
+        MaLiCh = lc.getMaLichChieu();
         return lc;
     }
 
@@ -145,7 +155,6 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         txtTitle.setToolTipText(lc.getMaLichChieu());
         txtGioChieu.setText(lc.getGioChieu());
         txtNgayChieu.setDate(lc.getNgayChieu());
-        cboMaPhong.setSelectedItem("iron men");
         cbomodelPhim.setSelectedItem(phimDAO.selectById(lc.getMaPhim()));
         cbomodelPhong.setSelectedItem(lc.getMaPhong());
     }
@@ -155,10 +164,14 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         try {
             if (check()) {
                 lichChieuDao.insert(lc);
-                JOptionPane.showMessageDialog(null, "Thêm thành công");
+
                 fillTable();
-                cboPhimTimKiem.setSelectedItem("Tất cả");
-		add_LC = true;
+                if (!cboPhimTimKiem.getSelectedItem().equals("Tất cả")) {
+                    cboPhimTimKiem.setSelectedIndex(0);
+                }
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                add_LC = true;
+                moi();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Thêm thất bại");
@@ -177,11 +190,15 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             if (check()) {
                 try {
                     lichChieuDao.update(lc);
-                    JOptionPane.showMessageDialog(null, "Sửa thành công");
+                    
                     fillTable();
-		    sua_LC = true;
-		    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
-                    cboPhimTimKiem.setSelectedItem("Tất cả");
+                    sua_LC = true;
+                    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
+                    if (!cboPhimTimKiem.getSelectedItem().equals("Tất cả")) {
+                        cboPhimTimKiem.setSelectedIndex(0);
+                    }
+                    JOptionPane.showMessageDialog(null, "Sửa thành công");
+                    moi();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Sửa thất bại");
                     e.printStackTrace();
@@ -197,15 +214,19 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vui dòng chọn cần xóa");
             return;
         } else {
-            int test = JOptionPane.showConfirmDialog(this ,"Bạn có muốn xóa lịch chiếu này không ?");
+            int test = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lịch chiếu này không ?");
             if (test == 0) {
                 try {
                     lichChieuDao.delete(tblLichChieu.getValueAt(index, 0).toString());
-                    JOptionPane.showMessageDialog(null, "Xóa thành công");
+                    
                     fillTable();
-		    xoa_LC = true;
-		    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
-                    cboPhimTimKiem.setSelectedItem("Tất cả");
+                    xoa_LC = true;
+                    MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
+                    if (!cboPhimTimKiem.getSelectedItem().equals("Tất cả")) {
+                        cboPhimTimKiem.setSelectedIndex(0);
+                    }
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
+                    moi();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Xóa thất bại");
                     e.printStackTrace();
@@ -230,13 +251,18 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             } else {
                 if (txtsearchFirstDate.getDate().getTime() > txtsearchLastDate.getDate().getTime()) {
                     JOptionPane.showMessageDialog(null, "Ngày đầu không được lớn hơn ngày sau");
-                    return;
+                    txtsearchFirstDate.setDate(null);
+                    txtsearchLastDate.setDate(null);
+                    cboPhimTimKiem.setSelectedItem("Tất cả");
+                    fillTable();
                 } else {
                     List<LichChieu> list = lichChieuDao.selectByDate(new java.sql.Date(txtsearchFirstDate.getDate().getTime()), new java.sql.Date(txtsearchLastDate.getDate().getTime()));
                     fillTableWithList(list);
+
                 }
             }
         } catch (Exception e) {
+
         }
     }
 
@@ -262,7 +288,17 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         return true;
 
     }
-
+    public void moi(){
+        txtNgayChieu.setDate(null);
+        txtGioChieu.setText("");
+        cboPhim.setSelectedIndex(0);
+        cboMaPhong.setSelectedIndex(0);
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -276,7 +312,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         cboPhimTimKiem = new javax.swing.JComboBox<>();
         txtTitle = new javax.swing.JLabel();
         btnSua = new com.GUI.swing.ButtonBadges();
-        buttonBadges2 = new com.GUI.swing.ButtonBadges();
+        btnMoi = new com.GUI.swing.ButtonBadges();
         btnThem = new com.GUI.swing.ButtonBadges();
         btnXoa = new com.GUI.swing.ButtonBadges();
         jLabel1 = new javax.swing.JLabel();
@@ -383,10 +419,15 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             }
         });
 
-        buttonBadges2.setBackground(new java.awt.Color(51, 51, 51));
-        buttonBadges2.setForeground(new java.awt.Color(255, 255, 255));
-        buttonBadges2.setText("LƯU");
-        buttonBadges2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        btnMoi.setBackground(new java.awt.Color(51, 51, 51));
+        btnMoi.setForeground(new java.awt.Color(255, 255, 255));
+        btnMoi.setText("MỚI");
+        btnMoi.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
 
         btnThem.setBackground(new java.awt.Color(51, 51, 51));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
@@ -471,8 +512,8 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtsearchLastDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cboPhimTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                        .addComponent(cboPhimTimKiem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1032, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -482,44 +523,44 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonBadges2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnMoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cboMaPhong, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cboMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel5)
-                            .addComponent(txtNgayChieu, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                            .addComponent(txtGioChieu, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                            .addComponent(cboPhim, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtNgayChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGioChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(64, 64, 64)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addComponent(txtTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboPhimTimKiem, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtsearchLastDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtsearchFirstDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -541,7 +582,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
                             .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -556,7 +597,6 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     private void cboPhimTimKiemPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboPhimTimKiemPopupMenuWillBecomeInvisible
         cboPhimTimKiem.setSize(242, 47);
-
     }//GEN-LAST:event_cboPhimTimKiemPopupMenuWillBecomeInvisible
 
     private void cboPhimTimKiemPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboPhimTimKiemPopupMenuWillBecomeVisible
@@ -583,33 +623,38 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         them();
-	Main.saoLuu.logLC();
+        Main.saoLuu.logLC();
         Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         sua();
-	Main.saoLuu.logLC();
+        Main.saoLuu.logLC();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         xoa();
-	Main.saoLuu.logLC();
+        Main.saoLuu.logLC();
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        moi();
+    }//GEN-LAST:event_btnMoiActionPerformed
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtsearchFirstDate.setDate(null);
         txtsearchLastDate.setDate(null);
         fillTable();
         cboPhimTimKiem.setSelectedItem("Tất cả");
     }//GEN-LAST:event_btnResetActionPerformed
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.GUI.swing.ButtonBadges btnMoi;
     private com.GUI.swing.ButtonBadges btnReset;
     private com.GUI.swing.ButtonBadges btnSua;
     private com.GUI.swing.ButtonBadges btnThem;
     private com.GUI.swing.ButtonBadges btnXoa;
-    private com.GUI.swing.ButtonBadges buttonBadges2;
     private javax.swing.JComboBox<String> cboMaPhong;
     private javax.swing.JComboBox<String> cboPhim;
     private javax.swing.JComboBox<String> cboPhimTimKiem;

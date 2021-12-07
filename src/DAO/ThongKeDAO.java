@@ -1,4 +1,4 @@
-/* @author nghiacubu */
+
 package DAO;
 
 import Utilities.XJdbc;

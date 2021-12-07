@@ -6,6 +6,7 @@ import Utilities.*;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -16,7 +17,6 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
     private List<KHTT> list;
     private ValidateCheck vld = new ValidateCheck();
     private KHTTDAO khdao = new KHTTDAO();
-    private Option dialog = new Option();
     private NhanVien nv;
     public static boolean add_KHTT = false;
     public static boolean xoa_KHTT = false;
@@ -404,11 +404,11 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         if (ValidateForm()) {
             try {
                 khdao.insert(GetKhachHangFromGui());
-                dialog.Done(this, "Thêm Mới Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Thêm Mới Thành Công");
 		add_KHTT = true;
 		MaKHTT = luuMaKHTT;
             } catch (Exception e) {
-                dialog.Error(this, "Thêm Mới Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Thêm Mới Không Thành Công");
             }
         }
         FillTable();
@@ -419,11 +419,11 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         if (index != -1 && ValidateForm()) {
             try {
                 khdao.update(GetKhachHangFromGui());
-                dialog.Done(this, "Cập Nhật Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
 		sua_KHTT = true;
 		MaKHTT = tblkhachhangthanthiet.getValueAt(index, 0).toString();
             } catch (Exception e) {
-                dialog.Error(this, "Cập Nhật Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Cập Nhật Không Thành Công");
             }
         }
         FillTable();
@@ -434,11 +434,11 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         if (index != -1) {
             try {
                 khdao.delete(tblkhachhangthanthiet.getValueAt(index, 0).toString());
-                dialog.Done(this, "Xóa Nhân Viên Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Xóa Thành Công");
 		xoa_KHTT = true;
 		MaKHTT = tblkhachhangthanthiet.getValueAt(index, 0).toString();
             } catch (Exception e) {
-                dialog.Error(this, "Xóa Nhân Viên Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Xóa Không Thành Công");
             }
         }
         FillTable();
@@ -462,7 +462,7 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
             fillTableByKey(key);
             tblkhachhangthanthiet.setRowSelectionInterval(0, 0);
         } catch (Exception e) {
-            dialog.Error(this, "Không Tìm Thấy Khách Hàng", "Lỗi");
+            JOptionPane.showMessageDialog(this, "Không Tìm Thấy Khách Hàng");
         }
     }
 

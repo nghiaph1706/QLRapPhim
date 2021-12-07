@@ -172,7 +172,5 @@ GO
 	('COMBO1',50000,1,50000,'HD9',0);
 	GO
 
-	exec sp_ThemPhimHomNay '2021-11-30'
+	exec sp_ThemPhimHomNay '2021-12-06'
 	go
-
-	select*from NhanVien

@@ -1,4 +1,4 @@
-/* @author nghiacubu */
+
 package DAO;
 
 import Entity.Phong;
@@ -10,25 +10,19 @@ import java.util.List;
 
 public class PhongDAO extends QLRapPhimDAO<Phong, String> {
 
-    static String insert = "INSERT INTO [Phong]([SoHang],[HIDE]) VALUES (?,?,0)";
-    static String update = "Update Phong Set Sohang =? Where maphong like ?";
-    static String delete = "Update Phong Set Hide = 1 Where maphong like ?";
     static String selectall = "Select * from Phong";
     static String selectbyid = "Select * from Phong where maphong like";
 
     @Override
     public void insert(Phong entity) {
-        XJdbc.update(insert, entity.getSohang(), entity.isHide());
     }
 
     @Override
     public void update(Phong entity) {
-        XJdbc.update(update, entity.getSohang(), entity.getMaphong());
     }
 
     @Override
     public void delete(String key) {
-        XJdbc.update(delete, key);
     }
 
     @Override
@@ -48,7 +42,7 @@ public class PhongDAO extends QLRapPhimDAO<Phong, String> {
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while (rs.next()) {
-                Phong p = new Phong();
+                Phong p = new Phong(rs.getInt(1),rs.getString(2),rs.getBoolean(3));
                 list.add(p);
             }
             rs.getStatement().getConnection().close();

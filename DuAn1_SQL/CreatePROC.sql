@@ -10,8 +10,6 @@ as Begin
 End
 GO
 
-
---Tạo ghế
 CREATE PROC sp_TaoGhe(@MaPhong VARCHAR(10), @time varchar(10))
 as begin
 	DECLARE @i int = 1, @j int =1, @maHang varchar(50)
@@ -33,7 +31,7 @@ as begin
 		end
 end
 GO
---time
+
 create proc sp_timeSeat(@MaPhong VARCHAR(10))
 as begin
 	declare @h int =17, @m int = 0, @time varchar(10)
@@ -48,10 +46,6 @@ as begin
 end
 go
 
-
-
-
---Doanh thu theo năm truyền tham số XXX
 CREATE PROCEDURE SP_DOANHTHUTHEONAM @year varchar(4)
 	AS BEGIN
 		SELECT 
@@ -63,7 +57,6 @@ CREATE PROCEDURE SP_DOANHTHUTHEONAM @year varchar(4)
 	END
 GO
 
---Doanh thu theo năm không truyền tham số
 CREATE PROCEDURE SP_DOANHTHUNAM
 	AS BEGIN
 		SELECT 
@@ -74,7 +67,6 @@ CREATE PROCEDURE SP_DOANHTHUNAM
 	END
 GO
 
---Doanh thu theo tháng truyền tham số XXX
 CREATE PROCEDURE SP_DOANHTHUTHEOTHANG @MONTH varchar(2)
 	AS BEGIN
 		SELECT 
@@ -86,7 +78,6 @@ CREATE PROCEDURE SP_DOANHTHUTHEOTHANG @MONTH varchar(2)
 	END
 GO
 
---Doanh thu theo tháng cuar nam
 CREATE PROCEDURE SP_DOANHTHUTHANG  @year varchar(4)
 	AS BEGIN
 		SELECT 
@@ -98,7 +89,6 @@ CREATE PROCEDURE SP_DOANHTHUTHANG  @year varchar(4)
 	END
 GO
 
---Thống kê Doanh thu từ time1 đến time2
 CREATE PROCEDURE SP_DOANHTHUBETWEEN @TIME1 DATE, @TIME2 DATE
 	AS BEGIN
 		SELECT 
@@ -109,7 +99,6 @@ CREATE PROCEDURE SP_DOANHTHUBETWEEN @TIME1 DATE, @TIME2 DATE
 	END
 GO
 
---THỐNG KÊ DOANH THU THEO  MÃ PHIM VÀ THEO NĂM /// đã sửa
 CREATE PROCEDURE SP_DOANHTHUPHIM @YEAR VARCHAR(4)
 	AS BEGIN
 		SELECT VE.MAPHIM AS 'MAPHIM',
@@ -156,7 +145,6 @@ as BEGIN
 END
 GO
 
--- SPECIFIC
 CREATE PROCEDURE sp_TKKH_TheoThangspc (@Thang INT)
 as BEGIN
 	SELECT Ten, SoLanSuDung, MONTH(NgayDK) as ThangDangKy
@@ -174,7 +162,7 @@ as BEGIN
 	GROUP BY MaKHTT, Ten, SoLanSuDung, YEAR(NgayDK)
 END
 GO
---SU KIEN DANG DIEN RA duong sua
+
 CREATE PROCEDURE SP_SUKIENDANGDIENRA @TIMENOW DATE
 	AS BEGIN
 		SELECT 
@@ -183,8 +171,6 @@ CREATE PROCEDURE SP_SUKIENDANGDIENRA @TIMENOW DATE
 	END
 GO
 
---nguyen
--- Doanh thu từng tháng theo năm --------
 create PROCEDURE sp_TKDT_TungThangTheoNam (@Nam INT)
 as BEGIN
 	select month(ngaylap),sum(tongtien) from hoadon where year(ngaylap) = @Nam group by month(NgayLap) 
@@ -192,7 +178,6 @@ as BEGIN
 END
 GO
 
--- Doanh thu từng ngày theo tháng theo năm--------
 create PROCEDURE sp_TKDT_TungNgayTheoThang(@Nam INT, @Thang INT)
 as BEGIN
 select day(ngaylap) as 'Ngay',count(mave) as 'TongVe',count(madichvu) as 'TongDichVu', sum(hoadonchitiet.thanhtien)  as 'TongTienNgay'
@@ -200,7 +185,6 @@ from hoadonchitiet inner join hoadon on HoaDonChiTiet.MaHoaDon = HoaDon.MaHoaDon
 where month(ngaylap) = @Thang and year(ngaylap) = @Nam group by DAY(ngaylap)
 END
 GO
-
 
 create PROCEDURE sp_DTTungNam
 as begin
@@ -226,7 +210,6 @@ group by ngaylap
 end 
 go
 
--- Thống kê lượt xem theo tháng
 create PROCEDURE sp_TKLX_TheoThang(@thang int, @nam int)
 as
 begin
@@ -264,3 +247,68 @@ INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
 (@date, '22:30', 'MP5', 'P5', 0);
 End
 GO
+
+Create proc sp_doanhThuHomNay
+as
+begin
+select sum(thanhtien) from hoadon	where day(ngaylap) = day(getDate()) 
+and month(ngaylap) = month(getdate()) 
+and YEAR(ngaylap) = year(getdate())
+group by day(ngaylap),month(ngaylap) ,YEAR(ngaylap)
+end
+go
+
+Create proc sp_doanhThuHomQua
+as
+begin
+select sum(thanhtien) from hoadon	where day(ngaylap) = day(DATEADD(day, -1, CAST(GETDATE() AS date)))
+and month(ngaylap) = month(DATEADD(day, -1, CAST(GETDATE() AS date)))
+and YEAR(ngaylap) = year(DATEADD(day, -1, CAST(GETDATE() AS date)))
+group by day(ngaylap),month(ngaylap) ,YEAR(ngaylap)
+end
+go
+
+Create proc sp_doanhThuDichVuHomNay
+as
+begin
+select sum(HoaDonChiTiet.ThanhTien) from hoadon inner join HoaDonChiTiet on hoadon.MaHoaDon = HoaDonChiTiet.MaHoaDon
+where day(ngaylap) = day(getDate()) 
+and month(ngaylap) = month(getdate()) 
+and YEAR(ngaylap) = year(getdate())
+and MaDichVu is not null
+group by day(ngaylap),month(ngaylap) ,YEAR(ngaylap)
+end
+go
+
+Create proc sp_doanhThuVeHomNay
+as
+begin
+select sum(HoaDonChiTiet.ThanhTien) from hoadon inner join HoaDonChiTiet on hoadon.MaHoaDon = HoaDonChiTiet.MaHoaDon
+where day(ngaylap) = day(getDate()) 
+and month(ngaylap) = month(getdate()) 
+and YEAR(ngaylap) = year(getdate())
+and MaVe  is not null
+group by day(ngaylap),month(ngaylap) ,YEAR(ngaylap)
+end
+go
+
+Create proc sp_select5PhimBanChay
+as begin
+select top 5  Phim.TenPhim, count(ve.mave) from hoadon inner join HoaDonChiTiet on hoadon.MaHoaDon = HoaDonChiTiet.MaHoaDon
+inner join ve on HoaDonChiTiet.MaVe = ve.MaVe inner join Phim on phim.MaPhim = ve.MaPhim
+where day(ngaylap) = day(getDate()) 
+and month(ngaylap) = month(getdate()) 
+and YEAR(ngaylap) = year(getdate())
+group by phim.tenphim
+order by count(ve.MaVe)
+end
+go
+
+create proc sp_DoanhThuTheoGio
+as begin
+select CONCAT( DATEPART(hour,ngaylap),':',DATEPART(minute,ngaylap)),ThanhTien from hoadon	where day(ngaylap) = day(getDate()) 
+and month(ngaylap) = month(getdate()) 
+and YEAR(ngaylap) = year(getdate())
+order by NgayLap 
+end
+go

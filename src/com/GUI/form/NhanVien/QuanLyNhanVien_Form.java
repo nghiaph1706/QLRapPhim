@@ -2,7 +2,6 @@ package com.GUI.form.NhanVien;
 
 import Entity.*;
 import DAO.*;
-import Utilities.Option;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
 import com.GUI.main.Main;
@@ -10,6 +9,7 @@ import com.GUI.swing.ScrollBar;
 import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,7 +22,6 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
     private XImage xImage = new XImage();
     private String HinhTam = "";
     private NhanVienDAO nvdao = new NhanVienDAO();
-    private Option dialog = new Option();
     private String pathDefaultFile = System.getProperty("user.dir");
     private ImageIcon icon;
     public static boolean add_NV = false;
@@ -544,12 +543,12 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         if (ValidateForm()) {
             try {
                 nvdao.insert(GetNhanVienFromGui());
-                dialog.Done(this, "Thêm Mới Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Thêm Mới Thành Công");
                 FillTable();
                 RefreshGui();
 		add_NV = true;
             } catch (Exception e) {
-                dialog.Error(this, "Thêm Mới Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Thêm Mới Không Thành Công");
             }
         }
     }
@@ -559,13 +558,13 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         if (index != -1 && ValidateForm()) {
             try {
                 nvdao.update(GetNhanVienFromGui());
-                dialog.Done(this, "Cập Nhật Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
                 FillTable();
                 RefreshGui();
 		sua_NV = true;
 		MaNV = tblnhanvien.getValueAt(index, 0).toString();
             } catch (Exception e) {
-                dialog.Error(this, "Cập Nhật Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Cập Nhật Không Thành Công");
             }
         }
     }
@@ -575,11 +574,11 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         if (index != -1) {
             try {
                 nvdao.delete(tblnhanvien.getValueAt(index, 0).toString());
-                dialog.Done(this, "Xóa Nhân Viên Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Xóa Nhân Viên Thành Công");
 		xoa_NV = true;
 		MaNV = tblnhanvien.getValueAt(index, 0).toString();
             } catch (Exception e) {
-                dialog.Error(this, "Xóa Nhân Viên Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Xóa Nhân Viên Không Thành Công");
             }
         }
         FillTable();
@@ -605,7 +604,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
             fillTableByKey(key);
             tblnhanvien.setRowSelectionInterval(0, 0);
         } catch (Exception e) {
-            dialog.Error(this, "Không Tìm Thấy Nhân Viên", "Lỗi");
+            JOptionPane.showMessageDialog(this, "Không Tìm Thấy Nhân Viên");
         }
     }
 
@@ -617,12 +616,12 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                 pass.setMaNhanVien(tblnhanvien.getValueAt(index, 0).toString());
                 pass.setMatKhau("123");
                 nvdao.UpdatePassword(pass);
-                dialog.Done(this, "Khôi Phục Mật Khẩu Mặc Định Thành Công", "Hoàn Thành");
+                JOptionPane.showMessageDialog(this, "Khôi Phục Mật Khẩu Mặc Định Thành Công");
             } catch (Exception e) {
-                dialog.Error(this, "Khôi Phục Mật Khẩu Mặc Định Không Thành Công\n" + e, "Lỗi");
+                JOptionPane.showMessageDialog(this, "Khôi Phục Mật Khẩu Mặc Định Không Thành Công");
             }
         } else {
-            dialog.Error(this, "Chưa Chọn Nhân Viên", "Lỗi");
+            JOptionPane.showMessageDialog(this, "Chưa Chọn Nhân Viên");
         }
     }
 

@@ -2,12 +2,12 @@ package com.GUI.component;
 
 import Entity.NhanVien;
 import Utilities.XImage;
-import com.GUI.form.NhanVien.ChangePassForm;
+import com.GUI.form.NhanVien.Profile_Form;
 import java.awt.event.ActionListener;
 
 public class Header extends javax.swing.JPanel {
     private XImage xImage = new XImage();
-    private ChangePassForm cpf = new ChangePassForm();
+    private Profile_Form cpf = new Profile_Form();
     private NhanVien nv;
     private String path = System.getProperty("user.dir");
 

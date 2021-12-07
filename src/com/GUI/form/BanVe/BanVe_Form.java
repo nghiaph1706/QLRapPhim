@@ -15,20 +15,25 @@ import Entity.LichChieu;
 import Entity.Phim;
 import Entity.Ve;
 import Utilities.XDate;
+import Utilities.XImage;
 import com.GUI.form.KhachHangThanThiet.KhachHangThanThiet_Form;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BanVe_Form extends javax.swing.JPanel {
 
+    private XImage xImage = new XImage();
     private LichChieuDAO lcDAO = new LichChieuDAO();
     private KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
     private HoaDonDAO hdDAO = new HoaDonDAO();
@@ -69,10 +74,10 @@ public class BanVe_Form extends javax.swing.JPanel {
         cboPhieuGG = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         panelDichVu = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblImageBap = new javax.swing.JLabel();
+        lblImageNuoc = new javax.swing.JLabel();
+        lblImageCB1 = new javax.swing.JLabel();
+        lblImageCB2 = new javax.swing.JLabel();
         spnBap = new javax.swing.JSpinner();
         spnNuoc = new javax.swing.JSpinner();
         spnCombo1 = new javax.swing.JSpinner();
@@ -83,7 +88,7 @@ public class BanVe_Form extends javax.swing.JPanel {
         txtMaKHTT = new com.GUI.swing.TextField();
         cboPhongChieu = new javax.swing.JComboBox<>();
         lblCheckMa = new javax.swing.JLabel();
-        btnXuatHD1 = new com.GUI.swing.Button();
+        btnNewHD = new com.GUI.swing.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,25 +163,33 @@ public class BanVe_Form extends javax.swing.JPanel {
 
         panelDichVu.setBackground(new java.awt.Color(224, 224, 224));
 
-        jLabel4.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("BẮP");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageBap.setForeground(new java.awt.Color(255, 153, 153));
+        lblImageBap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageBap.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageBap.setMaximumSize(new java.awt.Dimension(142, 159));
+        lblImageBap.setMinimumSize(new java.awt.Dimension(142, 159));
+        lblImageBap.setPreferredSize(new java.awt.Dimension(142, 159));
 
-        jLabel5.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("NƯỚC");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageNuoc.setForeground(new java.awt.Color(255, 153, 153));
+        lblImageNuoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageNuoc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageNuoc.setMaximumSize(new java.awt.Dimension(142, 159));
+        lblImageNuoc.setMinimumSize(new java.awt.Dimension(142, 159));
+        lblImageNuoc.setPreferredSize(new java.awt.Dimension(142, 159));
 
-        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("COMBO 1");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageCB1.setForeground(new java.awt.Color(255, 153, 153));
+        lblImageCB1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageCB1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageCB1.setMaximumSize(new java.awt.Dimension(142, 159));
+        lblImageCB1.setMinimumSize(new java.awt.Dimension(142, 159));
+        lblImageCB1.setPreferredSize(new java.awt.Dimension(142, 159));
 
-        jLabel7.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("COMBO 2");
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageCB2.setForeground(new java.awt.Color(255, 153, 153));
+        lblImageCB2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageCB2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        lblImageCB2.setMaximumSize(new java.awt.Dimension(142, 159));
+        lblImageCB2.setMinimumSize(new java.awt.Dimension(142, 159));
+        lblImageCB2.setPreferredSize(new java.awt.Dimension(142, 159));
 
         spnBap.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         spnBap.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 51, 51)));
@@ -197,20 +210,20 @@ public class BanVe_Form extends javax.swing.JPanel {
             .addGroup(panelDichVuLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(panelDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(spnBap, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(spnBap)
+                    .addComponent(lblImageBap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spnNuoc, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                    .addComponent(lblImageNuoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spnNuoc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spnCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                    .addComponent(lblImageCB1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spnCombo1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spnCombo2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                    .addComponent(lblImageCB2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spnCombo2))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         panelDichVuLayout.setVerticalGroup(
@@ -218,10 +231,10 @@ public class BanVe_Form extends javax.swing.JPanel {
             .addGroup(panelDichVuLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(panelDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImageBap, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImageNuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImageCB1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImageCB2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spnBap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,7 +261,7 @@ public class BanVe_Form extends javax.swing.JPanel {
         });
 
         btnChuyen.setForeground(new java.awt.Color(255, 255, 255));
-        btnChuyen.setText(">");
+        btnChuyen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/GUI/icon/icons8_right_40px.png"))); // NOI18N
         btnChuyen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChuyenActionPerformed(evt);
@@ -271,11 +284,11 @@ public class BanVe_Form extends javax.swing.JPanel {
         lblCheckMa.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblCheckMa.setForeground(new java.awt.Color(51, 51, 51));
 
-        btnXuatHD1.setForeground(new java.awt.Color(255, 255, 255));
-        btnXuatHD1.setText("New HD");
-        btnXuatHD1.addActionListener(new java.awt.event.ActionListener() {
+        btnNewHD.setForeground(new java.awt.Color(255, 255, 255));
+        btnNewHD.setText("New HD");
+        btnNewHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXuatHD1ActionPerformed(evt);
+                btnNewHDActionPerformed(evt);
             }
         });
 
@@ -320,7 +333,7 @@ public class BanVe_Form extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnXuatHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNewHD, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(86, 86, 86)
                         .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(101, 101, 101))))
@@ -338,18 +351,14 @@ public class BanVe_Form extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaKHTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cboPhongChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCheckMa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chkPhieuGG)
-                            .addComponent(btnChuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCheckMa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnChuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(cboPhongChieu))
+                        .addGap(16, 16, 16)
+                        .addComponent(chkPhieuGG)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -360,12 +369,12 @@ public class BanVe_Form extends javax.swing.JPanel {
                         .addComponent(panelDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                        .addGap(0, 27, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXuLy, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXuatHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNewHD, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -424,14 +433,15 @@ public class BanVe_Form extends javax.swing.JPanel {
         checkMaKHTT();
     }//GEN-LAST:event_txtMaKHTTKeyReleased
 
-    private void btnXuatHD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHD1ActionPerformed
+    private void btnNewHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewHDActionPerformed
         HoaDon hd = new HoaDon();
         hd.setHIDE(false);
         hd.setNgayLap(XDate.now());
         hd.setTrangThai(false);
         hdDAO.insert(hd);
         maHDNow = hdDAO.selectNewHD();
-    }//GEN-LAST:event_btnXuatHD1ActionPerformed
+        btnNewHD.setText(maHDNow);
+    }//GEN-LAST:event_btnNewHDActionPerformed
 
     // MAIN FUNCTIONAL
     private void init() {
@@ -451,6 +461,14 @@ public class BanVe_Form extends javax.swing.JPanel {
         spnNuoc.setSize(0, 100);
         spnCombo1.setSize(0, 100);
         spnCombo2.setSize(0, 100);
+        Icon icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/bap.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        lblImageBap.setIcon(icon1);
+        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/nuoclon.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        lblImageNuoc.setIcon(icon1);
+        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/combo1.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        lblImageCB1.setIcon(icon1);
+        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/combo2.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        lblImageCB2.setIcon(icon1);
     }
 
     public void loadDatabase() {
@@ -633,10 +651,10 @@ public class BanVe_Form extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnChuyen;
+    private com.GUI.swing.Button btnNewHD;
     private com.GUI.swing.Button btnThemDichVu;
     private com.GUI.swing.Button btnXuLy;
     private com.GUI.swing.Button btnXuatHD;
-    private com.GUI.swing.Button btnXuatHD1;
     private javax.swing.JComboBox<String> cboPhieuGG;
     private javax.swing.JComboBox<String> cboPhim;
     private javax.swing.JComboBox<String> cboPhongChieu;
@@ -644,12 +662,12 @@ public class BanVe_Form extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCheckMa;
+    private javax.swing.JLabel lblImageBap;
+    private javax.swing.JLabel lblImageCB1;
+    private javax.swing.JLabel lblImageCB2;
+    private javax.swing.JLabel lblImageNuoc;
     private javax.swing.JPanel panelDichVu;
     private javax.swing.JSpinner spnBap;
     private javax.swing.JSpinner spnCombo1;

@@ -1,4 +1,3 @@
-/* @author nghiacubu */
 
 
 package DAO;

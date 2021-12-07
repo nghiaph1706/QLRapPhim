@@ -116,6 +116,8 @@ public class SaoLuu_Form extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("DUNG LƯỢNG");
 
+        txtDuongDan.setLabelText("Đường Dẫn");
+
         progressBarCustom2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         progressBarCustom2.setForeground(new java.awt.Color(51, 255, 153));
         progressBarCustom2.setValue(50);
@@ -238,17 +240,6 @@ public class SaoLuu_Form extends javax.swing.JPanel {
         tblNhatKyHD.setModel(model);
     }
 
-//    public static void logDuLieu() {
-//        
-//	//logKHTT(log);
-//	logNV(log);
-//	logPhim(log);
-//	logSuKien(log);
-//	logLC(log);
-//        listLog.add(log);
-//	
-//        fillTable();
-//    }
     //HD
     public static void logHD() {
 	    Log log = new Log();

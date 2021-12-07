@@ -1324,23 +1324,23 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     }
 
     public Map mapImage(List<Phim> listPhim) {
-
+         
         // Tạo map 
         Map<String, String> map = new HashMap<>();
-        map.put("imgBgHeader", "src/images/bg_light__1___1___1___1___1___1_.png");
-        map.put("imgBgBody1", "src/images/bg-texture__1___1_.png");
-        map.put("imgGachDuoiTenKhach", "src/images/Group.png");
-        map.put("imgPhimChinh", "src/images/rapPhim.png");
-        map.put("imgUuDiem1", "src/images/quality-badge-star.png");
-        map.put("imgUuDiem2", "src/images/water.png");
-        map.put("imgUuDiem3", "src/images/hand.png");
-        map.put("imgBgBody2", "src/images/bg_light__1___1___1___1___1___1_.png");
-        map.put("imgBgBody3", "src/images/bg_light__1___1___1___1___1___1_.png");
-        map.put("imgPhim1", "src/imagePhim/" + listPhim.get(0).getHinh() + "");
-        map.put("imgPhim2", "src/imagePhim/" + listPhim.get(1).getHinh() + "");
-        map.put("imgPhim3", "src/imagePhim/" + listPhim.get(2).getHinh() + "");
-        map.put("imgBgBody4", "src/images/bg_light__1___1___1___1___1___1_.png");
-        map.put("imgAboutus", "src/images/d89f0523-ad7f-43e4-97ac-8df648461390.jpeg");
+        map.put("imgBgHeader", "images/bg_light__1___1___1___1___1___1_.png");
+        map.put("imgBgBody1", "images/bg-texture__1___1_.png");
+        map.put("imgGachDuoiTenKhach", "images/Group.png");
+        map.put("imgPhimChinh", "images/rapPhim.png");
+        map.put("imgUuDiem1", "images/quality-badge-star.png");
+        map.put("imgUuDiem2", "images/water.png");
+        map.put("imgUuDiem3", "images/hand.png");
+        map.put("imgBgBody2", "images/bg_light__1___1___1___1___1___1_.png");
+        map.put("imgBgBody3", "images/bg_light__1___1___1___1___1___1_.png");
+        map.put("imgPhim1", "imagePhim/"+"AntMain.jpg");
+        map.put("imgPhim2", "imagePhim/"+"MatBiec.jpg");
+        map.put("imgPhim3", "imagePhim/"+"NguoiNhen.jpg");
+        map.put("imgBgBody4", "images/bg_light__1___1___1___1___1___1_.png");
+        map.put("imgAboutus", "images/d89f0523-ad7f-43e4-97ac-8df648461390.jpeg");
 
         return map;
     }

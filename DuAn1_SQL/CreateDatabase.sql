@@ -88,7 +88,7 @@ GO
 
 CREATE TABLE [KhuyenMai] (
 	[MaKM] VARCHAR(50),
-	[TenKM] NVARCHAR(255),--duongsua
+	[TenKM] NVARCHAR(255),
 	[ThongTinKM] NVARCHAR(255),
 	[MucGiamGia] FLOAT,
 	[NgayBatDau] DATE,
@@ -125,7 +125,7 @@ CREATE TABLE [HoaDon](
 	[MaKHTT] VARCHAR(10),
 	[MucGiamGia] INT,
 	[ThanhTien] FLOAT,
-	[NgayLap] DATE,
+	[NgayLap] DATETIME,
 	[TrangThai] BIT,
 	[MaNhanVien] VARCHAR(10),
 	[HIDE] BIT DEFAULT 0,

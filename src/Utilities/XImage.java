@@ -10,10 +10,10 @@ import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class XImage {
 
-    private Option dialog = new Option();
     private String pathDefaultFile = System.getProperty("user.dir");
 
     public void ReadAndScaleIMG(JLabel lbl, String file, int width, int height) {
@@ -31,7 +31,7 @@ public class XImage {
             return file;
         } else {
             if (hinhtam == null) {
-                dialog.Error(null, "Chưa Chọn Hình!", "Lỗi!");
+                JOptionPane.showMessageDialog(null, "Chưa Chọn Hình!");
                 return null;
             }
             return null;

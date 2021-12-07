@@ -65,7 +65,6 @@
                               <Component id="txtEmail" min="-2" pref="290" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="rdonam" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Component id="rdonu" min="-2" max="-2" attributes="0"/>
