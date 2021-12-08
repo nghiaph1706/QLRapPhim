@@ -20,6 +20,7 @@ import com.GUI.form.SuKien.SKDangDienRa_Form;
 import com.GUI.form.ThongKe.TKDoanhThu_Form;
 import com.GUI.form.ThongKe.TKDoanhThu_Ngay;
 import com.GUI.form.ThongKe.TKLuotXem_Form;
+import com.GUI.form.CustomerAnalysis.DectectCustomer;
 import com.GUI.main.login.Login;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
 import com.GUI.swing.icon.IconFontSwing;
@@ -121,6 +122,8 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(saoLuu);
                     }
                 } else if (menuIndex == 9) {
+                    new DectectCustomer().setVisible(true);
+                } else if (menuIndex == 10) {
                     int test = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Đăng Xuất Không?");
                     if (test == 0) {
                         try {

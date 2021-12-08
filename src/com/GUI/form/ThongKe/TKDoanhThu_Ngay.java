@@ -1,29 +1,16 @@
 package com.GUI.form.ThongKe;
 
-import DAO.HoaDonDAO;
 import DAO.ThongKeDAO;
-import com.GUI.Chart.BarChart.BarChart;
-import com.GUI.Chart.BarChart.ModelChart;
-import com.GUI.Chart.ChartLine.ModelChartLine;
-import com.GUI.Chart.ChartPie.ModelChartPie;
 import com.GUI.Chart.CurveChart.ModelCurveChart;
-import com.GUI.swing.scrollbar.ScrollBarCustom;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.sql.SQLException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
 
 public class TKDoanhThu_Ngay extends javax.swing.JPanel {
 

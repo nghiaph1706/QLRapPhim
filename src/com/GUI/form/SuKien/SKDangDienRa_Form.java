@@ -8,6 +8,8 @@ import Entity.KhuyenMai;
 import Entity.Phim;
 import Utilities.ValidateCheck;
 import Utilities.XDate;
+import com.GUI.form.BanVe.BanVe_Form;
+import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.io.File;
 import java.io.IOException;
@@ -143,6 +145,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         if (tblsukien.getRowCount() > 0) {
             DeleteValues();
+            Main.banVe = new BanVe_Form();
         } else {
             JOptionPane.showMessageDialog(null, "Chưa Có Dữ Liệu!");
         }

@@ -6,6 +6,7 @@ import Entity.KHTT;
 import Entity.KhuyenMai;
 import Entity.NhanVien;
 import Utilities.ValidateCheck;
+import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.main.Main;
 import com.GUI.swing.ScrollBar;
 import java.util.List;
@@ -250,6 +251,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         AddEvent();
 	Main.saoLuu.logSuKien();
+        Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
@@ -260,6 +262,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         DeleteEvent();
 	Main.saoLuu.logSuKien();
+        Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void tblsukienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblsukienKeyReleased

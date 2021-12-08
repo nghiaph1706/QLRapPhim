@@ -319,6 +319,8 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         txtsolansudung.setLabelText("Số Lần Sử Dụng");
         txtMucGiamGia.setLabelText("Mức Giảm Giá(%)");
         txtSearch.setLabelText("Tìm Kiếm Khách Hàng");
+        DateNgayDK.setDate(XDate.now());
+        DateNgayDK.setEnabled(false);
     }
 
     public void FillTable() {
@@ -356,6 +358,7 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
             txtsolansudung.setText(String.valueOf(fill.getSoLanSuDung()));
             txtMucGiamGia.setText(String.valueOf(fill.getMucGiacGia()));
             DateNgayDK.setDate(fill.getNgayDK());
+            DateNgayDK.setEnabled(true);
         }
     }
 
@@ -452,7 +455,8 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
         txtMucGiamGia.setText("");
         txtsolansudung.setText("");
         txtSearch.setText("");
-        DateNgayDK.setDate(null);
+        DateNgayDK.setDate(XDate.now());
+        DateNgayDK.setEnabled(false);
         FillTable();
     }
 

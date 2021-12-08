@@ -33,7 +33,7 @@
                           <Component id="chkPhieuGG" min="-2" max="-2" attributes="0"/>
                           <Component id="cboPhongChieu" alignment="0" min="-2" pref="430" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtMaKHTT" pref="157" max="32767" attributes="0"/>
@@ -46,10 +46,6 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
-                              <Component id="btnXuLy" min="-2" pref="188" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="panelDichVu" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -57,8 +53,12 @@
                               <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                               <Component id="btnThemDichVu" min="-2" pref="400" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                              <Component id="btnXuLy" min="-2" pref="188" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="97" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -73,7 +73,7 @@
                       <Component id="btnNewHD" min="-2" pref="188" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       <Component id="btnXuatHD" min="-2" pref="188" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -89,7 +89,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cboPhim" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtMaKHTT" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -111,19 +111,19 @@
                       <Component id="btnThemDichVu" min="-2" pref="64" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="panelDichVu" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnXuLy" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="btnNewHD" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="btnXuatHD" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="598" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnXuLy" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                  <Component id="btnXuatHD" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                  <Component id="btnNewHD" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -596,7 +596,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="New HD"/>
+        <Property name="text" type="java.lang.String" value="HO&#xc1; &#x110;&#x1a0;N M&#x1eda;I"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewHDActionPerformed"/>

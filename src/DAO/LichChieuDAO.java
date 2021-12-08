@@ -5,7 +5,6 @@ package DAO;
 import Entity.LichChieu;
 import Utilities.XJdbc;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -89,7 +88,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     {
         try {
             List<LichChieu> list = new ArrayList<>();
-            ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
+            ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? and ngaychieu = CONVERT(char(10), GETDATE(),126) GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
             while(rs.next()) {
                 LichChieu lc = new LichChieu();
                 lc.setMaPhong(rs.getString(1));

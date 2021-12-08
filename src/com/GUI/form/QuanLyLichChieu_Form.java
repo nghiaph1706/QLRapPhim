@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package com.GUI.form;
 
 import DAO.LichChieuDAO;
@@ -25,10 +22,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author Admin
- */
+
 public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     DefaultTableModel model;
@@ -42,9 +36,6 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     public static boolean sua_LC = false;
     public static String MaLiCh;
 
-    /**
-     * Creates new form QuanLyLichChieu_Form2
-     */
     public QuanLyLichChieu_Form() {
         initComponents();
         setOpaque(false);

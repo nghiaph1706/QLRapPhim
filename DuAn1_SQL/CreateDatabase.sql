@@ -184,3 +184,11 @@ CREATE TABLE [HoaDonChiTiet] (
 			REFERENCES [HoaDon]([MaHoaDon]) ON DELETE CASCADE
 );
 GO
+
+CREATE TABLE [Customer](
+	[Gender] BIT,
+	[Age] INT,
+	[Date] DATETIME
+);
+GO
+

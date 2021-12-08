@@ -7,6 +7,9 @@ import com.GUI.Chart.BarChart.ModelChart;
 import com.GUI.Chart.ChartLine.ChartLine;
 import com.GUI.Chart.ChartLine.ModelChartLine;
 import com.GUI.Chart.ChartPie.ModelChartPie;
+import com.GUI.Chart.CurveChart.ModelCurveChart;
+import com.GUI.form.CustomerAnalysis.Customer;
+import com.GUI.form.CustomerAnalysis.CustomerDAO;
 import com.GUI.model.ModelCard;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -39,10 +42,8 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         List<ModelChartPie> modelChartPies = new ArrayList<>();
         modelChartPies.add(new ModelChartPie("KHTT", 200, new Color(245, 189, 135)));
         modelChartPies.add(new ModelChartPie("Khách vãng lai", 200, new Color(135, 189, 245)));
-        modelChartPies.add(new ModelChartPie("Khác", 200, new Color(245, 189, 135)));
+        modelChartPies.add(new ModelChartPie("Khác", 200, new Color(189, 245, 135)));
         chartPie1.setModel(modelChartPies);
-        card1.setData(new ModelCard("Value1", 255, 80, new ImageIcon("/com/GUI/icon/1.png")));
-        card1.setColorGradient(Color.pink);
     }
 
     public void init() {
@@ -54,6 +55,7 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
             Logger.getLogger(TKLuotXem_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
         thongKeTheoMP();
+        fillCurveChart();
     }
 
     public void fillCboThang() {
@@ -115,6 +117,19 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         jPanel1.add(chartlineTKNam, BorderLayout.CENTER);
         jPanel1.validate();
     }
+    
+    void fillCurveChart(){
+        List<Customer> listNam = new CustomerDAO().selectNam();
+        List<Customer> listNu = new CustomerDAO().selectNu();
+        curveChart1.addLegend("Nam", new Color(12,84,175), new Color(0,108,247));
+        curveChart1.addLegend("Nữ", new Color(54,4,143), new Color(104,49,200));
+        for (int i = 0; i < listNam.size(); i++) {
+            Customer customerNam = listNam.get(i);
+            Customer customerNu = listNu.get(i);
+            curveChart1.addData(new ModelCurveChart(customerNam.getDate().toString(), new double[]{customerNam.getAge(),customerNu.getAge()}));
+        }
+        curveChart1.start();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -124,13 +139,13 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         cboThang = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         chartPie1 = new com.GUI.Chart.ChartPie.ChartPie();
-        card1 = new com.GUI.component.Card();
-        card2 = new com.GUI.component.Card();
         jLabel4 = new javax.swing.JLabel();
         cboNam = new javax.swing.JComboBox<>();
         jpanelTKNam = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         chartLine1 = new com.GUI.Chart.ChartLine.ChartLine();
+        jPanel2 = new javax.swing.JPanel();
+        curveChart1 = new com.GUI.Chart.CurveChart.CurveChart();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -167,21 +182,29 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(chartLine1, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(curveChart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(curveChart1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(chartPie1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(card1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(card2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpanelTKNam, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,12 +213,14 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpanelTKNam, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(57, 57, 57)
+                        .addComponent(chartPie1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
@@ -214,11 +239,13 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanelTKNam, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(card1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chartPie1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                    .addComponent(card2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(61, 61, 61))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(chartPie1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(88, 88, 88))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(49, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -242,16 +269,16 @@ public class TKLuotXem_Form extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.GUI.component.Card card1;
-    private com.GUI.component.Card card2;
     private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JComboBox<String> cboThang;
     private com.GUI.Chart.ChartLine.ChartLine chartLine1;
     private com.GUI.Chart.ChartPie.ChartPie chartPie1;
+    private com.GUI.Chart.CurveChart.CurveChart curveChart1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jpanelTKNam;
     // End of variables declaration//GEN-END:variables
 }
