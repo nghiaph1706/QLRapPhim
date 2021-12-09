@@ -11,6 +11,8 @@ import com.GUI.form.Phim.QuanLyPhim_Form;
 import com.GUI.form.QuanLyLichChieu_Form;
 import com.GUI.form.SuKien.QuanLySuKien_Form;
 import com.GUI.form.SuKien.SKDangDienRa_Form;
+import com.GUI.main.Main;
+import com.GUI.main.login.Login;
 import com.GUI.swing.ScrollBar;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,8 +21,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class SaoLuu_Form extends javax.swing.JPanel {
@@ -233,7 +238,11 @@ public class SaoLuu_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLayDuLieuActionPerformed
 
     private void btnNhapDuLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapDuLieuActionPerformed
-        nhapDuLieu();
+        try {
+            nhapDuLieu();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Restore thất bại.");
+        }
     }//GEN-LAST:event_btnNhapDuLieuActionPerformed
 
     private void init() {
@@ -441,16 +450,20 @@ public class SaoLuu_Form extends javax.swing.JPanel {
                 System.out.println("No export");
             }
             XJdbc.update(backup);
+            JOptionPane.showMessageDialog(this, "Backup thành công.");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Backup Thất bại");
             throw new RuntimeException(e);
         }
     }
 
     private void backup_DuLieu_TrucTiep() {
         try {
-            String backup = "BACKUP DATABASE QL_RapPhim TO DISK = 'D:\\test.bak'";
+            String backup = "BACKUP DATABASE QL_RapPhim TO DISK = 'C:\\QLRapPhim.bak'";
             XJdbc.update(backup);
+            JOptionPane.showMessageDialog(this, "File backup được lưu đến C:\\QLRapPhim.bak");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Backup Thất bại");
             throw new RuntimeException(e);
         }
     }
@@ -458,6 +471,8 @@ public class SaoLuu_Form extends javax.swing.JPanel {
     private void layDuLieu() {
         try {
             fc = new JFileChooser();
+            FileNameExtensionFilter f = new FileNameExtensionFilter(null,"bak");
+            fc.setFileFilter(f);
             if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                 txtDuongDan.setText("" + fc.getSelectedFile());
             }
@@ -466,14 +481,22 @@ public class SaoLuu_Form extends javax.swing.JPanel {
         }
     }
 
-    private void nhapDuLieu() {
-        try {
-            String restore = "RESTORE DATABASE QL_RAPPHIM FROM DISK = '" + txtDuongDan.getText().trim() + "'";
-            XJdbc.update(restore);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private void nhapDuLieu() throws IOException {
+        if (txtDuongDan.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn đường dẫn");
+        } else {
+            String path = txtDuongDan.getText().replace('\\', '/').trim();
+            String restoreCMD = "sqlcmd -q \"RESTORE DATABASE QL_RAPPHIM FROM DISK=N'"+path+"' WITH REPLACE\"";
+            Process process = Runtime.getRuntime().exec(restoreCMD);
+            JOptionPane.showMessageDialog(this, "Restore thành công. Vui lòng đăng nhập lại.");
+            try {
+                            new Login().setVisible(true);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+            Main.mainCT.dispose();
         }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

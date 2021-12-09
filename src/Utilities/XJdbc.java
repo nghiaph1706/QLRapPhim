@@ -9,6 +9,11 @@ import java.sql.SQLException;
 
 public class XJdbc {
     static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    
+//    static String dburl = "jdbc:sqlserver://qlrapphim.cquyqmxzv0oi.ap-southeast-1.rds.amazonaws.com:1433;database=QL_RAPPHIM";
+//    static String user = "admin";
+//    static String pass = "QLRapPhim";
+    
     static String dburl = "jdbc:sqlserver://localhost:1433;database=QL_RAPPHIM";
     static String user = "sa";
     static String pass = "123";

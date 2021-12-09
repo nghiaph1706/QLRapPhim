@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Entity.Phim;
 import Entity.TheLoai;
+import Utilities.Auth;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
 import com.GUI.main.Main;
@@ -43,9 +44,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         jdNgaykt.setDateFormatString("yyyy-MM-dd");
         fillcboTheLoai();
         fillTable();
-        try {
-        } catch (Exception e) {
-        }
+        txtMaPhim.setEnabled(false);
     }
 
     public void fillcboTheLoai() {
@@ -391,8 +390,12 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        xoa();
-	Main.saoLuu.logPhim();
+        if (Auth.isManager()) {
+            xoa();
+            Main.saoLuu.logPhim();
+        } else {
+            JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblPhimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhimMouseClicked

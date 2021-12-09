@@ -3,6 +3,7 @@ package com.GUI.main;
 import DAO.GheDAO;
 import Entity.Ghe;
 import Entity.NhanVien;
+import Utilities.Auth;
 import com.GUI.component.Header;
 import com.GUI.component.Menu;
 import com.GUI.event.EventMenuSelected;
@@ -24,6 +25,8 @@ import com.GUI.form.CustomerAnalysis.DectectCustomer;
 import com.GUI.main.login.Login;
 import com.GUI.swing.icon.GoogleMaterialDesignIcons;
 import com.GUI.swing.icon.IconFontSwing;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,6 +43,7 @@ public class Main extends javax.swing.JFrame {
     private Menu menu;
     private Header header;
     public static MainForm main;
+    public static Main mainCT;
     private Animator animator;
     public static BanVe_Form banVe = new BanVe_Form();
     public static HoaDon_Form hoaDon = new HoaDon_Form();
@@ -53,6 +57,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         init();
+        mainCT = this;
         listGhe = ghDAO.selectAll();
     }
 
@@ -107,19 +112,31 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(new SKDangDienRa_Form());
                     }
                 } else if (menuIndex == 6) {
-                    QuanLyNhanVien_Form nvf = new QuanLyNhanVien_Form();
-                    main.showForm(nvf);
+                    if (Auth.isManager()) {
+                        QuanLyNhanVien_Form nvf = new QuanLyNhanVien_Form();
+                        main.showForm(nvf);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
+                    }
                 } else if (menuIndex == 7) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new TKDoanhThu_Ngay());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new TKDoanhThu_Form());
-                    } else if (subMenuIndex == 2) {
-                        main.showForm(new TKLuotXem_Form());
+                    if (Auth.isManager()) {
+                        if (subMenuIndex == 0) {
+                            main.showForm(new TKDoanhThu_Ngay());
+                        } else if (subMenuIndex == 1) {
+                            main.showForm(new TKDoanhThu_Form());
+                        } else if (subMenuIndex == 2) {
+                            main.showForm(new TKLuotXem_Form());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
                     }
                 } else if (menuIndex == 8) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(saoLuu);
+                    if (Auth.isManager()) {
+                        if (subMenuIndex == 0) {
+                            main.showForm(saoLuu);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
                     }
                 } else if (menuIndex == 9) {
                     new DectectCustomer().setVisible(true);
@@ -132,6 +149,12 @@ public class Main extends javax.swing.JFrame {
                             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         dispose();
+                    }
+                } else if (menuIndex == 11) {
+                    try {
+                        Desktop.getDesktop().browse(new File("Responsive/index.html").toURI());
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Không tìm thấy file hướng dẫn.");
                     }
                 }
             }

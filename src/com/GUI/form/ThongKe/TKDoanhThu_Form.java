@@ -35,17 +35,6 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
     }
 
     public void initText() {
-
-        List<ModelChartLine> modelChartLines = new ArrayList<>();
-        modelChartLines.add(new ModelChartLine("Quí 1", 800));
-        modelChartLines.add(new ModelChartLine("Quí 1", 950));
-        modelChartLines.add(new ModelChartLine("Quí 1", 700));
-        modelChartLines.add(new ModelChartLine("Quí 1", 800));
-        modelChartLines.add(new ModelChartLine("Quí 1", 800));
-        modelChartLines.add(new ModelChartLine("Quí 1", 950));
-        modelChartLines.add(new ModelChartLine("Quí 1", 700));
-        modelChartLines.add(new ModelChartLine("Quí 1", 800));
-        chartLine1.setModel(modelChartLines);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
     }
 
@@ -93,7 +82,7 @@ public class TKDoanhThu_Form extends javax.swing.JPanel {
             if (i > 0) {
                 modelChartPies.add(new ModelChartPie(ten[i], veVaDVArray[i], new Color(135, 189, 245)));
             } else {
-                modelChartPies.add(new ModelChartPie(ten[i], veVaDVArray[i], new Color(245, 189, 135)));
+                modelChartPies.add(new ModelChartPie(ten[i], veVaDVArray[i], Color.yellow));
             }
 
         }

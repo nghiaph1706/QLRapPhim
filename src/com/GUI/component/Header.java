@@ -4,6 +4,7 @@ import Entity.NhanVien;
 import Utilities.XImage;
 import com.GUI.form.NhanVien.Profile_Form;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class Header extends javax.swing.JPanel {
     private XImage xImage = new XImage();
@@ -94,7 +95,10 @@ public class Header extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        System.exit(0);
+        int i = JOptionPane.showConfirmDialog(null, "Bạn có muốn kết thúc phiên làm việc?");
+        if (i == 0) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void picMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_picMouseClicked

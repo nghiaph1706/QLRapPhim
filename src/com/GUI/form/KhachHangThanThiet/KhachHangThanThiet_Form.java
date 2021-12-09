@@ -265,8 +265,12 @@ public class KhachHangThanThiet_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
-        DeleteEntity();
-	Main.saoLuu.logKHTT();
+        if (Auth.isManager()) {
+            DeleteEntity();
+            Main.saoLuu.logKHTT();
+        } else {
+           JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
+        }
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed

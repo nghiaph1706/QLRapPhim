@@ -252,7 +252,7 @@ public class Login extends javax.swing.JFrame {
             public void run() {
                 try {
                     loading.setVisible(true);
-                    Thread.sleep(3000);
+                    Thread.sleep(5000);
                     loading.dispose();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -294,7 +294,9 @@ public class Login extends javax.swing.JFrame {
         new Thread() {
             public void run() {
                 try {
-                    showLoading();
+                    loading.setVisible(true);
+                    Thread.sleep(5000);
+                    loading.dispose();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -312,8 +314,24 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_pwdPassActionPerformed
 
     private void btnFaceIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFaceIDActionPerformed
-        new FaceIDDangNhap_Form().setVisible(true);
-        login.dispose();
+        new Thread() {
+            public void run() {
+                try {
+                    loading.setVisible(true);
+                    Thread.sleep(5000);
+                    loading.dispose();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+        new Thread() {
+            public void run() {
+                new FaceIDDangNhap_Form().setVisible(true);
+                login.dispose();
+            }
+        }.start();
+        
     }//GEN-LAST:event_btnFaceIDActionPerformed
 
     public static void main(String args[]) {

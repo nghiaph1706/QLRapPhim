@@ -6,6 +6,7 @@ import DAO.PhimDAO;
 import Entity.KHTT;
 import Entity.KhuyenMai;
 import Entity.Phim;
+import Utilities.Auth;
 import Utilities.ValidateCheck;
 import Utilities.XDate;
 import com.GUI.form.BanVe.BanVe_Form;
@@ -143,11 +144,18 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
-        if (tblsukien.getRowCount() > 0) {
-            DeleteValues();
-            Main.banVe = new BanVe_Form();
+        if (Auth.isManager()) {
+            int i = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xoá sự kiện này?");
+        if (i == 0) {
+            if (tblsukien.getRowCount() > 0) {
+                DeleteValues();
+                Main.banVe = new BanVe_Form();
+            } else {
+                JOptionPane.showMessageDialog(null, "Chưa Có Dữ Liệu!");
+            }
+        }
         } else {
-            JOptionPane.showMessageDialog(null, "Chưa Có Dữ Liệu!");
+            JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
         }
     }//GEN-LAST:event_btndeleteActionPerformed
 
@@ -192,8 +200,9 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     private void DeleteValues() {
         int index = tblsukien.getSelectedRow();
         if (index != -1) {
-	    xoa_SKDangDR = true;
-	    MaSuKiDDR = tblsukien.getValueAt(index, 0).toString();
+            xoa_SKDangDR = true;
+            MaSuKiDDR = tblsukien.getValueAt(index, 0).toString();
+            Main.saoLuu.logSuKien();
             KmAction = new KhuyenMaiDAO();
             KmAction.delete(tblsukien.getValueAt(index, 0).toString());
             JOptionPane.showMessageDialog(null, "Xóa Dữ Liệu Thành Công!");
@@ -938,7 +947,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																	<div\n"
                 + "																		style=\"font-size: 14px; mso-line-height-alt: 16.8px; color: #393d47; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;\">\n"
                 + "																		<p style=\"margin: 0; font-size: 14px;\"><span\n"
-                + "																				style=\"font-size:16px;\">" + listPhim.get(0).getTenPhim() + "dến từ" + listPhim.get(0).getQuocGia() + "</span></p>\n"
+                + "																				style=\"font-size:16px;\"></span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -984,7 +993,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																	<div\n"
                 + "																		style=\"font-size: 14px; mso-line-height-alt: 16.8px; color: #393d47; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;\">\n"
                 + "																		<p style=\"margin: 0; font-size: 14px;\"><span\n"
-                + "																				style=\"font-size:16px;\">" + listPhim.get(1).getTenPhim() + "dến từ" + listPhim.get(1).getQuocGia() + "</span></p>\n"
+                + "																				style=\"font-size:16px;\"></span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -1030,7 +1039,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
                 + "																	<div\n"
                 + "																		style=\"font-size: 14px; mso-line-height-alt: 16.8px; color: #393d47; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;\">\n"
                 + "																		<p style=\"margin: 0; font-size: 14px;\"><span\n"
-                + "																				style=\"font-size:16px;\">" + listPhim.get(2).getTenPhim() + "dến từ" + listPhim.get(2).getQuocGia() + "</span></p>\n"
+                + "																				style=\"font-size:16px;\"></span></p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
                 + "															</td>\n"
@@ -1327,7 +1336,7 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
     }
 
     public Map mapImage(List<Phim> listPhim) {
-         
+
         // Tạo map 
         Map<String, String> map = new HashMap<>();
         map.put("imgBgHeader", "images/bg_light__1___1___1___1___1___1_.png");
@@ -1339,9 +1348,9 @@ public class SKDangDienRa_Form extends javax.swing.JPanel {
         map.put("imgUuDiem3", "images/hand.png");
         map.put("imgBgBody2", "images/bg_light__1___1___1___1___1___1_.png");
         map.put("imgBgBody3", "images/bg_light__1___1___1___1___1___1_.png");
-        map.put("imgPhim1", "imagePhim/"+"AntMain.jpg");
-        map.put("imgPhim2", "imagePhim/"+"MatBiec.jpg");
-        map.put("imgPhim3", "imagePhim/"+"NguoiNhen.jpg");
+        map.put("imgPhim1", "imagePhim/" + "MatBiec.jpg");
+        map.put("imgPhim2", "imagePhim/" + "pvtd.jpg");
+        map.put("imgPhim3", "imagePhim/" + "NguoiNhen.jpg");
         map.put("imgBgBody4", "images/bg_light__1___1___1___1___1___1_.png");
         map.put("imgAboutus", "images/d89f0523-ad7f-43e4-97ac-8df648461390.jpeg");
 

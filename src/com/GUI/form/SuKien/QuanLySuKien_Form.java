@@ -5,6 +5,7 @@ import DAO.KhuyenMaiDAO;
 import Entity.KHTT;
 import Entity.KhuyenMai;
 import Entity.NhanVien;
+import Utilities.Auth;
 import Utilities.ValidateCheck;
 import com.GUI.form.BanVe.BanVe_Form;
 import com.GUI.main.Main;
@@ -34,7 +35,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     public static boolean xoa_SK = false;
     public static boolean sua_SK = false;
     public static String MaSuKi;
-    
+
     public QuanLySuKien_Form() {
         initComponents();
         setOpaque(false);
@@ -250,19 +251,25 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         AddEvent();
-	Main.saoLuu.logSuKien();
+        Main.saoLuu.logSuKien();
         Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
         UpdateEvent();
-	Main.saoLuu.logSuKien();
+        Main.saoLuu.logSuKien();
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
-        DeleteEvent();
-	Main.saoLuu.logSuKien();
-        Main.banVe = new BanVe_Form();
+        if (Auth.isManager()) {
+            int i = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xoá sự kiện này?");
+            if (i == 0) {
+                DeleteEvent();
+                Main.banVe = new BanVe_Form();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chỉ Quản lý mới được sử dụng chức năng này.");
+        }
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void tblsukienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblsukienKeyReleased
@@ -324,7 +331,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         km.setMucGiamGia(Float.valueOf(txtMucKhuyenMai.getText()));
         km.setThongTinKM(txtthongtin.getText());
         km.setMaNhanVien(nv.getMaNhanVien());
-	MaSuKi = km.getMaKM();
+        MaSuKi = km.getMaKM();
         return km;
     }
 
@@ -373,15 +380,18 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 if (test == 0) {
                     new SKDangDienRa_Form().guiMail2(new KhuyenMaiDAO().selectById(txtMaSuKien.getText()));
                 }
-		add_SK = true;
+                add_SK = true;
             } catch (Exception e) {
-                try {
-                    KmAction.updatehide(values.getMaKM());
-                    KmAction.update(values);
-                    JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!\n" + e);
+                if (check(values.getMaKM())) {
+                    try {
+                        KmAction.updatehide(values.getMaKM());
+                        KmAction.update(values);
+                        JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!\n" + e);
+                    }
                 }
+                JOptionPane.showMessageDialog(this, "Mã Sự Kiện Trùng Với Mã Sự Kiện Có Sẵn");
             }
             FillTable();
         }
@@ -411,7 +421,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             try {
                 KmAction.update(values);
                 JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Thành Công!");
-		sua_SK = true;
+                sua_SK = true;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Không Thành Công!\n" + e);
             }
@@ -424,9 +434,11 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         if (index != -1) {
             KmAction = new KhuyenMaiDAO();
             try {
+                xoa_SK = true;
+                MaSuKi = (String) tblsukien.getValueAt(index, 0);
+                Main.saoLuu.logSuKien();
                 KmAction.delete((String) tblsukien.getValueAt(index, 0));
                 JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Thành Công!");
-		xoa_SK = true;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Không Thành Công!\n" + e);
             }
@@ -529,5 +541,15 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 
     public void setNV(NhanVien nv) {
         this.nv = nv;
+    }
+    
+    private boolean check(String makm) {
+        for (int i = 0; i < tblsukien.getRowCount(); i++) {
+            if (makm.toUpperCase().equals(tblsukien.getValueAt(i, 0).toString())) {
+                tblsukien.setRowSelectionInterval(i, i);
+                return false;
+            }
+        }
+        return true;
     }
 }

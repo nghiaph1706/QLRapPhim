@@ -1,10 +1,8 @@
 package Utilities;
 
-import static Utilities.XDate.formater;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ValidateCheck implements Serializable {
