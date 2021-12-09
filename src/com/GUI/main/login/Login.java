@@ -248,26 +248,30 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new Thread() {
-            public void run() {
-                try {
-                    loading.setVisible(true);
-                    Thread.sleep(5000);
-                    loading.dispose();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        if (txtUser.getText().equals("") || pwdPass.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin.");
+        } else {
+            new Thread() {
+                public void run() {
+                    try {
+                        loading.setVisible(true);
+                        Thread.sleep(5000);
+                        loading.dispose();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
-        }.start();
-        new Thread() {
-            public void run() {
-                try {
-                    dangNhap(txtUser.getText().trim(), pwdPass.getText().trim());
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }.start();
+            new Thread() {
+                public void run() {
+                    try {
+                        dangNhap(txtUser.getText().trim(), pwdPass.getText().trim());
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
-        }.start();
+            }.start();
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblQuenMatKhauMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseMoved
@@ -331,7 +335,7 @@ public class Login extends javax.swing.JFrame {
                 login.dispose();
             }
         }.start();
-        
+
     }//GEN-LAST:event_btnFaceIDActionPerformed
 
     public static void main(String args[]) {

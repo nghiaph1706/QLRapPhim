@@ -18,7 +18,7 @@
 	GO
 
 	INSERT INTO [Phim]([TenPhim],[NgayKhoiChieu],[NgayKetThuc],[QuocGia],[MaTheLoai],[DinhDang],[Hinh],[MaNhanVien],[HIDE]) VALUES
-	(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','https://www.youtube.com/watch?v=KSFS0OfIK2c','NV1',0),
+	(N'MẮT BIẾC','10-10-2010','10-12-2010',N'VIỆT NAM','TL1','2D','https://www.youtube.com/watch?v=QDY4Gy_4eYw','NV1',0),
 	(N'AVENGER SECOND GAME','10-10-2011','10-12-2011',N'VIỆT NAM','TL2','2D','https://www.youtube.com/watch?v=TcMBFSGVi1c','NV2',0),
 	(N'IRON MAN','10-10-2012','10-12-2012',N'VIỆT NAM','TL3','2D','https://www.youtube.com/watch?v=8ugaeA-nMTc','NV3',0),
 	(N'NGƯỜI NHỆN MAN','10-10-2013','10-12-2013',N'VIỆT NAM','TL4','3D','https://www.youtube.com/watch?v=JfVOs4VSpmA','NV4',0),
