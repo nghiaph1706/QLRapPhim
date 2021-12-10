@@ -99,19 +99,5 @@ public class HDCTDAO extends QLRapPhimDAO<HDCT, String> {
         }
         return 0;
     }
-    
-    
 
 }
-
-/*
-
-   String insertSqlVe = "INSERT INTO [HoaDonChiTiet]([MaVe],[GiaTien],"
-            + "                       [SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) "
-            + "                       VALUES (?,?,?,?,?,?)";
-    String insertSqlDichVu = "INSERT INTO [HoaDonChiTiet]([MaDichVu],"
-            + "               [GiaTien],[SoLuong],[ThanhTien],[MaHoaDon],[HIDE]) "
-            + "               VALUES (?,?,?,?,?,?)";
-
-
-*/

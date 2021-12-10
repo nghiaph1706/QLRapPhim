@@ -49,6 +49,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     public static String MaHDTuHDCT;
     public static String MaKM;
     public static String MaKHTT;
+    private boolean checkDel = false;
     private String[] header = {
         "Mã vé/DV", "Số lượng", "Giá tiền", "Thành tiền", "Mã HD"
     };
@@ -435,13 +436,19 @@ public class BanVe_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_txtMaKHTTKeyReleased
 
     private void btnNewHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewHDActionPerformed
-        HoaDon hd = new HoaDon();
-        hd.setHIDE(false);
-        hd.setNgayLap(XDate.now());
-        hd.setTrangThai(false);
-        hdDAO.insert(hd);
-        maHDNow = hdDAO.selectNewHD();
-        btnNewHD.setText(maHDNow);
+        if (checkDel) {
+            deleteHDnow();
+            checkDel = false;
+        } else {
+            HoaDon hd = new HoaDon();
+            hd.setHIDE(false);
+            hd.setNgayLap(XDate.now());
+            hd.setTrangThai(false);
+            hdDAO.insert(hd);
+            maHDNow = hdDAO.selectNewHD();
+            btnNewHD.setText("Cancel: " + maHDNow);
+            checkDel = true;
+        }
     }//GEN-LAST:event_btnNewHDActionPerformed
 
     // MAIN FUNCTIONAL
@@ -651,6 +658,12 @@ public class BanVe_Form extends javax.swing.JPanel {
                 });
             }
         }
+    }
+    
+    private void deleteHDnow(){
+        maHDNow = "";
+        Main.banVe = new BanVe_Form();
+        Main.main.showForm(Main.banVe);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnChuyen;

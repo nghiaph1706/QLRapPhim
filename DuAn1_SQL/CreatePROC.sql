@@ -232,22 +232,6 @@ group by month(hd.NgayLap)
 end
 go
 
-CREATE PROC sp_ThemPhimHomNay(@date date)
-as Begin
-INSERT INTO [LichChieu]([NgayChieu],[GioChieu],[MaPhim],[MaPhong],[HIDE]) VALUES
-(@date, '21:30', 'MP1', 'P1', 0),
-(@date, '23:30', 'MP2', 'P2', 0),
-(@date, '18:30', 'MP3', 'P3', 0),
-(@date, '20:30', 'MP4', 'P4', 0),
-(@date, '22:30', 'MP5', 'P5', 0),
-(@date, '18:00', 'MP1', 'P1', 0),
-(@date, '21:00', 'MP2', 'P2', 0),
-(@date, '18:30', 'MP3', 'P3', 0),
-(@date, '20:30', 'MP4', 'P4', 0),
-(@date, '22:30', 'MP5', 'P5', 0);
-End
-GO
-
 Create proc sp_doanhThuHomNay
 as
 begin
