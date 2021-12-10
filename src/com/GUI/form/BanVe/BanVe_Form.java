@@ -45,7 +45,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     public static List<Ve> velList = new ArrayList<>();
     public static String MaPhong;
     public static String GioChieu;
-    public static String maHDNow;
+    public static String maHDNow = "";
     public static String MaHDTuHDCT;
     public static String MaKM;
     public static String MaKHTT;
@@ -397,34 +397,50 @@ public class BanVe_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXuLyActionPerformed
 
     private void btnXuatHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHDActionPerformed
-        DefaultComboBoxModel cbxModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
-        String tmp = cbxModel.getSelectedItem().toString().trim();
-        if (!tmp.equals("-")) {
-            MaKM = tmp;
+
+        if (!maHDNow.equals("")) {
+            if (model.getRowCount() != 0) {
+                DefaultComboBoxModel cbxModel = (DefaultComboBoxModel) cboPhieuGG.getModel();
+                String tmp = cbxModel.getSelectedItem().toString().trim();
+                if (!tmp.equals("-")) {
+                    MaKM = tmp;
+                } else {
+                    MaKM = null;
+                }
+                if (lblCheckMa.getText().equals("Mã hợp lệ")) {
+                    MaKHTT = txtMaKHTT.getText().trim();
+                } else {
+                    MaKHTT = null;
+                }
+                Main.hoaDon.tinhTien();
+                HoaDon_Form.txtMaHD.setText(BanVe_Form.maHDNow);
+                HoaDon_Form.txtThanhTien.setText("" + HoaDon_Form.thanhTien);
+                Main.hoaDon.loadDatabase();
+                Main.main.showForm(Main.hoaDon);
+            } else {
+                JOptionPane.showMessageDialog(null, "Chưa chọn dịch vụ.");
+            }
         } else {
-            MaKM = null;
+            JOptionPane.showMessageDialog(null, "Chưa tạo hoá đơn.");
         }
-        if (lblCheckMa.getText().equals("Mã hợp lệ")) {
-            MaKHTT = txtMaKHTT.getText().trim();
-        } else {
-            MaKHTT = null;
-        }
-        Main.hoaDon.tinhTien();
-        HoaDon_Form.txtMaHD.setText(BanVe_Form.maHDNow);
-        HoaDon_Form.txtThanhTien.setText("" + HoaDon_Form.thanhTien);
-        Main.hoaDon.loadDatabase();
-        Main.main.showForm(Main.hoaDon);
+
+
     }//GEN-LAST:event_btnXuatHDActionPerformed
 
     private void btnChuyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenActionPerformed
-        String tmp = cboPhongChieu.getSelectedItem().toString().trim();
-        if (!tmp.equals("-")) {
-            MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
-            GioChieu = tmp.substring(2).trim();
-            Main.main.showForm(new ChonGhe_Form());
+        if (!maHDNow.equals("")) {
+            String tmp = cboPhongChieu.getSelectedItem().toString().trim();
+            if (!tmp.equals("-")) {
+                MaPhong = tmp.substring(0, tmp.indexOf(" ")).trim();
+                GioChieu = tmp.substring(2).trim();
+                Main.main.showForm(new ChonGhe_Form());
+            } else {
+                JOptionPane.showMessageDialog(null, "Chọn phim");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Chọn phim");
+            JOptionPane.showMessageDialog(null, "Chưa tạo hoá đơn.");
         }
+
     }//GEN-LAST:event_btnChuyenActionPerformed
 
     private void cboPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimActionPerformed
@@ -469,13 +485,13 @@ public class BanVe_Form extends javax.swing.JPanel {
         spnNuoc.setSize(0, 100);
         spnCombo1.setSize(0, 100);
         spnCombo2.setSize(0, 100);
-        Icon icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/bap.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        Icon icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/bap.png")).getImage().getScaledInstance(142, 159, Image.SCALE_SMOOTH));
         lblImageBap.setIcon(icon1);
-        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/nuoclon.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/nuoclon.png")).getImage().getScaledInstance(142, 159, Image.SCALE_SMOOTH));
         lblImageNuoc.setIcon(icon1);
-        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/combo1.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/combo1.png")).getImage().getScaledInstance(142, 159, Image.SCALE_SMOOTH));
         lblImageCB1.setIcon(icon1);
-        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/combo2.png")).getImage().getScaledInstance(142,159, Image.SCALE_SMOOTH));
+        icon1 = new ImageIcon(new ImageIcon(getClass().getResource("/com/GUI/icon/combo2.png")).getImage().getScaledInstance(142, 159, Image.SCALE_SMOOTH));
         lblImageCB2.setIcon(icon1);
     }
 
@@ -659,8 +675,8 @@ public class BanVe_Form extends javax.swing.JPanel {
             }
         }
     }
-    
-    private void deleteHDnow(){
+
+    private void deleteHDnow() {
         maHDNow = "";
         Main.banVe = new BanVe_Form();
         Main.main.showForm(Main.banVe);

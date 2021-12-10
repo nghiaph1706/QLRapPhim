@@ -99,23 +99,6 @@ public class ValidateCheck implements Serializable {
 //Check Date After And Before
 
     public boolean CheckAfterAndBefore(String NameStringAfter, Date after, String NameStringBefore, Date before) {
-//        if (after.getYear() <= before.getYear()) {
-//            if (after.getYear() == before.getYear()) {
-//                if (after.getMonth() <= before.getMonth()) {
-//                    if (after.getMonth() == before.getMonth()) {
-//                        if (after.getDay() <= before.getDay()) {
-//                            return true;
-//                        }
-//                    }
-//                    if (after.getMonth() < before.getMonth()) {
-//                        return true;
-//                    }
-//                }
-//            }
-//            if (after.getYear() < before.getYear()) {
-//                return true;
-//            }
-//        }
         if (after.getTime() < before.getTime()) {
             return true;
         }
@@ -134,7 +117,7 @@ public class ValidateCheck implements Serializable {
 //regex numbers
 
     public boolean RegexPhoneNumber(String NameString, String number) {
-        if (number.matches("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")) {
+        if (number.matches("^(0|\\+84)(\\s|\\.)?((3[1-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")) {
             return true;
         }
         JOptionPane.showMessageDialog(null, NameString + " Nhập Vào Sai Kiểu Dữ Liệu!", "Lỗi", 0);

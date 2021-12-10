@@ -1,4 +1,3 @@
-
 package com.GUI.form;
 
 import DAO.LichChieuDAO;
@@ -22,7 +21,6 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-
 public class QuanLyLichChieu_Form extends javax.swing.JPanel {
 
     DefaultTableModel model;
@@ -35,7 +33,8 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     public static boolean xoa_LC = false;
     public static boolean sua_LC = false;
     public static String MaLiCh;
-
+    private boolean check = false;
+    
     public QuanLyLichChieu_Form() {
         initComponents();
         setOpaque(false);
@@ -181,7 +180,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             if (check()) {
                 try {
                     lichChieuDao.update(lc);
-                    
+
                     fillTable();
                     sua_LC = true;
                     MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
@@ -209,7 +208,7 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             if (test == 0) {
                 try {
                     lichChieuDao.delete(tblLichChieu.getValueAt(index, 0).toString());
-                    
+
                     fillTable();
                     xoa_LC = true;
                     MaLiCh = tblLichChieu.getValueAt(index, 0).toString();
@@ -228,6 +227,13 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     }
 
     public void searchByDate() {
+        if (!check) {
+            txtsearchFirstDate.setDate(null);
+            txtsearchLastDate.setDate(null);
+            check = false;
+        } else {
+            cboPhimTimKiem.setSelectedIndex(0);
+        }
         try {
             if (txtsearchFirstDate.getDate() == null) {
                 List<LichChieu> list = lichChieuDao.selectByDate(new java.sql.Date(XDate.now().getTime()), new java.sql.Date(txtsearchLastDate.getDate().getTime()));
@@ -279,12 +285,14 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         return true;
 
     }
-    public void moi(){
+
+    public void moi() {
         txtNgayChieu.setDate(null);
         txtGioChieu.setText("");
         cboPhim.setSelectedIndex(0);
         cboMaPhong.setSelectedIndex(0);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -393,6 +401,11 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
                 cboPhimTimKiemPopupMenuWillBecomeVisible(evt);
+            }
+        });
+        cboPhimTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboPhimTimKiemActionPerformed(evt);
             }
         });
 
@@ -601,7 +614,14 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_tblLichChieuMouseClicked
 
     private void cboPhimTimKiemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPhimTimKiemItemStateChanged
-        searchByCbo();
+//        searchByCbo();
+//        txtsearchFirstDate.setDate(null);
+//            txtsearchLastDate.setDate(null);
+//        if (txtsearchFirstDate.getDate() == null || txtsearchLastDate.getDate() == null) {
+//            
+//        } else {
+//            
+//        }
     }//GEN-LAST:event_cboPhimTimKiemItemStateChanged
 
     private void txtsearchFirstDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtsearchFirstDatePropertyChange
@@ -621,11 +641,13 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         sua();
         Main.saoLuu.logLC();
+        Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         xoa();
         Main.saoLuu.logLC();
+        Main.banVe = new BanVe_Form();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -638,6 +660,11 @@ public class QuanLyLichChieu_Form extends javax.swing.JPanel {
         fillTable();
         cboPhimTimKiem.setSelectedItem("Tất cả");
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void cboPhimTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhimTimKiemActionPerformed
+        searchByCbo();
+        check = true;
+    }//GEN-LAST:event_cboPhimTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

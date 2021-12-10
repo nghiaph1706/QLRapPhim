@@ -163,8 +163,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
 
     public boolean check(boolean x) {
         if (x
-                && vld.CheckString("Mã Phim", txtMaPhim.getText(), 50, false)
-                //                && Check(txtMaPhim.getText())
+                
                 && vld.CheckString("Tên Phim", txtTenPhim.getText(), 255, false)
                 && vld.CheckNullDate("Ngày Khởi Chiếu", jdNgaykc.getDate())
                 && vld.CheckNullDate("Ngày Kết Thúc", jdNgaykt.getDate())
@@ -174,7 +173,6 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
             return true;
         }
         if (x == false
-                && vld.CheckString("Mã Phim", txtMaPhim.getText(), 50, false)
                 && vld.CheckString("Tên Phim", txtTenPhim.getText(), 255, false)
                 && vld.CheckNullDate("Ngày Khởi Chiếu", jdNgaykc.getDate())
                 && vld.CheckNullDate("Ngày Kết Thúc", jdNgaykt.getDate())
@@ -271,6 +269,11 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         txtvideo.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         txtvideo.setLabelText("VIDEO");
         txtvideo.setMaximumSize(new java.awt.Dimension(6, 56));
+        txtvideo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtvideoFocusLost(evt);
+            }
+        });
 
         btnInsert.setForeground(new java.awt.Color(255, 255, 255));
         btnInsert.setText("THÊM");
@@ -436,6 +439,10 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         clear();
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void txtvideoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtvideoFocusLost
+        txtvideo.setText(txtvideo.getText().substring(txtvideo.getText().indexOf("=") + 1, txtvideo.getText().length()));
+    }//GEN-LAST:event_txtvideoFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.GUI.swing.Button btnDelete;

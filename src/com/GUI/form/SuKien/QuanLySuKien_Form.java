@@ -252,6 +252,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
         FillToNull();
         FillTable();
+        btnxoa.setEnabled(false);
     }//GEN-LAST:event_btnlammoiActionPerformed
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
@@ -283,6 +284,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 
     private void tblsukienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsukienMouseClicked
         FillToComp();
+        btnxoa.setEnabled(true);
     }//GEN-LAST:event_tblsukienMouseClicked
 
     private void txtMucKhuyenMaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMucKhuyenMaiKeyReleased
@@ -338,7 +340,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 
     private KhuyenMai GetValuesKhuyenMai() {
         KhuyenMai km = new KhuyenMai();
-        km.setMaKM(txtMaSuKien.getText());
+        km.setMaKM(txtMaSuKien.getText().trim());
         km.setTenKM(txtTenSuKien.getText());
         km.setNgayBatDau(DateOpen.getDate());
         km.setNgayKetThuc(DateClose.getDate());
@@ -389,20 +391,20 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
             KmAction = new KhuyenMaiDAO();
             try {
                 KmAction.insert(values);
-                JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
                 int test = JOptionPane.showConfirmDialog(null, "Bạn có muốn thông báo sự kiện này đến KHTT không?");
                 if (test == 0) {
                     new SKDangDienRa_Form().guiMail2(new KhuyenMaiDAO().selectById(txtMaSuKien.getText()));
                 }
                 add_SK = true;
             } catch (Exception e) {
-//                if (check(values.getMaKM())) {
-//                    JOptionPane.showMessageDialog(this, "Mã Sự Kiện Trùng Với Mã Sự Kiện Có Sẵn");
-//                    return;
-//                }
+                if (check(values.getMaKM())) {
+                    JOptionPane.showMessageDialog(this, "Mã Sự Kiện Trùng Với Mã Sự Kiện Có Sẵn");
+                    return;
+                }
                 JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!");
             }
             FillTable();
+            JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
         }
     }
 
