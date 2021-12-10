@@ -93,7 +93,7 @@ public class QuanLyPhim_Form extends javax.swing.JPanel {
         jdNgaykt.setDate(ph.getNgayKetThuc());
         cbomodelTheLoai.setSelectedItem(theLoaiDao.selectById(ph.getMaTheLoai()));
         txtDinhDang.setText(ph.getDinhDang());
-        txtvideo.setText(ph.getHinh());
+        txtvideo.setText(ph.getHinh().substring(ph.getHinh().indexOf("=") + 1, ph.getHinh().length()));
         video1.loadlink(ph.getHinh());
         txtQuocGia.setText(ph.getQuocGia());
     }

@@ -162,6 +162,11 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
 
         txtMucKhuyenMai.setForeground(new java.awt.Color(51, 51, 51));
         txtMucKhuyenMai.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        txtMucKhuyenMai.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMucKhuyenMaiKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -280,6 +285,15 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
         FillToComp();
     }//GEN-LAST:event_tblsukienMouseClicked
 
+    private void txtMucKhuyenMaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMucKhuyenMaiKeyReleased
+        try {
+            if (txtMucKhuyenMai.getText().length()>2) {
+                txtMucKhuyenMai.setText("10");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtMucKhuyenMaiKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateClose;
     private com.toedter.calendar.JDateChooser DateOpen;
@@ -382,16 +396,11 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 }
                 add_SK = true;
             } catch (Exception e) {
-                if (check(values.getMaKM())) {
-                    try {
-                        KmAction.updatehide(values.getMaKM());
-                        KmAction.update(values);
-                        JOptionPane.showMessageDialog(null, "Thêm Mới Thành Công!");
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!\n" + e);
-                    }
-                }
-                JOptionPane.showMessageDialog(this, "Mã Sự Kiện Trùng Với Mã Sự Kiện Có Sẵn");
+//                if (check(values.getMaKM())) {
+//                    JOptionPane.showMessageDialog(this, "Mã Sự Kiện Trùng Với Mã Sự Kiện Có Sẵn");
+//                    return;
+//                }
+                JOptionPane.showMessageDialog(null, "Thêm Mới Không Thành Công!");
             }
             FillTable();
         }
@@ -423,7 +432,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Thành Công!");
                 sua_SK = true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Không Thành Công!\n" + e);
+                JOptionPane.showMessageDialog(null, "Cập Nhật Thông Tin Không Thành Công!\n");
             }
             FillTable();
         }
@@ -440,7 +449,7 @@ public class QuanLySuKien_Form extends javax.swing.JPanel {
                 KmAction.delete((String) tblsukien.getValueAt(index, 0));
                 JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Thành Công!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Không Thành Công!\n" + e);
+                JOptionPane.showMessageDialog(null, "Xóa Sự Kiện Không Thành Công!\n");
             }
             FillTable();
             FillToNull();

@@ -26,6 +26,16 @@ public class XJdbc {
         }
     }
     
+    public static Connection ConnectDB(){
+        try {
+            Connection cn = DriverManager.getConnection(dburl,user,pass);
+            return cn;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public static PreparedStatement getStmt(String sql, Object... args) throws SQLException{
         Connection conn = DriverManager.getConnection(dburl,user,pass);
         PreparedStatement stmt;

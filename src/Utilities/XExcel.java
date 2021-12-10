@@ -97,6 +97,7 @@ public class XExcel {
                 out.close();
                 JOptionPane.showMessageDialog(null, "Export file excel thành công");
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Export file excel thất bại");
                 throw new RuntimeException(e);
             }
         } else {
@@ -178,6 +179,7 @@ public class XExcel {
                 out.close();
                 JOptionPane.showMessageDialog(null, "Export file excel thành công");
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Export file excel thất bại");
                 throw new RuntimeException(e);
             }
         } else {
@@ -258,6 +260,7 @@ public class XExcel {
                 out.close();
                 JOptionPane.showMessageDialog(null, "Export file excel thành công");
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Export file excel thất bại");
                 throw new RuntimeException(e);
             }
         } else {
@@ -338,6 +341,7 @@ public class XExcel {
                 out.close();
                 JOptionPane.showMessageDialog(null, "Export file excel thành công");
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Export file excel thất bại");
                 throw new RuntimeException(e);
             }
         } else {

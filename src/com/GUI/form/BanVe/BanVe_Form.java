@@ -42,6 +42,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     private HDCTDAO hdctDAO = new HDCTDAO();
     public static KHTTDAO khttdao = new KHTTDAO();
     public static List<String> khttList = new ArrayList<>();
+    public static List<Ve> velList = new ArrayList<>();
     public static String MaPhong;
     public static String GioChieu;
     public static String maHDNow;
@@ -548,6 +549,7 @@ public class BanVe_Form extends javax.swing.JPanel {
     public void insertMaVe() {
 
         HDCT hdct = new HDCT();
+        velList.clear();
 
         String tmp = cboPhim.getSelectedItem().toString();
         String maphim = tmp.substring(0, tmp.indexOf("-")).trim();
@@ -561,11 +563,12 @@ public class BanVe_Form extends javax.swing.JPanel {
             ve.setMalichchieu(malc);
             ve.setMaphong(MaPhong);
             ve.setMaphim(maphim);
+            ve.setGiochieu(giochieu);
             vDAO.insert(ve);
         }
 
         int count = ChonGhe_Form.listGheSelected.size();
-        List<Ve> velList = vDAO.selectNewVe(count);
+        velList = vDAO.selectNewVe(count);
 
         for (int i = 0; i < velList.size(); i++) {
             Ve ve = velList.get(i);

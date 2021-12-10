@@ -18,10 +18,10 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     private String DELETE_SQL = "UPDATE [LichChieu] SET [HIDE] = 1 WHERE [MaLichChieu] = ?";
     private String SELECT_BY_ID = "SELECT * FROM LichChieu WHERE [HIDE] = 0 AND [MaLichChieu] = ?";
     private String SELECT_ALL = "SELECT * FROM LichChieu WHERE [HIDE] = 0";
-    private String SELECT_BY_LC = "SELECT ph.MaPhim Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim where NgayChieu = CONVERT(char(10), GetDate(),126) GROUP BY ph.MaPhim, NgayChieu";
-    private String SELECT_ALL_BY_MaPhim = "Select * from lichchieu where maphim = ?";
-    private String SELECT_ALL_BY_DATE = "Select * from Lichchieu where ngaychieu between ? and ?";
-    private String SELECT_ALL_BY_LastDateNull = "select * from LichChieu where NgayChieu between ? and (select max(ngaychieu) from lichchieu)";
+    private String SELECT_BY_LC = "SELECT ph.MaPhim Phim FROM LichChieu lc INNER JOIN Phim ph ON lc.MaPhim = ph.MaPhim where NgayChieu = CONVERT(char(10), GetDate(),126) and lc.HIDE = 0 GROUP BY ph.MaPhim, NgayChieu";
+    private String SELECT_ALL_BY_MaPhim = "Select * from lichchieu where maphim = ? and HIDE = 0";
+    private String SELECT_ALL_BY_DATE = "Select * from Lichchieu where ngaychieu between ? and ? and hide =0";
+    private String SELECT_ALL_BY_LastDateNull = "select * from LichChieu where NgayChieu between ? and (select max(ngaychieu) from lichchieu) and hide =0";
     
     @Override
     public void insert(LichChieu entity) {
@@ -88,7 +88,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     {
         try {
             List<LichChieu> list = new ArrayList<>();
-            ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? and ngaychieu = CONVERT(char(10), GETDATE(),126) GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
+            ResultSet rs = XJdbc.query("SELECT CONCAT(MaPhong, ' ', lc.GioChieu) as Phong FROM LichChieu lc WHERE MaPhim=? and ngaychieu = CONVERT(char(10), GETDATE(),126) and hide = 0 GROUP BY MaPhim, MaPhong, GioChieu", maPhim);
             while(rs.next()) {
                 LichChieu lc = new LichChieu();
                 lc.setMaPhong(rs.getString(1));
@@ -140,7 +140,7 @@ public class LichChieuDAO extends QLRapPhimDAO<LichChieu, String> {
     
     public String selectLCbyTT(String maphim, String maphong, String giochieu)
     {
-        String sql = "select malichchieu from LichChieu where MaPhim = ? and MaPhong = ? and GioChieu = ?";
+        String sql = "select malichchieu from LichChieu where MaPhim = ? and MaPhong = ? and GioChieu = ? and hide = 0";
         try {
             List<LichChieu> list = new ArrayList<>();
             ResultSet rs = XJdbc.query(sql,maphim,maphong,giochieu);

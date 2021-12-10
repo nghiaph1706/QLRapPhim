@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VeDAO extends QLRapPhimDAO<Ve, String> {
 
-    static String insert = "INSERT INTO [Ve]([MaPhim],[MaLichChieu],[MaPhong],[MaGhe]) VALUES (?,?,?,?)";
+    static String insert = "INSERT INTO [Ve]([MaPhim],[MaLichChieu],[MaPhong],[MaGhe],[GioChieu]) VALUES (?,?,?,?,?)";
     static String update = "Update Ve Set Sohang =? Where maphim like ?";
     static String delete = "delete from Ve Where maphim like ?";
     static String selectall = "Select * from Ve";
@@ -18,7 +18,7 @@ public class VeDAO extends QLRapPhimDAO<Ve, String> {
 
     @Override
     public void insert(Ve entity) {
-        XJdbc.update(insert, entity.getMaphim(), entity.getMalichchieu(), entity.getMaphong(), entity.getMaghe());
+        XJdbc.update(insert, entity.getMaphim(), entity.getMalichchieu(), entity.getMaphong(), entity.getMaghe(), entity.getGiochieu());
     }
 
     @Override
@@ -79,6 +79,7 @@ public class VeDAO extends QLRapPhimDAO<Ve, String> {
                 v.setMalichchieu(rs.getString("MaLichChieu"));
                 v.setMaphong(rs.getString("MaPhong"));
                 v.setMaghe(rs.getString("MaGhe"));
+                v.setGiochieu(rs.getString("GioChieu"));
                 list.add(v);
             }
             rs.getStatement().getConnection().close();

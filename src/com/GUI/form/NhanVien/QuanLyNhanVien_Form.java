@@ -2,6 +2,7 @@ package com.GUI.form.NhanVien;
 
 import Entity.*;
 import DAO.*;
+import Utilities.Auth;
 import Utilities.ValidateCheck;
 import Utilities.XImage;
 import com.GUI.main.Main;
@@ -355,17 +356,20 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         AddEntity();
-	Main.saoLuu.logNV();
+        Main.saoLuu.logNV();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btncapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncapnhatActionPerformed
         UpdateEntity();
-	Main.saoLuu.logNV();
+        Main.saoLuu.logNV();
     }//GEN-LAST:event_btncapnhatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
-        DeleteEntity();
-	Main.saoLuu.logNV();
+        int i = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xoá nhân viên này?");
+        if (i == 0) {
+            DeleteEntity();
+            Main.saoLuu.logNV();
+        }
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
@@ -525,7 +529,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
         obj.setGioiTinh(rdoquanly.isSelected() ? true : false);
         obj.setGhiChu(txtghichu.getText());
         obj.setHinh(HinhTam);
-	MaNV = obj.getMaNhanVien();
+        MaNV = obj.getMaNhanVien();
         return obj;
     }
 
@@ -555,7 +559,7 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Thêm Mới Thành Công");
                 FillTable();
                 RefreshGui();
-		add_NV = true;
+                add_NV = true;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Thêm Mới Không Thành Công");
             }
@@ -570,8 +574,8 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
                 FillTable();
                 RefreshGui();
-		sua_NV = true;
-		MaNV = tblnhanvien.getValueAt(index, 0).toString();
+                sua_NV = true;
+                MaNV = tblnhanvien.getValueAt(index, 0).toString();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Cập Nhật Không Thành Công");
             }
@@ -581,13 +585,17 @@ public class QuanLyNhanVien_Form extends javax.swing.JPanel {
     private void DeleteEntity() {
         int index = tblnhanvien.getSelectedRow();
         if (index != -1) {
-            try {
-                nvdao.delete(tblnhanvien.getValueAt(index, 0).toString());
-                JOptionPane.showMessageDialog(this, "Xóa Nhân Viên Thành Công");
-		xoa_NV = true;
-		MaNV = tblnhanvien.getValueAt(index, 0).toString();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Xóa Nhân Viên Không Thành Công");
+            if (tblnhanvien.getValueAt(index, 0).toString().equals(Auth.user.getMaNhanVien())) {
+                JOptionPane.showMessageDialog(this, "Bạn không thể xoá chính mình.");
+            } else {
+                try {
+                    nvdao.delete(tblnhanvien.getValueAt(index, 0).toString());
+                    JOptionPane.showMessageDialog(this, "Xóa Nhân Viên Thành Công");
+                    xoa_NV = true;
+                    MaNV = tblnhanvien.getValueAt(index, 0).toString();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Xóa Nhân Viên Không Thành Công");
+                }
             }
         }
         FillTable();

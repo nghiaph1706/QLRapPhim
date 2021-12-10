@@ -1,4 +1,3 @@
-
 package com.GUI.form.BanVe;
 
 import DAO.DichVuDAO;
@@ -11,22 +10,24 @@ import DAO.LichChieuDAO;
 import DAO.PhimDAO;
 import Entity.Ghe;
 import Entity.HoaDon;
+import Entity.Ve;
 import Utilities.Auth;
 import Utilities.XDate;
+import Utilities.XJdbc;
 import com.GUI.main.Main;
 import java.awt.Image;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class HoaDon_Form extends javax.swing.JPanel {
 
@@ -74,7 +75,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
         hd.setHIDE(false);
         hdDAO.update(hd);
         maHoaDon_Paid = hd.getMaHoaDon();
-	checkThanhToan = true;
+        checkThanhToan = true;
     }
 
     public void loadDatabase() {
@@ -115,6 +116,7 @@ public class HoaDon_Form extends javax.swing.JPanel {
         Main.banVe.loadDatabase();
         Main.main.showForm(Main.banVe);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -265,9 +267,14 @@ public class HoaDon_Form extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        printHoaDon();
-        updateHD();
-        Main.saoLuu.logHD();
+        try {
+            exportHoaDon(Main.banVe.maHDNow);
+            exportVe();
+            updateHD();
+            Main.saoLuu.logHD();
+        } catch (JRException ex) {
+            Logger.getLogger(HoaDon_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
@@ -289,60 +296,22 @@ public class HoaDon_Form extends javax.swing.JPanel {
     public static com.GUI.swing.TextField txtThanhTien;
     // End of variables declaration//GEN-END:variables
 
-    private void printHoaDon() {
-        try {
-            File file = new File("test.txt");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < 1; i++) {
-                for (int j = 0; j < tblHoaDon.getColumnCount(); j++) {
-                    bw.write(tblHoaDon.getColumnName(j) + "  ");
-                }
-                bw.write("\n------------------------------------------------------------------\n");
-            }
-            for (int i = 0; i < 1; i++) {
-                for (int j = 0; j < tblHoaDon.getColumnCount(); j++) {
-                    if (tblHoaDon.getModel().getValueAt(i, j) == null) {
-                        tblHoaDon.getModel().setValueAt("NULL", i, j);
-                    }
-                    bw.write(tblHoaDon.getModel().getValueAt(i, j).toString() + " | ");
-                }
-                bw.write("\n------------------------------------------------------------------\n");
-            }
-            JOptionPane.showMessageDialog(null, "Xuất hóa đơn thành công");
-            bw.close();
-            fw.close();
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
+    private void exportHoaDon(String maHoaDon) throws JRException {
+        Hashtable a = new Hashtable();
+        JasperReport jasperReport = JasperCompileManager.compileReport("src/Utilities/HoaDon.jrxml");
+        a.put("MaHoaDon", maHoaDon);
+        JasperPrint p = JasperFillManager.fillReport(jasperReport, a, XJdbc.ConnectDB());
+        JasperViewer.viewReport(p, false);
     }
 
-    private void exportExcelHoadon() {
-        try {
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            XSSFSheet sheet = workbook.createSheet("HoaDon");
-            for (int i = 0; i < 1; i++) {
-                XSSFRow headerRow = sheet.createRow(i);
-                for (int j = 0; j < tblHoaDon.getColumnCount(); j++) {
-                    headerRow.createCell(j).setCellValue(tblHoaDon.getColumnName(j));
-                }
-            }
-            for (int i = 1; i < 2; i++) {
-                XSSFRow valueRow = sheet.createRow(i);
-                for (int j = 0; j < header.length; j++) {
-                    valueRow.createCell(j).setCellValue(tblHoaDon.getValueAt(0, j).toString());
-                }
-            }
-            FileOutputStream out = new FileOutputStream(
-                    new File("HoaDon.xlsx")
-            );
-            workbook.write(out);
-            out.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private void exportVe() throws JRException {
+        for (Ve ve : Main.banVe.velList) {
+            System.out.println(ve.getMave());
+            Hashtable a = new Hashtable();
+            JasperReport jasperReport = JasperCompileManager.compileReport("src/Utilities/Ve.jrxml");
+            a.put("MaVe", ve.getMave().toString());
+            JasperPrint p = JasperFillManager.fillReport(jasperReport, a, XJdbc.ConnectDB());
+            JasperViewer.viewReport(p, false);
         }
     }
 }

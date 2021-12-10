@@ -47,7 +47,7 @@ const app = new Vue(
                   ],
                   list_addresses : [
                         {
-                              id : 1, list : "Quận 1, Đường đéo nào đó, TP. HCM"
+                              id : 1, list : "1/17 PASTEUR, QUAN 1, TP HCM"
                         },
                         {
                               id : 2, list : "-----------------------------"
